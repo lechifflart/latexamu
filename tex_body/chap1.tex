@@ -1,31 +1,54 @@
-\chapter{ Généralités}
+\chapter{ State of the art theory}
 \chaptertoc{}
 
-\section{Généralités sur la fusion thermonucléaire}
+\section{Introduction on the many-body problem}
+%generalities on theories that are the building blocks of our workflows
+%what is ab initio
+The system of interacting electrons and nuclei in a material is described by the following Hamiltonian :
+\begin{align}
+	\hat{H} = &- \sum_I \frac{\hbar^2}{2 M_I} \nabla^2_I + \frac{1}{2} \sum_{I\neq J} \frac{Z_I Z_J e^2}{\left| \RR_I - \RR_J \right|} \nonumber \\
+	&- \frac{\hbar^2}{2m_e} \sum_i \nabla^2_i + \frac{1}{2} \sum_{i\neq j} \frac{e^2}{\left| \rr_i - \rr_j \right|} - \sum_{i,I} \frac{Z_I e^2}{\left|\rr_i - \RR_I \right|}
+\end{align}
+where capital indices refer to nuclei and lowercase indices refer to electrons. $Z_I$, $M_I$ and $\RR_I$ are the atomic number and the position in real space of nucleus $I$.
+The terms on the first line are the kinetic energy of the ions and the ion-ion interaction, respectively.
+%atomic units
+%Born-Oppenheimer
 
-	Lors d'une réaction de fusion, deux noyaux légers s'assemblent pour former un noyau plus lourd. Pour obtenir une réaction de fusion, il faut rapprocher suffisamment deux noyaux qui, puisqu'ils sont tous deux chargés positivement, se repoussent. Une certaine énergie est donc indispensable pour franchir cette barrière et arriver dans la zone, très proche du noyau, où se manifeste l'interaction forte capable de l'emporter sur la répulsion électrostatique.
-	\\ %  retour à la ligne
-	La réaction de fusion la plus favorable est celle faisant intervenir le deutérium et le tritium:
-	\begin{equation}
-		_{1}^{2}D^{+}~+~_{1}^{3}T^{+}~\rightarrow ~_{2}^{4}He^{2+}~(3,5\,\textrm{MeV})~+~n~(14,1\,\textrm{MeV})
-	    \label{equ:fusion}
-	\end{equation}
+\section{Density Functional Theory}
+% This theory is vastly used in solid-state physics and quantum chemistry, and it is the starting tool to compute structural and electronic properties of our systems.
+The idea behind \gls{DFT} is to replace the real system of interacting electrons by an auxiliary system of non-interacting particles evolving in an effective potential.
 
-	\noindent % pas d'indentation en début de paragraphe
-	\lipsum[2]\index{Nam dui ligula}
-	Un acronyme utilisé une première fois \gls{asb} puis une seconde fois \gls{asb}. Une définition du glossaire \gls{rutile} et une entrée de la nomenclature \gls{+a}.
-
-\section{Deuxième partie du premier chapitre}
-
-	\lipsum[2]
-
-	L'utilisation des formules dans un environnement autorise les références croisées. Par exemple, nous pouvons faire appel à la formule de la fusion deutérium-tritium \ref{equ:fusion}. Contrairement à une simple formule centrée :
-	$$\ce{(2Na+,SO4^2- ) + (Ba^2+, 2Cl- ) -> BaSO4 v + 2NaCl}$$
-
-	\lipsum[9]
-
-	\begin{displayquote}
-	\lipsum[10]
-	\end{displayquote}
-
-	A titre d'exemple, nous venons d'insérer une courte citation fictive de \cite{godard_borreliose_2012}.
+\gls{DFT} is a theory of the interacting electron system and is based on the work of Hohenberg and Kohn who stated and proved two fundamental theorems. \cite{hohenberg1964} The first one ensures there is a one-to-one correspondance between the electronic density and the external potential acting on the system. The second theorem states that the total energy of the system is a functional of the electronic density.
+The total energy of a system of interacting electrons is written as :
+\be
+	E = \expval{\hat{H}}{\Psi} = \expval{\hat{T} + \hat{V}_{ee} }{\Psi} + \int d\rr v_{ext}(\rr)n(\rr)
+\ee
+By virtue of the Hohenberg and Kohn theorems, the total energy is a functional of the density and can be written as :
+\be
+ 	E_{HK}[n] = F_{HK}[n] + \int d\rr v_{ext}(\rr)n(\rr)
+	\label{eq:E_HK}
+\ee
+where $F_{HK}[n] = \la \hat{T} \ra + \la \hat{V}_{ee} \ra$ is a universal functional of the density, \emph{ie} the dependence on $n$ of the functional is the same for all systems. The ground-state energy $E = E_0$ is the minimum of the energy functional at the ground-state density $n=n_0$. To be able to compute these quantities, Kohn and Sham reformulated the problem into an auxiliary system of non-interacting particles, that has the same density as the real system. This reformulation is particularly helpful because it is possible to compute analytically the kinetic energy term. The only subtlety is that one needs to use the density \emph{matrix} rather than the electronic density, that is defined as the expectation value of the density operator $\hat{\delta}(\rr) = \sum_i^{N_{e}} \delta(\rr - \rr_i)$ :
+\begin{align}
+\begin{split}
+	n(\rr) &= \int d^3r_1 ... d^3r_{N_{e}} \Psi^*(\rr_1,...,\rr_{N_{e}})
+	\hat{\delta}(\rr) \Psi(\rr_1,...,\rr_{N_{e}}) \\
+	&= N_{e}\int d^3r_2 ... d^3r_{N_{e}} \left| \Psi(\rr,\rr_2...,\rr_{N_{e}})\right|^2
+\end{split}
+\end{align}
+This is related to the probability density of finding a particle at position $\rr$.
+The expression for the total energy functional in \eqref{eq:E_HK} can be rewritten as :
+\be
+	E_{KS}[n] = T_{ip}[n] + \int d\rr v_{ext}(\rr)n(\rr) + E_H[n] + E_{XC}[n]
+\ee
+where $T_{ip}$ is the kinetic energy of the independent particles with density $n$, $E_H$ is the Hartree energy, which is the classical electrostatic interaction :
+\be
+	E_H = \int n(\rr')n(\rr)
+	\label{eq:E_Hartree}
+\ee
+and $E_{XC}$ is the exchange-correlation energy defined as :
+\be
+	E_{XC}[n] = T
+\ee
+difference between the exact kinetic energy and $T_{ip}$ plus
+contains quantum effects of exchange and correlation of fermions

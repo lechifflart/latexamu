@@ -51,8 +51,8 @@
 \RequirePackage{subfig}						%% figures multiples
 \RequirePackage{caption}					%% légendes des figures
 \RequirePackage{tabularx}					%% tableaux
-\RequirePackage{multirow}					%% fusion des cellules dans les tableaux 
-\RequirePackage{makecell}					%% sauts des lignes dans les cellules	
+\RequirePackage{multirow}					%% fusion des cellules dans les tableaux
+\RequirePackage{makecell}					%% sauts des lignes dans les cellules
 \RequirePackage{array}						%% amélioration des tableaux
 \RequirePackage{booktabs}					%% tables formelles
 \RequirePackage{tikz}						%% figures en code natif
@@ -110,7 +110,7 @@
 \RequirePackage{nicefrac}					%% fractions en ligne (voir aussi xfrac)
 \RequirePackage{siunitx}					%% unités du système international
 \sisetup{									%% options pour les unités
-	list-final-separator = { \translate{and} },	
+	list-final-separator = { \translate{and} },
 	list-pair-separator  = { \translate{and} },
 	output-decimal-marker = {,},
 	exponent-product = {\cdot},
@@ -138,7 +138,7 @@
 	colorlinks=true,						%% colorise liens
 	urlcolor=blue,							%% couleur hyperliens
 	citecolor=blue,							%% couleur liens bibliographie
-	linkcolor=blue,							%% couleur liens internes
+	linkcolor=black,							%% couleur liens internes
 	anchorcolor=blue,						%% couleur liens ancres
 	bookmarksopen=false,					%% signets repliés par défaut
 	linktocpage=false,						%% lien numéro de page dans TOC
@@ -174,7 +174,7 @@
 \definecolor{cyanamu}{RGB}{61, 183, 228}
 
 \newcommand{\dhorline}[3][0]{%
-    \tikz[baseline=-2pt]{\path[decoration={markings, 
+    \tikz[baseline=-2pt]{\path[decoration={markings,
       mark=between positions 0 and 1 step 2*#3
       with {\node[color=blueamu, fill, circle, minimum width=#3, inner sep=0pt, anchor=south west] {};}},postaction={decorate}]  (0,#1) -- ++(#2,0);}}
 \newcommand{\dvertline}[3][0]{%
@@ -198,3 +198,16 @@
 \renewcommand*{\sfdefault}{phv} % sélectionne la fonte Helvetica pour tout le sans sérif (titrage)
 
 %\renewcommand{\familydefault}{\sfdefault} % passe à l'utilisation du sans-serif pour tout sauf les mathématiques (décommenter : vivement déconseillé)
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pierre stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{physics}
+\RequirePackage{bm}
+\RequirePackage{xcolor}
+\RequirePackage{dsfont}
+\RequirePackage{url}
+
+\include{alias}
