@@ -11,8 +11,10 @@ The system of interacting electrons and nuclei in a material is described by the
 \end{align}
 where capital indices refer to nuclei and lowercase indices refer to electrons. $Z_I$, $M_I$ and $\RR_I$ are the atomic number and the position in real space of nucleus $I$.
 The terms on the first line are the kinetic energy of the ions and the ion-ion interaction, respectively.
+% define v_ext
 %atomic units
 %Born-Oppenheimer
+plane waves formulation
 
 \section{Density Functional Theory}
 % This theory is vastly used in solid-state physics and quantum chemistry, and it is the starting tool to compute structural and electronic properties of our systems.
@@ -43,12 +45,64 @@ The expression for the total energy functional in \eqref{eq:E_HK} can be rewritt
 \ee
 where $T_{ip}$ is the kinetic energy of the independent particles with density $n$, $E_H$ is the Hartree energy, which is the classical electrostatic interaction :
 \be
-	E_H = \int n(\rr')n(\rr)
+	E_H[n] = \int d\rr d\rr' \frac{n(\rr')n(\rr)}{\left|\rr - \rr' \right|}
 	\label{eq:E_Hartree}
 \ee
-and $E_{XC}$ is the exchange-correlation energy defined as :
+and $E_{XC}$ is the exchange-correlation energy functional defined as :
 \be
-	E_{XC}[n] = T
+	E_{XC}[n] = \langle \hat{T} \rangle - T_{ip} + \langle \hat{V}_{ee} \rangle - E_H.
 \ee
-difference between the exact kinetic energy and $T_{ip}$ plus
-contains quantum effects of exchange and correlation of fermions
+It is the difference between the exact kinetic energy and $T_{ip}$ plus the difference between the exact electron-electron interaction and the Hartree energy functional. Hence it contains the quantum effects of exchange and correlation of fermions.
+
+Since the auxiliary system is an ensemble of independent particles, one can write the so-called Kohn-Sham equations for each individual particle $i$:
+\be
+ 	\( -\frac{\nabla^2}{2} + v_{eff}(\rr)\) \psi_i(\rr) = \varepsilon_i \psi_i(\rr).
+\ee
+They are analogous to Schrödinger equation for a particle evolving in a local effective potential $v_{eff}$, that we have yet to determine. Their solutions are the auxiliary system's eigenvalues $\varepsilon_i$ and the eigenvectors $\psi_i$ that are defined as :
+\be
+ 	n(\rr) = \sum_i f_i \left| \psi_i\right|^2
+\ee
+where $f_i$ is the occupation number of state $i$. Using the fact that the total kinetic energy is independent of the density at fixed number of particles, we get :
+\begin{align}
+\begin{split}
+	v_{eff}(\rr) &= v_{ext}(\rr) + \frac{\delta E_H[n]}{\delta n(\rr)} + \frac{\delta E_{xc}[n]}{\delta n(\rr)} \\
+	&\equiv v_{ext}(\rr) + v_H([n],\rr) + v_{xc}([n],\rr).
+\end{split}
+\end{align}
+At this point, we see that we have to solve the many-electron problem self-consistently. Indeed, the density is obtained by solving the Kohn-Sham equations which contain the effective potential. In turn, this potential depends on the density. In practice, one starts from a guess density and iterate over the self-consistent cycle until the quantities of interest vary less than an arbitrary threshold.
+
+Up to now, \gls{DFT} is in principle an exact theory, as long as one can define an auxiliary system with the same density as the real system. However, there exists no analytical form of the exchange-correlation potential. Hence we will then have to resort to approximations to compute the density in practice.
+
+The \textbf{\gls{LDA}} is the first one that we present, and that we used for most of the results in this thesis. It was proposed by Kohn and Sham \cite{kohn}. It consists in replacing the exchange-correlation energy density by the one of the homogeneous electron gas, which is local in the density :
+\be
+	E_{XC}^{LDA} [n] = \int d\rr \epsilon^{HEG}_{xc}(n(\rr))
+\ee
+The exchange energy density of the homogeneous electron gas is known : $\epsilon_X^{HEG}(n) = -\tfrac{3}{4}(\tfrac{3}{\pi}n)^{(1/3)}$, and the correlation energy density is obtained from interpolation of an accurate quantum Monte Carlo simulation \cite{alder} for various values of densities. The LDA is relatively simple and computationally inexpensive. It gives a satisfactory description of system with slowly-varying density, but also surprisingly good results for a larger range of materials. For instance, for layered materials such as hBN, the interlayer binding energies are rather accurate, due to the tendency of overbinding of the LDA which cancels the error induced by the lack of van der Waals interactions.
+
+In the \textbf{\gls{GGA}} the exchange-correlation energy density contains an additional dependence in the gradient of the density :
+\be
+ 	E_{XC}^{GGA} [n] = \int d\rr \ \epsilon^{GGA}_{xc}(n(\rr),\nabla n(\rr)).
+\ee
+There are many different ways of expressing the exchange-correlation energy density in this case. Some of the proposed approximated functionals include the exact exchange term or a fraction of it, and it is separated from the correlation term.
+
+There are many more approximations going beyond LDA and GGA functionals that we will not detail here, as we did not use them for the DFT cqalculations in this thesis.\newline
+
+In our work, the description of each and every electron of the crystal is not necessary. Indeed, for the range of energies we are interested in, the electrons that can be optically excited are the ones that occupied the highest valence shells. The core electrons of the first $s$ and $p$ shells are bound too strongly to the nuclei to be excited by a few electron-Volts incoming light. Hence, to simplify the system, we use pseudopotentials to avoid describing the core electrons.
+Pseudopotentials solve the problem of the divergence of the Coulomb potential as $\rr  \to 0$, which leads to rapid oscillations in the wave functions of the valence orbitals.
+Beyond a given cutoff radius $r_c$, pseudopotentials are constrained to be exactly equal to the true
+potential. Below this radius, the pseudopotential does not diverge and assumes a finite value at $r=0$. This generates a pseudo-wave function which is smooth and does not oscillate below the cutoff radius. With this method, the Kohn-Sham eigenvalues remain unchanged, and the computationally demanding task of representing the oscillating wave function is eliminated.\newline
+
+For real systems, the wave function of the crystal is an immensely complicated object whose analytical expression is out of reach. For computational purposes, one needs to represent it in a complete basis of the Hilbert space. Depending on the characteristics of the system, the choice of the basis functions is different.
+
+In this thesis we study infinite, periodic crystals. A suitable basis for this case is the plane waves. It is based on the Bloch theorem, which states that the square modulus of the wave function of an electron has the same periodicity than the crystal potential :
+\be
+ 	\phi_{j,\kk} (\rr) = u_j (\rr) e^{i\kk\cdot\rr}
+\ee
+
+
+
+Cutoff on the number of plane waves
+In principle any complete basis of the Hilbert space yield equal representation of the wave function. As it is impossible to numerically sample a Hilbert space with infinite dimension, one has to truncate the representation. Thus, one has to make sure enough basis functions are included in the expansion to have an accurate wave function.
+
+(Structure optimization ?)
+Problems of DFT : ground-state theory : eigenvalues are not electron energies; not made to compute bandgaps
