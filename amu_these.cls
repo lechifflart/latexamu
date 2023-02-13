@@ -209,5 +209,6 @@
 \RequirePackage{xcolor}
 \RequirePackage{dsfont}
 \RequirePackage{url}
+\RequirePackage{lineno}
 
 \include{alias}
