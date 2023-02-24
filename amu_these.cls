@@ -21,8 +21,8 @@
 %%% extensions minimales
 \RequirePackage[utf8]{inputenc}				%% encodage du texte
 \RequirePackage[TS1,T1]{fontenc}			%% encodage des fontes
-%\RequirePackage{lmodern}					%% polices latines (désactivés)
-\RequirePackage{fourier}					%% polices Adobe Utopia (activés)
+\RequirePackage{tgtermes}					%% polices latines (désactivés)
+%\RequirePackage{fourier}					%% polices Adobe Utopia (activés) Je garde ça si jamais je dois garder la police horrible par défaut
 \RequirePackage[english,main=french]{babel}	%% typographie (français par défaut)
 \RequirePackage[babel]{csquotes}			%% guillemets typographiques
 \MakeAutoQuote{«}{»}						%% espacement automatique des guillemets

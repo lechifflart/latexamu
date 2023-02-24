@@ -114,7 +114,152 @@ One has to verify that the cutoff is high enough so that the results are accurat
 
 Density Functional Theory is often used as a reference for bandgaps and electronic dispersion calculations. One has to be careful when interpreting Kohn-Sham eigenvalues, because they do not bear any physical meaning. First, there is no guaranty that one can find an auxiliary system of non-interacting particles for any real system. Then, the excited states and bandgaps are not the physical ones. This is especially relevant if one wants to simulate optics experiments of semiconductors or insulators. Optical excitations are neutral excitations, in the sense that the excited electron does not leave the system and therefore can interact with the hole it left behind in the valence band. This interaction between a hole in a valence band and an excited electron in the conduction bands is not accurately accounted for in \gls{DFT}, as it is designed to compute total energy and electronic density of the \textit{groundstate}. For this reason, we will resort to a more refined theoretical framework to treat the electronic correlations and study the excited states.
 
-
-
-
 %(Structure optimization ? Hellmann-Feynman theorem to compute the forces acting on atoms, compute the total energy, minimize both the forces and the total energy)
+
+\section{Many-Body Perturbation Theory}
+concept of quasiparticle
+self-energy is difference between the independent particle energy and the quasiparticle energy (for the real part) ; the imaginary part is the inverse QP lifetime
+define Green's function as electronic propagator
+explain what we do in the next subsection; define G, derive its equation of motion, get $G_2$, nested dependence on higher-order GFs hence : resum with a self-energy. To compute self-energy, we need a cycle of equations with vertex, polarization etc; approximate self-energy $\Sigma = GW$ to simplify the Hedin's equations 
+define screening
+derive GW
+
+\textbf{Derivation of GW approximation}
+% First, define the Green's function
+$x = (\rr,\sigma)$;
+We consider a system of N interacting electrons. We will consider the effect of nucleus motion in a later section.
+In the limit of large kinetic energy, adding or removing is instantaneous. Addition or removal energy are directly related to the electronic Green's function, defined as :
+\begin{equation}
+	iG(x,x') = \bra{0} \hat{T} \left[ \hat{\psi}(x)\hat{\psi}^\dagger(x') \right] \ket{0} \label{eq:GF}
+\end{equation}
+where $\ket{0}$ is the exact ground state of the N-electron system, $\hat{\psi}(x)$ is a field operator in Heisenberg representation which annihilates an electron at $x = (\rr,t)$ and T is the Wick's time-ordering operator. It ensures that the time variable increase from right to left. It gives $\hat{T}\left[ \hpsi(\rr t) \hpsidag(\rr 't') \right] = \theta(t-t') \hpsi(\rr t) \hpsidag(\rr 't') - \theta(t'-t)\hpsidag(\rr't')\hpsi(\rr t)$, where $\theta$ is the Heaviside function.  %Physically, probability of propagating an added or removed electron.
+
+We shall make explicit the time dependence of every term appearing in \ref{eq:GF}. We start with the time evolution of the field operators. We recall some useful properties of the field operators for fermions in the Schrödinger picture :
+\begin{align}
+\begin{split}
+	\{ \hpsi(x),\hpsidag(x')\} &= \delta (x-x') \\
+	\{ \hpsi(x),\hpsi(x') \} &= \{ \hpsidag(x),\hpsidag(x') \} = 0 \\
+	n(x) &= \hpsidag(x)\hpsi(x)
+\end{split}	
+\end{align}
+We start from the Hamiltonian for interacting electrons in second quantization:
+
+\begin{align}
+\begin{split}
+ 	\hat{H} &= \int dx_1 \ \hpsidag(x_1) h(x_1) \hpsi(x_1) + \frac{1}{2} \int\int dx_1 \  dx_2 \ \hpsidag(x_1) \hpsidag(x_2) v(x_1,x_2) \hpsi(x_2)\hpsi(x_1) \\
+		&= \hat{H}_0 + \hat{H}_{int}
+\end{split}
+\end{align}
+where $h$ is the single-particle Hamiltonian for non-interacting particles evolving in an external potential $v_{ext}$. The total Hamiltonian containing this plus the interaction term enters the Heisenberg equation of motion for an operator $\hat{O}$:
+\begin{equation}
+	i\frac{d}{d t}\hat{O}_H(t) = \hat{U}^\dagger_S(t) \left[ \hat{O}(t),\hat{H} \right] \hat{U}_S(t) + \hat{U}^\dagger_S(t) (i \frac{d}{dt} \hat{O}_S(t)) \hat{U}_S(t)
+\end{equation}
+where the subscript $H$ and $S$ denote respectively the Heisenberg and Schrödinger pictures, and the transformation from one the latter to the former is given by :
+\begin{align}
+\begin{split}
+	\hpsi_H(x,t) &= \hat{U}^\dagger_S(t) \hpsi_S(x) \hat{U}_S(t) \\
+	\hpsidag_H(x,t) &= \hat{U}^\dagger_S(t) \hpsidag_S(x) \hat{U}_S(t)
+\end{split}
+\end{align}
+and $\hat{U}_S(t) = \exp(-i\hat{H}t) $ is the time evolution operator. In the following we drop the subscript $H$ for the field operators, as their time dependence will be explicit. The Heisenberg equation of motion for the field operator is then :
+\begin{equation}
+	i\frac{d}{dt} \hpsi(x,t) = \hat{U}^\dagger_S(t) \left[ \hpsi(x),\hat{H} \right] \hat{U}_S(t)
+\end{equation}
+and similarly for $\hpsidag$. To compute the commutator, we split the two terms of the Hamiltonian and we use the identity 
+\begin{equation}
+	\left[ \hpsi(x),\hat{A}\hat{B} \right] = \{ \hpsi(x),\hat{A} \}\hat{B} -  \hat{A}\{ \hpsi(x), \hat{B} \}
+\end{equation}
+where we take
+\begin{align} 
+\begin{split}
+	\hat{A} &= \hpsidag(x_1) \\
+	\hat{B} &= h(x_1) \hpsi(x_1)
+\end{split}
+\end{align}
+Since $\{\hpsi(x),\hat{B}\} = 0$, then 
+\begin{equation}
+	\left[ \hpsi(x),\hat{H}_0\right] = h(x) \hpsi(x)
+\end{equation}
+Now we notice that the second term in the commutator contains 
+\begin{align}
+\begin{split}
+	\left[ \hpsi(x), \hpsidag(x_1)\hpsidag(x_2)\hpsi(x_2)\hpsi(x_1) \right] &= \left[ \hpsi(x),\hpsidag(x_1)\hpsidag(x_2) \right] \hpsi(x_2)\hpsi(x_1) \\
+	&= \left( \hpsidag(x_1) \delta(x_1-x_2) + \hpsidag(x_2)\delta(x-x_1) \right) \hpsi(x_2)\hpsi(x_1).
+\end{split}
+\end{align}
+Therefore, 
+\begin{align}
+\begin{split}
+	\left[ \hpsi(x),\hat{H}_{int} \right] &= \frac{1}{2} \int dx_1 \hpsidag(x_1)\hpsi(x)\hpsi(x_1) v(x,x_1) + \frac{1}{2} \int dx_2 \hpsidag(x_2)\hpsi(x_2)\hpsi(x) v(x,x_2) \\
+	&= \int dx_2 v(x,x_2) \hpsidag(x_1) \hpsi(x_2) \hpsi(x)
+\end{split}
+\end{align}
+where in the second line we used the symmetry property of the Coulomb interaction $v(x,x') = v(x',x)$.
+Finally, with the compact notation $1 \equiv (\rr_1, \sigma, t_1)$, we get the equations of motion for the field operators :
+\begin{align}
+\begin{split}
+	\frac{\partial}{\partial t_1} \hpsi(1) &= -i \left[ h(1) + \int d3 v(1,3) \hpsidag(3)\hpsi(3) \right] \hpsi(1) \\
+	\frac{\partial}{\partial t_2} \hpsidag(2) &= i \left[ h(2)\hpsidag(2) + \hpsidag(2) \int d3 v(2,3) \hpsidag(3)\hpsi(3) \right]
+\end{split}
+\end{align}
+
+
+
+
+
+
+% This was from Aryasetiawwan Gunnarsson
+%
+% We start with the Hamiltonian of the electronic system in second quantization :
+% \be 
+% 	\hat{H} = \int d^3r \ \hpsidag(x) h_0(x) \hpsi(x) + \frac{1}{2} \int d^3r \  d^3r' \ \hpsidag(x) \hpsidag(x') v(\rr - \rr') \hpsi(x')\hpsi(x)  
+% \ee
+% where $h_0$ contains the energy of the single, non-interacting electron evolving in a local external potential, and the second term on right-hand side is the electron-electron interaction. In the Heisenberg picture, the time-dependence of the field operators is given by :
+% \be 
+% 	\hpsi(\rr t) = e^{it\hat{H}} \hpsi(\rr t) e^{-it\hat{H}}
+% \ee
+% Hence we get the Heisenberg equation of motion for the field operator :
+% \be 
+% 	i\frac{\partial \hpsi(x)}{\partial t} = \left[ \hpsi(x),\hat{H}\right]
+% \ee
+% With the Green's function defined above in \ref{eq:GF}, the equation of motion for the Green's function simply follows :
+% \be 
+% 	\left[ i\frac{\partial }{\partial t } - h_0(x) \right] G(x,x') - \int dx'' M(x,x'') G(x'',x') = \delta(x-x').
+% \ee
+% The mass operator $M$ is defined as :
+% \begin{align}
+% \begin{split}
+% 	\int dx_1 \ M(x,x_1) G(x_1,x') = &-i \int d^3r_1 \ v(\rr - \rr_1)\\ \nonumber
+% 	&\times \bra{0} T\left[ \hpsidag(\rr_1 t)\hpsi(\rr_1 t) \hpsi(\rr t)\hpsidag (\rr',t') \right] \ket{0}
+% \end{split}
+% \end{align}
+% The term on the second line is a special case of a two particle Green's function :
+% \begin{equation}
+% 	G_2(1,2,3,4) = i^2 \bra{0} T \left[ \hpsi(1)\hpsi(3)\hpsidag(2)\hpsidag(4) \right] \ket{0}
+% \end{equation}
+% At this point it is convenient to adopt the short-hand notation $1\equiv x_1 = (\rr_1 t_1)$ and $2\equiv x_2 = (\rr_2 t_2)$ and so on. 
+
+% To proceed with the derivation of the self-energy, we will follow Schwinger's functional derivative method \textcolor{red}{Maybe read Schwinger and cite it :)}. We will introduce an external perturbation, in the form of a time-dependent field $\varphi(\rr t)$ that we will later set to 0 once the self-energy is obtained. We have to switch from Heisenberg to the (Dirac) interaction picture, where :
+% \begin{equation}
+% 	\ket{\Psi_D(\rr t)} = \hat{U}(t,t_0) \ket{\Psi_D(\rr t_0)}
+% \end{equation}
+% where $\hat{U}$ is the time evolution operator :
+% \begin{equation}
+% 	\hat{U}(t,t_0) = T \exp\left[ -i \int_{t_0}^t d\tau \ \hat{\varphi}(\tau) \right]
+% \end{equation}
+% \begin{equation}
+% 	\hat{\varphi}(\tau) = \int d^3r \ \varphi(\rr,\tau) \hpsidag_D(\rr,\tau) \hpsi_D (\rr,\tau)
+% \end{equation}
+% Note that this interaction-picture field operator obeys the same equation of motion as the unperturbed Heisenberg operator :
+% \begin{equation}
+% 	i\frac{\partial}{\partial t} \hpsi_D = \left[ \hpsi_D,\hat{H}(\varphi=0)\right]
+% \end{equation}
+% where we recall the relationship between the two pictures :
+% \begin{equation}
+% 	\hpsi(\rr t) = \hat{U}^\dagger(t,0) \hpsi_D(\rr,t)\hat{U}(t,0).
+% \end{equation}
+% We can now write the Green's function using the $\hat{U}$ operator :
+% \begin{equation}
+% 	iG(1,2) = \frac{\bra{0}T\left[ \hat{U}(\infty,-\infty) \hpsi_D(1) \hpsidag_D(2)\right] \ket{0}}{\bra{0}\hat{U}(\infty,-\infty)\ket{0}}
+% \end{equation}
+% functional derivative of G ; try to understand the formula in Aryasetiawan
