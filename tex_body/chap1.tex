@@ -117,6 +117,7 @@ Density Functional Theory is often used as a reference for bandgaps and electron
 %(Structure optimization ? Hellmann-Feynman theorem to compute the forces acting on atoms, compute the total energy, minimize both the forces and the total energy)
 
 \section{Many-Body Perturbation Theory}
+zero temperature
 concept of quasiparticle
 self-energy is difference between the independent particle energy and the quasiparticle energy (for the real part) ; the imaginary part is the inverse QP lifetime
 define Green's function as electronic propagator
@@ -124,142 +125,173 @@ explain what we do in the next subsection; define G, derive its equation of moti
 define screening
 derive GW
 
-\textbf{Derivation of GW approximation}
+\subsection{Hedin's equations}
 % First, define the Green's function
-$x = (\rr,\sigma)$;
-We consider a system of N interacting electrons. We will consider the effect of nucleus motion in a later section.
-In the limit of large kinetic energy, adding or removing is instantaneous. Addition or removal energy are directly related to the electronic Green's function, defined as :
-\begin{equation}
-	iG(x,x') = \bra{0} \hat{T} \left[ \hat{\psi}(x)\hat{\psi}^\dagger(x') \right] \ket{0} \label{eq:GF}
-\end{equation}
-where $\ket{0}$ is the exact ground state of the N-electron system, $\hat{\psi}(x)$ is a field operator in Heisenberg representation which annihilates an electron at $x = (\rr,t)$ and T is the Wick's time-ordering operator. It ensures that the time variable increase from right to left. It gives $\hat{T}\left[ \hpsi(\rr t) \hpsidag(\rr 't') \right] = \theta(t-t') \hpsi(\rr t) \hpsidag(\rr 't') - \theta(t'-t)\hpsidag(\rr't')\hpsi(\rr t)$, where $\theta$ is the Heaviside function.  %Physically, probability of propagating an added or removed electron.
-
-We shall make explicit the time dependence of every term appearing in \ref{eq:GF}. We start with the time evolution of the field operators. We recall some useful properties of the field operators for fermions in the Schrödinger picture :
-\begin{align}
-\begin{split}
-	\{ \hpsi(x),\hpsidag(x')\} &= \delta (x-x') \\
-	\{ \hpsi(x),\hpsi(x') \} &= \{ \hpsidag(x),\hpsidag(x') \} = 0 \\
-	n(x) &= \hpsidag(x)\hpsi(x)
-\end{split}	
-\end{align}
+\textcolor{red}{add more explanations, see Fulvio's thesis}
+We consider a system of N interacting electrons. We will consider the effect of nuclei motion in a later section.
 We start from the Hamiltonian for interacting electrons in second quantization:
+\begin{align}
+\begin{split}
+ 	\hat{H} &= \int dx_1 \ \hpsidag(x_1) h(\rr_1) \hpsi(x_1) + \frac{1}{2} \iint dx_1 \  dx_2 \ \hpsidag(x_1) \hpsidag(x_2) v(\rr_1,\rr_2) \hpsi(x_2)\hpsi(x_1) \\
+		&= \hat{H}_0 + \hat{H}_{int}.
+\end{split}
+\end{align}
+where $\hat{\psi}(x)$ is a field operator in Schrödinger representation, $h$ is the single-particle Hamiltonian for non-interacting particles evolving in an external potential $V_{ext}$ and $v(\rr_1,\rr_2) = e^2 (\left| \rr_1 - \rr_2 \right|)^{-1}$ is the Coulomb interaction. In the above equation, x is the set of space and spin variables $x = (\rr, \sigma)$.
+%
 
+For the following derivation, we introduce an external potential $\Phi(x,x';t)$ which is local in time but nonlocal in space. We write it in the form of an interaction Hamiltonian :
+\begin{equation}
+	\hat{H}'(t) = \int dx dx' \hpsidag(x) \Phi(x,x';t) \hpsi(x') 
+\end{equation}
+In our case, this external perturbation will be set to 0 at the end of the calculation. It is a formal tool to derive the useful equations for the time-evolution of Green's functions. With this Hamiltonian, it is especially relevant to introduce the \textit{interaction picture}, in which both the operators and the wavefunctions have a time dependence. For the field operators we have :
+\begin{equation}
+	\hpsi(1) \equiv \hpsi(x_1, t_1) = e^{i\hat{H} t_1} \hpsi(x_1) e^{-i\hat{H} t_1}
+\end{equation}
+and for the interaction Hamiltonian :
+\begin{equation}
+	\hat{H}_I'(t) = e^{i\hat{H} t} \hat{H}'(t) e^{-i\hat{H} t} = \int dx dx' \hpsidag(x,t^+) U(x,x';t) \hpsi(x',t)
+\end{equation}
+where we use the notation $t^+$ for $t+\delta (\delta \to 0^+)$. We define a time-evolution operator in terms of this interaction Hamiltonian :
+\begin{equation}
+	\hat{S} = \exp\biggl\{ -i \int_{-\infty}^{+\infty} dt \hat{H}_I'(t) \biggr\}
+\end{equation}
+We now write the definitions of single- and two-particle Green's functions that include the dependence in $\Phi$ :
+\begin{equation}
+	G(1,2) = -i \frac{\bra{N}\hat{T}\left[\hat{S}\hpsi(1)\hpsidag(2)\right]\ket{N}}{\bra{N}T[\hat{S}]\ket{N}} \label{eq:GF}
+\end{equation}
+and
+\begin{equation}
+	G_2(1,2:1',2') = (-i)^2  \frac{\bra{N}\hat{T}\left[\hat{S}\hpsi(1)\hpsi(2)\hpsidag(2')\hpsidag(1')\right]\ket{N}}{\bra{N}T[\hat{S}]\ket{N}}\label{eq:2GF}
+\end{equation}
+where $\ket{N}$ is the exact ground state of the N-electron system and T is the Wick's time-ordering operator. It ensures that the time variable increases from right to left. It gives $\hat{T}\left[ \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) \right] = \theta(t_1 - t_2) \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) - \theta(t_2-t_1)\hpsidag(\rr_2 t_2)\hpsi(\rr_1 t_1)$, where $\theta$ is the Heaviside function. The physical meaning of the one-body Green's function is the probability amplitude that an electron added in the system at time $t_2$ and position $\rr_2$ propagates to position $\rr_1$ and time $t_1$. In the time-ordered formalism that we are using, it is also the probability amplitude that a hole created at time $t_1$ and position $x_1$ propagates to $(x_2,t_2)$, depending on how the two time variables are ordered.
+%
+
+We will now sketch a derivation for the equations of motion for the single-particle Green's function. To do this, we will make explicit the time dependence of each term in \ref{eq:GF}.
+we start with the time evolution operator in the interaction picture, whose time dependence is :
+\begin{equation}
+	\hat{S}(t_a,t_b) = \exp	\biggl\{ -i \int_{t_a}^{t_b} dt \hat{H}_I'(t) \biggr\}
+\end{equation}
+and its time derivatives are:
 \begin{align}
 \begin{split}
- 	\hat{H} &= \int dx_1 \ \hpsidag(x_1) h(x_1) \hpsi(x_1) + \frac{1}{2} \int\int dx_1 \  dx_2 \ \hpsidag(x_1) \hpsidag(x_2) v(x_1,x_2) \hpsi(x_2)\hpsi(x_1) \\
-		&= \hat{H}_0 + \hat{H}_{int}
+	\frac{\partial}{\partial t_a} T[\hat{S}(t_a,t_b)] &= -i \hat{H}'_I(t_a)T[\hat{S}(t_a,t_b)] \\
+	\frac{\partial}{\partial t_b} T[\hat{S}(t_a,t_b)] &= i T[\hat{S}(t_a,t_b)]\hat{H}'_I(t_b)
 \end{split}
 \end{align}
-where $h$ is the single-particle Hamiltonian for non-interacting particles evolving in an external potential $v_{ext}$. The total Hamiltonian containing this plus the interaction term enters the Heisenberg equation of motion for an operator $\hat{O}$:
-\begin{equation}
-	i\frac{d}{d t}\hat{O}_H(t) = \hat{U}^\dagger_S(t) \left[ \hat{O}(t),\hat{H} \right] \hat{U}_S(t) + \hat{U}^\dagger_S(t) (i \frac{d}{dt} \hat{O}_S(t)) \hat{U}_S(t)
-\end{equation}
-where the subscript $H$ and $S$ denote respectively the Heisenberg and Schrödinger pictures, and the transformation from one the latter to the former is given by :
-\begin{align}
-\begin{split}
-	\hpsi_H(x,t) &= \hat{U}^\dagger_S(t) \hpsi_S(x) \hat{U}_S(t) \\
-	\hpsidag_H(x,t) &= \hat{U}^\dagger_S(t) \hpsidag_S(x) \hat{U}_S(t)
-\end{split}
-\end{align}
-and $\hat{U}_S(t) = \exp(-i\hat{H}t) $ is the time evolution operator. In the following we drop the subscript $H$ for the field operators, as their time dependence will be explicit. The Heisenberg equation of motion for the field operator is then :
-\begin{equation}
-	i\frac{d}{dt} \hpsi(x,t) = \hat{U}^\dagger_S(t) \left[ \hpsi(x),\hat{H} \right] \hat{U}_S(t)
-\end{equation}
-and similarly for $\hpsidag$. To compute the commutator, we split the two terms of the Hamiltonian and we use the identity 
-\begin{equation}
-	\left[ \hpsi(x),\hat{A}\hat{B} \right] = \{ \hpsi(x),\hat{A} \}\hat{B} -  \hat{A}\{ \hpsi(x), \hat{B} \}
-\end{equation}
-where we take
-\begin{align} 
-\begin{split}
-	\hat{A} &= \hpsidag(x_1) \\
-	\hat{B} &= h(x_1) \hpsi(x_1)
-\end{split}
-\end{align}
-Since $\{\hpsi(x),\hat{B}\} = 0$, then 
-\begin{equation}
-	\left[ \hpsi(x),\hat{H}_0\right] = h(x) \hpsi(x)
-\end{equation}
-Now we notice that the second term in the commutator contains 
-\begin{align}
-\begin{split}
-	\left[ \hpsi(x), \hpsidag(x_1)\hpsidag(x_2)\hpsi(x_2)\hpsi(x_1) \right] &= \left[ \hpsi(x),\hpsidag(x_1)\hpsidag(x_2) \right] \hpsi(x_2)\hpsi(x_1) \\
-	&= \left( \hpsidag(x_1) \delta(x_1-x_2) + \hpsidag(x_2)\delta(x-x_1) \right) \hpsi(x_2)\hpsi(x_1).
-\end{split}
-\end{align}
-Therefore, 
-\begin{align}
-\begin{split}
-	\left[ \hpsi(x),\hat{H}_{int} \right] &= \frac{1}{2} \int dx_1 \hpsidag(x_1)\hpsi(x)\hpsi(x_1) v(x,x_1) + \frac{1}{2} \int dx_2 \hpsidag(x_2)\hpsi(x_2)\hpsi(x) v(x,x_2) \\
-	&= \int dx_2 v(x,x_2) \hpsidag(x_1) \hpsi(x_2) \hpsi(x)
-\end{split}
-\end{align}
-where in the second line we used the symmetry property of the Coulomb interaction $v(x,x') = v(x',x)$.
-Finally, with the compact notation $1 \equiv (\rr_1, \sigma, t_1)$, we get the equations of motion for the field operators :
+For the field operators, the derivation of the equations of motions can be found in Appendix \ref{app:EOM}. They read :
 \begin{align}
 \begin{split}
 	\frac{\partial}{\partial t_1} \hpsi(1) &= -i \left[ h(1) + \int d3 v(1,3) \hpsidag(3)\hpsi(3) \right] \hpsi(1) \\
 	\frac{\partial}{\partial t_2} \hpsidag(2) &= i \left[ h(2)\hpsidag(2) + \hpsidag(2) \int d3 v(2,3) \hpsidag(3)\hpsi(3) \right]
+\end{split}	
+\end{align}
+where we introduced $v(1,2) = v(\rr_1,\rr_1)\delta(t_1-t_2)$ and $h(1)=h(\rr_1)$. Knowing that the derivative of the Heaviside function is a Dirac delta, we can write the equations of motion for the single-particle Green's functions :
+\begin{align}
+\begin{split}
+	&\left[ i\frac{\partial}{\partial t_1} - h(1) \right] G_1(1,2) - \int d3 \Phi(1,3)G_1(3,2) + i \int d3 v(1,3) G_2(1,3^+;2,3^{++}) = \delta(1,2) \\
+	&\left[ -i\frac{\partial}{\partial t_2} - h(2) \right] G_1(1,2) - \int d3 G_1(1,3)\Phi(3,2) + i \int d3 v(2,3) G_2(1,3^{--};2,3^-) = \delta(1,2)
 \end{split}
 \end{align}
-
-
-
-
-
-
-% This was from Aryasetiawwan Gunnarsson
+with the notation : 
+\begin{equation}
+	\Phi(1,2) = \Phi(x_1,x_2;t_1) \delta(t_1-t_2).
+\end{equation}
+Here we notice that the equations for the single-particle Green's function depend on the two-particle Green's function. The latter could be expressed in terms of the three-body Green's function, and so on. Instead of using a hierarchy of higher-order Green's function, we will eliminate the two-particle Green's function from the equation and write a set of coupled integro-differential equations containing the self-energy and other useful quantities.
 %
-% We start with the Hamiltonian of the electronic system in second quantization :
-% \be 
-% 	\hat{H} = \int d^3r \ \hpsidag(x) h_0(x) \hpsi(x) + \frac{1}{2} \int d^3r \  d^3r' \ \hpsidag(x) \hpsidag(x') v(\rr - \rr') \hpsi(x')\hpsi(x)  
-% \ee
-% where $h_0$ contains the energy of the single, non-interacting electron evolving in a local external potential, and the second term on right-hand side is the electron-electron interaction. In the Heisenberg picture, the time-dependence of the field operators is given by :
-% \be 
-% 	\hpsi(\rr t) = e^{it\hat{H}} \hpsi(\rr t) e^{-it\hat{H}}
-% \ee
-% Hence we get the Heisenberg equation of motion for the field operator :
-% \be 
-% 	i\frac{\partial \hpsi(x)}{\partial t} = \left[ \hpsi(x),\hat{H}\right]
-% \ee
-% With the Green's function defined above in \ref{eq:GF}, the equation of motion for the Green's function simply follows :
-% \be 
-% 	\left[ i\frac{\partial }{\partial t } - h_0(x) \right] G(x,x') - \int dx'' M(x,x'') G(x'',x') = \delta(x-x').
-% \ee
-% The mass operator $M$ is defined as :
-% \begin{align}
-% \begin{split}
-% 	\int dx_1 \ M(x,x_1) G(x_1,x') = &-i \int d^3r_1 \ v(\rr - \rr_1)\\ \nonumber
-% 	&\times \bra{0} T\left[ \hpsidag(\rr_1 t)\hpsi(\rr_1 t) \hpsi(\rr t)\hpsidag (\rr',t') \right] \ket{0}
-% \end{split}
-% \end{align}
-% The term on the second line is a special case of a two particle Green's function :
-% \begin{equation}
-% 	G_2(1,2,3,4) = i^2 \bra{0} T \left[ \hpsi(1)\hpsi(3)\hpsidag(2)\hpsidag(4) \right] \ket{0}
-% \end{equation}
-% At this point it is convenient to adopt the short-hand notation $1\equiv x_1 = (\rr_1 t_1)$ and $2\equiv x_2 = (\rr_2 t_2)$ and so on. 
 
-% To proceed with the derivation of the self-energy, we will follow Schwinger's functional derivative method \textcolor{red}{Maybe read Schwinger and cite it :)}. We will introduce an external perturbation, in the form of a time-dependent field $\varphi(\rr t)$ that we will later set to 0 once the self-energy is obtained. We have to switch from Heisenberg to the (Dirac) interaction picture, where :
-% \begin{equation}
-% 	\ket{\Psi_D(\rr t)} = \hat{U}(t,t_0) \ket{\Psi_D(\rr t_0)}
-% \end{equation}
-% where $\hat{U}$ is the time evolution operator :
-% \begin{equation}
-% 	\hat{U}(t,t_0) = T \exp\left[ -i \int_{t_0}^t d\tau \ \hat{\varphi}(\tau) \right]
-% \end{equation}
-% \begin{equation}
-% 	\hat{\varphi}(\tau) = \int d^3r \ \varphi(\rr,\tau) \hpsidag_D(\rr,\tau) \hpsi_D (\rr,\tau)
-% \end{equation}
-% Note that this interaction-picture field operator obeys the same equation of motion as the unperturbed Heisenberg operator :
-% \begin{equation}
-% 	i\frac{\partial}{\partial t} \hpsi_D = \left[ \hpsi_D,\hat{H}(\varphi=0)\right]
-% \end{equation}
-% where we recall the relationship between the two pictures :
-% \begin{equation}
-% 	\hpsi(\rr t) = \hat{U}^\dagger(t,0) \hpsi_D(\rr,t)\hat{U}(t,0).
-% \end{equation}
-% We can now write the Green's function using the $\hat{U}$ operator :
-% \begin{equation}
-% 	iG(1,2) = \frac{\bra{0}T\left[ \hat{U}(\infty,-\infty) \hpsi_D(1) \hpsidag_D(2)\right] \ket{0}}{\bra{0}\hat{U}(\infty,-\infty)\ket{0}}
-% \end{equation}
-% functional derivative of G ; try to understand the formula in Aryasetiawan
+We use the functional derivative identity which is derived in appendix B :
+\begin{equation}
+	G_2(1,3;2,3^+) = G(1,2)G(3,3^+) - \frac{\delta G(1,2)}{\delta \Phi(3)}
+\end{equation}
+where we consider the external potential to be local in space $\Phi(x_1,x_2;t_1) = \Phi(x_1,t_1)\delta(x_1,x_2)$. This restriction is enough to generate the equations of motion for the single-particle Green's function. For the two-particle ones instead, one needs to consider the more general form of the external potential, non-local in space.
+The equations of motion become :
+\begin{equation}
+	\left[ i \frac{\partial}{\partial t_1} - h(1) - \Phi(1) + i \int d3 v(1,3)G(3,3^+) \right] G(1,2) - i \int d3 v(1^+,3) \frac{\delta G(1,2)}{\delta \Phi(3)} = \delta(1,2)
+\end{equation}
+and
+\begin{equation}
+	\left[ i \frac{\partial}{\partial t_2} - h(2) - \Phi(2) + i \int d3 v(2,3)G(3^-,3) \right] G(1,2) - i \int d3 v(2^-,3) \frac{\delta G(1,2)}{\delta \Phi(3)} = \delta(1,2)
+\end{equation}
+We cannot take the limit $\Phi \to 0$ yet because it would require the knowledge of the functional dependence of $G$ on $\Phi$. However we can rewrite the equations of motion (or at least one of them and the other would undergo the same process) by introducing new physical quantities, coupled in nonlinear self-consistent equations. 
+%
+
+The first of these quantities is the \textbf{total potential} $V$ :
+\begin{equation}
+	\vtot (1) \equiv \int d2 v(12) \langle \hat{n}(2) \rangle + \Phi(1) \label{eq:vtot}
+\end{equation}
+where $\hat{n}$ is the density operator. The equation of motion for the Green's function is then :
+\begin{equation}
+	\left[ i \frac{\partial}{\partial t_1} + \frac{1}{2}\nabla^2(1) - \vtot (1) -i\int d3 v(1^+,3) \frac{\delta}{\delta \Phi(3)} \right] G(1,2) = \delta(1,2) \label{eq:GF_EOM}
+\end{equation}
+To get rid of the functional derivative with respect to the external perturbation, we make use of the definition of the inverse Green's function and of the functional differentiation of a product:
+\begin{equation}
+	\frac{\delta G(1,2)}{\delta \Phi(3)} = - \int d45 G(1,4) \frac{\delta G^{-1}(4,5)}{\delta \Phi(3)} G(5,2)
+\end{equation}
+where the inverse single-particle Green's function is defined as :
+\begin{equation}
+	\int d3 G^{-1}(1,3) G(3,2) = \int d3 G(1,3)G^{-1}(3,2) = \delta(1,2)
+\end{equation}
+We now use the chain rule for functional differentiation :
+\begin{equation}
+	\frac{\delta G^{-1}(4,5)}{\delta \Phi(3)} = \int d6 \frac{\delta G^{-1}(4,5)}{\delta \vtot(6)} \frac{\delta \vtot(6)}{\delta \Phi(3)}
+\end{equation}
+We introduce the \textbf{scalar vertex function}, a three-point quantity defined as :
+\begin{equation}
+	\Gamma(1,2;3) \equiv -\frac{\delta G^{-1}(1,2)}{\delta \vtot(3)} \label{eq:vertex}
+\end{equation}
+We introduce the \textbf{inverse dielectric matrix} $\inveps$ :
+\begin{equation}
+	\inveps(1,2) = \frac{\delta \vtot(1)}{\delta \Phi(2)}.
+\end{equation} 
+It is the many-body formulation of the classical (inverse) dielectric matrix. 
+We introduce the \textbf{dynamically screened interaction} $W$ or screened Coulomb interaction, defined as :
+\begin{equation}
+	W(1,2) \equiv \int d3 \inveps(1,3) v(3,2) \equiv \int d3 v(1,3) \inveps(2,3)
+\end{equation}
+Note that the screened interaction is symmetric under the exchange of indices $W(1,2) = W(2,1)$.
+Finally, we introduce the \textbf{electron self-energy}, defined as :
+\begin{equation}
+	\Sigma(1,2) = i \int d34 G(1,3) \Gamma(3,2;4) W(4,1^+)
+\end{equation}
+%
+
+With these quantities, we can rewrite the equation of motion for the single-particle Green's function :
+\begin{equation}
+	\left[ i \frac{\partial}{\partial t_1} + \frac{1}{2}\nabla^2(1) - \vtot (1)\right] G(1,2) - \int d3 \Sigma(1,3) G(3,2) = \delta(1,2) \label{eq:GF_EOM_SE}
+\end{equation}
+We can see here that the self-energy $\Sigma$ has the meaning of a nonlocal and energy-dependent effective single-particle potential.
+
+Using eqs. \eqref{eq:vertex} and \eqref{eq:GF_EOM_SE}, we can express the vertex function in terms of the above quantities. 
+\begin{equation}
+	\Gamma(1,2;3) = \delta(1,2) \delta(1,3) + \int d4567 \frac{\delta \Sigma(12)}{\delta G(4,5)} G(4,6) G(7,5) \Gamma(6,7;3).
+\end{equation}
+More details about these quantities and their derivations can be found for example in Strinati's review\cite{strinati1988application}.
+The previous quantities form a set of coupled integro-differential equations. In order to close the loop and build a self-consistent set, we need to write the relations between $W$ and the other quantities. By combining $\vtot$, $\inveps$ and $W$, we get :
+\begin{equation}
+	W(1,2) = v(1,2) + \int d34 v(1,3) \frac{\delta \langle \hat{n}(3)\rangle}{\delta \vtot (4)} W(4,2)
+\end{equation}
+We define the \textbf{irreducible polarizability} to be :
+\begin{equation}
+	P(1,2) \equiv \frac{\delta \langle \hat{n}(1)\rangle}{\delta \vtot (2)}.
+\end{equation}
+The reducible polarizability would be the derivative of the density with respect to the perturbation $\Phi$
+Then we can write the screened interaction in term of $P$ :
+\begin{equation}
+	W(1,2) = v(1,2) + \int d34v(1,3)P(3,4) W(4,2)
+\end{equation}
+as well as the dielectric matrix :
+\begin{equation}
+	\epsilon(1,2) = \delta(1,2) - \int d3 v(1,3) P(3,2)
+\end{equation}
+We now have a set of coupled self-consistent equations, where the limit $\Phi \to 0$ can be taken. We will see in the next section how to write $G$ in a way that is easier to compute.
+
+\subsection{Dyson equation}
+
+
+\subsection{Quasiparticle equations}
+
+
+\textcolor{red}{Relation between the 2-particle GF and the linear response function}
+
+
+
