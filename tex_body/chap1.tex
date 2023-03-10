@@ -127,7 +127,7 @@ derive GW
 
 \subsection{Hedin's equations}
 % First, define the Green's function
-\textcolor{red}{add more explanations, see Fulvio's thesis}
+\textcolor{red}{add more explanations, see Fulvio's thesis; especially correspondance between Schrödinger equation and GF}
 We consider a system of N interacting electrons. We will consider the effect of nuclei motion in a later section.
 We start from the Hamiltonian for interacting electrons in second quantization:
 \begin{align}
@@ -199,7 +199,7 @@ with the notation :
 Here we notice that the equations for the single-particle Green's function depend on the two-particle Green's function. The latter could be expressed in terms of the three-body Green's function, and so on. Instead of using a hierarchy of higher-order Green's function, we will eliminate the two-particle Green's function from the equation and write a set of coupled integro-differential equations containing the self-energy and other useful quantities.
 %
 
-We use the functional derivative identity which is derived in appendix B :
+We use the functional derivative identity which is derived in appendix B \textcolor{red}{I don't know if it is necessary to include this derivation}:
 \begin{equation}
 	G_2(1,3;2,3^+) = G(1,2)G(3,3^+) - \frac{\delta G(1,2)}{\delta \Phi(3)}
 \end{equation}
@@ -229,7 +229,7 @@ To get rid of the functional derivative with respect to the external perturbatio
 \end{equation}
 where the inverse single-particle Green's function is defined as :
 \begin{equation}
-	\int d3 G^{-1}(1,3) G(3,2) = \int d3 G(1,3)G^{-1}(3,2) = \delta(1,2)
+	\int d3 G^{-1}(1,3) G(3,2) = \int d3 G(1,3)G^{-1}(3,2) = \delta(1,2) \label{eq:inv_GF}
 \end{equation}
 We now use the chain rule for functional differentiation :
 \begin{equation}
@@ -274,7 +274,17 @@ We define the \textbf{irreducible polarizability} to be :
 \begin{equation}
 	P(1,2) \equiv \frac{\delta \langle \hat{n}(1)\rangle}{\delta \vtot (2)}.
 \end{equation}
-The reducible polarizability would be the derivative of the density with respect to the perturbation $\Phi$
+The reducible polarizability would be the derivative of the density with respect to the perturbation $\Phi$. With the following relation 
+\begin{equation}
+	n(1) = \langle \hat{n}(1)\rangle = -iG(1,1+),
+\end{equation}
+and using properties of the inverse Green's function and the chain rule, one can write :
+\begin{align}
+\begin{split}
+	P(1,2) &= -i \frac{\delta G(1,1+)}{\delta V(2)} = i \int d34 G(1,3)\frac{\delta G^{-1}(3,4)}{\delta V(2)}G(4,1^+)\\
+	&= -i \int d34 G(1,3) G(4,1^+) \Gamma(3,4;2)
+\end{split}
+\end{align}
 Then we can write the screened interaction in term of $P$ :
 \begin{equation}
 	W(1,2) = v(1,2) + \int d34v(1,3)P(3,4) W(4,2)
@@ -283,13 +293,71 @@ as well as the dielectric matrix :
 \begin{equation}
 	\epsilon(1,2) = \delta(1,2) - \int d3 v(1,3) P(3,2)
 \end{equation}
-We now have a set of coupled self-consistent equations, where the limit $\Phi \to 0$ can be taken. We will see in the next section how to write $G$ in a way that is easier to compute.
+We now have a set of coupled self-consistent equations, where the limit $\Phi \to 0$ can be taken. 
+
 
 \subsection{Dyson equation}
 
+In order to be able to compute the Green's function and the related useful quantities, we need to reformulate the Green's function. We start by separating the part which comes only from the one-particle operators in the equation of motion \eqref{eq:GF_EOM_SE} :
+\begin{equation}
+	\left[ i\frac{\partial}{\partial t_1} - h(1) \right] G_0(1,2) = \delta(1,2)
+\end{equation}
+This is the definition of the non-interacting Green's function $G_0$. It also has an inverse and they obey the same relation as the full single-particle Green's function \eqref{eq:inv_GF}, therefore one can write :
+\begin{equation}
+	G(1,2) = \int d34 G_0(1,4)G^{-1}_0(4,3)G(3,2)
+\end{equation}
+Inserting the above equation in \eqref{eq:GF_EOM_SE}, we get :
+\begin{equation}
+	\int d3 \left[ G_0^{-1}(1,3) - \Sigma(1,3) \right] G(3,2) = \delta(1,2).
+\end{equation}
+After multiplying the from the left by $\int d1 G_0(4,1)$ we obtain :
+\begin{equation}
+	G(1,2) = G_0(1,2) - \int d34 G_0(1,3) \Sigma(3,4) G(4,2) \label{eq:Dyson}
+\end{equation}
+or equivalently,
+\begin{equation}
+	G^{-1}(1,2) = G_0^{-1}(1,2) - \Sigma(1,2)
+\end{equation}
+Equation \eqref{eq:Dyson} is called the \textit{Dyson equation} for the single-particle Green's function. Knowing $G_0$, which is numerically simple to compute, and approximating the self-energy $\Sigma$, which we will discuss later, allows one to compute the Green's function $G$.
+
+\textcolor{red}{Should I put the GW approx subsection here and the QP equations after ? yes}
+\subsection{The $\mathbf{GW}$ approximation}
+With the Dyson equation for the Green's function, we can now complete the set of self-consistent, coupled equations that are called the Hedin's equations:
+\begin{empheq}[box=\widefbox]{align*}
+	&\Sigma(1,2) = i \int d34 G(1,3) \Gamma(3,2;4) W(4,1^+) \\
+	&G(1,2) = \int d34 G_0(1,4)G^{-1}_0(4,3)G(3,2) \\
+	&\Gamma(1,2;3) = \delta(1,2) \delta(1,3) + \int d4567 \frac{\delta \Sigma(12)}{\delta G(4,5)} G(4,6) G(7,5) \Gamma(6,7;3) \\
+	&P(1,2) = -i \int d34 G(1,3) G(4,1^+) \Gamma(3,4;2) \\
+	&W(1,2) = v(1,2) + \int d34v(1,3)P(3,4) W(4,2)
+\end{empheq}
+self-consistent cycle; consider $\frac{\delta \Sigma(12)}{\delta G(4,5)} = 0$ so that $\Gamma = \delta(1,2)\delta(1,3)$ and $\gS = iGW$. This is the so-called $GW$ approximation. Still self-consistent but we do only a one-shot. Starting point are the DFT KS eigenvalues. Linearize $\gS$ around the KS eigenvalues. Real part of SE is a shift to the KS eigenvalues. 
+
 
 \subsection{Quasiparticle equations}
+Once the limit $\Phi \to 0$ is taken, there is no time-dependent potential acting on the system of N electrons. Hence, the system is invariant under time translation and the Green's function depends only on the time difference $\tau = t_1 - t_2$. One can do the Fourier transform from time $\tau$ to frequency $\omega$, and we can write the Green's function in the so-called Lehmann representation :
+\begin{equation}
+	G(x_1,x_2;\omega) = \sum_a \frac{f_a(x_1)f_a^*(x_2)}{\omega-\varepsilon_a + i\eta} + \sum_i \frac{f_i(x_1)f_i^*(x_2)}{\omega-\varepsilon_i + i\eta}
+\end{equation}
+where $a,i$ denote electron states, $f_a(x) = \bra{N}\hpsi(x)\ket{N+1,a}$ and $f_i(x) = \bra{N-1,i} \hpsi(x) \ket{N}$ are the Lehmann amplitudes (as called Dyson orbitals). They are defined with the $N$-electron ground state $\ket{N}$ whose total energy is $E_N$, the electron state number $a$ of the $(N+1)$-electron system $\ket{N+1,a}$ with total energy $E_{N+1,a}$ and the electron-state number $i$ of the $(N-1)$-electron system $\ket{N-1,i}$ with total energy $E_{N-1,i}$.
+The Lehmann representation of the Green's function also contains the quasiparticle energies, which are defined as $\varepsilon_a = E_{N+1,a} - E_N = -A_a$ and $\varepsilon_i = E_N - E_{N-1,i} = -I_i$. $A_a$ and $I_i$ are the electron affinities and ionization energies. This highlights the link between the poles of the Green's function from many-body perturbation theory and the photoemission and inverse photoemission spectroscopies. 
 
+With this form of the Green's function we can reformulate the Dyson equation \eqref{eq:Dyson}. Just as the Green's function, the self-energy depends only on the time difference $\tau = t_1 - t_2$. We can then take the Fourier transform of eq. \eqref{eq:GF_EOM_SE} :
+\begin{equation}
+	\left[ \omega - h(\rr_1) \right] G(x_1,x_2;\omega) - \int dx_3 \Sigma(x_1,x_2;\omega) G(x_3,x_2;\omega) = \delta(x_1,x_2)
+\end{equation}
+Inserting the Lehmann representation of $G(x_1,x_2;\omega)$, one can select the term corresponding to a given pole $\varepsilon_k$ by multiplying the equation by $\omega - \varepsilon_k$ and taking the limit $\omega \to \epsilon_k$, giving :
+\begin{equation}
+	\left[ \epsilon_k - h(\rr_1) \right] f_k(x_1)f^*_k(x_2) - \int dx_3 \Sigma(x_1,x_3;\varepsilon_k) f_k(x_3) = \varepsilon_k f_k(x_1)
+\end{equation}
+and we obtain an eigenvalue equation :
+\begin{equation}
+	h(\rr_1)f_k(x_1) + \int dx_3 \Sigma(x_1,x_3;\varepsilon_k)f_k(x_3) = \varepsilon_k f_k(x_1)
+\end{equation}
+\textcolor{red}{Maybe frame this equation} 
+These are the \textit{quasiparticle equations}. They give the quasiparticle energies and the Lehmann amplitudes, or also called the Dyson orbitals. Here it is made apparent that $\Sigma$ is a nonlocal, energy-dependent potential. One thing to notice is also the fact that the quasiparticle energy is made out of the bare, independent single particle, and another term coming from the interaction with surrounding particle. The quasiparticle is the bare particle "dressed" with the interaction.
+\textcolor{red}{Linearize the SE, the Z factor appears. talk about the fact that the KS eigenvalues are the starting point}
+\textcolor{pink}{Imaginary part of self-energy is lifetime. Cite Mattuck ?}
+\textcolor{pink}{Subtract the $v_{xc}$ from DFT when computing QP energies}
 
 \textcolor{red}{Relation between the 2-particle GF and the linear response function}
 

@@ -209,6 +209,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{dsfont}
 \RequirePackage{url}
-\RequirePackage{lineno}
+\RequirePackage{lineno}       % line numbering for easier corrections
+\RequirePackage{empheq}		  % boxed multiline equations
 
 \include{alias}
