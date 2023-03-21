@@ -83,13 +83,13 @@
 \RequirePackage{imakeidx}					%% index
 \RequirePackage{etoc}						%% fonctions pour TOC locale (préférable à minitoc avec KOMA-Script)
 \setuptoc{toc}{totoc}						%% ajoute la TOC à la TOC
-\newcommand{\chaptertoc}[1][Sommaire]{%		%% définit une commande pour la TOC locale (Sommaire)
+\newcommand{\chaptertoc}[1][Contents]{%		%% définit une commande pour la TOC locale (Sommaire)
 	\etocsetnexttocdepth{3}%				%% profondeur de la TOC locale
 	\etocsettocstyle{\addsec*{#1}}{}%
 	\localtableofcontents%
 }
 
-\setcounter{secnumdepth}{3}					%% profondeur des sections numérotées
+\setcounter{secnumdepth}{2}					%% profondeur des sections numérotées
 \setcounter{tocdepth}{2}					%% profondeur des sections dans la table des matières
 
 \addbibresource{biblio.bib}					%% fichiers sources bibliographiques
@@ -144,7 +144,7 @@
 	linktocpage=false,						%% lien numéro de page dans TOC
 %% métadonnées :							%% ATTENTION à compléter
 	pdftitle={Titre},
-	pdfauthor={Prénom NOM},
+	pdfauthor={Pierre LECHIFFLART},
 	pdfsubject={Résumé},
 	pdfkeywords = {mot clé, keyword, ...},
 	}

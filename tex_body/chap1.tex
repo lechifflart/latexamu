@@ -125,6 +125,7 @@ Density Functional Theory is often used as a reference for bandgaps and electron
 % define screening
 % derive GW
 % Concept of QP and satellites
+cite Strinati, Aryasetiawian, Martin Reining Ceperley, Julien Toulouse notes, Giustino, Stefanucci and van Leuween for the appendix  
 Here I will write a general introduction for MBPT and an outline of the content of the following subsections. I would prefer to write it once the following is corrected and the content is fixed.
 
 \subsection{Hedin's equations}
@@ -203,7 +204,7 @@ Here we notice that the equations for the single-particle Green's function depen
 
 We use the functional derivative identity which is derived in appendix B \textcolor{red}{I don't know if it is necessary to include this derivation}:
 \begin{equation}
-	G_2(1,3;2,3^+) = G(1,2)G(3,3^+) - \frac{\delta G(1,2)}{\delta \Phi(3)}
+	G_2(1,3;2,3^+) = G(1,2)G(3,3^+) - \frac{\delta G(1,2)}{\delta \Phi(3)} \label{eq:2GF_dPhi}
 \end{equation}
 where we consider the external potential to be local in space $\Phi(x_1,x_2;t_1) = \Phi(x_1,t_1)\delta(x_1,x_2)$. This restriction is enough to generate the equations of motion for the single-particle Green's function. For the two-particle ones instead, one needs to consider the more general form of the external potential, non-local in space.
 The equations of motion become :
@@ -217,7 +218,7 @@ and
 We cannot take the limit $\Phi \to 0$ yet because it would require the knowledge of the functional dependence of $G$ on $\Phi$. However we can rewrite the equations of motion (or at least one of them and the other would undergo the same process) by introducing new physical quantities, coupled in nonlinear self-consistent equations. 
 %
 
-The first of these quantities is the \textbf{total potential} $V$ :
+The first of these quantities is the \textbf{total classical potential} $V$ : \textcolor{red}{\textsc{THE FIRST TERM IS THE HARTREE POTENTIAL} \textbf{BY THE WAY}}
 \begin{equation}
 	\vtot (1) \equiv \int d2 v(12) \langle \hat{n}(2) \rangle + \Phi(1) \label{eq:vtot}
 \end{equation}
@@ -262,10 +263,11 @@ With these quantities, we can rewrite the equation of motion for the single-part
 	\left[ i \frac{\partial}{\partial t_1} + \frac{1}{2}\nabla^2(1) - \vtot (1)\right] G(1,2) - \int d3 \Sigma(1,3) G(3,2) = \delta(1,2) \label{eq:GF_EOM_SE}
 \end{equation}
 We can see here that the self-energy $\Sigma$ has the meaning of a nonlocal and energy-dependent effective single-particle potential.
+%
 
 Using eqs. \eqref{eq:vertex} and \eqref{eq:GF_EOM_SE}, we can express the vertex function in terms of the above quantities. 
 \begin{equation}
-	\Gamma(1,2;3) = \delta(1,2) \delta(1,3) + \int d4567 \frac{\delta \Sigma(1,2)}{\delta G(4,5)} G(4,6) G(7,5) \Gamma(6,7;3).
+	\Gamma(1,2;3) = \delta(1,2) \delta(1,3) + \int d4567 \frac{\delta \Sigma(1,2)}{\delta G(4,5)} G(4,6) G(7,5) \Gamma(6,7;3). \label{eq:vertex_hedin}
 \end{equation}
 More details about these quantities and their derivations can be found for example in Strinati's review\cite{strinati1988application}.
 The previous quantities form a set of coupled integro-differential equations. In order to close the loop and build a self-consistent set, we need to write the relations between $W$ and the other quantities. By combining $\vtot$, $\inveps$ and $W$, we get :
@@ -274,7 +276,7 @@ The previous quantities form a set of coupled integro-differential equations. In
 \end{equation}
 We define the \textbf{irreducible polarizability} to be :
 \begin{equation}
-	P(1,2) \equiv \frac{\delta \langle \hat{n}(1)\rangle}{\delta \vtot (2)}.
+	P(1,2) \equiv \frac{\delta \langle \hat{n}(1)\rangle}{\delta \vtot (2)}. \label{eq:P_dn/dV}
 \end{equation}
 The reducible polarizability would be the derivative of the density with respect to the perturbation $\Phi$. With the following relation 
 \begin{equation}
@@ -296,7 +298,7 @@ as well as the dielectric matrix :
 	\epsilon(1,2) = \delta(1,2) - \int d3 v(1,3) P(3,2)
 \end{equation}
 We now have a set of coupled self-consistent equations, where the limit $\Phi \to 0$ can be taken. 
-
+%
 
 \subsection{Dyson equation}
 
@@ -321,7 +323,7 @@ or equivalently,
 	G^{-1}(1,2) = G_0^{-1}(1,2) - \Sigma(1,2)
 \end{equation}
 Equation \eqref{eq:Dyson} is called the \textit{Dyson equation} for the single-particle Green's function. Knowing $G_0$, which is numerically simple to compute, and approximating the self-energy $\Sigma$, which we will discuss later, allows one to compute the Green's function $G$.
-
+\textcolor{pink}{The vertex function contains a local part which give the Hartree-Fock self-energy. The other term are the vertex corrections. Neglecting the vertex corrections in the polarizability leads to the RPA.\textcolor{red}{DO A PARAGRAPH ON THIS}. Neglecting the vertex corrections in the self-energy leads to the GWA.}
 
 \subsection{The $\mathbf{GW}$ approximation}
 With the Dyson equation for the Green's function, we can now complete the set of self-consistent, coupled equations that are called the \textit{Hedin's equations}:
@@ -374,10 +376,144 @@ where $\varepsilon^{KS}_n$ are Kohn-Sham eigenvalues and the renormalization fac
 \end{equation}
 It is a measure of the single-particle character of the system. If $Z=1$, the electron addition or removal spectra (given by $\Im G$) shows a single peak at the quasiparticle energy. The width of the peak is proportional to the inverse of the life-time of the single-particle state. For weakly correlated system, typically $Z \leq 1$. In this case, the intensity of the quasiparticle peak is renormalized by $Z$, and the amount missing is transferred to secondary peaks called satellites. In the $GW$ approximation, there is a only one satellite, and it is at the wrong energy with respect to experiments. This is because the electronic correlations are approximated. Finally if $Z \ll 1$, it means that the material is not well described by a single-particle scheme, for example because of strong correlations. In this case, Many Body Perturbation Theory is not well suited to describe such materials.
 
-
+%\textcolor{green}{At some point, talk about the Hartree part in the self-energy.}
 \subsection{The Bethe-Salpeter equation}
-Relation between the 2-particle GF and the linear response function
-\subsection{Numerical implementation / Computational scheme}
+
+The $GW$ approximation allows us to compute the quasiparticle energies through the addition or removal of one particle. These excitations are qualified as charged. Instead, optical excitations in semiconductors are referred to as neutral excitations, where an electron is promoted to a conduction band but stays in the crystal, and leaves a hole in a valence band. In order to have a good description of these phenomena, we need to consider the interaction between the excited electron and the hole. In principle, this interaction is contained in the vertex function $\Gamma$ from eq. \eqref{eq:vertex_hedin}. However, we neglected it in the $GW$ approximation. In this section, we will see how to include the electron-hole interaction from the two-particle Green's function, and how we can change the formulation of the problem from particles in bands to a new type of quasiparticle : the \textit{exciton}, which is a bound electron-hole pair.
+
+\subsubsection{Dyson equation for the two-particle propagator $\mathbf{L}$}
+We start by writing a Dyson equation for the two-particle Green's function, defined in eq. \eqref{eq:2GF}.  We define the two-particle correlation function or propagator $L$ :
+\begin{equation}
+	L(1,2,1',2') = - G_2(1,2,1',2') + G(1,1')G(2,2') \label{eq:L}
+\end{equation}
+It contains the correlated propagation of a particle and a hole which is the first term, and the second term removes the uncorrelated propagation of the two. Depending on the time-ordering of the field operators in the definitions of $G$ and $G_2$, one can have different combinations for the two particles, for instance hole-hole, electron-electron \textit{etc}.
+By using the identity in eq. \eqref{eq:2GF_dPhi}, with a fully non-local external potential $\Phi(2',2)$, we can also write :
+\begin{equation}
+	L(1,2,1',2') = \frac{\delta G(1,1')}{\delta \Phi(2',2)} = -\int d33' G(1,3)\frac{\delta G^{-1}(3,3')}{\delta\Phi(2',2)}G(3',1')
+\end{equation}
+After computing the functional derivative of the inverse Green's function, we get :
+\begin{equation}
+	L(1,2,1',2') = G(1,2')G(2,1') + \int d33' G(1,3) \frac{\delta \Sigma(3,3')}{\delta \Phi(2',2)} G(3',1') \label{eq:L_}
+\end{equation}
+\textcolor{green}{please act as if I had defined $\gS = v_H + \gS_{xc}$ and detailled each term above in the GW section} with $\gS = v_H + \gS_{xc}$.  \textcolor{green}{please act as if $v_H$ was defined above in the GW section} One can take the limit $\Phi \to 0$ in the above equation to obtain the equilibrium solution. The first term in eq. \eqref{eq:L_} is defined as the propagator for two independent particles :
+\begin{equation}
+	L_0(1,2,1',2') = G(1,2') G(2,1') 
+\end{equation}
+We can use the chain rule for the functional derivative of $\gS$ to express it with respect to $G$. Now if we define the two-particle interaction $i\Xi$ as :
+\begin{equation}
+	\Xi(3,2,3',2') \equiv -i \delta(3,3')\delta(2'^+,2)v(3^+,2) + \frac{\delta \gS_{xc}(3,3')}{\delta(2',2)}
+\end{equation}
+then we obtain the \textbf{Bethe-Salpeter equation} :
+\begin{equation}
+	L(1,2,1',2') = L_0(1,2,1',2') + \int d3'3d44' L_0(1,3',1',3) \Xi(3,4,3',4') L(4',2,4,2')
+\end{equation}
+which is a Dyson equation for the two-particle propagator L. The two-particle interaction quantity $\Xi$ is called the \textit{kernel}. It contains two terms, which we can separate and hence break the \gls{BSE} into the so-called irreducible contribution, that does not contain the derivative of the Hartree potential $v_H$ :
+\begin{equation}
+	\tilde{L}(1,2,1',2') = L_0(1,2,1',2') + \int d33'd44' L_0(1,3',1',3) \frac{\delta \gS_{xc}(3,3')}{\delta(2',2)} L(4',2,4,2')
+\end{equation} 
+and 
+\begin{equation}
+	L(1,2,1',2') = \tilde{L}(1,2,1',2') -i \int d34 \tilde{L}(1,3,1',3) v(3^+,4) L(4,2,4^+,2')
+\end{equation}
+Now, from the first identity in eq. \eqref{eq:L}, we have that $L$ is the variation of $G$ under the action of a non-local potential $\Phi$. If we define $v_H(2',2) \equiv \delta(2',2)v_H(1)$, then we can extend our total classical potential $\vtot$ from eq. \eqref{eq:vtot} to be non-local, and we can express the irreducible two-particle propagator as :
+\begin{equation}
+	\tilde{L}(1,2,1',2') = \frac{\delta G(1,1')}{\delta \vtot(2',2)}
+\end{equation}
+With this equation, we can notice the similarity with eq. \eqref{eq:P_dn/dV}, where the density is replaced by the Green's function and the total classical potential is non-local. In fact, the irreducible two-particle propagator $\tilde{L}$ is a generalization of the irreducible polarizability to four points. We have the relation :
+\begin{equation}
+	-i \tilde{L}(1,2,1^+,2^+) = P(1,2) 
+\end{equation}
+The same relation exists for the full or reducible polarizability, which we call $\chi$, and the reducible two-particle propagator :
+\begin{equation}
+	\chi(1,2) = \frac{n(1)}{\delta \Phi(2)} = -i L(1,2,1^+,2^+)
+\end{equation}
+In the two above equations, the time-ordering is chosen so that the two-particle propagator (reducible or irreducible) describes the propagation of an electron correlated with a hole.
+
+\subsubsection{The Bethe-Salpeter equation in the $\mathbf{GW}$ approximation}
+In the same way we needed an approximation to compute the electron self-energy $\gS$, we need an approximation to be able to compute the kernel $\Xi$ and hence the Dyson equation for $L$. The main difficulty in solving the \gls{BSE} is that the kernel is a four-points quantity. In principle, the arguments are in spin-space-time coordinates. In the following, we will omit the spin dependence. The two-particle propagators depend on four times or three time differences, in the absence of a time-dependent Hamiltonian. We can Fourier transform the BSE, which will therefore depend on three frequencies. If we consider only the simultaneous propagation of an electron and a hole, we obtain :
+\begin{equation}
+	L(\go_1,\go_2) = L_0(\go_1,\go_2) + \int d\go_3 d\go_4 \frac{L_0(\go_1,\go_2,\go_3)}{(2\pi)^2} \Xi(\omega_1,\go_3,\go_4) L(\go_1,\go_4) \label{eq:BSE_freq}
+\end{equation}
+For more details about this derivation and the relation between the Green's functions in frequency space, I refer to section 14 of \cite{martin2016interacting}. We set ourselves in the $GW$ approximation, which will simplify the calculation of the kernel $\Xi$. The exchange-correlation part reads :
+\begin{equation}
+	\Xi^{GWA}_{xc}(1,2,3,4) = i\delta(1,4)\delta(2,3)W(1,2) + iG(1,3)\frac{\delta W(1,3)}{\delta G(4,2)}
+\end{equation}
+The first term is at first order in $W$. The second term is the change in the screening when the system is perturbed, and contains higher-orders in $W$. In accordance with the $GW$ approximation, we also neglect here the second term in the above equation. In frequency space, we are left with :
+\begin{equation}
+	\Xi^{GWA}_{xc}(\go_1,\go_2,\go_3) \approx iW(\go_2 - \go_3)
+\end{equation}
+Here we see that the coupling between two particles, which comes from the screened interaction, is frequency-dependent. It originates from the fact that the system needs time to adapt to the perturbation, which is the creation of the electron-hole pair. Another important approximation that we introduce here is that we consider the screened interaction to be static, \textit{ie} frequency-independent : $W(\go) \to W(0)$. In practice, we obtain $L_0$ with the single-particle Green's functions in the quasiparticle approximation in the dynamic \gls{GWA}, and we use a static screening only for the kernel of the \gls{BSE}. Reintroducing the space and (implicit) spin dependence, we finally obtain :
+\begin{align}
+\begin{split}
+	L(x_1,x_2,x_{1'},x_{2'};\go) = &L_0(x_1,x_2,x_{1'},x_{2'};\go) \\
+	    &-i \int dx_3dx_4 L_0(x_1,x_3,x_{1'},x_{3};\go) v(x_3,x_4) L(x_4,x_2,x_{4},x_{2'};\go) \\
+		&\qquad - L_0(x_1,x_4,x_{1'},x_{3};\go) W(x_3,x_4)  L(x_3,x_2,x_{4},x_{2'};\go) \label{eq:GW-BSE}
+\end{split}
+\end{align}
+
+\subsubsection{Reformulation in a two-particle Schrödinger equation}
+With the \gls{BSE} written in this form, we can now reformulate the problem into a Schrödinger equation for two particles, which will highlight the physics of the problem and make appear the \textit{excitons} as emerging quasiparticles. Here we assume that the non-interacting two-particle propagator $L_0$ is diagonal in an independent-particle basis, and that we obtained the quasiparticle eigenvalues from the \gls{GWA}. At $T=0$, we can write :
+\begin{equation}
+	L_{0\ n_1n_2n_3n_4}(\go) = L_{0\ n_1n_3}^{n_4n_2} = 2 i \frac{(f_{n_1} - f_{n_2}) \delta_{n_1n_4}\delta_{n_2n_3}}{\go - (\varepsilon_1 - \varepsilon_2) \pm i\eta}
+\end{equation}
+where the $n_i$ indices denote for the quasiparticle state with occupation number $f_i$ and the factor 2 in the right-hand side stems from the summation on spin indices. The plus or minus sign in the denominator depends on the sign of the difference of the occupation factors $f_i$. The \gls{BSE} becomes :
+\begin{equation}
+	L_{n_1n_3}^{n_4n_2} = \left[ L_0^{-1} + \frac{i}{2}\Xi\right]^{-1\ n_4n_2}_{n_1n_3} = 2i \left[ H^{2p} - \mathbb{I}(\omega \pm i\eta) \right]^{-1\ n_4n_2}_{n_1n_3}(f_{n_2} - f_{n_4}),
+\end{equation}
+where $\mathbb{I}$ is the identity matrix and $H^{2p}$ is the two-particle Hamiltonian 
+\begin{equation}
+	H^{2p\ n_4n_2}_{n_1n_3} = (\varepsilon_{n_2} - \varepsilon_{n_1}) \delta_{n_1n_4}\delta_{n_2n_3} + (f_{n_1} - f_{n_3}) \Xi_{n_1n_3}^{n_4n_2}.
+\end{equation}
+The matrix element of the kernel is :
+\begin{equation}
+	\Xi_{n_1n_3}^{n_4n_2} = 2v_{n_1n_4}^{n_3n_2} - W_{n_1n_3}^{n_4n_2}
+\end{equation}
+We consider a semiconductor or an insulator with well-separated valence and conduction bands. The difference of the occupation factors, at $T=0$, in the above equations guarantees that only pairs of an occupied and an empty state are contributing in the interaction. We can use the indices $v,c$ for valence and conduction states, respectively. Then
+\begin{equation}
+	\Xi^{v'c'}_{vc} = 2v^{cc'}_{vv'} - W^{v'c'}_{vc}
+\end{equation}
+We can remark that the matrix elements of the bare Coulomb interaction are coupling two different dipoles together. This corresponding contribution is often referred to as electron-hole exchange. The second term is called the direct electron-hole interaction, and it is an attractive interaction between the electron and the hole that binds them in a pair.
+We can decompose the Hamiltonian into four blocks :
+\begin{equation}
+	H^{2p} = \begin{pmatrix}
+		H^{res} & H^{coupl} \\
+		-[H^{coupl}]^* & H^{ares}
+	\end{pmatrix}
+\end{equation}
+where the resonant part is 
+\begin{equation}
+	H^{res} \equiv H^{2p\ v'c'}_{vc} = (\varepsilon_c - \varepsilon_v) \delta_{vv'}\delta_{cc'} + \Xi^{v'c'}_{vc}
+\end{equation}
+This subpart is hermitian and corresponds to transitions from the valence to the conduction band, with positive frequencies. The coupling part is :
+\begin{equation}
+	H^{coupl} \equiv H^{2p\ c'v'}_{vc} = \Xi^{c'v'}_{vc} = [\Xi^{v'c'}_{cv}]^*
+\end{equation}
+which is symmetric. The antiresonant part is :
+\begin{equation}
+	H^{ares} \equiv H^{2p\ c'v'}_{vc} (\varepsilon_v - \varepsilon_c)\delta_{vv'}\delta_{cc'} - \Xi^{c'v'}_{cv} = - [H^{res}]^*
+\end{equation}
+The whole Hamiltonian $H^{2p}$ is not hermitian, so in general it has complex eigenvalues. For the calculations in this thesis, we used the Tamm-Dancoff approximation, which consists in neglecting the coupling part of the Hamiltonian. It works best with bulk semiconductors and insulators, where the energy of the transitions is large compared to the interaction matrix elements in $H^{coupl}$. With this approximation, we only consider transitions with positive energies, and the full Hamiltonian becomes hermitian.
+With this Hamiltonian, we can build a two-particle Schrödinger equation :
+\begin{equation}
+	\sum_{n_3n_4} H^{2p\ n_3n_4}_{n_1n_2} A_\lambda^{n_3n_4} = E_\lambda A_\lambda^{n_1n_2}
+\end{equation}
+where $E_\lambda$ are the eigenvalues of the \textit{excitons} $\lambda$. We change from the quasiparticle basis $\{n\}$ to the transition basis $\{\lambda\}$, and $A_\lambda$ are the coefficients of the expansion in the transition basis. We will see in a later section that they are also related to the oscillator strength of the transitions. We can write the two-particle propagator using these quantities :
+\begin{equation}
+	L^{n_3n_4}_{n_1n_2}(\go) = 2i \sum_{\gl\gl'}\frac{A^{n_1n_2}_\gl \ I^{-1}_{\gl\gl'} \ A^{*n_3n_4}_{\gl'}}{\omega - E_\gl + i\eta} (f_{n_4} - f_{n_3})
+\end{equation}
+with the overlap matrix defined as 
+\begin{equation}
+	I_{\gl\gl'} \equiv \sum_{n_1n_2} A^{*n_1n_2}_{\gl} A^{n_1n_2}_{\gl'}.
+\end{equation}
+Each couple $(nn')$ corresponds to a pair $(vc)$ or $(cv)$ of an occupied and an empty state. We remark that the exciton energies replaced the difference of quasiparticle energies $\varepsilon_c - \varepsilon_v$ in the denominator, which is the quasiparticle gap. The screened interaction contributes to the attraction between the electron and the hole, lowering the transition energy below the gap. The difference between the transition energy and the quasiparticle gap is called the \textit{exciton binding energy}. Excitonic effects can be extremely important in the optical properties of semiconductors, as we will see in the next section.
+
+
+
+\section{Optics}
+I plan to write a section about the optics. transition dipoles, linear response, absorption spectra, luminescence, etc
+
+\section{Numerical implementation / Computational scheme}
+Maybe this can go in the next chapter about the methods
 %There are different ways of treating the frequency dependence of the screening. One can the dielectric matrix on a selected grid of frequencies $\omega$, or approximate it with a model function depending on a few frequencies, as in the Plasmon Pole Approximation. Most commonly, it is computed in the \gls{RPA}. 
 Subtract the $v_{xc}$ from DFT when computing QP energies
 from $\rr$ space to $\kk$ space, dipoles, Lehmann representation from DFT ev and wf
