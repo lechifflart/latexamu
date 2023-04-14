@@ -211,5 +211,6 @@
 \RequirePackage{url}
 \RequirePackage{lineno}       % line numbering for easier corrections
 \RequirePackage{empheq}		  % boxed multiline equations
+\RequirePackage{amssymb}      % maths symbols
 
-\include{alias}
+\include{alias}               % a file with a lot of new commands and aliases
