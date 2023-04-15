@@ -587,23 +587,61 @@ To make the distinction between short-range, microscopic variations and long-ran
 	f(\rr,\rr';\omega) = \frac{1}{\Omega} \sum_{\kk}^{BZ} \sum_{\GG\GG'} \exp{i(\kk+\GG)\cdot\rr} f(\kk+\GG,\kk'+\GG';\omega)  \exp{-i(\kk+\GG')\cdot\rr'}
 \end{equation}
 where $\Omega$ is the volume of the crystal (more precisely of the Born-von Karmann supercell in the case of an infinite crystal), $\kk$ is a Bloch wavevector confined to the first \gls{BZ} and $\GG,\GG'$ are reciprocal lattice vectors.
-the inverse dielectric matrix in reciprocal space :
+With this definition, we can write the inverse dielectric matrix in reciprocal space :
 \begin{equation}
-	\inveps_{\GG\GG'}(\qq;\omega) = \delta_{\GG\GG'} + v(\qq+\GG)\chi
+	\inveps_{\GG\GG'}(\qq;\omega) = \delta_{\GG\GG'} + v(\qq+\GG)\chi_{\GG\GG'}(\qq;\omega) \label{eq:inveps_RL}
 \end{equation}
-where W in reciprocal space is 
+where $\qq$ is a vector in the first \gls{BZ}. The Fourier transform of the Coulomb potential is $v(\qq+\GG) = \tfrac{4\pi}{\left| \qq+\GG \right|^2}$. The matrix elements of the screened interaction $W$ in reciprocal space are
 \begin{equation}
-	% here, follow Martin Reining
+	W_{\GG\GG'}(\qq;\omega) = \inveps_{\GG\GG'}(\qq;\omega) v(\qq+\GG') = v(\qq + \GG) + v(\qq+\GG) \chi_{\GG\GG'}(\qq;\omega) v(\qq+\GG') \label{eq:W_RL}
+\end{equation}
+From now on, we set ourselves in the optical limit, that is to say $\qq \to 0$, as we consider a longitudinal external field that carries a only a very small momentum. Also, it is useful to make the separation between long-range and short-range terms in the Coulomb potential $v = v_0 + \bar{v}$. We have 
+\begin{equation}
+\begin{array}{l l}
+	\bar{v}(\GG)=0 & \quad \text{for } \GG=0 \\
+	\bar{v}(\GG)=v(\GG) & \quad \textrm{for } \GG \neq 0,
+\end{array}
+\end{equation}
+and we can define the corresponding polarizability, called the \textit{proper} response function :
+\begin{equation}
+	\bar{\chi}(1,2) = \tilde{\chi}(1,2) + \int d34 \tilde{\chi}(1,3) \bar{v}(3,4) \bar{\chi}(4,2)
 \end{equation}
 
-but HERE, $\chi$ (the eh interaction) can be treated at different levels
-first, RPA
-With this definition we can write the expression of polarizability in the \gls{RPA} in reciprocal space :
+The polarizability enters both reciprocal space expressions Eqs. \eqref{eq:inveps_RL},\eqref{eq:W_RL}. Depending on which level of theory the electron-hole interaction is treated, its expression will be different and will lead to different spectra. Before writing its expression we need to define the matrix elements of pairs of orbitals, also called screening matrix elements :
 \begin{equation}
-	\chi^{RPA}
+	\rho_{v\kk c\kk+\qq}(\GG) = \bra{c\kk+\qq} e^{i(\qq+\GG)\cdot \rr} \ket{v\kk}
 \end{equation}
-then, BSE 
-% I believe it is here that I have to introduce v_bar : coulomb potential without long-range term.
+where $v,c$ denote for valence and conduction states. This is the mixing of a valence state at $\kk$ with a conduction state at $\kk+\qq$ due to an electric field with momentum $q$. At this point we note that, for momentum conservation, the vector $\qq$ which lies in the first \gls{BZ} has to be equal to the difference of two crystal momenta $\kk$. 
+
+The polarizability in the \gls{RPA} writes : is it even RPA or is it just independent particles ?
+\begin{equation}
+	\chi^{RPA}_{00}
+\end{equation}
+
+
+
+
+\subsection{Optical absorption}
+% show the importance of excitonic effects, maybe ?
+In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. 
+Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. 
+Hence the screening matrix elements can be expanded and become the \textit{dipole} matrix elements. Finally we can write the imaginary part of the macroscopic dielectric function in terms of the dipoles (check Fulvio's formulas). This is the quantity we compute and we compare to experiments. As one can see in the denominators, the peaks are not given by the same excitations. Hence the spectra are quite different, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption.
+
+
+
+
+\subsection{Photoluminescence}
+% what it is generally and
+% van Roosbroeck-Shockley relation
+
+\begin{itemize}
+	\item screening matrix elements
+	\item rigorous expression for $\chi^{RPA}$ and $\chi^{BSE}$
+	\item dipole approx : field not varying over unit cell => dipole matrix elements
+	\item macroscopic dielectric function (mention fact that longitudinal part enough)
+	\item absorption spectra; comparison RPA and BSE
+	\item PL : vRS relation
+\end{itemize}
 
 
 
