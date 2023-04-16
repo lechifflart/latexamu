@@ -506,11 +506,11 @@ where the $n_i$ indices denote for the quasiparticle state with occupation numbe
 \end{equation}
 where $\mathbb{I}$ is the identity matrix and $H^{2p}$ is the two-particle Hamiltonian 
 \begin{equation}
-	H^{2p\ n_4n_2}_{n_1n_3} = (\varepsilon_{n_2} - \varepsilon_{n_1}) \delta_{n_1n_4}\delta_{n_2n_3} + (f_{n_1} - f_{n_3}) \Xi_{n_1n_3}^{n_4n_2}.
+	H^{2p\ n_4n_2}_{n_1n_3} = (\varepsilon_{n_2} - \varepsilon_{n_1}) \delta_{n_1n_4}\delta_{n_2n_3} + (f_{n_1} - f_{n_3}) \Xi_{n_1n_3}^{n_4n_2}. \label{eq:BSE_H2p}
 \end{equation}
-The matrix element of the kernel is :
+The matrix elements of the kernel are :
 \begin{equation}
-	\Xi_{n_1n_3}^{n_4n_2} = 2v_{n_1n_4}^{n_3n_2} - W_{n_1n_3}^{n_4n_2}
+	\Xi_{n_1n_3}^{n_4n_2} = 2v_{n_1n_4}^{n_3n_2} - W_{n_1n_3}^{n_4n_2} \label{eq:GW-BSE_kernel}
 \end{equation}
 We consider a semiconductor or an insulator with well-separated valence and conduction bands. The difference of the occupation factors, at $T=0$, in the above equations guarantees that only pairs of an occupied and an empty state are contributing in the interaction. We can use the indices $v,c$ for valence and conduction states, respectively. Then
 \begin{equation}
@@ -606,23 +606,38 @@ and we can define the corresponding polarizability, called the \textit{proper} r
 \begin{equation}
 	\bar{\chi}(1,2) = \tilde{\chi}(1,2) + \int d34 \tilde{\chi}(1,3) \bar{v}(3,4) \bar{\chi}(4,2)
 \end{equation}
+Now if we use $\bar{v}$ instead of $v$ in the Bethe-Salpeter kernel $\Xi$, we can compute the two-particle propagator without the long-range component of the Coulomb interaction, which gives :
+\begin{equation}
+	\bar{L}(1,2,1',2') = \tilde{L}(1,2,1',2') + \int d34 \tilde{L}(1,3,1',3) \bar{v}(3,4) \bar{L}(4,2,4,2') \label{eq:Lbar}
+\end{equation}
+and we have the usual relationship :
+\begin{equation}
+	\bar{\chi}(1,2) = -i \bar{L}(1,2,1^+,2^+)
+\end{equation}
+Eq. \eqref{eq:Lbar} is the most commonly used equation for the calculation of optical spectra in the context of the \gls{BSE}.
 
-The polarizability enters both reciprocal space expressions Eqs. \eqref{eq:inveps_RL},\eqref{eq:W_RL}. Depending on which level of theory the electron-hole interaction is treated, its expression will be different and will lead to different spectra. Before writing its expression we need to define the matrix elements of pairs of orbitals, also called screening matrix elements :
+The response function enters both reciprocal space expressions Eqs. \eqref{eq:inveps_RL},\eqref{eq:W_RL}. Depending on which level of theory the electron-hole interaction is treated, its expression will be different and will lead to different spectra. Before writing its expression we need to define the matrix elements of pairs of orbitals, also called screening matrix elements :
 \begin{equation}
 	\rho_{v\kk c\kk+\qq}(\GG) = \bra{c\kk+\qq} e^{i(\qq+\GG)\cdot \rr} \ket{v\kk}
 \end{equation}
 where $v,c$ denote for valence and conduction states. This is the mixing of a valence state at $\kk$ with a conduction state at $\kk+\qq$ due to an electric field with momentum $q$. At this point we note that, for momentum conservation, the vector $\qq$ which lies in the first \gls{BZ} has to be equal to the difference of two crystal momenta $\kk$. 
 
-The polarizability in the \gls{RPA} writes : is it even RPA or is it just independent particles ?
+For independent particles in the \gls{RPA}, the response function has the form $\chi^0 = -iG_0G_0$, where $G_0$ are non-interacting Green's functions. The first matrix element of this response function can be written :
 \begin{equation}
-	\chi^{RPA}_{00}
+	\chi^{0}_{00}(\qq \to 0,\omega) = 2\lim_{\qq \to 0} \sum_{vc\kk} \frac{\left|\rho_{v\kk c\kk+\qq}\right|^2}{\omega - (\epsilon_{c\kk+\qq}-\epsilon_{v\kk}) + i\eta} \label{eq:chi_IP_RPA}
 \end{equation}
+This response function will give a spectrum with peaks at the independent-particle transition energies. Due to momentum conservation, only transitions with momentum transfer $\qq$ between the hole in state $v\kk$ and the electron in state $c\kk+\qq$ contribute.
 
+To account properly for the electron-hole interaction, which is crucial to accurately simulate absorption spectra, we can compute the response function at the \gls{BSE} level The diagonalization of the two-particle Hamiltonian $H^{2p}$ (\eqref{eq:BSE_H2p}) with $\bar{v}$ gives the excitonic eigenvectors $\bar{A}_lambda$ (we will omit the bar for simplicity). Using this, the head of the response function matrix is :
+\begin{equation}
+	\bar{\chi}_{00}(\qq \to 0,\omega) = 2 \lim_{\qq \to 0} \sum_\lambda \frac{\left| \sum_{vc\kk} A_\lambda^{v\kk c\kk+\qq} \rho_{v\kk c\kk+\qq}\right|^2}{\omega - E_\lambda + i\eta} \label{eq:chi_BSE}
+\end{equation}
+Compared to Eq. \eqref{eq:chi_IP_RPA}, the transition energies are replaced by the excitonic energies, meaning the positions of the peaks will be changed with respect to independent-particle calculations. Also, the $A_\lambda$ coefficients participate in the mixing of the transitions, which will give rise to different structures in the spectra.
 
 
 
 \subsection{Optical absorption}
-% show the importance of excitonic effects, maybe ?
+% where to talk about dark or bright excitons ? probably here
 In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. 
 Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. 
 Hence the screening matrix elements can be expanded and become the \textit{dipole} matrix elements. Finally we can write the imaginary part of the macroscopic dielectric function in terms of the dipoles (check Fulvio's formulas). This is the quantity we compute and we compare to experiments. As one can see in the denominators, the peaks are not given by the same excitations. Hence the spectra are quite different, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption.
@@ -657,4 +672,5 @@ Maybe this can go in the next chapter about the methods
 	\item Iterating GW cycle; $G_0W_0$ === explain this in particular because it is widely used in the results
 	\item include \cite{martin2016interacting} Eqs. (12.53) and (12.54)
 	\item divergence of the Coulomb term at $\qq = 0$ and $\GG' =0$
+	\item matrix elements of W and v, in terms of the dipoles (14.54) and (14.55) of Martin Reining Ceperley
 \end{itemize}
