@@ -634,14 +634,30 @@ To account properly for the electron-hole interaction, which is crucial to accur
 \end{equation}
 Compared to Eq. \eqref{eq:chi_IP_RPA}, the transition energies are replaced by the excitonic energies, meaning the positions of the peaks will be changed with respect to independent-particle calculations. Also, the $A_\lambda$ coefficients participate in the mixing of the transitions, which will give rise to different structures in the spectra.
 
-
+Relation between $\bar{\chi}$ and $\epsilon_M$
 
 \subsection{Optical absorption}
-% where to talk about dark or bright excitons ? probably here
-In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. 
-Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. 
-Hence the screening matrix elements can be expanded and become the \textit{dipole} matrix elements. Finally we can write the imaginary part of the macroscopic dielectric function in terms of the dipoles (check Fulvio's formulas). This is the quantity we compute and we compare to experiments. As one can see in the denominators, the peaks are not given by the same excitations. Hence the spectra are quite different, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption.
+% limit of dielectric matrix for q to 0
 
+
+In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. 
+Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. This is called the \textit{dipole approximation}.
+On top of that, we are interested in macroscopic quantities, so we consider the optical limit $\qq \to 0$. With all this, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\ket\rr-\rr'{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
+\begin{equation}
+	d_{cv\kk} = \mathbf{n} \cdot \bra{c\kk} \rr \ket{v\kk}
+\end{equation}
+
+Finally we can write the imaginary part of the macroscopic dielectric function in terms of the dipoles. For independent particles, it writes :
+\begin{equation}
+	\epsilon_2(\omega) = \frac{8\pi^2 e^2}{V} \sum_{cv\kk} \left| d_{cv\kk} \right|^2 \delta(\omega - (\epsilon_{c\kk} - \epsilon_{v\kk}) )
+\end{equation}
+At the \gls{BSE} level, it gives :
+\begin{equation}
+	\epsilon_2(\omega) = \frac{8\pi^2 e^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda)
+\end{equation}
+
+This is the quantity we compute and we compare to experiments. As one can see in the denominators, the peaks are not given by the same excitations. Hence the spectra are quite different, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption.
+% where to talk about dark or bright excitons ? probably here
 
 
 
