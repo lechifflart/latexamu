@@ -569,17 +569,19 @@ Then the irreducible polarizability writes :
 \begin{equation}
 	\tilde{\chi}(1,2) \approx \tilde{\chi}_0(1,2) \equiv -i G(1,2^+)G(2,1^+) \label{eq:tilde_chi_0}
 \end{equation}
-From the time ordering, one can see that it is made of non-interacting electron-hole pairs. The full polarizability follows from Eq. \eqref{eq:chi_dn/dPhi} :
+% I use \tilde{\chi} and not \chi to be consistent with the definition in Hedin's equations.
+Working out the above expression, one can see that it is made of non-interacting electron-hole pairs. The full polarizability follows from Eq. \eqref{eq:chi_dn/dPhi} :
 \begin{equation}
 	\chi(1,2) = \tilde{\chi}_0(1,2) + \int d34 \tilde{\chi}_0(1,3) v(3,4) \chi(4,2) = \int d3 \tilde{\chi}_0(1,3) \left[ 1 - v \tilde{\chi}_0\right]^{-1}(3,2)
 \end{equation}
-When we calculate $\tilde{\chi}_0$ from the single-particle Green's function as in Eq. \eqref{eq:tilde_chi_0}, the derivative with respect to the perturbation was neglected. In this regard, $\tilde{\chi}_0$ is not an \gls{RPA} response function. It will however be useful when dealing with optical properties.
-Indeed, from the inverted form, one can construct the inverse dielectric function, written in a compact form as $\inveps = 1+v \chi^{RPA}$.
+When we calculate $\tilde{\chi}_0$ from the single-particle Green's function as in Eq. \eqref{eq:tilde_chi_0}, the derivative with respect to the perturbation is neglected. In this regard, $\tilde{\chi}_0$ is not an \gls{RPA} response function. We call it the independent particle response function while $\tilde{\chi}$ is called the RPA response function, for historical reasons.
+However, $\tilde{\chi}_0$ will be useful when dealing with optical properties. Indeed, from the inverted form, one can construct the inverse dielectric function, written in a compact form as $\inveps = 1+v \chi^{RPA}$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Optics}
 %I plan to write a section about the optics. transition dipoles, linear response, absorption spectra, luminescence, etc
-Optics experiments involve an external field interacting with the electronic density of the material. In the regime of low intensity field where we can describe it as a perturbation, the formalism presented above is a perfectly suited simulation tool. One key quantity is the electronic screening of the material, which is linked to the dielectric matrix and to the response function or polarizability $\chi$. Pertubatively, the response of the electronic density with respect to an external field can be described in terms of the neutral excitations of the system, \textit{ie} by the formation and propagation of electron-hole pairs.
+Optics experiments involve an external field interacting with the electronic density of the material. In the regime of low intensity field where we can describe it as a perturbation, the formalism presented above is a perfectly suited simulation tool. The key quantity to reproduce the results of these experiments is the electronic screening of the material, which is linked to the dielectric matrix and to the response function or polarizability $\chi$. Pertubatively, the response of the electronic density with respect to an external field can be described in terms of the neutral excitations of the system, \textit{ie} by the formation and propagation of electron-hole pairs.
+In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. 
 In order to obtain optical spectra that are comparable to those measured experimentally, we need to average the microscopic variations in the response functions and related quantities we introduced so far. Hence we can obtain macroscopic quantities, which are the ones accessible in experiments. 
 
 To make the distinction between short-range, microscopic variations and long-range, macroscopic variations of the quantities of interest in a periodic and infinite crystal, it is best make the space Fourier transform and to work in reciprocal space. For a function $f$ of two space variables and one frequency (or time) variable, its space Fourier transform is :
@@ -595,11 +597,11 @@ where $\qq$ is a vector in the first \gls{BZ}. The Fourier transform of the Coul
 \begin{equation}
 	W_{\GG\GG'}(\qq;\omega) = \inveps_{\GG\GG'}(\qq;\omega) v(\qq+\GG') = v(\qq + \GG) + v(\qq+\GG) \chi_{\GG\GG'}(\qq;\omega) v(\qq+\GG') \label{eq:W_RL}
 \end{equation}
-From now on, we set ourselves in the optical limit, that is to say $\qq \to 0$, as we consider a longitudinal external field that carries a only a very small momentum. Also, it is useful to make the separation between long-range and short-range terms in the Coulomb potential $v = v_0 + \bar{v}$. We have 
+From now on, we set ourselves in the optical limit, that is to say $\qq \to 0$, as we consider a longitudinal external field that carries only a very small momentum. Also, it is useful to make the separation between long-range and short-range terms in the Coulomb potential $v = v_0 + \bar{v}$, where $v_0$ is the long-range component with $\GG = 0$ and $\bar{v}$ contains all the $G \neq 0$ components. We have 
 \begin{equation}
 \begin{array}{l l}
 	\bar{v}(\GG)=0 & \quad \text{for } \GG=0 \\
-	\bar{v}(\GG)=v(\GG) & \quad \textrm{for } \GG \neq 0,
+	\bar{v}(\GG)=v(\GG) & \quad \text{for } \GG \neq 0,
 \end{array}
 \end{equation}
 and we can define the corresponding polarizability, called the \textit{proper} response function :
@@ -628,7 +630,7 @@ For independent particles in the \gls{RPA}, the response function has the form $
 \end{equation}
 This response function will give a spectrum with peaks at the independent-particle transition energies. Due to momentum conservation, only transitions with momentum transfer $\qq$ between the hole in state $v\kk$ and the electron in state $c\kk+\qq$ contribute.
 
-To account properly for the electron-hole interaction, which is crucial to accurately simulate absorption spectra, we can compute the response function at the \gls{BSE} level The diagonalization of the two-particle Hamiltonian $H^{2p}$ (\eqref{eq:BSE_H2p}) with $\bar{v}$ gives the excitonic eigenvectors $\bar{A}_lambda$ (we will omit the bar for simplicity). Using this, the head of the response function matrix is :
+To account properly for the electron-hole interaction, which is crucial to accurately simulate absorption spectra, we can compute the response function at the \gls{BSE} level The diagonalization of the two-particle Hamiltonian $H^{2p}$ (\eqref{eq:BSE_H2p}) with $\bar{v}$ gives the excitonic eigenvectors $\bar{A}_\lambda$ (in the following, we will omit the bar for simplicity). Using this, the head of the response function matrix is :
 \begin{equation}
 	\bar{\chi}_{00}(\qq \to 0,\omega) = 2 \lim_{\qq \to 0} \sum_\lambda \frac{\left| \sum_{vc\kk} A_\lambda^{v\kk c\kk+\qq} \rho_{v\kk c\kk+\qq}\right|^2}{\omega - E_\lambda + i\eta} \label{eq:chi_BSE}
 \end{equation}
@@ -640,8 +642,8 @@ Relation between $\bar{\chi}$ and $\epsilon_M$
 % limit of dielectric matrix for q to 0
 
 
-In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. 
-Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. This is called the \textit{dipole approximation}.
+% In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. 
+% Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. This is called the \textit{dipole approximation}.
 On top of that, we are interested in macroscopic quantities, so we consider the optical limit $\qq \to 0$. With all this, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\ket\rr-\rr'{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
 \begin{equation}
 	d_{cv\kk} = \mathbf{n} \cdot \bra{c\kk} \rr \ket{v\kk}
