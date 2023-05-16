@@ -584,7 +584,7 @@ Optics experiments involve an external field interacting with the electronic den
 In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. 
 In order to obtain optical spectra that are comparable to those measured experimentally, we need to average the microscopic variations in the response functions and related quantities we introduced so far. Hence we can obtain macroscopic quantities, which are the ones accessible in experiments. 
 
-To make the distinction between short-range, microscopic variations and long-range, macroscopic variations of the quantities of interest in a periodic and infinite crystal, it is best make the space Fourier transform and to work in reciprocal space. For a function $f$ of two space variables and one frequency (or time) variable, its space Fourier transform is :
+To make the distinction between short-range, microscopic variations and long-range, macroscopic variations of the quantities of interest in a periodic and infinite crystal, it is best to make the space Fourier transform and to work in reciprocal space. For a function $f$ of two space variables and one frequency (or one time difference), its space Fourier transform is :
 \begin{equation}
 	f(\rr,\rr';\omega) = \frac{1}{\Omega} \sum_{\kk}^{BZ} \sum_{\GG\GG'} \exp{i(\kk+\GG)\cdot\rr} f(\kk+\GG,\kk'+\GG';\omega)  \exp{-i(\kk+\GG')\cdot\rr'}
 \end{equation}
@@ -597,7 +597,7 @@ where $\qq$ is a vector in the first \gls{BZ}. The Fourier transform of the Coul
 \begin{equation}
 	W_{\GG\GG'}(\qq;\omega) = \inveps_{\GG\GG'}(\qq;\omega) v(\qq+\GG') = v(\qq + \GG) + v(\qq+\GG) \chi_{\GG\GG'}(\qq;\omega) v(\qq+\GG') \label{eq:W_RL}
 \end{equation}
-From now on, we set ourselves in the optical limit, that is to say $\qq \to 0$, as we consider a longitudinal external field that carries only a very small momentum. Also, it is useful to make the separation between long-range and short-range terms in the Coulomb potential $v = v_0 + \bar{v}$, where $v_0$ is the long-range component with $\GG = 0$ and $\bar{v}$ contains all the $G \neq 0$ components. We have 
+It is useful to make the separation between long-range and short-range terms in the Coulomb potential $v = v_0 + \bar{v}$, where $v_0$ is the long-range component with $\GG = 0$ and $\bar{v}$ contains all the $G \neq 0$ components. We have 
 \begin{equation}
 \begin{array}{l l}
 	\bar{v}(\GG)=0 & \quad \text{for } \GG=0 \\
@@ -606,17 +606,13 @@ From now on, we set ourselves in the optical limit, that is to say $\qq \to 0$, 
 \end{equation}
 and we can define the corresponding polarizability, called the \textit{proper} response function :
 \begin{equation}
-	\bar{\chi}(1,2) = \tilde{\chi}(1,2) + \int d34 \tilde{\chi}(1,3) \bar{v}(3,4) \bar{\chi}(4,2)
+	\bar{\chi}_{\GG\GG'}(\qq,\omega) = \chi_{\GG\GG'}(\qq,\omega) - \chi_{\GG\GG'}(\qq,\omega) v(\qq+\GG) \bar{\chi}_{\GG\GG'}(\qq,\omega)
 \end{equation}
-Now if we use $\bar{v}$ instead of $v$ in the Bethe-Salpeter kernel $\Xi$, we can compute the two-particle propagator without the long-range component of the Coulomb interaction, which gives :
-\begin{equation}
-	\bar{L}(1,2,1',2') = \tilde{L}(1,2,1',2') + \int d34 \tilde{L}(1,3,1',3) \bar{v}(3,4) \bar{L}(4,2,4,2') \label{eq:Lbar}
-\end{equation}
-and we have the usual relationship :
+Now if we use $\bar{v}$ instead of $v$ in the Bethe-Salpeter kernel $\Xi$, we can compute the two-particle propagator without the long-range component of the Coulomb interaction, and we have the usual relationship :
 \begin{equation}
 	\bar{\chi}(1,2) = -i \bar{L}(1,2,1^+,2^+)
 \end{equation}
-Eq. \eqref{eq:Lbar} is the most commonly used equation for the calculation of optical spectra in the context of the \gls{BSE}.
+$\bar{L}$ is the most commonly computed quantity for the calculation of optical spectra in the context of the \gls{BSE}.
 
 The response function enters both reciprocal space expressions Eqs. \eqref{eq:inveps_RL},\eqref{eq:W_RL}. Depending on which level of theory the electron-hole interaction is treated, its expression will be different and will lead to different spectra. Before writing its expression we need to define the matrix elements of pairs of orbitals, also called screening matrix elements :
 \begin{equation}
@@ -636,7 +632,6 @@ To account properly for the electron-hole interaction, which is crucial to accur
 \end{equation}
 Compared to Eq. \eqref{eq:chi_IP_RPA}, the transition energies are replaced by the excitonic energies, meaning the positions of the peaks will be changed with respect to independent-particle calculations. Also, the $A_\lambda$ coefficients participate in the mixing of the transitions, which will give rise to different structures in the spectra.
 
-Relation between $\bar{\chi}$ and $\epsilon_M$
 
 \subsection{Optical absorption}
 % limit of dielectric matrix for q to 0
@@ -644,21 +639,35 @@ Relation between $\bar{\chi}$ and $\epsilon_M$
 
 % In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. 
 % Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. This is called the \textit{dipole approximation}.
-On top of that, we are interested in macroscopic quantities, so we consider the optical limit $\qq \to 0$. With all this, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\ket\rr-\rr'{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
+As mentioned at the start of this section, we need to relate the many-body quantities we compute with the ones measured experimentally. To this end, we first write the relation between the microscopic inverse dielectric function and the proper response function : 
+\begin{equation}
+	\frac{1}{\epsilon^{-1}_{00}(\qq,\omega)} = 1 - v_0(\qq)\bar{\chi}_{00}(\qq,\omega)
+\end{equation}
+where it should be understood that the $00$ indices mean that we take the first component of the inverse. We now define the \emph{macroscopic} dielectric function as :
+\begin{equation}
+	\epsilon_M(\omega) \equiv \lim_{\qq\to 0} \frac{1}{\epsilon^{-1}_{00}(\qq,\omega)}
+\end{equation}
+and using the above relation :
+\begin{equation}
+	\epsilon_M(\omega) = 1-\lim_{q\to 0} \frac{4\pi}{q^2} \bar{\chi}_{00}(\qq,\omega) \label{eq:eps_macro}
+\end{equation}
+This equation is well-behaved at the small-$q$ limit because $\bar{\chi}_{00}$ has a $q^2$ dependence. The macroscopic dielectric function is a complex function $\epsilon_M(\omega) = \epsilon_1(\omega) + i \epsilon_2(\omega)$ and the absorption spectrum will be given by its imaginary part. Let us express it in a computable way. 
+
+Taking the optical limit $\qq \to 0$ is justified because the longitudinal external field carries a very small momentum with respect to the extent of the Brillouin Zone. In this limit, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\ket\rr-\rr'{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
 \begin{equation}
 	d_{cv\kk} = \mathbf{n} \cdot \bra{c\kk} \rr \ket{v\kk}
 \end{equation}
 
-Finally we can write the imaginary part of the macroscopic dielectric function in terms of the dipoles. For independent particles, it writes :
+Now by making use of Eqs \eqref{eq:eps_macro,eq:chi_IP_RPA}, we can write the imaginary part of the macroscopic dielectric function in terms of the dipoles. For independent particles, it writes :
 \begin{equation}
-	\epsilon_2(\omega) = \frac{8\pi^2 e^2}{V} \sum_{cv\kk} \left| d_{cv\kk} \right|^2 \delta(\omega - (\epsilon_{c\kk} - \epsilon_{v\kk}) )
+	\epsilon_2(\omega) = \frac{8\pi^2}{V} \sum_{cv\kk} \left| d_{cv\kk} \right|^2 \delta(\omega - (\epsilon_{c\kk} - \epsilon_{v\kk}) )
 \end{equation}
-At the \gls{BSE} level, it gives :
+At the \gls{BSE} level and using \eqref{eq:chi_BSE}, it gives :
 \begin{equation}
-	\epsilon_2(\omega) = \frac{8\pi^2 e^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda)
+	\epsilon_2(\omega) = \frac{8\pi^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda)
 \end{equation}
 
-This is the quantity we compute and we compare to experiments. As one can see in the denominators, the peaks are not given by the same excitations. Hence the spectra are quite different, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption.
+This is the quantity we compute and we compare to experiments. As one can see in the denominators of the two versions, the peaks are not given by the same excitations. Hence the spectra are quite different, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption. \textcolor{red}{make the figure :)}
 % where to talk about dark or bright excitons ? probably here
 
 
@@ -692,3 +701,6 @@ Maybe this can go in the next chapter about the methods
 	\item divergence of the Coulomb term at $\qq = 0$ and $\GG' =0$
 	\item matrix elements of W and v, in terms of the dipoles (14.54) and (14.55) of Martin Reining Ceperley
 \end{itemize}
+
+\section{Special case of 2D material}
+Should I explain stuff here at the start or rather when I present the results for the hBN monolayer ? Couloumb cutoff in DFT, phonons, RIM integration in GW
