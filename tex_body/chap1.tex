@@ -641,19 +641,19 @@ Compared to Eq. \eqref{eq:chi_IP_RPA}, the transition energies are replaced by t
 % Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. This is called the \textit{dipole approximation}.
 As mentioned at the start of this section, we need to relate the many-body quantities we compute with the ones measured experimentally. To this end, we first write the relation between the microscopic inverse dielectric function and the proper response function : 
 \begin{equation}
-	\frac{1}{\epsilon^{-1}_{00}(\qq,\omega)} = 1 - v_0(\qq)\bar{\chi}_{00}(\qq,\omega)
+	\frac{1}{\epsilon^{-1}_{00}(\qq,\omega)} = 1 - v_0(\qq)\bar{\chi}_{00}(\qq,\omega) \label{eq:inveps_chibar}
 \end{equation}
 where it should be understood that the $00$ indices mean that we take the first component of the inverse. We now define the \emph{macroscopic} dielectric function as :
 \begin{equation}
 	\epsilon_M(\omega) \equiv \lim_{\qq\to 0} \frac{1}{\epsilon^{-1}_{00}(\qq,\omega)}
 \end{equation}
-and using the above relation :
+and using the relation from Eq. \eqref{eq:inveps_chibar} :
 \begin{equation}
 	\epsilon_M(\omega) = 1-\lim_{q\to 0} \frac{4\pi}{q^2} \bar{\chi}_{00}(\qq,\omega) \label{eq:eps_macro}
 \end{equation}
-This equation is well-behaved at the small-$q$ limit because $\bar{\chi}_{00}$ has a $q^2$ dependence. The macroscopic dielectric function is a complex function $\epsilon_M(\omega) = \epsilon_1(\omega) + i \epsilon_2(\omega)$ and the absorption spectrum will be given by its imaginary part. Let us express it in a computable way. 
+Taking the optical limit $\qq \to 0$ is justified because the longitudinal external field carries a very small momentum with respect to the extent of the Brillouin Zone. This equation is well-behaved at the small-$q$ limit because $\bar{\chi}_{00}$ has a $q^2$ dependence. The macroscopic dielectric function is a complex function $\epsilon_M(\omega) = \epsilon_1(\omega) + i \epsilon_2(\omega)$ and the absorption spectrum will be given by its imaginary part. Let us express it in a computable way. 
 
-Taking the optical limit $\qq \to 0$ is justified because the longitudinal external field carries a very small momentum with respect to the extent of the Brillouin Zone. In this limit, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\ket\rr-\rr'{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
+ In the optical limit, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\ket\rr-\rr'{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
 \begin{equation}
 	d_{cv\kk} = \mathbf{n} \cdot \bra{c\kk} \rr \ket{v\kk}
 \end{equation}
@@ -673,16 +673,18 @@ This is the quantity we compute and we compare to experiments. As one can see in
 
 
 \subsection{Photoluminescence}
+
+
 % what it is generally and
 % van Roosbroeck-Shockley relation
 
 \begin{itemize}
-	\item screening matrix elements
-	\item rigorous expression for $\chi^{RPA}$ and $\chi^{BSE}$
-	\item dipole approx : field not varying over unit cell => dipole matrix elements
-	\item macroscopic dielectric function (mention fact that longitudinal part enough)
-	\item absorption spectra; comparison RPA and BSE
-	\item PL : vRS relation
+	\item screening matrix elements DONE
+	\item rigorous expression for $\chi^{RPA}$ and $\chi^{BSE}$ DONE
+	\item dipole approx : field not varying over unit cell => dipole matrix elements DONE
+	\item macroscopic dielectric function (mention fact that longitudinal part enough) DONE
+	\item absorption spectra; comparison RPA and BSE TO DO
+	\item PL : vRS relation TO DO
 \end{itemize}
 
 
