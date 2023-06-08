@@ -641,41 +641,74 @@ Compared to Eq. \eqref{eq:chi_IP_RPA}, the transition energies are replaced by t
 % Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. This is called the \textit{dipole approximation}.
 As mentioned at the start of this section, we need to relate the many-body quantities we compute with the ones measured experimentally. To this end, we first write the relation between the microscopic inverse dielectric function and the proper response function : 
 \begin{equation}
-	\frac{1}{\epsilon^{-1}_{00}(\qq,\omega)} = 1 - v_0(\qq)\bar{\chi}_{00}(\qq,\omega) \label{eq:inveps_chibar}
+	\frac{1}{\varepsilon^{-1}_{00}(\qq,\omega)} = 1 - v_0(\qq)\bar{\chi}_{00}(\qq,\omega) \label{eq:inveps_chibar}
 \end{equation}
 where it should be understood that the $00$ indices mean that we take the first component of the inverse. We now define the \emph{macroscopic} dielectric function as :
 \begin{equation}
-	\epsilon_M(\omega) \equiv \lim_{\qq\to 0} \frac{1}{\epsilon^{-1}_{00}(\qq,\omega)}
+	\varepsilon_M(\omega) \equiv \lim_{\qq\to 0} \frac{1}{\varepsilon^{-1}_{00}(\qq,\omega)}
 \end{equation}
 and using the relation from Eq. \eqref{eq:inveps_chibar} :
 \begin{equation}
-	\epsilon_M(\omega) = 1-\lim_{q\to 0} \frac{4\pi}{q^2} \bar{\chi}_{00}(\qq,\omega) \label{eq:eps_macro}
+	\varepsilon_M(\omega) = 1-\lim_{q\to 0} \frac{4\pi}{q^2} \bar{\chi}_{00}(\qq,\omega) \label{eq:eps_macro}
 \end{equation}
 Taking the optical limit $\qq \to 0$ is justified because the longitudinal external field carries a very small momentum with respect to the extent of the Brillouin Zone. This equation is well-behaved at the small-$q$ limit because $\bar{\chi}_{00}$ has a $q^2$ dependence. The macroscopic dielectric function is a complex function $\epsilon_M(\omega) = \epsilon_1(\omega) + i \epsilon_2(\omega)$ and the absorption spectrum will be given by its imaginary part. Let us express it in a computable way. 
 
- In the optical limit, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\ket\rr-\rr'{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
+ In the optical limit, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\rr-\rr'\ket{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
 \begin{equation}
 	d_{cv\kk} = \mathbf{n} \cdot \bra{c\kk} \rr \ket{v\kk}
 \end{equation}
 
 Now by making use of Eqs \eqref{eq:eps_macro,eq:chi_IP_RPA}, we can write the imaginary part of the macroscopic dielectric function in terms of the dipoles. For independent particles, it writes :
 \begin{equation}
-	\epsilon_2(\omega) = \frac{8\pi^2}{V} \sum_{cv\kk} \left| d_{cv\kk} \right|^2 \delta(\omega - (\epsilon_{c\kk} - \epsilon_{v\kk}) )
+	\varepsilon_2(\omega) = \frac{8\pi^2}{V} \sum_{cv\kk} \left| d_{cv\kk} \right|^2 \delta(\omega - (\epsilon_{c\kk} - \epsilon_{v\kk}) ) \label{eq:eps_2_IP}
 \end{equation}
-At the \gls{BSE} level and using \eqref{eq:chi_BSE}, it gives :
+At the \gls{BSE} level, the dipole matrix elements are replaced with their linear combination with exciton eigenvectors.Using \eqref{eq:chi_BSE}, it gives :
 \begin{equation}
-	\epsilon_2(\omega) = \frac{8\pi^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda)
+	\varepsilon_2(\omega) = \frac{8\pi^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda) \label{eq:eps_2_exc}
 \end{equation}
-
-This is the quantity we compute and we compare to experiments. As one can see in the denominators of the two versions, the peaks are not given by the same excitations. Hence the spectra are quite different, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption. \textcolor{red}{make the figure :)}
+As one can see in the denominators of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit are quite different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption. \textcolor{red}{make the figure :)}
 % where to talk about dark or bright excitons ? probably here
 
+We now have access to another relevant quantity which is the \textit{absorption coefficient} $\alpha(\omega)$ :
+\begin{equation}
+	\alpha(\omega) = \frac{\omega}{c} \frac{\varepsilon_2(\omega)}{n_1(\omega)} \label{eq:abs_coeff}
+\end{equation}
+It is the ratio of the imaginary part of the dielectric function and the real part of the refractive index which writes $n(\omega) = n_1(\omega) + i n_2(\omega)$. The refractive index is obtained with $\varepsilon_M(\omega) = n^2(\omega)$
+The absorption coefficient is completely determined by $\varepsilon_2(\omega)$ and it is the quantity that yields the absorption spectra that we compute and compare to experiments.
 
-
-\subsection{Photoluminescence}
+\subsection{Luminescence}
 % what it is generally and
 % van Roosbroeck-Shockley relation
-Photoluminescence is the process which can be seen as the inverse of absorption : photo-excited carriers de-excite from the bottom of the conduction band to an empty state in the valence band by emitting light with a frequency corresponding to the gap energy. For direct semiconductors or insulators, considering that the light emission is the inverse process of the absorption is generally an acceptable approximation. In this case, the spectra for the two process should look identical\footnote[1]{In reality there are differences such as the Stokes shift, which is caused by the broadening of electronic states by phonons.}. However, for materials with indirect gaps, this simple picture does not prove to be so good. Indeed one needs to consider the phonon-assited transitions
+Different types of luminescence : photo-, cathodo-, electro-, ... depending on how the electrons are excited.
+Photoluminescence is the process which can be seen as the inverse of absorption : photo-excited carriers de-excite from the bottom of the conduction band to an empty state in the valence band by emitting light with a frequency corresponding to the gap energy. For direct semiconductors or insulators, considering that the light emission is the inverse process of the absorption is generally an acceptable approximation. In this case, the spectra for the two process should look identical\footnote[1]{In reality there are differences such as the Stokes shift, which is caused by the broadening of electronic states by phonons.}. However, for materials with indirect gaps, this simple picture does not hold anymore. Indeed, one needs to consider the phonon-assisted transitions, which give rise to phonon satellites in the luminescence spectra, as will be discussed later. \\
+Here I will present an approximation to derive the spontaneous emission rate, which is the key quantity to compute luminescence spectra, for any kind of gapped material, starting from the absorption rate. We use the van Roosbroeck -- Shockley relation, derived in 1954 to describe the light emission in Germanium \cite{van1954photon} and follow refs \textcolor{red}{which refs are we following ???}. It is based on a \emph{steady-state} approximation, that is to say we consider the absorption rate and the spontaneous emission rate to be in detailed balance. We start by giving the relations for the case of independent particles and direct transitions only. For indirect transitions, the same kind of relations hold but they need to be slightly modified to include the phonon-assisted transitions, which will be done in the body of this thesis. The absorption rate is :
+\begin{equation}
+	R^{abs}(\omega) = 2\pi \mathcal{K}(\omega) \frac{\mathcal{N} (\omega)}{N_k} \sum_{cv\kk} \left|d_{cv\kk} \right|^2 \left[ f_{v\kk}(1-f_{c\kk}) - f_{c\kk}(1-f_{v\kk})\right] \delta(\epsilon_{c\kk} - \epsilon_{v\kk} - \omega)
+\end{equation}
+where $f_{n\kk} = \left[ 1 + e^{\epsilon_{n\kk} - \mu_{e/h}/k_BT} \right]^{-1}$ is the Fermi-Dirac occupation function for the state $n$ at point $\kk$, $\mu_{e/h}$ being the chemical potential for electrons or holes. $\mathcal{K}(\omega)$ is a dimensional factor depending on electromagnetic quantities. The rate of spontaneous emission writes : 
+\begin{equation}
+	R^{sp}(\omega) = 2\pi \mathcal{K}(\omega) \frac{\mathcal{G} (\omega)}{N_k} \sum_{cv\kk} \left|d_{cv\kk} \right|^2 f_{c\kk}(1-f_{v\kk}) \delta(\epsilon_{c\kk} - \epsilon_{v\kk} - \omega)
+\end{equation}
+These two expressions differ by the occupation functions of the electrons and holes, but also by the presence of the photon density of states $\mathcal{G}(\omega)$ in one and the photon density per unit energy $\mathcal{N}(\omega)$. The two are linked by the relation $ \int\mathcal{N}(\omega) d\omega = \int \bar{\mathcal{N}} \mathcal{G}(\omega) d\omega$ where $\bar{\mathcal{N}}$ is the average photon number. \\
+If we define the incoming photon flux as $\mathcal{F}(\omega) = \mathcal{N}(\omega) \frac{c}{n_1(\omega)}$, we can use the following relation :
+\begin{equation}
+	R^{abs}(\omega) = \mathcal{F}(\omega) \alpha(\omega)
+\end{equation}
+Finally, we can derive a Bose-Einstein type of occupation function by noticing that the following relation holds independently of which $(cv\kk)$ transition is considered :
+\begin{equation}
+	\frac{f_{c\kk} (1-f_{v\kk})}{f_{v\kk} (1-f_{c\kk}) - f_{c\kk}(1-f_{v\kk})} = \frac{1}{e^{\omega - (\mu_e - \mu_h)/k_BT} - 1 }\approx e^{\omega - (\mu_e - \mu_h)/k_BT}
+\end{equation}
+where in the last step we approximated the Bose-Einstein function with a Boltzmann distribution.
+Finally, by comparing the absorption and the spontaneous emission rates, we obtain :
+\begin{align}
+\begin{split}
+	R^{sp}(\omega) &= \frac{n_1(\omega)^2\omega^2}{\pi^2 c^2}\ \alpha(\omega)\ e^{\omega - (\mu_e - \mu_h)/k_BT} \\
+	 &= \frac{n_1(\omega)\omega^3}{\pi^2 c^3}\ \varepsilon_2(\omega)\ e^{\omega - (\mu_e - \mu_h)/k_BT} \label{eq:vRS_PL}
+\end{split}
+\end{align}
+We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently $n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon_2(\omega)^2} + \varepsilon_1(\omega)}$.
+Now I need to talk about the Boltzmann distribution for excitons and we are good to go for this part.
+
 
 \begin{itemize}
 	\item screening matrix elements DONE
@@ -689,7 +722,10 @@ Photoluminescence is the process which can be seen as the inverse of absorption 
 
 
 \section{Phonons}
-DFPT
+\begin{itemize}
+	\item DFPT
+	\item electron-phonon coupling
+\end{itemize}
 
 \section{Numerical implementation / Computational scheme}
 Maybe this can go in the next chapter about the methods
