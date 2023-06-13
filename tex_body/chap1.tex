@@ -59,7 +59,7 @@ Since the auxiliary system is an ensemble of independent particles, one can writ
 \ee
 They are analogous to Schrödinger equation for a particle evolving in a local effective potential $v_{\text{eff}}$, that we have yet to determine. Their solutions are the auxiliary system's eigenvalues $\varepsilon_i$ and the eigenvectors $\psi_i$ that are defined as :
 \be
- 	n(\rr) = \sum_i f_i \left| \psi_i\right|^2
+ 	n(\rr) = \sum_i f_i \left| \psi_i\right|^2 \label{eq:DFT_n_vs_psi}
 \ee
 where $f_i$ is the occupation number of state $i$. 
 Applying the variational principle to $E_{ip}$ and $E_{KS}$ we get 
@@ -766,26 +766,43 @@ with the eigenvectors $\xi^\mu(\qq)$ associated with the mode $\mu$, that are th
 \begin{equation}
 	\sum_{s\alpha} \xi^{\mu *}_{s\alpha} \xi^{\nu}_{s\alpha} = \delta_{\mu\nu}, \hspace{24pt} \sum_{\nu} \xi^{\mu *}_{s\alpha} \xi^{\mu}_{t\beta} = \delta_{st}\delta_{\alpha\beta}.
 \end{equation}
-Here we see the picture of collective motion appearing. Indeed the problem is no longer described as a sum of individual displacements, but rather in terms of $3N_{at}$ collective, periodic oscillations of the crystal with a momentum $\qq$ and a frequency $\omega_\mu(\qq)$, which are independent of each other. \\
+Here we see the picture of collective motion emerge. Indeed the problem is no longer described as the sum of individual displacements, but rather in terms of $3N_{at}$ collective, periodic oscillations of the crystal with a momentum $\qq$ and a frequency $\omega_\mu(\qq)$, which are independent of each other. \\
 From this, we can obtain an expression for the atomic displacements in real-space and time, which have the form of standing waves :
 \begin{equation}
 	u_{Ls\alpha}(t) = \frac{1}{2\sqrt{N_cM_s}} \sum_{\mu q} \text{e}^{i\qq\cdot\tau_L} \; \xi^\mu_{s\alpha}(\qq)\left[ A_\mu(\qq,T) \text{e}^{-i\omega_\mu t} + A_\mu^*(\qq,T) \text{e}^{i\omega_\mu t} \right] 
 \end{equation}
-where the temperature-dependent amplitudes of the oscillations are given by the equipartition theorem \cite{bruesch2012phonons} $A_\mu(\qq,T) = \sqrt{2k_B T}/\omega_\mu(\qq)$ with $k_B$ the Boltzmann constant.
+where the temperature-dependent amplitudes of the oscillations are given by the equipartition theorem \cite{bruesch2012phonons} $A_\mu(\qq,T) = \sqrt{2k_B T}/\omega_\mu(\qq)$ with $k_B$ the Boltzmann constant. In summary, we see that the crucial vibrational quantities are obtained after calculating the force constants, and then diagonalizing the dynamical matrix. One way to do the former starting from \gls{DFT} is presented in the next section.
 
+%
+\subsection{Density Functional Perturbation Theory}
+This theory is a general formulation of the linear response of the Kohn-Sham wavefunctions and charge density obtained in \glossary{DFT} with respect to a perturbation. It is presented by Baroni \textit{et al.} in ref. \cite{baroni2001phonons}, where they show that the linear response can be calculated in a self-consistent maner in reciprocal space, independently of the wavelength of the perturbation. This means that the use of supercells is not needed. In the case of phonons, one needs to compute the Hessian of the Born-Oppenheimer energy surface, which is the second derivative of the ground-state energy with respect to atomic displacements. One can show that the force constants matrix can be obtained from \gls{DFT} with the following expression \cite{gonze1997dynamical} :
+\begin{align}
+\begin{split}
+	C^{Ls}_{Mt} &= \frac{\partial^2 E(\{\RR\})}{\partial\RR_{Ls} \partial \RR_{Mt}} \Biggr|_{\RR=\RR_0} = - \frac{\partial \FF_{Ls}}{\partial \RR_{Mt}} \Biggr|_{\RR=\RR_0} \\
+	&= \int \frac{\partial n(\rr)}{\partial \RR_{Ls}} \frac{\partial v_{ext}(\rr)}{\partial \RR_{Ls}} d^3r + \int n(\rr) \frac{\partial^2 v_{ext}(\rr)}{\partial \RR_{Ls} \partial \RR_{Mt}} d^3r + \frac{\partial^2 E_N(\RR^0) }{\partial \RR_{Ls} \partial \RR_{Mt}}
+\end{split}
+\end{align}
+where $v_{ext}$ and $E_N$ are the ionic potential acting on the electrons and the nucleus-nucleus interaction, defined in Sec. \ref{sec:BO_approx}, and $n$ is the \gls{DFT} groundstate electronic density. Its first derivatives are computed in a self-consistent way with the linearization of Eq. \eqref{eq:DFT_n_vs_psi} :
+\begin{equation}
+	\frac{\partial n(\rr)}{\partial \RR_{Ls}} = 4\Re \sum_i \bra{\psi_i} \frac{\partial}{\partial \RR_{Ls}} \ket{\psi_i}
+\end{equation}
+The change of the Kohn-Sham states is in turn obtained from first-order perturbation theory and summing over all the eigenstates :
+\begin{equation}
+	\frac{\partial\ket{\psi_i}}{\partial \RR_{Ls}} = \sum_{j\neq i} \ket{\psi_j} \frac{\bra{\psi_j} \tfrac{\partial v_{\text{eff}}}{\partial\RR_{Ls}}\ket{\psi_i}}{\epsilon_i - \epsilon_j}
+\end{equation}
+This problem can be reformulated such that no empty states are needed :
+\begin{equation}
+	(\hat{H} - \epsilon_i) \frac{\partial\ket{\psi_i}}{\partial \RR_{Ls}} = - \left(\frac{\partial v_{\text{eff}}}{\partial\RR_{Ls}} - \frac{\partial \epsilon_i}{\partial\RR_{Ls}}  \right) \ket{\psi_i}.
+\end{equation}
 
-\subsection{DFPT}
-This is a general formulation of the linear response of the Kohn-Sham wavefunctions and charge density obtained in \glossary{DFT} with respect to a perturbation.
-It is formulated generally by Baroni \textit{et al.} in ref. \cite{baroni2001phonons}, where they show that the linear response can be calculated in a self-consistent maner in reciprocal space, independently of the wavelength of the perturbation. This means that the use of supercells is not needed. In the case of phonons, one needs to compute the Hessian of the Born-Oppenheimer energy surface, which is the second derivative of the ground-state energy with respect to displacement of the atomic positions. It is shown that it is entirely determined by the charge density and its linear variation.
-FT of dynamical matrix : DFPT says that response is independent of perturbation wavelength, so we can compute C at each q independently, and do the FT when needed
-
-
+%
 \subsection{Long wavelength limit}
 Acoustic sum rule ?
+In the case of polar semiconductors and insulators, which include \hbn that we study in this work, care has to be taken in the long wavelength limit, or equivalently the $\qq \to 0$ limit.
 Polar semiconductors and insulators, LO-TO splitting (bulk only)
 
 \begin{equation}
-	\tilde{C}^{\text{NA} \alpha\beta}_{st} = \frac{4\pi}{\Omega} e^2 \frac{(\qq\cdot\mathbf{Z}^*_s)_\alpha(\qq\cdot\mathbf{Z}^*_t)_\beta}{\qq \cdot \mathbf{\varepsilon}^\infty \cdot \qq}
+	\tilde{C}^{\text{NA} s\alpha}_{\ \ \ t\beta} = \frac{4\pi}{\Omega} e^2 \frac{(\qq\cdot\mathbf{Z}^*_s)_\alpha(\qq\cdot\mathbf{Z}^*_t)_\beta}{\qq \cdot \mathbf{\varepsilon}^\infty \cdot \qq}
 \end{equation}
 The effective charges and the electronic contributution to the dielectric permittivity tensor can be obtained from DFPT
 
