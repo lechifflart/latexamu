@@ -138,7 +138,7 @@
 	colorlinks=true,						%% colorise liens
 	urlcolor=blue,							%% couleur hyperliens
 	citecolor=blue,							%% couleur liens bibliographie
-	linkcolor=black,							%% couleur liens internes
+	linkcolor=blue,							%% couleur liens internes
 	anchorcolor=blue,						%% couleur liens ancres
 	bookmarksopen=false,					%% signets repliés par défaut
 	linktocpage=false,						%% lien numéro de page dans TOC
@@ -160,6 +160,8 @@
 \newglossary[nlg]{notation}{not}{ntn}{Nomenclature} % Création d'un type de glossaire 'notation'
 \makeglossaries								%% génère les glossaires
 \loadglsentries{tex_open/gloss}					%% fichiers sources glossaires
+\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}  %% acronymes affichés en noir indép de linkcolor dans hyperref
+
 
 %%% commandes personnelles (macros)
 \newcommand{\langue}{\emph}					%% mots en langues étrangères en italique : \langue{framework}

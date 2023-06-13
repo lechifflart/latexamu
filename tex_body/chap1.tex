@@ -2,7 +2,7 @@
 \chapter{ State of the art theory}
 \chaptertoc{}
 
-\section{Introduction on the many-body problem}
+\section{Introduction on the many-body problem} \label{sec:BO_approx}
 %generalities on theories that are the building blocks of our workflows
 %what is ab initio
 The system of interacting electrons and nuclei in a material is described by the following Hamiltonian :
@@ -679,7 +679,7 @@ The absorption coefficient is completely determined by $\varepsilon_2(\omega)$ a
 \subsection{Luminescence}
 % what it is generally and
 % van Roosbroeck-Shockley relation
-Different types of luminescence : photo-, cathodo-, electro-, ... depending on how the electrons are excited.
+\textcolor{red}{Intro to write here} Different types of luminescence : photo-, cathodo-, electro-, ... depending on how the electrons are excited.
 Photoluminescence is the process which can be seen as the inverse of absorption : photo-excited carriers de-excite from the bottom of the conduction band to an empty state in the valence band by emitting light with a frequency corresponding to the gap energy. For direct semiconductors or insulators, considering that the light emission is the inverse process of the absorption is generally an acceptable approximation. In this case, the spectra for the two process should look identical\footnote[1]{In reality there are differences such as the Stokes shift, which is caused by the broadening of electronic states by phonons.}. However, for materials with indirect gaps, this simple picture does not hold anymore. Indeed, one needs to consider the phonon-assisted transitions, which give rise to phonon satellites in the luminescence spectra, as will be discussed later. \\
 Here I will present an approximation to derive the spontaneous emission rate, which is the key quantity to compute luminescence spectra, for any kind of gapped material, starting from the absorption rate. We use the van Roosbroeck -- Shockley relation, derived in 1954 to describe the light emission in Germanium \cite{van1954photon} and follow refs \textcolor{red}{which refs are we following ???}. It is based on a \emph{steady-state} approximation, that is to say we consider the absorption rate and the spontaneous emission rate to be in detailed balance. We start by giving the relations for the case of independent particles and direct transitions only. For indirect transitions, the same kind of relations hold but they need to be slightly modified to include the phonon-assisted transitions, which will be done in the body of this thesis. The absorption rate is :
 \begin{equation}
@@ -696,37 +696,104 @@ If we define the incoming photon flux as $\mathcal{F}(\omega) = \mathcal{N}(\ome
 \end{equation}
 Finally, we can derive a Bose-Einstein type of occupation function by noticing that the following relation holds independently of which $(cv\kk)$ transition is considered :
 \begin{equation}
-	\frac{f_{c\kk} (1-f_{v\kk})}{f_{v\kk} (1-f_{c\kk}) - f_{c\kk}(1-f_{v\kk})} = \frac{1}{e^{\omega - (\mu_e - \mu_h)/k_BT} - 1 }\approx e^{\omega - (\mu_e - \mu_h)/k_BT}
+	\frac{f_{c\kk} (1-f_{v\kk})}{f_{v\kk} (1-f_{c\kk}) - f_{c\kk}(1-f_{v\kk})} = \frac{1}{e^{\omega - (\mu_e - \mu_h)/k_BT} - 1 }\approx e^{-(\omega - \Delta \mu)/k_BT}
 \end{equation}
 where in the last step we approximated the Bose-Einstein function with a Boltzmann distribution.
 Finally, by comparing the absorption and the spontaneous emission rates, we obtain :
 \begin{align}
 \begin{split}
-	R^{sp}(\omega) &= \frac{n_1(\omega)^2\omega^2}{\pi^2 c^2}\ \alpha(\omega)\ e^{\omega - (\mu_e - \mu_h)/k_BT} \\
-	 &= \frac{n_1(\omega)\omega^3}{\pi^2 c^3}\ \varepsilon_2(\omega)\ e^{\omega - (\mu_e - \mu_h)/k_BT} \label{eq:vRS_PL}
+	R^{sp}(\omega) &= \frac{n_1(\omega)^2\omega^2}{\pi^2 c^2}\ \alpha(\omega)\ e^{-(\omega - \Delta \mu)/k_BT} \\
+	 &= \frac{n_1(\omega)\omega^3}{\pi^2 c^3}\ \varepsilon_2(\omega)\ e^{-(\omega - \Delta \mu)/k_BT} \label{eq:vRS_PL}
 \end{split}
 \end{align}
 We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently $n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon_2(\omega)^2} + \varepsilon_1(\omega)}$.
-Now I need to talk about the Boltzmann distribution for excitons and we are good to go for this part.
+\textcolor{green}{Remember to talk about the exciton occupation in the results part}
+
+%
+%
+\section{Phonons and electron-phonon coupling}
+In solids, the collective motion of atoms can be treated as quasiparticles, called \textit{phonons}. They represent the vibrational modes of atoms in the crystal. In the harmonic approximation, we consider that each atom oscillates around its equilibrium position with a given frequency and a direction. 
+The atoms being bound to their neighbours, the oscillation propagates in the crystal. A phonon is a quantum of these lattice vibrations, with as many modes as there are degrees of freedom for the atoms in the unit cell. 
+In a unit cell containing multiple atoms, there are two types of phonons based on the relative motion of the atoms. When the atoms oscillate in phase, the resulting vibration propagates as a sound wave, and these phonons are known as acoustic phonons. On the other hand, if the atoms oscillate in opposite phases, the phonons are referred to as optical phonons.
+
+Vibrational modes and their frequencies can be calculated classically by modelling the crystal by atoms linked with springs with different rigidities. One can also solve the problem analytically in the second quantization formalism. Here I will present a scheme based on \glossary{DFT} which allows to compute the phonon frequencies and eigenvectors from the variation of the Kohn-Sham potential with respect to the atomic displacements. 
+
+%
+%
+Compute total energy with Taylor expansion : zero order is total energy when atoms are at equilibrium positions, first order are forces acting on atoms when displaced around its equilibrium position, the second order is the force acting on an atom induced by the displacement of another atom. Terms at higher orders are anharmonic, useful for phonon lifetimes or temperature dependence of the lattice constants, but not considered in this thesis.
+Forces are computed with Hellmann-Feynman theorem. The second term is also called interatomic force constants matrix. 
+Can be reformulated in terms of displacements.
+Formulate a Hamiltonian, and an equation of motion.
+Solutions of the EOM, with amplitudes and eigenvectors. Give value of amplitudes.
+Write dynamical matrix in terms of IFC and masses and a phase.
+Eigenvalue problem with $\omega^2$ and eigenvectors.
+%
+%
+
+We are still in Born-Oppenheimer approximation presented in Sec. \ref{sec:BO_approx}, \textit{ie} the ionic Hamiltonian depends on the electronic potential evaluated only at the static ionic positions. Reciprocally, the electronic Hamiltonian depends parametrically on the ionic positions $\{\RR\}$.
+Mainly adapted from \cite{baroni2001phonons,pereira2017ab,paleari2019first}. The vibrational problem can be solved starting from the Taylor expansion of the total energy of the solid around the equilibrium positions of the atoms. We truncate the expansion at the second order, which is the \textit{harmonic approximation}. It reads :
+\begin{align}
+\begin{split}
+	E(\{\RR\}) &=  E(\{\RR^0\}) \\ 
+	&+ \sum_{Ls\alpha} \frac{\partial E(\{\RR\})}{\partial R^0_{Ls\alpha}}\Biggr|_{0} (R_{Ls\alpha - R^0_{Ls\alpha}}) \\
+	&+ \frac{1}{2} \sum_{\substack{Ls\alpha \\ Mt\beta}} \frac{\partial^2 E(\{\RR\})}{\partial R^0_{Ls\alpha} \partial R^0_{Mt\beta}}\Biggr|_{0} (R_{Ls\alpha} - R^0_{Ls\alpha}) (R_{Mt\beta} - R^0_{Mt\beta}) + \ldots
+\end{split}
+\end{align}
+where ${\RR}$ and $\{\RR^0\}$ are the set of positions and equilibrium positions of all the nuclei in the system. They depend on three indices : $s,t$ count the nuclei in the unit cell, $L,M$ denote for the unit cell index in the whole crystal and $\alpha,\beta$ are for the Cartesian directions. The first line of the above expression is the total energy evaluated at equilibrium positions, which in our case is calculated within \gls{DFT}. The second line is the force acting on a nucleus when displaced around its equilibrium position. It is defined as :
+\begin{equation}
+	F_{Ls\alpha} \equiv -\frac{\partial E(\{ \RR\})}{\partial R^0_{Ls\alpha}}.
+\end{equation}
+The third term is the Hessian of the Born-Oppenheimer energy surface, or the force acting on the nucleus $(Ls)$ induced by the displacement of another nucleus $(Mt)$. We define the matrix of interatomic force constants as :
+\begin{equation}
+	C^{Ls\alpha}_{Mt\beta} \equiv \frac{\partial^2 E(\{\RR\})}{\partial R^0_{Ls\alpha} \partial R^0_{Mt\beta}} = -\frac{\partial F_{Ls\alpha}}{\partial R^0_{Mt\beta}}
+	\label{eq:IFC_matrix}
+\end{equation}
+The higher order terms are anharmonic and are relevant for the calculation of phonon lifetimes or temperature dependence of lattice constants for instance. We do not consider them in this thesis and work only in the harmonic approximation.
+
+We now reformulate the problem in term of the atomic \textit{displacements}, defined as $\uu_{Ls} = \RR_{Ls} - \RR^0_{Ls}$. Then the total energy writes :
+\begin{equation}
+	E(\{\RR\}) = E(\{\RR^0\}) - \sum_{Ls\alpha} F_{Ls\alpha} u_{Ls\alpha} + \frac{1}{2} \sum_{\substack{Ls\alpha \\ Mt\beta}} C^{Ls\alpha}_{Mt\beta} \; u_{Ls\alpha} u_{Mt\beta} + \mathcal{O}(u^3)
+\end{equation}
+The size of the interatomic force constants matrix is $3N_cN_{at}$ where $N_c$ is the number of unit cells in the periodic supercell considered and $N_{at}$ is the number of atoms in the unit cell. However we can use the invariance of the force constants under a translation by a lattice vector $\mathbf{\tau}$, which means they only depend on the difference $\mathbf{\tau}_I = \mathbf{\tau}_L - \mathbf{\tau}_M$. This allows us to take the Fourier transform and solve the problem in reciprocal space, where only a unit cell is needed and the sum over supercells is replaced by a sum over a grid of $\qq$-points in the Brillouin Zone. We define the \textit{dynamical matrix} as :
+\begin{equation}
+	D^{s\alpha}_{t\beta}(\qq) = \frac{1}{\sqrt{M_sM_t}} \sum_I C^{Is\alpha}_{\ \, t\beta} \text{e}^{i\qq\cdot \tau_I}	
+\end{equation}
+where $M_s$ is the mass of atom $s$. The phonon frequencies are eigenvalues of the dynamical matrix with the following eigenvalue problem :
+\begin{equation}
+	\sum_{s\alpha} D^{s\alpha}_{t\beta}(\qq) \xi^{\mu}_{s\alpha}(\qq) = \omega^2_\mu(\qq) \xi^\mu_{t\beta}(\qq)
+\end{equation}
+with the eigenvectors $\xi^\mu(\qq)$ associated with the mode $\mu$, that are the normal modes of the oscillating system and obey the orthogonality relations :
+\begin{equation}
+	\sum_{s\alpha} \xi^{\mu *}_{s\alpha} \xi^{\nu}_{s\alpha} = \delta_{\mu\nu}, \hspace{24pt} \sum_{\nu} \xi^{\mu *}_{s\alpha} \xi^{\mu}_{t\beta} = \delta_{st}\delta_{\alpha\beta}.
+\end{equation}
+Here we see the picture of collective motion appearing. Indeed the problem is no longer described as a sum of individual displacements, but rather in terms of $3N_{at}$ collective, periodic oscillations of the crystal with a momentum $\qq$ and a frequency $\omega_\mu(\qq)$, which are independent of each other. \\
+From this, we can obtain an expression for the atomic displacements in real-space and time, which have the form of standing waves :
+\begin{equation}
+	u_{Ls\alpha}(t) = \frac{1}{2\sqrt{N_cM_s}} \sum_{\mu q} \text{e}^{i\qq\cdot\tau_L} \; \xi^\mu_{s\alpha}(\qq)\left[ A_\mu(\qq,T) \text{e}^{-i\omega_\mu t} + A_\mu^*(\qq,T) \text{e}^{i\omega_\mu t} \right] 
+\end{equation}
+where the temperature-dependent amplitudes of the oscillations are given by the equipartition theorem \cite{bruesch2012phonons} $A_\mu(\qq,T) = \sqrt{2k_B T}/\omega_\mu(\qq)$ with $k_B$ the Boltzmann constant.
 
 
-\begin{itemize}
-	\item screening matrix elements DONE
-	\item rigorous expression for $\chi^{RPA}$ and $\chi^{BSE}$ DONE
-	\item dipole approx : field not varying over unit cell => dipole matrix elements DONE
-	\item macroscopic dielectric function (mention fact that longitudinal part enough) DONE
-	\item absorption spectra; comparison RPA and BSE TO DO
-	\item PL : vRS relation TO DO
-\end{itemize}
+\subsection{DFPT}
+This is a general formulation of the linear response of the Kohn-Sham wavefunctions and charge density obtained in \glossary{DFT} with respect to a perturbation.
+It is formulated generally by Baroni \textit{et al.} in ref. \cite{baroni2001phonons}, where they show that the linear response can be calculated in a self-consistent maner in reciprocal space, independently of the wavelength of the perturbation. This means that the use of supercells is not needed. In the case of phonons, one needs to compute the Hessian of the Born-Oppenheimer energy surface, which is the second derivative of the ground-state energy with respect to displacement of the atomic positions. It is shown that it is entirely determined by the charge density and its linear variation.
+FT of dynamical matrix : DFPT says that response is independent of perturbation wavelength, so we can compute C at each q independently, and do the FT when needed
 
 
+\subsection{Long wavelength limit}
+Acoustic sum rule ?
+Polar semiconductors and insulators, LO-TO splitting (bulk only)
 
-\section{Phonons}
-\begin{itemize}
-	\item DFPT
-	\item electron-phonon coupling
-\end{itemize}
+\begin{equation}
+	\tilde{C}^{\text{NA} \alpha\beta}_{st} = \frac{4\pi}{\Omega} e^2 \frac{(\qq\cdot\mathbf{Z}^*_s)_\alpha(\qq\cdot\mathbf{Z}^*_t)_\beta}{\qq \cdot \mathbf{\varepsilon}^\infty \cdot \qq}
+\end{equation}
+The effective charges and the electronic contributution to the dielectric permittivity tensor can be obtained from DFPT
 
+\subsection{Electron-phonon coupling}
+for this, second quantization is needed : write the el-ph Hamiltonian with gkkp
+
+
+%
 \section{Numerical implementation / Computational scheme}
 Maybe this can go in the next chapter about the methods
 %There are different ways of treating the frequency dependence of the screening. One can the dielectric matrix on a selected grid of frequencies $\omega$, or approximate it with a model function depending on a few frequencies, as in the Plasmon Pole Approximation. Most commonly, it is computed in the \gls{RPA}. 
@@ -737,6 +804,7 @@ Maybe this can go in the next chapter about the methods
 	\item include \cite{martin2016interacting} Eqs. (12.53) and (12.54)
 	\item divergence of the Coulomb term at $\qq = 0$ and $\GG' =0$
 	\item matrix elements of W and v, in terms of the dipoles (14.54) and (14.55) of Martin Reining Ceperley
+	\item double grids for elph and excph
 \end{itemize}
 
 \section{Special case of 2D material}
