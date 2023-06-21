@@ -64,11 +64,11 @@
 %%% appareil de référence (sauf glossaires)
 \PassOptionsToPackage{						%% options biblatex
 	backend=biber,							%% compilateur par défaut pour biblatex
-	maxnames=3,								%% nombre max. de noms auteurs
-	minnames=3,								%% nombre min. de noms auteurs
-	sorting=nyt,							%% trier par nom, année, titre
-	citestyle=authoryear,					%% style de citation auteur-année
-	bibstyle=alphabetic,					%% style de bibliographie alphabétique
+	maxnames=99,								%% nombre max. de noms auteurs
+	minnames=1,								%% nombre min. de noms auteurs
+	sorting=none,							%% trier par nom, année, titre
+	citestyle=numeric,					%% style de citation auteur-année
+	bibstyle=numeric,					%% style de bibliographie alphabétique
 %	bibstyle=iso-authoryear,				%% style de bibliographie ISO 690
 	backref=true							%% liens retour des références (cf. p.)
 	}

@@ -1,24 +1,26 @@
-\linenumbers
 \chapter{ State of the art theory}
 \chaptertoc{}
+%
+\linenumbers
 
+%
 \section{Introduction on the many-body problem} \label{sec:BO_approx}
-%generalities on theories that are the building blocks of our workflows
-%what is ab initio
-The system of interacting electrons and nuclei in a material is described by the following Hamiltonian :
+In this thesis, most of the computed quantities are not based on any parameter. The only input required is the chemical composition of the system, \textit{i.e.} the atomic numbers of the atoms constituting the crystal. This way of calculation is called \textit{ab initio}. It is a powerful framework since it does not require to fit any parameter to experiments and it can include all the physical phenomena one wants to consider. One of the shortcomings is that we often need to resort to approximations for the problems to be solvable numerically.
+To perform such calculations, we need to consider all nuclei and all electrons in the crystal, as well as all the interactions between them. The system of interacting electrons and nuclei in a material can be described by the following Hamiltonian :
 \begin{align}
 	\hat{H} = &- \sum_I \frac{\hbar^2}{2 M_I} \nabla^2_I + \frac{1}{2} \sum_{I\neq J} \frac{Z_I Z_J e^2}{\left| \RR_I - \RR_J \right|} \nonumber \\
 	&- \frac{\hbar^2}{2m_e} \sum_i \nabla^2_i + \frac{1}{2} \sum_{i\neq j} \frac{e^2}{\left| \rr_i - \rr_j \right|} - \sum_{i,I} \frac{Z_I e^2}{\left|\rr_i - \RR_I \right|}
 \end{align}
 where capital indices refer to nuclei and lowercase indices refer to electrons. $Z_I$, $M_I$ and $\RR_I$ are the atomic number, the mass and the position in real space of nucleus $I$, and $m_e,\rr_i$ are the electron mass and the electron position in real space. In this thesis, unless explicitly specified, we will use the atomic units, that is $\hbar = m_e = e =\pi/\varepsilon_0 =1$.
-The terms on the first line are the kinetic energy of the ions and the ion-ion interaction, respectively. On the second line we have the kinetic energy of electrons, that we will later denote $T_{ee}$, the electron-electron interaction $V_{ee}$ and finally the electron-nucleus interaction, which we will refer to as the external potential felt by electrons in equilibrium, $V_{ext}$. To greatly simplify this Hamiltonian, we use the so-called Born-Oppenheimer approximation. It consists in considering that the nuclei move in a much longer time-scale than the electrons, because their masses are much greater than those of the electrons. Every time we compute the electronic part, we consider that the nuclei do not have time to move from their equilibrium position \cite{monserrat2018electron}. We can then split the Hamiltonian into a nuclear term and an electronic term, and the nuclear part is just an additive constant. The electronic Hamiltonian then reads :
+The terms on the first line are the kinetic energy of the ions and the ion-ion interaction, respectively. On the second line we have the kinetic energy of electrons, that we will later denote $T_{ee}$, the electron-electron interaction $V_{ee}$ and finally the electron-nucleus interaction, which we will refer to as the external potential felt by electrons in equilibrium, $V_{ext}$. This Hamiltonian is difficult to solve for a system containing two nuclei and two electrons, and is untractable for a larger number of particles. The kinetic terms are rather staightforward, but the difficulty comes from the electron-electron interaction, which is a two-body interaction.
+To greatly simplify this Hamiltonian, we use the so-called Born-Oppenheimer approximation. It consists in considering that the nuclei move in a much longer time-scale than the electrons, because their masses are much greater than those of the electrons. Every time we compute the electronic part, we consider that the nuclei do not have time to move from their equilibrium position \cite{monserrat2018electron}. We can then split the Hamiltonian into a nuclear term and an electronic term, and the nuclear part is just an additive constant. The electronic Hamiltonian then reads :
 \be
 	\hat{H} = \hat{T_e} + \hat{V}_{ee} + \hat{V}_{ext}
 \ee
 The first and second term are universal for all systems.The peculiarities of any systems are included in the last term in the above equation.
 
 \section{Density Functional Theory}
-\gls{DFT} is vastly used in solid-state physics and quantum chemistry. In this thesis, it will be the starting tool to compute structural and electronic properties of our systems. The idea behind \gls{DFT} is to replace the real system of interacting electrons by an auxiliary system of non-interacting particles evolving in an effective potential. \gls{DFT} is an exact theory in principle and allows to compute the ground state of the many-electron system.
+\gls{DFT} is vastly used in solid-state physics and quantum chemistry. In this thesis, it will be the starting tool to compute structural and electronic properties of our systems. The idea behind \gls{DFT} is to replace the real system of interacting electrons by an auxiliary system of non-interacting particles evolving in an effective potential. \gls{DFT} is an exact theory in principle and allows one to compute the ground state of the many-electron system.
 
 \gls{DFT} is a theory of the interacting electron system and is based on the work of Hohenberg and Kohn who stated and proved two fundamental theorems. \cite{hohenberg1964} The first one ensures there is a one-to-one correspondence between the electronic density and the external potential acting on the system. The second theorem states that the total energy of the system is a functional of the electronic density.
 The total energy of a system of interacting electrons is written as :
@@ -102,10 +104,10 @@ The core electrons of the first $s$ and $p$ shells are bound too strongly to the
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.5\textwidth]{Sketch_Pseudopotentials.png}
-	\caption{Sketch of the pseudopotential compared to the real potential and the wavefunctions that are generated by them.}
+	\caption{Sketch of the pseudopotential compared to the real potential and the wavefunctions they generate.}
 	\label{fig:sketch_pseudo}
 \end{figure}
-Beyond a given cutoff radius $r_c$, pseudopotentials are constrained to be exactly equal to the true potential. Below this radius, the pseudopotential does not diverge and assumes a finite value at $r=0$, as can be seen in fig. \ref{fig:sketch_pseudo} This generates a pseudo-wave function which is smooth and does not oscillate below the cutoff radius. With this method, the Kohn-Sham eigenvalues remain unchanged, and the computationally demanding task of representing the oscillating wave function is eliminated. The fact that fewer electrons have to be taken into account also helps to speed up the calculations.
+Beyond a given cutoff radius $r_c$, pseudopotentials are constrained to be exactly equal to the true potential. Below this radius, the pseudopotential does not diverge and assumes a finite value at $r=0$, as can be seen in Fig. \ref{fig:sketch_pseudo} This generates a pseudo-wave function which is smooth and does not oscillate below the cutoff radius. With this method, the Kohn-Sham eigenvalues remain unchanged, and the computationally demanding task of representing the oscillating wave function is eliminated. The fact that fewer electrons have to be taken into account also helps to speed up the calculations.
 %
 
 \subsubsection{Basis set}
@@ -130,24 +132,26 @@ In principle all complete bases of the Hilbert space yield equal representation 
 \ee
 One has to verify that the cutoff is high enough so that the results are accurate, but setting it too high would mean including more plane waves which would slow down the calculations. Since the plane waves are orthonormal, adding extra ones to the basis by increasing $E_{cut}$ does not add redundant physical information.
 
-%Density Functional Theory is often used as a reference for bandgaps and electronic dispersion calculations. One has to be careful when interpreting Kohn-Sham eigenvalues, because they do not bear any physical meaning. First, there is no guarantee that one can find an auxiliary system of non-interacting particles for any real system. Then, the excited states and bandgaps are not the physical ones. 
 As mentioned above, \gls{DFT} is not well suited to simulate optics experiments of semiconductors or insulators. Optical excitations are neutral excitations, in the sense that the excited electron does not leave the system and can therefore interact with the hole it left behind in the valence band. This interaction between a hole in a valence band and an excited electron in the conduction bands is not accurately accounted for in \gls{DFT}, as it is designed to calculate the total energy and the electronic density of the \textit{groundstate}. For this reason, we will resort to a more refined theoretical framework to treat the electronic correlations and study the excited states.
 
-%(Structure optimization ? Hellmann-Feynman theorem to compute the forces acting on atoms, compute the total energy, minimize both the forces and the total energy)
 
-%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
 \section{Many-Body Perturbation Theory}
-The following derivations are adapted from textbooks \cite{martin2016interacting,stefanucci2013nonequilibrium}, review articles \cite{strinati1988application,aryasetiawan1998gw,giustino2017review} and lecture notes \cite{JulienToulouseNotes}.
-Single-particle and two-particle GF are matrix elements of the full GF of the many-electron system. A lot of useful quantities can be derived from them. For example total energy, excitation energies, polarizability, response function (maybe refer to Martin Reining for more details)
-Here I will write a general introduction for MBPT and an outline of the content of the following subsections. I would prefer to write it once the following is corrected and the content is fixed.
-
+In this section I will present the basics of \gls{MBPT}. In this theory, the many-body interactions are treated as a perturbation to the system of non-interacting electrons. I will detail the effects on the electronic structure and also the inclusion of the electron-hole interaction, to deal with optical excitations. \\
+Including the many-body interaction in an Hamiltonian formulation would lead to computing immensely complicated wavefunctions for the system of N electrons, and this is not tractable. Instead, if we are more interested in observables such as optical spectra, we can reformulate the problem in terms of Green's functions. It is a mathematical object which is the solution of the equation of motion for the N interacting electrons, when the source term is a Dirac distribution. The link between the two formulation writes :
+\begin{align}
+\begin{split}
+	&\left[ i \partial_t - \hat{H}_e \right] \mathcal{G}(\rr,t;\rr',t') = \delta(\rr-\rr')\delta(t-t') \\
+	&\mathcal{G}(\rr,\rr',\omega) = \left[\omega - \hat{H}_e\right]^{-1}
+\end{split}	
+\end{align}
+The first line is the time-dependent Schrödinger equation for N interacting electrons. The second line gives the N-body Green's function in terms of the Hamiltonian, where we took the Fourier transform $t-t' \to \omega$. The one-body and two-body Green's functions are the first two matrix elements of $\mathcal{G}$. We will see in this section how to obtain many useful quantities from them, such as the electronic density, the total energy, the charged and neutral excitation energies and much more. 
+The derivations in this section are adapted from textbooks \cite{martin2016interacting,stefanucci2013nonequilibrium}, review articles \cite{strinati1988application,aryasetiawan1998gw,giustino2017review} and lecture notes \cite{JulienToulouseNotes}.
 
 \subsection{Hedin's equations}
-\textcolor{red}{add more explanations, see Fulvio's thesis; especially correspondance between Schrödinger equation and GF}
 We consider a system of N interacting electrons. We will consider the effect of nuclei motion in a later section.
 We start from the Hamiltonian for interacting electrons in second quantization:
 \begin{align}
@@ -156,7 +160,7 @@ We start from the Hamiltonian for interacting electrons in second quantization:
 		&= \hat{H}_0 + \hat{H}_{int}.
 \end{split}
 \end{align}
-where $\hat{\psi}(x)$ is a field operator in Schrödinger representation, $h$ is the single-particle Hamiltonian for non-interacting particles evolving in an external potential $V_{ext}$ and $v(\rr_1,\rr_2) = e^2 (\left| \rr_1 - \rr_2 \right|)^{-1}$ is the Coulomb interaction. In the above equation, x is the set of space and spin variables $x = (\rr, \sigma)$.
+where $\hat{\psi}(x)$ is a field operator in Schrödinger representation, $h$ is the single-particle Hamiltonian for non-interacting particles evolving in an external potential $V_{ext}$ and $v(\rr_1,\rr_2) = e^2 (\left| \rr_1 - \rr_2 \right|)^{-1}$ is the Coulomb interaction. In the above equation, $x$ is the combined space and spin variables $x = (\rr, \sigma)$.
 %
 
 For the following derivation, we introduce an external potential $\Phi(x,x';t)$ which is local in time but nonlocal in space. We write it in the form of an interaction Hamiltonian :
@@ -183,15 +187,7 @@ and
 \begin{equation}
 	G_2(1,2:1',2') = (-i)^2  \frac{\bra{N}\hat{T}\left[\hat{S}\hpsi(1)\hpsi(2)\hpsidag(2')\hpsidag(1')\right]\ket{N}}{\bra{N}T[\hat{S}]\ket{N}}\label{eq:2GF}
 \end{equation}
-where $\ket{N}$ is the exact ground state of the N-electron system and T is a time-ordering operator. It ensures that the time variable increases from right to left. It gives $\hat{T}\left[ \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) \right] = \theta(t_1 - t_2) \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) - \theta(t_2-t_1)\hpsidag(\rr_2 t_2)\hpsi(\rr_1 t_1)$, where $\theta$ is the Heaviside function.\cite{fetter2012quantum} The physical meaning of the one-body Green's function is the probability amplitude that an electron added in the system at time $t_2$ and position $\rr_2$ propagates to position $\rr_1$ and time $t_1$. In the time-ordered formalism that we are using, it is also the probability amplitude that a hole created at time $t_1$ and position $x_1$ propagates to $(x_2,t_2)$, depending on how the two time variables are ordered. It can be related to photoemission and inverse photoemission spectroscopy, as illustrated in Fig. \ref{fig:sketch_PES}
-\begin{figure}[h!tbp]
-	\vspace{0.5cm}
-	\setcapindent{2em}
-	\centering
-	\includegraphics[width=0.5\textwidth]{Sketch_PES.png}
-	\caption{Sketch of the photoemission and inverse photoemission spectroscopy experiments, and their link with the Green's function. \textcolor{red}{find a better picture}}
-	\label{fig:sketch_PES}
-\end{figure}
+where $\ket{N}$ is the exact ground state of the N-electron system and T is a time-ordering operator. It ensures that the time variable increases from right to left. It gives $\hat{T}\left[ \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) \right] = \theta(t_1 - t_2) \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) - \theta(t_2-t_1)\hpsidag(\rr_2 t_2)\hpsi(\rr_1 t_1)$, where $\theta$ is the Heaviside function.\cite{fetter2012quantum} The physical meaning of the one-body Green's function is the probability amplitude that an electron added in the system at time $t_2$ and position $\rr_2$ propagates to position $\rr_1$ and time $t_1$. In the time-ordered formalism that we are using, it is also the probability amplitude that a hole created at time $t_1$ and position $x_1$ propagates to $(x_2,t_2)$, depending on how the two time variables are ordered. 
 The two-particle Green's function $G_2$ describes the propagation of two correlated particles. Depending on the time ordering, it can describe a propagation electron-electron pair, a hole-hole pair or an electron-hole pair. It will become useful in a following section.
 %
 
@@ -245,7 +241,7 @@ and
 We cannot take the limit $\Phi \to 0$ yet because it would require the knowledge of the functional dependence of $G$ on $\Phi$. However Hedin proposed a way to rewrite the equations of motion (or at least one of them and the other would undergo the same process) by introducing new physical quantities, coupled in nonlinear self-consistent equations.\cite{hedin1965new} 
 %
 
-The first of these quantities is the \textbf{total classical potential} $V$ : \textcolor{red}{\textsc{THE FIRST TERM IS THE HARTREE POTENTIAL} \textbf{BY THE WAY}}
+The first of these quantities is the \textbf{total classical potential} $V$ : 
 \begin{equation}
 	\vtot (1) \equiv \int d2 v(12) \langle \hat{n}(2) \rangle + \Phi(1) \label{eq:vtot}
 \end{equation}
@@ -363,9 +359,30 @@ or equivalently,
 \begin{equation}
 	G^{-1}(1,2) = G_0^{-1}(1,2) - \Sigma(1,2)
 \end{equation}
-Equation \eqref{eq:Dyson} is called the \textit{Dyson equation} for the single-particle Green's function. Knowing $G_0$, which is numerically simple to compute, and approximating the self-energy $\Sigma$, which we will discuss later, allows one to compute the Green's function $G$.
-\textcolor{pink}{The vertex function contains a local part which give the Hartree-Fock self-energy. The other term are the vertex corrections. Neglecting the vertex corrections in the polarizability leads to the RPA.\textcolor{red}{DO A PARAGRAPH ON THIS}. Neglecting the vertex corrections in the self-energy leads to the GWA.}
+Equation \eqref{eq:Dyson} is called the \textit{Dyson equation} for the single-particle Green's function. Knowing $G_0$, which is numerically simple to compute, and approximating the self-energy $\Sigma$, which we will discuss later, allows one to compute the Green's function $G$. At this point it is useful to rewrite the self-energy as a sum of two terms $\gS = v_H + \gS_{xc}$, which are the Hartree potential and the exchange-correlation self-energy. Formally, it writes :
+\begin{equation}
+	\gS(1,2) = v_H(1,2) - i\int d34 v(1,4)G(1,3) \left[ \frac{\delta G^{-1}(3,2)}{\delta \Phi(4^+)} \right] 
+\end{equation}
 
+%
+\subsection{Random Phase Approximation} 
+The \gls{RPA} consists in neglecting the vertex corrections in the formula of the reducible polarizability (Eq. \eqref{eq:tilde_chi}). The vertex functions is reduced to 
+\begin{equation}
+	\Gamma(1,2;3) \approx \delta(1,2)\delta(1,3).
+\end{equation}
+Then the irreducible polarizability writes :
+\begin{equation}
+	\tilde{\chi}(1,2) \approx \tilde{\chi}_0(1,2) \equiv -i G(1,2^+)G(2,1^+) \label{eq:tilde_chi_0}
+\end{equation}
+% I use \tilde{\chi} and not \chi to be consistent with the definition in Hedin's equations.
+Working out the above expression, one can see that it is made of non-interacting electron-hole pairs. The full polarizability follows from Eq. \eqref{eq:chi_dn/dPhi} :
+\begin{equation}
+	\chi(1,2) = \tilde{\chi}_0(1,2) + \int d34 \tilde{\chi}_0(1,3) v(3,4) \chi(4,2) = \int d3 \tilde{\chi}_0(1,3) \left[ 1 - v \tilde{\chi}_0\right]^{-1}(3,2)
+\end{equation}
+When we calculate $\tilde{\chi}_0$ from the single-particle Green's function as in Eq. \eqref{eq:tilde_chi_0}, the derivative with respect to the perturbation is neglected. In this regard, $\tilde{\chi}_0$ is not an \gls{RPA} response function. We call it the independent particle response function while $\tilde{\chi}$ is called the RPA response function, for historical reasons.
+However, $\tilde{\chi}_0$ will be useful when dealing with optical properties. Indeed, from the inverted form, one can construct the inverse dielectric function, written in a compact form as $\inveps = 1+v \chi^{RPA}$.
+
+%
 \subsection{The $\mathbf{GW}$ approximation}
 With the Dyson equation for the Green's function, we can now complete the set of self-consistent, coupled equations that are called the \textit{Hedin's equations} \cite{hedin1965new}:
 \begin{empheq}[box=\widefbox]{align*}
@@ -377,21 +394,29 @@ With the Dyson equation for the Green's function, we can now complete the set of
 \end{empheq}
 $\Gamma$ and $W$ also satisfy Dyson equations, just as $G$.This is an exact set of coupled equations, that is solved self-consistently. In practice, it is untractable to solve. One has to chose a starting approximation for the self-energy, which contains the summation to all orders in the interaction expansion of $G$. One way to approximate the self-energy is to consider $\frac{\delta \Sigma(12)}{\delta G(4,5)} = 0$ so that $\Gamma = \delta(1,2)\delta(1,3)$ and we obtain :
 \begin{equation} 
-\gS(1,2) = iG(1,2)W(1,2). \label{eq:GW}
+\gS_{xc}(1,2) = iG(1,2)W(1,2). \label{eq:GW}
 \end{equation}
 This is the so-called $GW$ approximation, which gives good results for weakly-correlated materials. It is the first-order in the expansion of the self-energy in terms of the interaction $W$. All higher order terms that are involved in electronic correlations are neglected. Part of those can be included by recomputing $G$ self-consistently with the Hedin's equations. However in practice, it is not guaranteed that it leads to better results. Most of the times, the $GW$ method is a one-shot calculation starting from the DFT Kohn-Sham eigenvalues and wave functions, as we will see in a later subsection. 
 
 Eq. \eqref{eq:GW} resembles the Hartree-Fock approximation, where the exchange part of the self-energy is written as $\gS_x^{HF}(1,2) = i G(1,2^+)v(1,2)$.
 The difference in this case is that we used the dynamically screened interaction instead of the bare Coulomb one. 
 
-
+%
 \subsection{Quasiparticle equations}
 Once the limit $\Phi \to 0$ is taken, there is no time-dependent potential acting on the system of N electrons. Hence, the system is invariant under time translation and the Green's function depends only on the time difference $\tau = t_1 - t_2$. One can do the Fourier transform from time $\tau$ to frequency $\omega$, and we can write the Green's function in the so-called Lehmann representation :
 \begin{equation}
 	G(x_1,x_2;\omega) = \sum_a \frac{f_a(x_1)f_a^*(x_2)}{\omega-\varepsilon_a + i\eta} + \sum_i \frac{f_i(x_1)f_i^*(x_2)}{\omega-\varepsilon_i + i\eta}
 \end{equation}
 where $a,i$ denote electron states, $f_a(x) = \bra{N}\hpsi(x)\ket{N+1,a}$ and $f_i(x) = \bra{N-1,i} \hpsi(x) \ket{N}$ are the Lehmann amplitudes (as called Dyson orbitals). They are defined with the $N$-electron ground state $\ket{N}$ whose total energy is $E_N$, the electron state number $a$ of the $(N+1)$-electron system $\ket{N+1,a}$ with total energy $E_{N+1,a}$ and the electron-state number $i$ of the $(N-1)$-electron system $\ket{N-1,i}$ with total energy $E_{N-1,i}$.
-The Lehmann representation of the Green's function also contains the quasiparticle energies, which are defined as $\varepsilon_a = E_{N+1,a} - E_N = -A_a$ and $\varepsilon_i = E_N - E_{N-1,i} = -I_i$. $A_a$ and $I_i$ are the electron affinities and ionization energies. This highlights the link between the poles of the Green's function from many-body perturbation theory and the photoemission and inverse photoemission spectroscopies. 
+The Lehmann representation of the Green's function also contains the quasiparticle energies, which are defined as $\varepsilon_a = E_{N+1,a} - E_N = -A_a$ and $\varepsilon_i = E_N - E_{N-1,i} = -I_i$. $A_a$ and $I_i$ are the electron affinities and ionization energies. This highlights the link between the poles of the Green's function from many-body perturbation theory and the photoemission and inverse photoemission spectroscopies, and is illustrated in Fig. \ref{fig:sketch_PES}.
+\begin{figure}[h!tbp]
+	\vspace{0.5cm}
+	\setcapindent{2em}
+	\centering
+	\includegraphics[width=0.5\textwidth]{Sketch_PES.png}
+	\caption{Sketch of the photoemission and inverse photoemission spectroscopy experiments, and their link with the Green's function. \textcolor{blue}{This is a placeholder. I need to change the labels in there.}}
+	\label{fig:sketch_PES}
+\end{figure}
 
 With this form of the Green's function we can reformulate the Dyson equation \eqref{eq:Dyson}. Just as the Green's function, the self-energy depends only on the time difference $\tau = t_1 - t_2$. We can then take the Fourier transform of eq. \eqref{eq:GF_EOM_SE} :
 \begin{equation}
@@ -436,7 +461,7 @@ After computing the functional derivative of the inverse Green's function, we ge
 \begin{equation}
 	L(1,2,1',2') = G(1,2')G(2,1') + \int d33' G(1,3) \frac{\delta \Sigma(3,3')}{\delta \Phi(2',2)} G(3',1') \label{eq:L_}
 \end{equation}
-\textcolor{green}{please act as if I had defined $\gS = v_H + \gS_{xc}$ and detailled each term above in the GW section} with $\gS = v_H + \gS_{xc}$.  \textcolor{green}{please act as if $v_H$ was defined above in the GW section} One can take the limit $\Phi \to 0$ in the above equation to obtain the equilibrium solution. The first term in eq. \eqref{eq:L_} is defined as the propagator for two independent particles :
+with $\gS = v_H + \gS_{xc}$. One can take the limit $\Phi \to 0$ in the above equation to obtain the equilibrium solution. The first term in eq. \eqref{eq:L_} is defined as the propagator for two independent particles :
 \begin{equation}
 	L_0(1,2,1',2') = G(1,2') G(2,1') 
 \end{equation}
@@ -484,7 +509,7 @@ The first term is at first order in $W$. The second term is the change in the sc
 \begin{equation}
 	\Xi^{GWA}_{xc}(\go_1,\go_2,\go_3) \approx iW(\go_2 - \go_3)
 \end{equation}
-Here we see that the coupling between two particles, which comes from the screened interaction, is frequency-dependent. It originates from the fact that the system needs time to adapt to the perturbation, which is the creation of the electron-hole pair. Another important approximation that we introduce here is that we consider the screened interaction to be static, \textit{ie} frequency-independent : $W(\go) \to W(0)$. In practice, we obtain $L_0$ with the single-particle Green's functions in the quasiparticle approximation in the dynamic \gls{GWA}, and we use a static screening only for the kernel of the \gls{BSE}. Reintroducing the space and (implicit) spin dependence, we finally obtain :
+Here we see that the coupling between two particles, which comes from the screened interaction, is frequency-dependent. It originates from the fact that the system needs time to adapt to the perturbation, which is the creation of the electron-hole pair. Another important approximation that we introduce here is that we consider the screened interaction to be static, \textit{i.e.} frequency-independent : $W(\go) \to W(0)$. In practice, we obtain $L_0$ with the single-particle Green's functions in the quasiparticle approximation in the dynamic \gls{GWA}, and we use a static screening only for the kernel of the \gls{BSE}. Reintroducing the space and (implicit) spin dependence, we finally obtain :
 \begin{align}
 \begin{split}
 	L(x_1,x_2,x_{1'},x_{2'};\go) = &L_0(x_1,x_2,x_{1'},x_{2'};\go) \\
@@ -556,31 +581,9 @@ with the overlap matrix defined as
 Each couple $(nn')$ corresponds to a pair $(vc)$ or $(cv)$ of an occupied and an empty state. We remark that the exciton energies replaced the difference of quasiparticle energies $\varepsilon_c - \varepsilon_v$ in the denominator, which are the quasiparticle transition energies. The screened interaction contributes to the attraction between the electron and the hole, lowering the transition energy below the gap. The difference between the transition energy and the quasiparticle gap is called the \textit{exciton binding energy}. Excitonic effects can be extremely important in the optical properties of semiconductors, as we will see in the next section.
 %
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% This is not at the definitive location
-\subsection{Random Phase Approximation} 
-\textcolor{green}{This should be before the GW approx section, but I put it here for practicality}
-The \gls{RPA} consists in neglecting the vertex corrections in the formula of the reducible polarizability (Eq. \eqref{eq:tilde_chi}). The vertex functions is reduced to 
-\begin{equation}
-	\Gamma(1,2;3) \approx \delta(1,2)\delta(1,3).
-\end{equation}
-Then the irreducible polarizability writes :
-\begin{equation}
-	\tilde{\chi}(1,2) \approx \tilde{\chi}_0(1,2) \equiv -i G(1,2^+)G(2,1^+) \label{eq:tilde_chi_0}
-\end{equation}
-% I use \tilde{\chi} and not \chi to be consistent with the definition in Hedin's equations.
-Working out the above expression, one can see that it is made of non-interacting electron-hole pairs. The full polarizability follows from Eq. \eqref{eq:chi_dn/dPhi} :
-\begin{equation}
-	\chi(1,2) = \tilde{\chi}_0(1,2) + \int d34 \tilde{\chi}_0(1,3) v(3,4) \chi(4,2) = \int d3 \tilde{\chi}_0(1,3) \left[ 1 - v \tilde{\chi}_0\right]^{-1}(3,2)
-\end{equation}
-When we calculate $\tilde{\chi}_0$ from the single-particle Green's function as in Eq. \eqref{eq:tilde_chi_0}, the derivative with respect to the perturbation is neglected. In this regard, $\tilde{\chi}_0$ is not an \gls{RPA} response function. We call it the independent particle response function while $\tilde{\chi}$ is called the RPA response function, for historical reasons.
-However, $\tilde{\chi}_0$ will be useful when dealing with optical properties. Indeed, from the inverted form, one can construct the inverse dielectric function, written in a compact form as $\inveps = 1+v \chi^{RPA}$.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%
 \section{Optics}
-%I plan to write a section about the optics. transition dipoles, linear response, absorption spectra, luminescence, etc
-Optics experiments involve an external field interacting with the electronic density of the material. In the regime of low intensity field where we can describe it as a perturbation, the formalism presented above is a perfectly suited simulation tool. The key quantity to reproduce the results of these experiments is the electronic screening of the material, which is linked to the dielectric matrix and to the response function or polarizability $\chi$. Pertubatively, the response of the electronic density with respect to an external field can be described in terms of the neutral excitations of the system, \textit{ie} by the formation and propagation of electron-hole pairs.
+Optics experiments involve an external field interacting with the electronic density of the material. In the regime of low intensity field where we can describe it as a perturbation, the formalism presented above is a perfectly suited simulation tool. The key quantity to reproduce the results of these experiments is the electronic screening of the material, which is linked to the dielectric matrix and to the response function or polarizability $\chi$. Pertubatively, the response of the electronic density with respect to an external field can be described in terms of the neutral excitations of the system, \textit{i.e.} by the formation and propagation of electron-hole pairs.
 In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. 
 In order to obtain optical spectra that are comparable to those measured experimentally, we need to average the microscopic variations in the response functions and related quantities we introduced so far. Hence we can obtain macroscopic quantities, which are the ones accessible in experiments. 
 
@@ -634,11 +637,6 @@ Compared to Eq. \eqref{eq:chi_IP_RPA}, the transition energies are replaced by t
 
 
 \subsection{Optical absorption}
-% limit of dielectric matrix for q to 0
-
-
-% In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. 
-% Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. It is then a reasonable approximation to assume that the variation of the external electric field over the unit cell is negligible. This is called the \textit{dipole approximation}.
 As mentioned at the start of this section, we need to relate the many-body quantities we compute with the ones measured experimentally. To this end, we first write the relation between the microscopic inverse dielectric function and the proper response function : 
 \begin{equation}
 	\frac{1}{\varepsilon^{-1}_{00}(\qq,\omega)} = 1 - v_0(\qq)\bar{\chi}_{00}(\qq,\omega) \label{eq:inveps_chibar}
@@ -666,7 +664,7 @@ At the \gls{BSE} level, the dipole matrix elements are replaced with their linea
 \begin{equation}
 	\varepsilon_2(\omega) = \frac{8\pi^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda) \label{eq:eps_2_exc}
 \end{equation}
-As one can see in the denominators of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit are quite different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption. \textcolor{red}{make the figure :)}
+As one can see in the denominators of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit are quite different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption. \textcolor{blue}{Here I need to make a figure but I have several questions about it.}
 % where to talk about dark or bright excitons ? probably here
 
 We now have access to another relevant quantity which is the \textit{absorption coefficient} $\alpha(\omega)$ :
@@ -677,11 +675,9 @@ It is the ratio of the imaginary part of the dielectric function and the real pa
 The absorption coefficient is completely determined by $\varepsilon_2(\omega)$ and it is the quantity that yields the absorption spectra that we compute and compare to experiments.
 
 \subsection{Luminescence}
-% what it is generally and
-% van Roosbroeck-Shockley relation
-\textcolor{red}{Intro to write here} Different types of luminescence : photo-, cathodo-, electro-, ... depending on how the electrons are excited.
+In general, luminescence is the spontaneous emission of light from an excited state of the material. Depending on how the system is excited, a prefix is added. For instance, if the system is excited by a laser, the process is called photoluminescence. It is called cathodoluminescence when the excitation is made by a beam of electrons, electroluminescence when an electric field is applied, an so on.
 Photoluminescence is the process which can be seen as the inverse of absorption : photo-excited carriers de-excite from the bottom of the conduction band to an empty state in the valence band by emitting light with a frequency corresponding to the gap energy. For direct semiconductors or insulators, considering that the light emission is the inverse process of the absorption is generally an acceptable approximation. In this case, the spectra for the two process should look identical\footnote[1]{In reality there are differences such as the Stokes shift, which is caused by the broadening of electronic states by phonons.}. However, for materials with indirect gaps, this simple picture does not hold anymore. Indeed, one needs to consider the phonon-assisted transitions, which give rise to phonon satellites in the luminescence spectra, as will be discussed later. \\
-Here I will present an approximation to derive the spontaneous emission rate, which is the key quantity to compute luminescence spectra, for any kind of gapped material, starting from the absorption rate. We use the van Roosbroeck -- Shockley relation, derived in 1954 to describe the light emission in Germanium \cite{van1954photon} and follow refs \textcolor{red}{which refs are we following ???}. It is based on a \emph{steady-state} approximation, that is to say we consider the absorption rate and the spontaneous emission rate to be in detailed balance. We start by giving the relations for the case of independent particles and direct transitions only. For indirect transitions, the same kind of relations hold but they need to be slightly modified to include the phonon-assisted transitions, which will be done in the body of this thesis. The absorption rate is :
+Here I will present an approximation to derive the spontaneous emission rate, which is the key quantity to compute luminescence spectra, for any kind of gapped material, starting from the absorption rate. We use the van Roosbroeck -- Shockley relation, derived in 1954 to describe the light emission in Germanium \cite{van1954photon} and follow refs \cite{paleari2019exciton,paleari2019first,}. It is based on a \emph{steady-state} approximation, that is to say we consider the absorption rate and the spontaneous emission rate to be in detailed balance. We start by giving the relations for the case of independent particles and direct transitions only. For indirect transitions, the same kind of relations hold but they need to be slightly modified to include the phonon-assisted transitions, which will be done in the body of this thesis. The absorption rate is :
 \begin{equation}
 	R^{abs}(\omega) = 2\pi \mathcal{K}(\omega) \frac{\mathcal{N} (\omega)}{N_k} \sum_{cv\kk} \left|d_{cv\kk} \right|^2 \left[ f_{v\kk}(1-f_{c\kk}) - f_{c\kk}(1-f_{v\kk})\right] \delta(\epsilon_{c\kk} - \epsilon_{v\kk} - \omega)
 \end{equation}
@@ -707,7 +703,7 @@ Finally, by comparing the absorption and the spontaneous emission rates, we obta
 \end{split}
 \end{align}
 We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently $n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon_2(\omega)^2} + \varepsilon_1(\omega)}$.
-\textcolor{green}{Remember to talk about the exciton occupation in the results part}
+%Remember to talk about the exciton occupation in the results part
 
 %
 %
@@ -718,19 +714,7 @@ In a unit cell containing multiple atoms, there are two types of phonons based o
 
 Vibrational modes and their frequencies can be calculated classically by modelling the crystal by atoms linked with springs with different rigidities. One can also solve the problem analytically in the second quantization formalism. Here I will present a scheme based on \glossary{DFT} which allows to compute the phonon frequencies and eigenvectors from the variation of the Kohn-Sham potential with respect to the atomic displacements. 
 
-%
-%
-Compute total energy with Taylor expansion : zero order is total energy when atoms are at equilibrium positions, first order are forces acting on atoms when displaced around its equilibrium position, the second order is the force acting on an atom induced by the displacement of another atom. Terms at higher orders are anharmonic, useful for phonon lifetimes or temperature dependence of the lattice constants, but not considered in this thesis.
-Forces are computed with Hellmann-Feynman theorem. The second term is also called interatomic force constants matrix. 
-Can be reformulated in terms of displacements.
-Formulate a Hamiltonian, and an equation of motion.
-Solutions of the EOM, with amplitudes and eigenvectors. Give value of amplitudes.
-Write dynamical matrix in terms of IFC and masses and a phase.
-Eigenvalue problem with $\omega^2$ and eigenvectors.
-%
-%
-
-We are still in Born-Oppenheimer approximation presented in Sec. \ref{sec:BO_approx}, \textit{ie} the ionic Hamiltonian depends on the electronic potential evaluated only at the static ionic positions. Reciprocally, the electronic Hamiltonian depends parametrically on the ionic positions $\{\RR\}$.
+We are still in the Born-Oppenheimer approximation presented in Sec. \ref{sec:BO_approx}, \textit{i.e.} the ionic Hamiltonian depends on the electronic potential evaluated only at the static ionic positions. Reciprocally, the electronic Hamiltonian depends parametrically on the ionic positions $\{\RR\}$.
 Mainly adapted from \cite{baroni2001phonons,pereira2017ab,paleari2019first}. The vibrational problem can be solved starting from the Taylor expansion of the total energy of the solid around the equilibrium positions of the atoms. We truncate the expansion at the second order, which is the \textit{harmonic approximation}. It reads :
 \begin{align}
 \begin{split}
@@ -784,32 +768,59 @@ This theory is a general formulation of the linear response of the Kohn-Sham wav
 \end{align}
 where $v_{ext}$ and $E_N$ are the ionic potential acting on the electrons and the nucleus-nucleus interaction, defined in Sec. \ref{sec:BO_approx}, and $n$ is the \gls{DFT} groundstate electronic density. Its first derivatives are computed in a self-consistent way with the linearization of Eq. \eqref{eq:DFT_n_vs_psi} :
 \begin{equation}
-	\frac{\partial n(\rr)}{\partial \RR_{Ls}} = 4\Re \sum_i \bra{\psi_i} \frac{\partial}{\partial \RR_{Ls}} \ket{\psi_i}
+	\frac{\partial n(\rr)}{\partial \RR_{Ls}} = 4\Re \sum_n \bra{\psi_n} \frac{\partial}{\partial \RR_{Ls}} \ket{\psi_n}
 \end{equation}
 The change of the Kohn-Sham states is in turn obtained from first-order perturbation theory and summing over all the eigenstates :
 \begin{equation}
-	\frac{\partial\ket{\psi_i}}{\partial \RR_{Ls}} = \sum_{j\neq i} \ket{\psi_j} \frac{\bra{\psi_j} \tfrac{\partial v_{\text{eff}}}{\partial\RR_{Ls}}\ket{\psi_i}}{\epsilon_i - \epsilon_j}
+	\frac{\partial\ket{\psi_n}}{\partial \RR_{Ls}} = \sum_{m\neq n} \ket{\psi_m} \frac{\bra{\psi_m} \tfrac{\partial v_{\text{eff}}}{\partial\RR_{Ls}}\ket{\psi_n}}{\epsilon_n - \epsilon_m}
 \end{equation}
 This problem can be reformulated such that no empty states are needed :
 \begin{equation}
-	(\hat{H} - \epsilon_i) \frac{\partial\ket{\psi_i}}{\partial \RR_{Ls}} = - \left(\frac{\partial v_{\text{eff}}}{\partial\RR_{Ls}} - \frac{\partial \epsilon_i}{\partial\RR_{Ls}}  \right) \ket{\psi_i}.
+	(\hat{H} - \epsilon_n) \frac{\partial\ket{\psi_n}}{\partial \RR_{Ls}} = - \left(\frac{\partial v_{\text{eff}}}{\partial\RR_{Ls}} - \frac{\partial \epsilon_n}{\partial\RR_{Ls}}  \right) \ket{\psi_n}.
 \end{equation}
 
 %
-\subsection{Long wavelength limit}
-Acoustic sum rule ?
-In the case of polar semiconductors and insulators, which include \hbn that we study in this work, care has to be taken in the long wavelength limit, or equivalently the $\qq \to 0$ limit.
-Polar semiconductors and insulators, LO-TO splitting (bulk only)
-
+\subsubsection{Long wavelength limit}
+Care has to be taken in the long wavelength limit, or equivalently the $\qq \to 0$ limit. In this limit, the periodicity of the phonons tends to infinity, and it has consequences on both acoustic and optical modes. There will always be 3 acoustic modes in any crystal, one for each degree of freedom of the atom. When there are two or more atoms in the unit cell, there are $3N_{at} - 3$ optical modes. \\
+The acoustic modes have a linear dispersion at small momenta, and they are constrained by the translational invariance of the crystal : at $\qq = 0$ an acoustic phonon mode correspond to a rigid translation of all atoms in the crystal in the same direction. This translation should have a frequency identically equal to zero. It might not be rigorously respected when computing the phonon dispersion numerically. For this reason, the acoustic sum rule is enforced to maintain the linear dispersion :
 \begin{equation}
-	\tilde{C}^{\text{NA} s\alpha}_{\ \ \ t\beta} = \frac{4\pi}{\Omega} e^2 \frac{(\qq\cdot\mathbf{Z}^*_s)_\alpha(\qq\cdot\mathbf{Z}^*_t)_\beta}{\qq \cdot \mathbf{\varepsilon}^\infty \cdot \qq}
+	\sum_t C^{Is\alpha}_{\ \, t\beta} (|\mathbf{\tau}_I| \to \infty) = 0
+\end{equation} 
+
+In the case of non-2D polar semiconductors and insulators -- the material we study in this thesis \hbn, falls in this category -- the difference of electronegativity between the two types of atom creates electric dipoles, which in turn create long range electric fields when the atoms are oscillating out of phase. This is the case for optical phonons, whose frequencies are finite at $\qq = 0$. At small momenta, the transverse optical (TO) modes, whose direction of propagation is orthogonal to the momentum $\qq$, are unaffected. However the longitudinal optical (LO) modes can interact with the long range electric fields and their frequencies become larger. Hence there is a LO-TO frequency splitting at $\qq=0$ which can only be accounted for by adding a non-analytical term to the force constants matrix, given by :
+\begin{equation}
+	\tilde{C}^{\text{NA} s\alpha}_{\ \ \ \; t\beta}(\qq \to 0) = \frac{4\pi}{\Omega} e^2 \frac{(\qq\cdot\mathbf{Z}^*_s)_\alpha(\qq\cdot\mathbf{Z}^*_t)_\beta}{\qq \cdot \mathbf{\varepsilon}^\infty \cdot \qq}
 \end{equation}
-The effective charges and the electronic contributution to the dielectric permittivity tensor can be obtained from DFPT
+The Born effective charges $Z^*$ and the electronic contribution to the dielectric permittivity tensor $\mathbf{\varepsilon}^\infty$ can be obtained from \gls{DFPT} with a macroscopic electric field as the perturbation.
 
 \subsection{Electron-phonon coupling}
-for this, second quantization is needed : write the el-ph Hamiltonian with gkkp
+The coupled system of electrons and phonons is described by a three-part Hamiltonian :
+\begin{equation}
+	\hat{\mathcal{H}} = \hat{H}_e + \hat{H}_p + \hat{H}_{ep}
+\end{equation}
+The electron-electron interactions are contained in the Kohn-Sham Hamiltonian, that can be written in second quantization $\hat{H}_e = \sum_{n\kk} \epsilon_{n\kk} \hat{a}^\dagger_{n\kk}\hat{a}_{n\kk}$. 
+We can define the nuclear Hamiltonian as a sum of quantum harmonic oscillators, which has the following second-quantized form :
+\begin{equation}
+	\hat{H}_p = \sum_{\qq\mu} \hbar \omega_\mu(\qq) (\hat{b}^\dagger_{\qq\mu}\hat{b}_{\qq\mu} + \frac{1}{2})
+\end{equation}
+where $\hat{b}$ and $\hat{b}^\dagger$ are annihilation and creation operators of a phonon with momentum $\qq$ and branch index $\mu$. They follow the commutation relations $\left[ \hat{b}_{\qq\mu},\hat{b}^\dagger_{\qq'\mu'} \right] = \delta_{\qq,\qq'}\delta_{\mu,\mu'}$ and $\left[ \hat{b}_{\qq\mu},\hat{b}_{\qq'\mu'} \right] = \left[ \hat{b}^\dagger_{\qq\mu},\hat{b}^\dagger_{\qq'\mu'} \right]= 0 $. We see that in the Born-Oppenheimer and harmonic approximations, lattice vibrations are quantized as perfect bosons.\\
+With these we can construct the electron-phonon Hamiltonian, which contain the first order expansion of the effective potential in terms of the atomic displacements :
+\begin{equation}
+	H^{(1)}_{ep} = \sum_{Ls\alpha} \frac{\partial v_{\text{eff}}}{\partial R_{Ls\alpha}} u_{Ls\alpha} = \sum_{nm\mu\kk\qq} g^{\mu\qq}_{nm\kk} \hat{a}^\dagger_{n\kk} \hat{a}_{m\kk-\qq}(\hat{b}_{\qq\mu} + \hat{b}^\dagger_{-\qq\mu}).
+\end{equation}
+In the last equality, the electron-phonon coupling matrix element $g$ is introduced. It is the probability that a a phonon of branch index $\mu$ and momentum $\qq$ scatters a Kohn-Sham electron in state $\ket{m\kk-\qq} = \ket{\psi_{m\kk-\qq}}$ into another Kohn-Sham state $\ket{n\kk}$. It is written in a simplified form as :
+\begin{equation}
+	g^{\mu\qq}_{nm\kk} = {}_{uc}\langle n\kk| \Delta_{\qq\mu} v_{\text{eff}} \ket{m\kk-\qq}_{uc}
+	\label{eq:elph_me}
+\end{equation}
+or in a more complete form, following the notation adopted by Giustino \cite{giustino2017review} :
+\begin{equation}
+	g^{\mu\qq}_{nm\kk} = g^{\mu}_{nm}(\kk,\kk-\qq) = \sum_{Ls} \text{e}^{i\qq\cdot\RR_{Ls}} \frac{\mathbf{\xi}^\mu_s(\qq) }{\sqrt{2M_s\omega_\mu(\qq)}} {}_{uc}\langle n\kk | \frac{\partial v_{\text{eff}}}{\partial \RR_Ls} \ket{m\kk-\qq}_{uc}
+\end{equation}
+where the subscript $uc$ signifies that the integral is taken over a unit cell of the crystal, using the lattice-periodic parts of the Kohn-Sham wavefunctions $u_{n\kk}$. These matrix elements are the one we will use throughout this thesis to compute the magnitude of the interaction between electrons and phonons. They are also a key ingredient to define the exciton-phonon coupling \textit{ab initio}.\\
+Note that one can go beyond the first order and compute for instance the matrix elements generated by the second derivative of the effective potential with respect to the atomic displacements. One would obtain the so-called Debye-Waller term, which can be used in a self-energy framework to compute the renormalization of the electronic bands by the lattice vibrations \cite{giustino2017review, kawai2014electron, cannuccia2011effect}.
 
-
+\newpage
 %
 \section{Numerical implementation / Computational scheme}
 Maybe this can go in the next chapter about the methods
@@ -818,9 +829,9 @@ Maybe this can go in the next chapter about the methods
 	\item Subtract the $v_{xc}$ from DFT when computing QP energies
 	\item from $\rr$ space to $\kk$ space, dipoles, Lehmann representation from DFT ev and wf
 	\item Iterating GW cycle; $G_0W_0$ === explain this in particular because it is widely used in the results
-	\item include \cite{martin2016interacting} Eqs. (12.53) and (12.54)
-	\item divergence of the Coulomb term at $\qq = 0$ and $\GG' =0$
-	\item matrix elements of W and v, in terms of the dipoles (14.54) and (14.55) of Martin Reining Ceperley
+	% \item include \cite{martin2016interacting} Eqs. (12.53) and (12.54)
+	% \item divergence of the Coulomb term at $\qq = 0$ and $\GG' =0$
+	% \item matrix elements of W and v, in terms of the dipoles (14.54) and (14.55) of Martin Reining Ceperley
 	\item double grids for elph and excph
 \end{itemize}
 
