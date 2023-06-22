@@ -57,9 +57,9 @@ It is the difference between the exact kinetic energy and $T_{ip}$ plus the diff
 
 Since the auxiliary system is an ensemble of independent particles, one can write the so-called Kohn-Sham equations for each individual particle $i$ :
 \be
- 	\( -\frac{\nabla^2}{2} + v_{\text{eff}}(\rr)\) \psi_i(\rr) = \varepsilon_i \psi_i(\rr).
+ 	\( -\frac{\nabla^2}{2} + v_{\text{eff}}(\rr)\) \psi_i(\rr) = \epsilon_i \psi_i(\rr).
 \ee
-They are analogous to Schrödinger equation for a particle evolving in a local effective potential $v_{\text{eff}}$, that we have yet to determine. Their solutions are the auxiliary system's eigenvalues $\varepsilon_i$ and the eigenvectors $\psi_i$ that are defined as :
+They are analogous to Schrödinger equation for a particle evolving in a local effective potential $v_{\text{eff}}$, that we have yet to determine. Their solutions are the auxiliary system's eigenvalues $\epsilon_i$ and the eigenvectors $\psi_i$ that are defined as :
 \be
  	n(\rr) = \sum_i f_i \left| \psi_i\right|^2 \label{eq:DFT_n_vs_psi}
 \ee
@@ -405,16 +405,16 @@ The difference in this case is that we used the dynamically screened interaction
 \subsection{Quasiparticle equations}
 Once the limit $\Phi \to 0$ is taken, there is no time-dependent potential acting on the system of N electrons. Hence, the system is invariant under time translation and the Green's function depends only on the time difference $\tau = t_1 - t_2$. One can do the Fourier transform from time $\tau$ to frequency $\omega$, and we can write the Green's function in the so-called Lehmann representation :
 \begin{equation}
-	G(x_1,x_2;\omega) = \sum_a \frac{f_a(x_1)f_a^*(x_2)}{\omega-\varepsilon_a + i\eta} + \sum_i \frac{f_i(x_1)f_i^*(x_2)}{\omega-\varepsilon_i + i\eta}
+	G(x_1,x_2;\omega) = \sum_a \frac{f_a(x_1)f_a^*(x_2)}{\omega-\epsilon_a + i\eta} + \sum_i \frac{f_i(x_1)f_i^*(x_2)}{\omega-\epsilon_i + i\eta}
 \end{equation}
-where $a,i$ denote electron states, $f_a(x) = \bra{N}\hpsi(x)\ket{N+1,a}$ and $f_i(x) = \bra{N-1,i} \hpsi(x) \ket{N}$ are the Lehmann amplitudes (as called Dyson orbitals). They are defined with the $N$-electron ground state $\ket{N}$ whose total energy is $E_N$, the electron state number $a$ of the $(N+1)$-electron system $\ket{N+1,a}$ with total energy $E_{N+1,a}$ and the electron-state number $i$ of the $(N-1)$-electron system $\ket{N-1,i}$ with total energy $E_{N-1,i}$.
-The Lehmann representation of the Green's function also contains the quasiparticle energies, which are defined as $\varepsilon_a = E_{N+1,a} - E_N = -A_a$ and $\varepsilon_i = E_N - E_{N-1,i} = -I_i$. $A_a$ and $I_i$ are the electron affinities and ionization energies. This highlights the link between the poles of the Green's function from many-body perturbation theory and the photoemission and inverse photoemission spectroscopies, and is illustrated in Fig. \ref{fig:sketch_PES}.
+where $a,i$ denote electron states, $f_a(x) = \bra{N}\hpsi(x)\ket{N+1,a}$ and \\ $f_i(x) = \bra{N-1,i} \hpsi(x) \ket{N}$ are the Lehmann amplitudes (also called Dyson orbitals). They are defined with the $N$-electron ground state $\ket{N}$ whose total energy is $E_N$, the electron state number $a$ of the $(N+1)$-electron system $\ket{N+1,a}$ with total energy $E_{N+1,a}$ and the electron-state number $i$ of the $(N-1)$-electron system $\ket{N-1,i}$ with total energy $E_{N-1,i}$.
+The Lehmann representation of the Green's function also contains the quasiparticle energies, which are defined as $\epsilon_a = E_{N+1,a} - E_N = -A_a$ and $\epsilon_i = E_N - E_{N-1,i} = -I_i$. $A_a$ and $I_i$ are the electron affinities and ionization energies. This highlights the link between the poles of the Green's function from many-body perturbation theory and the photoemission and inverse photoemission spectroscopies, and is illustrated in Fig. \ref{fig:sketch_PES}. In PES, the ionization energy writes $-I_i = \epsilon_i = \hbar \omega - E_{kin} - \Phi$ for $\epsilon_i < E_F$ where $\Phi$ is the extraction energy to send an electron to the vacuum levels with a kinetic energy $E_{kin}$, thanks to an irradiation of energy $\hbar \omega$. In inverse PES, the electronic affinity writes $-A_a = \epsilon_a = E_{kin} - \hbar \omega + \Phi$
 \begin{figure}[h!tbp]
 	\vspace{0.5cm}
 	\setcapindent{2em}
 	\centering
-	\includegraphics[width=0.5\textwidth]{Sketch_PES.png}
-	\caption{Sketch of the photoemission and inverse photoemission spectroscopy experiments, and their link with the Green's function. \textcolor{blue}{This is a placeholder. I need to change the labels in there.}}
+	\includegraphics[width=0.8\textwidth]{Sketch_PES.png}
+	\caption{Sketches of A) the photoemission spectroscopy , where the kinetic energy of the extracted electron is measured, B) Inverse photoemission spectroscopy, where the emitted light coming from the de-excitation of the added electron is measured. }
 	\label{fig:sketch_PES}
 \end{figure}
 
@@ -422,23 +422,23 @@ With this form of the Green's function we can reformulate the Dyson equation \eq
 \begin{equation}
 	\left[ \omega - h(\rr_1) \right] G(x_1,x_2;\omega) - \int dx_3 \Sigma(x_1,x_2;\omega) G(x_3,x_2;\omega) = \delta(x_1,x_2)
 \end{equation}
-Inserting the Lehmann representation of $G(x_1,x_2;\omega)$, one can select the term corresponding to a given pole $\varepsilon_n$ by multiplying the equation by $\omega - \varepsilon_n$ and taking the limit $\omega \to \varepsilon_n$, giving :
+Inserting the Lehmann representation of $G(x_1,x_2;\omega)$, one can select the term corresponding to a given pole $\epsilon_n$ by multiplying the equation by $\omega - \epsilon_n$ and taking the limit $\omega \to \epsilon_n$, giving :
 \begin{equation}
-	\left[ \varepsilon_n - h(\rr_1) \right] f_n(x_1)f^*_n(x_2) - \int dx_3 \Sigma(x_1,x_3;\varepsilon_n) f_n(x_3) = \varepsilon_n f_n(x_1)
+	\left[ \epsilon_n - h(\rr_1) \right] f_n(x_1)f^*_n(x_2) - \int dx_3 \Sigma(x_1,x_3;\epsilon_n) f_n(x_3) = \epsilon_n f_n(x_1)
 \end{equation}
 and we obtain an eigenvalue equation :
 \begin{equation}
-	h(\rr_1)f_n(x_1) + \int dx_3 \Sigma(x_1,x_3;\varepsilon_n)f_n(x_3) = \varepsilon_n f_n(x_1)
+	h(\rr_1)f_n(x_1) + \int dx_3 \Sigma(x_1,x_3;\epsilon_n)f_n(x_3) = \epsilon_n f_n(x_1)
 \end{equation}
-These are the \textit{quasiparticle equations}. They give the quasiparticle energies and the Lehmann amplitudes, or also called the Dyson orbitals. The quasiparticle energies are in general complex, and the Lehmann amplitudes, which act as the quasiparticles wavefunctions, are not orthogonal because $\Sigma$ is energy-dependent and non Hermitian. The physical meaning of the poles of $G$ is therefore the exact excitation energies of the $N\pm1$ electrons. In an infinite, periodic system, the poles form a branch cut, and we can interpret the excitation spectrum in terms of quasiparticles with energies $\Re\varepsilon_n$ and life-times $1/\Im\varepsilon_n$
+These are the \textit{quasiparticle equations}. They give the quasiparticle energies and the Lehmann amplitudes, or also called the Dyson orbitals. The quasiparticle energies are in general complex, and the Lehmann amplitudes, which act as the quasiparticles wavefunctions, are not orthogonal because $\Sigma$ is energy-dependent and non Hermitian. The physical meaning of the poles of $G$ is therefore the exact excitation energies of the $N\pm1$ electrons. In an infinite, periodic system, the poles form a branch cut, and we can interpret the excitation spectrum in terms of quasiparticles with energies $\Re\epsilon_n$ and life-times $1/\Im\epsilon_n$
 Here it is made apparent that $\Sigma$ is a nonlocal, energy-dependent single-particle effective potential. One thing to notice is also the fact that the quasiparticle energy is made out of the bare, independent single particle, and another term coming from the interaction with surrounding particle. The quasiparticle is the bare particle "dressed" with the interaction. This is a formulation in the Green's functions formalism of the quasiparticle concept, which was first introduced by Landau simplify the analytic study of Fermi liquids. \cite{landau1957oscillations}
 Since $\gS$ is frequency-dependent, so are the quasiparticle energies. To solve this in practice, we linearize the self-energy :
 \begin{equation}
-	\varepsilon_n = \varepsilon^{KS}_n + Z_n\Re\Sigma(\varepsilon^{KS}_n)
+	\epsilon_n = \epsilon^{KS}_n + Z_n\Re\Sigma(\epsilon^{KS}_n)
 \end{equation} 
-where $\varepsilon^{KS}_n$ are Kohn-Sham eigenvalues and the renormalization factor $Z$ is defined as :
+where $\epsilon^{KS}_n$ are Kohn-Sham eigenvalues and the renormalization factor $Z$ is defined as :
 \begin{equation}
-	Z_n \equiv \left[ 1 - \frac{\partial \gS(\omega)}{\partial \omega} \Biggr|_{\omega = \varepsilon_n} \right]^{-1}
+	Z_n \equiv \left[ 1 - \frac{\partial \gS(\omega)}{\partial \omega} \Biggr|_{\omega = \epsilon_n} \right]^{-1}
 \end{equation}
 It is a measure of the single-particle character of the system. If $Z=1$, there is no correlation effects and the electron addition or removal spectra (given by $\Im G$) shows a single peak at the quasiparticle energy. The life-time of the single-particle state is infinite. For weakly correlated system, typically $Z \lesssim 1$. In this case, the intensity of the quasiparticle peak is renormalized by $Z$, and the amount missing is transferred to secondary peaks called satellites. In the $GW$ approximation, there is a only one satellite, and it is at the wrong energy with respect to experiments.\cite{PhysRevLett.107.166401} This is because the electronic correlations are approximated. Finally if $Z \ll 1$, it means that the material is not well described by a single-particle scheme, for example because of strong correlations. In this case, Many Body Perturbation Theory is not well suited to describe such materials and a non-perturbative approach is required.
 
@@ -523,7 +523,7 @@ The static screening approximation is necessary to obtain a two-particle propaga
 \subsubsection{Reformulation in a two-particle Schrödinger equation}
 With the \gls{BSE} written in this form, we can now reformulate the problem into a Schrödinger equation for two particles, which is easier to solve and will highlight the physics of the problem and make the \textit{excitons} appear as emerging quasiparticles. Here we consider an independent-particle basis in which the non-interacting two-particle propagator $L_0$ is diagonal, and we assumed that we obtained the quasiparticle eigenvalues from the \gls{GWA}. At $T=0$, we can write :
 \begin{equation}
-	L_{0\ n_1n_2n_3n_4}(\go) = L_{0\ n_1n_3}^{n_4n_2} = 2 i \frac{(f_{n_1} - f_{n_2}) \delta_{n_1n_4}\delta_{n_2n_3}}{\go - (\varepsilon_1 - \varepsilon_2) \pm i\eta}
+	L_{0\ n_1n_2n_3n_4}(\go) = L_{0\ n_1n_3}^{n_4n_2} = 2 i \frac{(f_{n_1} - f_{n_2}) \delta_{n_1n_4}\delta_{n_2n_3}}{\go - (\epsilon_1 - \epsilon_2) \pm i\eta}
 \end{equation}
 where the $n_i$ indices denote for the quasiparticle state with occupation number $f_i$ and the factor 2 in the right-hand side stems from the summation on spin indices. The plus or minus sign in the denominator depends on the sign of the difference of the occupation factors $f_i$. The \gls{BSE} becomes :
 \begin{equation}
@@ -531,7 +531,7 @@ where the $n_i$ indices denote for the quasiparticle state with occupation numbe
 \end{equation}
 where $\mathbb{I}$ is the identity matrix and $H^{2p}$ is the two-particle Hamiltonian 
 \begin{equation}
-	H^{2p\ n_4n_2}_{n_1n_3} = (\varepsilon_{n_2} - \varepsilon_{n_1}) \delta_{n_1n_4}\delta_{n_2n_3} + (f_{n_1} - f_{n_3}) \Xi_{n_1n_3}^{n_4n_2}. \label{eq:BSE_H2p}
+	H^{2p\ n_4n_2}_{n_1n_3} = (\epsilon_{n_2} - \epsilon_{n_1}) \delta_{n_1n_4}\delta_{n_2n_3} + (f_{n_1} - f_{n_3}) \Xi_{n_1n_3}^{n_4n_2}. \label{eq:BSE_H2p}
 \end{equation}
 The matrix elements of the kernel are :
 \begin{equation}
@@ -551,7 +551,7 @@ We can decompose the Hamiltonian into four blocks :
 \end{equation}
 where the resonant part is 
 \begin{equation}
-	H^{res} \equiv H^{2p\ v'c'}_{vc} = (\varepsilon_c - \varepsilon_v) \delta_{vv'}\delta_{cc'} + \Xi^{v'c'}_{vc}
+	H^{res} \equiv H^{2p\ v'c'}_{vc} = (\epsilon_c - \epsilon_v) \delta_{vv'}\delta_{cc'} + \Xi^{v'c'}_{vc}
 \end{equation}
 This subpart is hermitian and corresponds to transitions from the valence to the conduction band, with positive frequencies. The coupling part is :
 \begin{equation}
@@ -559,7 +559,7 @@ This subpart is hermitian and corresponds to transitions from the valence to the
 \end{equation}
 which is symmetric. The antiresonant part is :
 \begin{equation}
-	H^{ares} \equiv H^{2p\ c'v'}_{vc} (\varepsilon_v - \varepsilon_c)\delta_{vv'}\delta_{cc'} - \Xi^{c'v'}_{cv} = - [H^{res}]^*
+	H^{ares} \equiv H^{2p\ c'v'}_{vc} (\epsilon_v - \epsilon_c)\delta_{vv'}\delta_{cc'} - \Xi^{c'v'}_{cv} = - [H^{res}]^*
 \end{equation}
 The whole Hamiltonian $H^{2p}$ is not hermitian, so in general it has complex eigenvalues. For the calculations in this thesis, we used the Tamm-Dancoff approximation, which consists in neglecting the coupling part of the Hamiltonian. It works best with bulk semiconductors and insulators, where the energy of the transitions is large compared to the interaction matrix elements in $H^{coupl}$. With this approximation, we only consider transitions with positive energies, and the full Hamiltonian becomes hermitian.
 With this Hamiltonian, we can build a two-particle Schrödinger equation :
@@ -578,7 +578,7 @@ with the overlap matrix defined as
 \begin{equation}
 	I_{\gl\gl'} \equiv \sum_{n_1n_2} A^{*n_1n_2}_{\gl} A^{n_1n_2}_{\gl'}.
 \end{equation}
-Each couple $(nn')$ corresponds to a pair $(vc)$ or $(cv)$ of an occupied and an empty state. We remark that the exciton energies replaced the difference of quasiparticle energies $\varepsilon_c - \varepsilon_v$ in the denominator, which are the quasiparticle transition energies. The screened interaction contributes to the attraction between the electron and the hole, lowering the transition energy below the gap. The difference between the transition energy and the quasiparticle gap is called the \textit{exciton binding energy}. Excitonic effects can be extremely important in the optical properties of semiconductors, as we will see in the next section.
+Each couple $(nn')$ corresponds to a pair $(vc)$ or $(cv)$ of an occupied and an empty state. We remark that the exciton energies replaced the difference of quasiparticle energies $\epsilon_c - \epsilon_v$ in the denominator, which are the quasiparticle transition energies. The screened interaction contributes to the attraction between the electron and the hole, lowering the transition energy below the gap. The difference between the transition energy and the quasiparticle gap is called the \textit{exciton binding energy}. Excitonic effects can be extremely important in the optical properties of semiconductors, as we will see in the next section.
 %
 
 %
