@@ -1,72 +1,48 @@
-\chapter{ Méthodologie de la recherche}
+\chapter{Something about strained hBN}
 \chaptertoc{}
 
-\section{Matériel et méthodes}
+\section{oui}
 
-	\subsection{Modèle animal}
+\begin{itemize}
+	\item experimental motivations
+	\item why we build the orthorombic cell 
+	\item relaxation of the structures (I didn't mention structure relaxtion with DFT anywhere)
+	\item convert orthorombic to pseudo-hexagonal (this could be an appendix)
+	\item alot of computational details
+	\item electronic band structure 
+	\item exciton-phonon coupling from finite differences
+	\item vRS relation in this case 
+\end{itemize}
+%
+%
+ETSF webinar of Fulvio
+indirect bandgap only; we can write the response function with derivatives of the response function because we consider only phonon-assisted transitions; need supercells
+converge the displacement so that it is the smallest possible
+PLE (propto absorption) or absorption and PL are not symmetric, as expected for direct gaps
+the minimum exciton at T is the degenerate dark state at Gamma which splits
+for absorption, the bright exciton overlaps with the phonon replicas and it is so bright that we don't see them 
+%
+%
+Theory of phonon-assisted optics : it exists. For instance, Williams-Lax theory that treats lattice-dependent band features and phonon-assisted transitions 
+There is also Hallen-Bardeen-Blatt and Heine-Cardona but I don't know too much about them.
+Besides, some models of exciton-phonon coupling exists also, some specifically for luminescence, but they are computationally expensive for real materials.
+==> there is a need for exciton-phonon coupling and phonon-assisted optics from first principles. In the next two chapters, two different approaches are presented. The first one consists in calculating the response function correction due to exciton-phonon coupling from finite differences, by displacing atoms in supercells. The second one is a more general approach based on \gls{MBPT}, in which a dynamical correction induced by electron-phonon coupling is added as a perturbation to the Bethe-Salpeter kernel. Thanks to this \textit{ab initio} framework, the scattering of every exciton with every phonon mode can be computed, over the whole Brillouin Zone. These calculations are done in the unit cell.
+Both approaches allow to compute the exciton-phonon coupling. Then, the absorption can be obtained after post-processing of a standard \gls{BSE} calculation. To obtain the luminescence spectra, we use the van Roosbroeck -- Shockley relation for both cases.
 
-	\lipsum[1]\index{Lorem ipsum}
+\subsection{Experimental motivations}
+From Léonard Schué's thesis, (suspended nanosheet of hBN), they conclude that there is probably a residual uniaxial strain at the center of the suspended sheet. They use cathodoluminescence, where the electron beam penetrates in the bulk of the crystal
 
-	Une première note de fin de document\endnote{Première note de fin de document.}, une deuxième\endnote{Deuxième note de fin de document.} et \ldots \endnote{\ldots note de fin de document.} \endnote{\ldots note de fin de document.} \endnote{\ldots note de fin de document.} \endnote{\ldots note de fin de document.} \endnote{\ldots note de fin de document.} \endnote{\ldots note de fin de document.} \endnote{\ldots note de fin de document.}: le package enotez associé à hyperref permet l'appel et le retour de note\endnote{\lipsum[1]\index{Lorem ipsum}}.
-
-	\subsection{Traitement expérimental}
-
-		\subsubsection{Hypergravité}
-			\label{hypergravite} % on peut mettre systématiquement un \label après chaque titre de partie au cas où un appel \ref{} serait nécessaire
-
-			L'hypergravité consiste à augmenter la force du vecteur gravitaire en lui sur-imposant la force centrifuge. En effet, la force centrifuge induite par la rotation se surimpose à la gravité terrestre ce qui permet d'avoir une force résultante dépendante de la vitesse de rotation. On utilise pour cela des centrifugeuses qui sont des carrousels équipés de nacelles suspendues à des axes libres permettant à la force résultante d'être perpendiculaire au plancher de la nacelle et ainsi obtenir une «gravité» dont la force est supérieure à la gravité terrestre tout en maintenant, pour les individus expérimentaux, l'orientation \og naturelle \fg de celle-ci.
-
-		\subsubsection{La centrifugeuse}
-
-			Les caractéristiques techniques de la centrifugeuse\index{centrifugeuse} ont été décrites dans un article de~\cite{jamon_ground-based_2008} et dans la partie~\ref{hypergravite}. Brièvement, la centrifugeuse (Figure~\ref{photo_centrifugeuse}) est de grand diamètre (jusqu'à \SI{3.6}{\m} en rotation). Pour limiter les vibrations, la centrifugeuse repose sur des dispositifs anti-vibrations. Le bruit produit par la centrifugeuse est faible. A un mètre de distance, le niveau sonore n'est que de \SI{58}{\dB} contre \SI{52}{\dB} si la centrifugeuse est arrêtée. Les nacelles sont sur des axes libres et chacune peut contenir trois cages de type standard avec 4 souris par cage, soit un total de 48 souris. La centrifugeuse est équipée de caméras infra-rouge couplées à un système de vidéo-surveillance accessible sur internet. Cela nous permet de contrôler les niveaux d'eau et de nourriture ainsi que de conduire des études de l'activité des individus expérimentaux à distance, de jour comme de nuit. La quantité d'eau et de nourriture disponible par cage permet de faire fonctionner la centrifugeuse 3 semaines sans interruption. Les animaux ont à disposition \SI{400}{\g} de nourriture et \SI{500}{\ml} d'eau, mais la consommation de nourriture sur cette période est en moyenne de \SI{209(14)}{\g}, et la consommation d'eau de \SI{258(21)}{\ml} pour une cage de 4 souris.
-
-			\begin{figure}[h!tbp]
-				\vspace{0.5cm}
-				\setcapindent{2em}
-				\centering
-				\includegraphics[width=0.7\textwidth]{photo_centrifugeuse.png}
-				\caption[Photographie de la centrifugeuse]{Photographie de la centrifugeuse utilisée.}
-				\label{photo_centrifugeuse}
-			\end{figure}
-
-			\lipsum[2]\index{Nam dui ligula}
-
-\section{Deuxième partie du deuxième chapitre}
-
-	Le faisceau passe ensuite dans un module comprenant un cristal non linéaire permettant de doubler le féquence (excitation de \SIrange{345}{500}{\nano\meter}). Toutes les mesures ont été faites entre \SIlist{400;1200}{\nano\meter} avec un pas de \SI{5}{\nano\meter}.
-
-	\lipsum[3]\index{Nulla malesuada}
-
-	\subsection{Première sous-partie de la deuxième partie}
-
-		\lipsum[4]\index{Quisque ullamcorper}
-
-	\subsection[Sous-partie 2]{Deuxième sous-partie de la deuxième partie} % entre [] pour le texte dans la TOC
-
-		Ajout d'une nouvelle entrée d'index de la centrifugeuse\index{centrifugeuse}. Les entrées \gls{+a} \gls{2a} \gls{ca} \gls{Aa} \gls{aa} \gls{alpha} {\NoAutoSpaceBeforeFDP}sont dans la nomenclature. On peux utiliser les commandes personnelles pour appeler rapidement des formules lors de la rédaction \acc et passer des arguments aux commandes pour en modifier l'éxécution \emiss[\nu]{\Omega}.
-
-		\subsubsection{Ce titre de partie ne s'affiche pas dans la TOC (tocdepth=2) mais dans la TOC locale (etocsettocdepth=3)}
-
-			Voir (Tableaux~\ref{table:alpha}~et~\ref{table:butcher}).
-
-			\paragraph{Ce titre de partie n'est pas numéroté (secnumdepth=3)}~~\\ % ~~\\ fait le saut de ligne après le titre de 'paragraph' sinon le texte suivant est accolé au titre
-
-				% ce saut de ligne indente le texte de 'paragraph' sinon le paragraphe débute à la marge
-				Ajout d'une citation entre parenthèses et tous les auteurs~\parencite{zohdy_mapping_2012}.
-
-			\paragraph{Plusieurs figures côte à côte}~~\\
-
-				\lipsum[66]
-
-
-				\begin{figure}
-					\centering
-					\subfloat[Figure A]{\includegraphics[width=.5\textwidth, max height=2in]{example-image-a}}
-					\subfloat[Figure B]{\includegraphics[width=.5\textwidth, max height=2in]{example-image-b}}
-					\caption{Deux figures}
-					\label{fig:deux_figures}
-				\end{figure}
-
-			\paragraph{Paramétrer siunitx avec sisetup}~~\\
-
-        		Célérité de la lumière dans le vide: $$c=\SI{2.99792458e8}{\meter\per\second}$$
+In this experiment, the group of Julien Barjon, specifically Léonard Schué, they suspended a nanosheet of hexagonal Boron Nitride on a over a trench carved out from an SiO$_2$ substrate. The nanosheet is about 100 nm thick and curves under the effect of gravity, as illustrated in Fig. \ref{fig:exp_strain}(a), and was imaged by \gls{AFM} (Fig. \ref{fig:exp_strain}(b)).
+\begin{figure}[h!tbp]
+	\vspace{0.5cm}
+	\setcapindent{2em}
+	\centering
+	\includegraphics[width=0.8\textwidth]{exp_strain.png}
+	\caption{(a) Sketch of the deposited hBN nanosheet on the trench. (b) AFM profile and relative intensity ratios of different emission peaks with respect to spatial region. (c) Cathodoluminescence intensity measured on different regions of the sample.}
+	\label{fig:exp_strain}
+\end{figure}
+When measuring the cathodoluminescence spectra at different positions on the sample, one can see that the intensity ratios between different peaks are varying. Their interpretation is that the deformation of the sample induces uniaxial (compressive) strain, perpendicular to the trench. This strain could have an effect on the recombination process of excitons, leading to a change in the luminescence intensity.
+%
+%
+\subsection{Structure and phonons}
+We try to simulate the experimental strained structure by , focusing mainly on compressive strain because the electron beam penetrates on the upper part of the sample where the strain is compressive.
