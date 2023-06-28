@@ -42,7 +42,7 @@
 
 \pagestyle{scrheadings}						%% style de page
 %\setkomafont{disposition}{\bfseries}		%% titrage en police sérif (décommenter)
-%\setkomafont{descriptionlabel}{\bfseries}	%% entrée des glossaires en police sérif (décommenter)
+\setkomafont{descriptionlabel}{\bfseries}	%% entrée des glossaires en police sérif (décommenter)
 
 %%% tableaux et figures
 \RequirePackage{float}						%% définit les objets flottants tels que les figures et tableaux
@@ -157,7 +157,7 @@
 	style=altlist							%% affichage des entrées
 	]
 	{glossaries}							%% glossaires (charger le package glossaries après le package hyperref)
-\newglossary[nlg]{notation}{not}{ntn}{Nomenclature} % Création d'un type de glossaire 'notation'
+%\newglossary[nlg]{notation}{not}{ntn}{Nomenclature} % Création d'un type de glossaire 'notation'
 \makeglossaries								%% génère les glossaires
 \loadglsentries{tex_open/gloss}					%% fichiers sources glossaires
 \renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}  %% acronymes affichés en noir indép de linkcolor dans hyperref

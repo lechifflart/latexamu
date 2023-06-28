@@ -1,0 +1,11 @@
+pdflatex these
+biber these
+makeindex these
+makeglossaries these
+pdflatex these
+pdflatex these
+
+
+makeindex these
+makeglossaries these
+pdflatex these
