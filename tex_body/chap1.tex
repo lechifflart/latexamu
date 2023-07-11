@@ -744,7 +744,7 @@ The size of the interatomic force constants matrix is $3N_cN_{at}$ where $N_c$ i
 \end{equation}
 where $M_s$ is the mass of atom $s$. The phonon frequencies are eigenvalues of the dynamical matrix with the following eigenvalue problem :
 \begin{equation}
-	\sum_{s\alpha} D^{s\alpha}_{t\beta}(\qq) \xi^{\mu}_{s\alpha}(\qq) = \omega^2_\mu(\qq) \xi^\mu_{t\beta}(\qq)
+	\sum_{s\alpha} D^{s\alpha}_{t\beta}(\qq) \xi^{\mu}_{s\alpha}(\qq) = \omega^2_\mu(\qq) \xi^\mu_{t\beta}(\qq) \label{eq:ph_evprob}
 \end{equation}
 with the eigenvectors $\xi^\mu(\qq)$ associated with the mode $\mu$, that are the normal modes of the oscillating system and obey the orthogonality relations :
 \begin{equation}
@@ -758,7 +758,7 @@ From this, we can obtain an expression for the atomic displacements in real-spac
 where the temperature-dependent amplitudes of the oscillations are given by the equipartition theorem \cite{bruesch2012phonons} $A_\mu(\qq,T) = \sqrt{2k_B T}/\omega_\mu(\qq)$ with $k_B$ the Boltzmann constant. In summary, we see that the crucial vibrational quantities are obtained after calculating the force constants, and then diagonalizing the dynamical matrix. One way to do the former starting from \acrshort{DFT} is presented in the next section.
 
 %
-\subsection{Density Functional Perturbation Theory}
+\subsection{Density Functional Perturbation Theory} \label{sec:DFPT}
 This theory is a general formulation of the linear response of the Kohn-Sham wavefunctions and charge density obtained in \glossary{DFT} with respect to a perturbation. It is presented by Baroni \textit{et al.} in ref. \cite{baroni2001phonons}, where they show that the linear response can be calculated in a self-consistent maner in reciprocal space, independently of the wavelength of the perturbation. This means that the use of supercells is not needed. In the case of phonons, one needs to compute the Hessian of the Born-Oppenheimer energy surface, which is the second derivative of the ground-state energy with respect to atomic displacements. One can show that the force constants matrix can be obtained from \acrshort{DFT} with the following expression \cite{gonze1997dynamical} :
 \begin{align}
 \begin{split}
