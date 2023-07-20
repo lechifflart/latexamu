@@ -4,7 +4,7 @@
 \linenumbers
 
 %
-\section{Introduction on the many-body problem} \label{sec:BO_approx}
+\section{Introduction to the many-body problem} \label{sec:BO_approx}
 In this thesis, most of the computed quantities are not based on any parameter. The only input required is the chemical composition of the system, \textit{i.e.} the atomic numbers of the atoms constituting the crystal. This way of calculation is called \textit{ab initio}. It is a powerful framework since it does not require to fit any parameter to experiments and it can include all the physical phenomena one wants to consider. One of the shortcomings is that we often need to resort to approximations for the problems to be solvable numerically.
 To perform such calculations, we need to consider all nuclei and all electrons in the crystal, as well as all the interactions between them. The system of interacting electrons and nuclei in a material can be described by the following Hamiltonian :
 \begin{align}
@@ -660,7 +660,7 @@ Now by making use of Eqs \eqref{eq:eps_macro,eq:chi_IP_RPA}, we can write the im
 \begin{equation}
 	\varepsilon_2(\omega) = \frac{8\pi^2}{V} \sum_{cv\kk} \left| d_{cv\kk} \right|^2 \delta(\omega - (\epsilon_{c\kk} - \epsilon_{v\kk}) ) \label{eq:eps_2_IP}
 \end{equation}
-At the \acrshort{BSE} level, the dipole matrix elements are replaced with their linear combination with exciton eigenvectors.Using \eqref{eq:chi_BSE}, it gives :
+At the \acrshort{BSE} level, the dipole matrix elements are replaced with their linear combination with exciton eigenvectors. Using \eqref{eq:chi_BSE}, it gives :
 \begin{equation}
 	\varepsilon_2(\omega) = \frac{8\pi^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda) \label{eq:eps_2_exc}
 \end{equation}
@@ -753,7 +753,7 @@ with the eigenvectors $\xi^\mu(\qq)$ associated with the mode $\mu$, that are th
 Here we see the picture of collective motion emerge. Indeed the problem is no longer described as the sum of individual displacements, but rather in terms of $3N_{at}$ collective, periodic oscillations of the crystal with a momentum $\qq$ and a frequency $\omega_\mu(\qq)$, which are independent of each other. \\
 From this, we can obtain an expression for the atomic displacements in real-space and time, which have the form of standing waves :
 \begin{equation}
-	u_{Ls\alpha}(t) = \frac{1}{2\sqrt{N_cM_s}} \sum_{\mu q} \text{e}^{i\qq\cdot\tau_L} \; \xi^\mu_{s\alpha}(\qq)\left[ A_\mu(\qq,T) \text{e}^{-i\omega_\mu t} + A_\mu^*(\qq,T) \text{e}^{i\omega_\mu t} \right] 
+	u_{Ls\alpha}(t) = \frac{1}{2\sqrt{N_cM_s}} \sum_{\mu q} \text{e}^{i\qq\cdot\tau_L} \; \xi^\mu_{s\alpha}(\qq)\left[ A_\mu(\qq,T) \text{e}^{-i\omega_\mu t} + A_\mu^*(\qq,T) \text{e}^{i\omega_\mu t} \right] \label{eq:normal_displacements}
 \end{equation}
 where the temperature-dependent amplitudes of the oscillations are given by the equipartition theorem \cite{bruesch2012phonons} $A_\mu(\qq,T) = \sqrt{2k_B T}/\omega_\mu(\qq)$ with $k_B$ the Boltzmann constant. In summary, we see that the crucial vibrational quantities are obtained after calculating the force constants, and then diagonalizing the dynamical matrix. One way to do the former starting from \acrshort{DFT} is presented in the next section.
 

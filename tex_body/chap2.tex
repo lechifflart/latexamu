@@ -1,7 +1,7 @@
-\chapter{Something about strained hBN}
+\chapter{Hexagonal Boron Nitride under strain}
 \chaptertoc{}
 
-\section{oui}
+\section{Introduction of the chapter}
 \textit{This chapter is partly based on our publication \cite{lechifflart2022excitons}. Some of the text and figures contained in this Chapter are adapted from this reference. }
 \begin{itemize}
 	\item in the intro, talk about strain-induced symmetry breaking
@@ -102,55 +102,65 @@ We observe the same trend for the lowest-lying excitons with non-zero momentum, 
 
 %
 \section{Exciton-phonon coupling from finite differences}
-detail how we compute exc-ph coupling : numerical derivative of $\chi$ or of the exc dipoles  
-spectra vs strain
-mention excitonic temperature and Boltzmann population
-
-We Taylor-expand the dielectric function with respect to atomic displacements. We neglect the variation of the delta in energy (this I need to explain (understand first lol)), so we are left with the derivative of the dipoles squared. We consider the minimal excitons which are dark, so the 0th order is 0. On the other hand, Taylor expanding the dipoles gives terms that will coincide only at 2nd order in atomic displacement (check the maths). All in all, it suffices to take 2nd derivative of dipoles, at 2nd order in atomic displacements. We compute this derivative numerically by finite differences (give formula here) : we displace atoms on one side, then the opposite side, BSE on each configuration, sum and boom. 
-
-
-displacements with the scaling factor are converged to the value of 0.05 Angström. Needs to be big enough so the effect is bigger than numerical error, but small enough so that only the harmonic effects appear and not the higher order derivatives
-%
-
-As presented in the introduction of the thesis, the inclusion of lattice vibrations in our computational framework is necessary to describe accurately the phonon-assisted features in the luminescence spectrum of hBN. In particular the exciton-phonon coupling is the central quantity to take into account. To do so, I present in this section how to calculate the macroscopic dielectric function with a dynamical correction due to lattice vibrations, in a finite-difference scheme. \textcolor{green}{remember to cite FulvioPRL, Claudio}
-
-We want to take the Taylor expansion of the response function with respect to atomic displacements around their equilibrium positions. We use the response function obtained from the \acrshort{BSE} without the long-range component so that the macroscopic dielectric function is readily obtainable following Eq. \eqref{eq:eps_macro}.
+As presented in the introduction of the thesis, the inclusion of lattice vibrations in our computational framework is necessary to describe accurately the phonon-assisted features in the luminescence spectrum of hBN. In particular the exciton-phonon coupling is the central quantity to take into account. To do so, I present in this section how to calculate the macroscopic dielectric function with a dynamical correction due to lattice vibrations, in a finite-difference scheme. \textcolor{green}{remember to cite FulvioPRL, Elena Bartomeu Claudio}\\
+The key idea is to take the Taylor expansion of the macroscopic dielectric function with respect to atomic displacements. By displacing the atoms around their equilibrium positions along the phonon eigenvectors obtained earlier with \acrshort{DFPT} and calculating the response function with the \acrshort{BSE} in the displaced configurations, we will obtain the coupling between the exciton responsible for the optical response and the phonons. The link between the response function (without the long-range component) and the macroscopic dielectric function is given by Eq. \eqref{eq:eps_macro}. 
+The Taylor exp is $\varepsilon (\omega)\approx \varepsilon^{(0)}(\omega) + \varepsilon^{st,(2)}_{\bar{q}}(\omega)$, where the second term is the static correction induced buy the atomic displacements \cite{zacharias2016one}. 
 The contribution from exciton $\lambda$ to the response function  writes :
 \begin{equation}
 	\chi^\lambda_R(\omega) = \frac{|T^\lambda_R|^2}{E^\lambda_R - \omega + i \eta}
 \end{equation}
-where the subscript R indicates that the quantities are evaluated at clamped ion positions. The infinitesimal $\eta$ is taken independent of $R$ for simplicity. Here we recall that we define the exciton dipole matrix element $T^\lambda = \sum_{cvk} A_\lambda^{cvk} d_{cvk}$. The first derivative entering in the Taylor expansion will be :
+where the subscript R indicates that the quantities are evaluated at clamped ion positions. The infinitesimal $\eta$ is taken independent of $R$ for simplicity. Here we recall that we define the exciton dipole matrix element $T^\lambda = \sum_{cvk} \bar{A}_\lambda^{cvk} d_{cvk}$. The first derivative entering in the Taylor expansion will be :
 \begin{equation}
 	\frac{\partial \chi^\lambda_R(\omega)}{\partial R}\biggr|_{R=0} = \frac{\partial |T^\lambda_R|}{\partial R}\biggr|_{R=0} \frac{2|T^\lambda_{R=0}|}{E^\lambda_{R=0} - \omega + i\eta} + \frac{\partial \left[ E^\lambda_R - \omega + i\eta \right]^{-1}}{\partial R}\biggr|_{R=0} |T^\lambda_{R=0}|^2.
 \end{equation}
-This expression has a term linear in the exciton dipole and a term at the second power, both taken at clamped ion positions. It means that for dark excitons, the first derivative in the Taylor expansion will be zero. Excitons belonging in this category are labelled $\lambda'$, and we have $\frac{\partial \chi^{\lambda'}_R(\omega)}{\partial R}\bigr|_{R=0} = 0$
+This expression has a term linear in the exciton dipole and a term at the second power, both taken at clamped ion positions. It means that for dark excitons, the first derivative in the Taylor expansion will be zero. Excitons belonging in this category are labelled $\lambda'$, and we have $\frac{\partial \chi^{\lambda'}_R(\omega)}{\partial R}\bigr|_{R=0} = 0$.
 In \acrshort{hBN}, the excitons involved in luminescence are the ones which low at the lowest energies in the dispersion, at finite momentum. Because of momentum conservation, these ones cannot recombine and emit light which has almost zero momentum, hence they are dark at clamped ion positions. Phonons are needed to transfer momentum and assist their recombination. \\ 
 Similar arguments hold for the second derivative in the Taylor expansion
 and the only non-vanishing term that remains is :
 \begin{equation}
 	\frac{\partial^2 \chi^{\lambda'}_R(\omega)}{\partial R^2} = \frac{\partial^2 |T^{\lambda'}_R|^2}{\partial R^2}\biggr|_{R=0} \left[ E^{\lambda'}_{R=0} - \omega + i\eta \right]^{-1} \label{eq:chi_fdd}
 \end{equation}
-This derivative is evaluated numerically with the finite difference formula :
+This equation shows that it is equivalent to compute the finite-difference derivative of the full response function or only of the exciton dipoles. This is verified numerically in Ref. \cite{paleari2019exciton}. \\
+This above second derivative is evaluated numerically with the finite difference formula :
 \begin{equation}
 	\frac{\partial^2 \chi^{\lambda'}_R(\omega)}{\partial R^2} \approx \frac{\chi(\Delta\RR;\omega) - 2 \chi_0(\omega) + \chi(-\Delta\RR;\omega)}{\Delta\RR^2}
 \end{equation}
-Eq. \eqref{eq:chi_fdd} shows that it is equivalent to compute the finite-difference derivative of the full response function or only of the exciton dipoles. This is verified numerically in Ref. \cite{paleari2019exciton}
+In our case, the displacements write $R \to R_{\mu\bar{q}}$ and are along the eigenvector of a particular phonon mode $\mu$ taken at the momentum $\bar{q}$ where the exciton dispersion reaches its minimum. The displacement magnitude are given by Eq. \eqref{eq:normal_displacements} taken for $t=0$ :
+\begin{equation}
+	u^{\mu\bar{q}}_{Ls\alpha}(t=0) = \frac{c}{\sqrt{M_s}}\Re\left\{ e^{i\bar{\qq}\cdot\boldsymbol{\tau}_L} \xi^{\mu\bar{q}}_{s\alpha} \right\}
+\end{equation}
+The $c$ parameter is a scaling factor which needs to be converged. Indeed for the finite difference derivative, we want to keep the displacements as small as possible. However if they are too small, their effect will be indistinguishable from numerical noise, but if they are too large, effects beyond the second-order derivatives will start to appear. For this work, we converged the displacements to a value of $|\Delta \RR| = 0.05 \AA$.
+To accommodate the periodicity of the phonon at $\bar{q}$, we construct supercells. The supercell with the minimal size is non-diagonal \cite{lloyd2015lattice}, and we build them using the \texttt{yambopy} Python tool \cite{Sangalli_2019}. \\
+From Ref. \cite{zacharias2020theory}, the second-order correction to the full dielectric due to the transitions assisted by a single phonon of momentum $\bar{q}$ is :
+\begin{equation}
+	\varepsilon^{st,(2)}_{\bar{q}} (\omega) = \frac{1}{2} \sum_\mu \left[ \sum_i^{N_{\bar{q}}} \frac{1}{2} \sum_j^2 \frac{\partial^2 \varepsilon^{(0)}_j(\omega)}{\partial R^2_{\mu\bar{q}}} \biggr|_{eq} \right] \sigma^2_{\mu\bar{q}}
+\end{equation}
+where $j$ is the polarization direction of the incoming light. We average over two orthogonal in-plane directions. The index $i$ runs over the equivalent $\bar{q}$ points in the \acrshort{BZ} where the exciton energies are minimal. For a perfect hBN crystal, $N_{\bar{q}} = 6$ but in our case, $N_{\bar{q}} = 4$. The last factor $\sigma^2_{\mu\bar{q}}$ is the thermal average of the squared displacement of the a quantum harmonic oscillator, given by :
+\begin{equation}
+	\sigma^2_{\mu\bar{q}}(T) = l^2_{\mu\bar{q}} (2n_{\mu\bar{q}}(T) + 1).
+\end{equation}
+$n_{\mu\bar{q}}(T)$ is the Bose-Einstein occupation function, and $l^2_{\mu\bar{q}} = 1/(2M_{\mu\bar{q}}\omega_{\mu\bar{q}})$ is the zero-temperature squared displacement. In our case the reference mass is $M_{\mu\bar{q}} = \sum^{N_{ions}}_s M_s |\xi_s^{\mu\bar{q}}|^2$.\\
+Finally the imaginary part of the 
 
-Switching focus to dielectric function rather that response function (they are linked by Eq. je sais plus combien), the Taylor exp is $\varepsilon \approx \varepsilon^{(0)} + \varepsilon^{st,(2)}_{\bar{q}}$. Static correction blabla, cite Zacharias Patrick Giustino. The second order is given by (Fulvio Eq. 3.38), avg over polariztion of light (because the lowest 2 excitons have different symmetries that will only allow coupling with certain phonon modes, in plane), restrict to momentum $\bar{q}$ where exc energies are minimal. (times 6 in a perfect BZ, times 4 in our case). Give thermal avg of atomic displacements (harmonic phonons). \textcolor{green}{this little paragraph could even be before the finite-difference derivation}. Now the Eq. 3.39, you can introduce the different processes : phonon abs and emission, giving different nominators. And finally Eq. 3.40. \\
-Say how we compute the finite-diff deriv, supercells and displacing. Non-diagonal supercells \cite{Monserrat} : the minimum supercell size needed to fold a k-point at $\Gamma$ is the least common multiple of the Ni and not their product. Displacement of the atoms : Fulvio Eq. (B.3) 
+Now the Eq. 3.39, you can introduce the different processes : phonon abs and emission, giving different nominators. And finally Eq. 3.40. \\
+
+
+
+
+
+
+
 Say that we use the W at eq positions for the displaced BSE. The \acrshort{RPA} static screening function is  interpolated from the unit cell. \\
-vRS relation for luminescence. Temperature effects for the phonons are in the BE occupations (neglected for the strain article), for the excitons in the Boltzmann with excitonic temperature, Lorentzian model for broadening.
 
-
-
-displace atoms, converge displacement, yambopy
-\textcolor{red}{But now what happens to the displacement term in the Taylor expansion ? And include temperature aswell}
-% supercells means folding of dark excitons at Gamma when atoms are clamped; they remain dark (verified numerically) and they acquire a momentum after displacing atoms (because of breaking of symmetries, derivative is non-zero etc)
 % correction to the exciton energies due to exc-ph is neglected. Anyways we know that GW underestimates the gap so we won't have accurate energies. We are more interested in the shape of the spectra
 
 %
 \section{Luminescence results}
 spectra vs strain, discussion
+
+
+vRS relation for luminescence. Temperature effects for the phonons are in the BE occupations (neglected for the strain article), for the excitons in the Boltzmann with excitonic temperature, Lorentzian model for broadening.
+
 
 %
 \section*{Conclusion of the chapter ?}
