@@ -702,8 +702,11 @@ Finally, by comparing the absorption and the spontaneous emission rates, we obta
 	 &= \frac{n_1(\omega)\omega^3}{\pi^2 c^3}\ \varepsilon_2(\omega)\ e^{-(\omega - \Delta \mu)/k_BT} \label{eq:vRS_PL}
 \end{split}
 \end{align}
-We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently $n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon_2(\omega)^2} + \varepsilon_1(\omega)}$.
-%Remember to talk about the exciton occupation in the results part
+We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently $n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon_2(\omega)^2} + \varepsilon_1(\omega)}$. We can slightly anticipate the following parts of this thesis and mention how this relation is modified in the case of indirect transitions, assisted by phonons :
+\begin{equation}
+	R^{sp,exc}_{\mu q}(\omega) \propto n_1^{exc}(\omega) \omega(\omega - 2 \Omega_{q\mu})^2 \varepsilon^{exc}_2(\omega - 2\Omega_{q\mu})n_{B}(\omega), \label{eq:vRS_PL_ind}
+\end{equation}
+where $\Omega_{q\mu}$ refers to a phonon frequency for the phonon mode $\mu$ at momentum $q$, which will be introduced in the next section.
 
 %
 %
