@@ -594,6 +594,7 @@ To make the distinction between short-range, microscopic variations and long-ran
 \begin{equation}
 	f(\rr,\rr';\omega) = \frac{1}{\Omega} \sum_{\kk}^{BZ} \sum_{\GG\GG'} \exp{i(\kk+\GG)\cdot\rr} f(\kk+\GG,\kk'+\GG';\omega)  \exp{-i(\kk+\GG')\cdot\rr'}
 \end{equation}
+\textcolor{red}{I could make a figure to illustrate}
 where $\Omega$ is the volume of the crystal (more precisely of the Born-von Karmann supercell in the case of an infinite crystal), $\kk$ is a Bloch wavevector confined to the first \acrshort{BZ} and $\GG,\GG'$ are reciprocal lattice vectors.
 With this definition, we can write the inverse dielectric matrix in reciprocal space :
 \begin{equation}
@@ -612,19 +613,19 @@ It is useful to make the separation between long-range and short-range terms in 
 \end{equation}
 and we can define the corresponding polarizability, called the \textit{proper} response function :
 \begin{equation}
-	\bar{\chi}_{\GG\GG'}(\qq,\omega) = \chi_{\GG\GG'}(\qq,\omega) - \chi_{\GG\GG'}(\qq,\omega) v(\qq+\GG) \bar{\chi}_{\GG\GG'}(\qq,\omega)
+	\bar{\chi}_{\GG\GG'}(\qq,\omega) = \chi_{\GG\GG'}(\qq,\omega) - \chi_{\GG\GG'}(\qq,\omega) \bar{v}(\qq+\GG) \bar{\chi}_{\GG\GG'}(\qq,\omega)
 \end{equation}
 Now if we use $\bar{v}$ instead of $v$ in the Bethe-Salpeter kernel $\Xi$, we can compute the two-particle propagator without the long-range component of the Coulomb interaction, and we have the usual relationship :
 \begin{equation}
 	\bar{\chi}(1,2) = -i \bar{L}(1,2,1^+,2^+)
 \end{equation}
-$\bar{L}$ is the most commonly computed quantity for the calculation of optical spectra in the context of the \acrshort{BSE}.
+$\bar{L}$ is the most commonly computed quantity for the calculation of optical spectra in the context of the \acrshort{BSE}.\cite{bussi2004effects}
 
-The response function enters both reciprocal space expressions in Eqs. \eqref{eq:inveps_RL} and \eqref{eq:W_RL}. Depending on which level of theory the electron-hole interaction is treated, its expression will be different and will lead to different spectra. Before writing its expression we need to define the matrix elements of pairs of orbitals, also called screening matrix elements :
+The response function enters both reciprocal space expressions in Eqs. \eqref{eq:inveps_RL} and \eqref{eq:W_RL}. Depending on which level of theory the electron-hole interaction is treated, its expression will be different and will lead to different spectra. Before writing its expression we need to define the matrix elements of pairs of orbitals, that we call generalized dipoles :
 \begin{equation}
 	\rho_{v\kk c\kk+\qq}(\GG) = \bra{c\kk+\qq} e^{i(\qq+\GG)\cdot \rr} \ket{v\kk}
 \end{equation}
-where $v,c$ denote for valence and conduction states. This is the mixing of a valence state at $\kk$ with a conduction state at $\kk+\qq$ due to an electric field with momentum $q$. At this point we note that, for momentum conservation, the vector $\qq$ which lies in the first \acrshort{BZ} has to be equal to the difference of two crystal momenta $\kk$. 
+where $v,c$ denote for valence and conduction states. These matrix elements describe the transition from a valence state at $\kk$ to a conduction state at $\kk+\qq$ mediated by an electric field with momentum $q$. At this point we note that, for momentum conservation, the vector $\qq$ which lies in the first \acrshort{BZ} has to be equal to the difference of two crystal momenta $\kk$. 
 
 For independent particles in the \acrshort{RPA}, the response function has the form $\chi^0 = -iG_0G_0$, where $G_0$ are non-interacting Green's functions. The first matrix element of this response function can be written :
 \begin{equation}
@@ -636,7 +637,7 @@ To account properly for the electron-hole interaction, which is crucial to accur
 \begin{equation}
 	\bar{\chi}_{00}(\qq \to 0,\omega) = 2 \lim_{\qq \to 0} \sum_\lambda \frac{\left| \sum_{vc\kk} A_\lambda^{v\kk c\kk+\qq} \rho_{v\kk c\kk+\qq}\right|^2}{\omega - E_\lambda + i\eta} \label{eq:chi_BSE}
 \end{equation}
-Compared to Eq. \eqref{eq:chi_IP_RPA}, the transition energies are replaced by the excitonic energies, meaning the positions of the peaks will be changed with respect to independent-particle calculations. Also, the $A_\lambda$ coefficients participate in the mixing of the transitions, which will give rise to different structures in the spectra.
+Compared to Eq. \eqref{eq:chi_IP_RPA}, the transition energies are replaced by the excitonic energies, meaning the positions of the peaks will be changed with respect to independent-particle calculations. Also, the $A_\lambda$ coefficients participate in the mixing of the dipole matrix elements,\cite{bussi2004effects} which will give rise to different structures in the spectra.
 
 
 \subsection{Optical absorption}
@@ -652,11 +653,11 @@ and using the relation from Eq. \eqref{eq:inveps_chibar} :
 \begin{equation}
 	\varepsilon_M(\omega) = 1-\lim_{q\to 0} \frac{4\pi}{q^2} \bar{\chi}_{00}(\qq,\omega) \label{eq:eps_macro}
 \end{equation}
-Taking the optical limit $\qq \to 0$ is justified because the longitudinal external field carries a very small momentum with respect to the extent of the Brillouin Zone. This equation is well-behaved at the small-$q$ limit because $\bar{\chi}_{00}$ has a $q^2$ dependence. The macroscopic dielectric function is a complex function $\epsilon_M(\omega) = \epsilon_1(\omega) + i \epsilon_2(\omega)$ and the absorption spectrum will be given by its imaginary part. Let us express it in a computable way. 
+Taking the optical limit $\qq \to 0$ is justified because the longitudinal external field carries a very small momentum with respect to the extent of the Brillouin Zone. This equation is well-behaved at the small-$q$ limit because $\bar{\chi}_{00}$ has a $q^2$ dependence. Here we see the advantage of using the proper response function $\bar{\chi}$ because it gives us direct access to the macroscopic dielectric function without the need to average or to invert the microscopic one. The macroscopic dielectric function is a complex function $\epsilon_M(\omega) = \epsilon_1(\omega) + i \epsilon_2(\omega)$ and the absorption spectrum will be given by its imaginary part. Let us express it in a computable way. 
 
- In the optical limit, we can expand the screening matrix elements to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\rr-\rr'\ket{v} \right|^2 = q^2\left| \mathbf{n}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\mathbf{n}$ is the unit vector pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
+ In the optical limit, we can expand the generalized dipoles to first order in $\qq$, and the first non-zeo term is $\propto \left| i\qq\cdot\bra{c}\rr-\rr'\ket{v} \right|^2 = q^2\left| \hat{\mathbf{n}}\cdot\bra{c}\rr\ket{v} \right|^2$ where $\hat{\mathbf{n}}$ is the versor pointing in the direction of $\qq$. We then define the \textit{dipole matrix elements} as :
 \begin{equation}
-	d_{cv\kk} = \mathbf{n} \cdot \bra{c\kk} \rr \ket{v\kk}
+	d_{cv\kk} = \hat{\mathbf{n}} \cdot \bra{c\kk} \rr \ket{v\kk}
 \end{equation}
 
 Now by making use of Eqs. \eqref{eq:eps_macro} and \eqref{eq:chi_IP_RPA}, we can write the imaginary part of the macroscopic dielectric function in terms of the dipoles. For independent particles, it writes :
@@ -667,7 +668,7 @@ At the \acrshort{BSE} level, the dipole matrix elements are replaced with their 
 \begin{equation}
 	\varepsilon_2(\omega) = \frac{8\pi^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda) \label{eq:eps_2_exc}
 \end{equation}
-As one can see in the denominators of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit are quite different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption. \textcolor{blue}{Here I need to make a figure but I have several questions about it.}
+As one can see in the delta functions of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption. \textcolor{blue}{Here I need to make a figure but I have several questions about it.}
 % where to talk about dark or bright excitons ? probably here
 
 We now have access to another relevant quantity which is the \textit{absorption coefficient} $\alpha(\omega)$ :
@@ -675,12 +676,15 @@ We now have access to another relevant quantity which is the \textit{absorption 
 	\alpha(\omega) = \frac{\omega}{c} \frac{\varepsilon_2(\omega)}{n_1(\omega)} \label{eq:abs_coeff}
 \end{equation}
 It is the ratio of the imaginary part of the dielectric function and the real part of the refractive index which writes $n(\omega) = n_1(\omega) + i n_2(\omega)$. The refractive index is obtained with $\varepsilon_M(\omega) = n^2(\omega)$
-The absorption coefficient is completely determined by $\varepsilon_2(\omega)$ and it is the quantity that yields the absorption spectra that we compute and compare to experiments.
+The absorption coefficient is completely determined by $\varepsilon_2(\omega)$ and it is the quantity that yields the absorption spectra that we compare to experiments.\cite{dressel2002electrodynamics}
 
 \subsection{Luminescence}
-In general, luminescence is the spontaneous emission of light from an excited state of the material. Depending on how the system is excited, a prefix is added. For instance, if the system is excited by a laser, the process is called photoluminescence. It is called cathodoluminescence when the excitation is made by a beam of electrons, electroluminescence when an electric field is applied, an so on.
-Photoluminescence is the process which can be seen as the inverse of absorption : photo-excited carriers de-excite from the bottom of the conduction band to an empty state in the valence band by emitting light with a frequency corresponding to the gap energy. For direct semiconductors or insulators, considering that the light emission is the inverse process of the absorption is generally an acceptable approximation. In this case, the spectra for the two process should look identical\footnote[1]{In reality there are differences such as the Stokes shift, which is caused by the broadening of electronic states by phonons.}. However, for materials with indirect gaps, this simple picture does not hold anymore. Indeed, one needs to consider the phonon-assisted transitions, which give rise to phonon satellites in the luminescence spectra, as will be discussed later. \\
-Here I will present an approximation to derive the spontaneous emission rate, which is the key quantity to compute luminescence spectra, for any kind of gapped material, starting from the absorption rate. We use the van Roosbroeck -- Shockley relation, derived in 1954 to describe the light emission in Germanium \cite{van1954photon} and follow Refs \cite{paleari2019exciton,paleari2019first,}. It is based on a \emph{steady-state} approximation, that is to say we consider the absorption rate and the spontaneous emission rate to be in detailed balance. We start by giving the relations for the case of independent particles and direct transitions only. For indirect transitions, the same kind of relations hold but they need to be slightly modified to include the phonon-assisted transitions, which will be done in the body of this thesis. The absorption rate is :
+In general, luminescence is the spontaneous emission of light from an excited state of the material. Depending on how the system is excited, a prefix is added. For instance, if the system is excited by a laser, the process is called photoluminescence. It is called cathodoluminescence when the excitation is made by a beam of electrons, electroluminescence when an electric field is applied, an so on.\cite{pelant2012luminescence} \\
+Photoluminescence is the process that can be seen as the inverse of absorption : photo-excited carriers de-excite from the bottom of the conduction band to an empty state in the valence band by emitting light with a frequency corresponding to the gap energy. For direct semiconductors or insulators, considering that the light emission is the inverse process of the absorption is generally an acceptable approximation. In this case, the spectra for the two process should look identical\footnote[1]{In reality there are differences such as the Stokes shift, which is caused by the broadening of electronic states by phonons.}. However, for materials with indirect gaps, this simple picture does not hold anymore. Indeed, one needs to consider the phonon-assisted transitions, which give rise to phonon satellites in both the absorption and the luminescence spectra, as will be discussed later. \\
+
+Here I will present an approximation to derive the spontaneous emission rate, which is the key quantity to compute luminescence spectra, for any kind of gapped material, starting from the absorption rate. We use the van Roosbroeck -- Shockley relation, derived in 1954 to describe the light emission in Germanium \cite{van1954photon} and follow Refs \cite{paleari2019exciton,paleari2019first,}. This relation is based on a \emph{steady-state} approximation, that is to say we consider the absorption rate and the spontaneous emission rate to be in detailed balance. We start by giving the relations for the case of independent particles and direct transitions only. For indirect transitions, the same kind of relations hold but they need to be slightly modified to include the phonon-assisted transitions, which will be done in the body of this thesis. Here we consider a quasi-equilibrium situation
+where excited electron and holes are relaxed at the band extrema after scattering with phonons, electrons or other relaxation processes. Hence reach a quasi-equilibrium distribution of particles where some electrons
+have been removed from the top valence band and promoted in conductions bands. These electron and hole distributions are described by two Fermi-Dirac functions with two different chemical potentials (for a discussion see section 12.2.1 of Ref. \cite{schafer2002semiconductor}). The absorption rate is :
 \begin{equation}
 	R^{abs}(\omega) = 2\pi \mathcal{K}(\omega) \frac{\mathcal{N} (\omega)}{N_k} \sum_{cv\kk} \left|d_{cv\kk} \right|^2 \left[ f_{v\kk}(1-f_{c\kk}) - f_{c\kk}(1-f_{v\kk})\right] \delta(\epsilon_{c\kk} - \epsilon_{v\kk} - \omega)
 \end{equation}
@@ -705,23 +709,24 @@ Finally, by comparing the absorption and the spontaneous emission rates, we obta
 	 &= \frac{n_1(\omega)\omega^3}{\pi^2 c^3}\ \varepsilon_2(\omega)\ e^{-(\omega - \Delta \mu)/k_BT} \label{eq:vRS_PL}
 \end{split}
 \end{align}
-We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently $n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon_2(\omega)^2} + \varepsilon_1(\omega)}$. We can slightly anticipate the following parts of this thesis and mention how this relation is modified in the case of indirect transitions, assisted by phonons :
+We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently $n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon^{exc}_2(\omega)^2} + \varepsilon^{exc}_1(\omega)}$. We can slightly anticipate the following parts of this thesis and mention how this relation is modified in the case of indirect transitions, assisted by phonons :
 \begin{equation}
 	R^{sp,exc}_{\mu q}(\omega) \propto n_1^{exc}(\omega) \omega(\omega - 2 \Omega_{q\mu})^2 \varepsilon^{exc}_2(\omega - 2\Omega_{q\mu})n_{B}(\omega), \label{eq:vRS_PL_ind}
 \end{equation}
-where $\Omega_{q\mu}$ refers to a phonon frequency for the phonon mode $\mu$ at momentum $q$, which will be introduced in the next section.
+where $\Omega_{q\mu}$ refers to a phonon frequency for the phonon mode $\mu$ at momentum $q$, which will be introduced in the next section and $n_B$ is the Boltzmann distribution.
 
 %
 %
 \section{Phonons and electron-phonon coupling}
-In solids, the collective motion of atoms can be treated as quasiparticles, called \textit{phonons}. They represent the vibrational modes of atoms in the crystal. In the harmonic approximation, we consider that each atom oscillates around its equilibrium position with a given frequency and a direction. 
-The atoms being bound to their neighbours, the oscillation propagates in the crystal. A phonon is a quantum of these lattice vibrations, with as many modes as there are degrees of freedom for the atoms in the unit cell. 
+In solids, the collective motion of atoms can be treated as quasiparticles, called \textit{phonons}. They represent the vibrational eigenmodes of atoms in the crystal. In this thesis we use the harmonic approximation, which means that we approximate the potential acting on the atoms as a sum of coupled harmonic oscillators. In this approximation the phonons are eigenstates of the system with infinite lifetime. Corrections due to the anharmonicity or to the coupling with between electronic and atomic motions introduce
+a finite lifetime for the atomic vibrations, but these effects are not considered here.\cite{giustino2017review} 
+A phonon is a quantum of lattice vibrations and similarly to the crystal momentum $\kk$ of the electrons, phonons have a crystal momentum that we call $\qq$. 
 In a unit cell containing multiple atoms, there are two types of phonons based on the relative motion of the atoms. When the atoms oscillate in phase, the resulting vibration propagates as a sound wave, and these phonons are known as acoustic phonons. On the other hand, if the atoms oscillate in opposite phases, the phonons are referred to as optical phonons.
 
-Vibrational modes and their frequencies can be calculated classically by modelling the crystal by atoms linked with springs with different rigidities. One can also solve the problem analytically in the second quantization formalism. Here I will present a scheme based on \glossary{DFT} which allows to compute the phonon frequencies and eigenvectors from the variation of the Kohn-Sham potential with respect to the atomic displacements. 
+Vibrational modes and their frequencies can be calculated classically by modelling the crystal by atoms linked with springs with different rigidities. One can also solve the problem analytically for simpler systems in the second quantization formalism.\cite{ashcroft2022solid} Here I will present a scheme based on \acrshort{DFT} which allows to compute the phonon frequencies and eigenvectors from the variation of the Kohn-Sham potential with respect to the atomic displacements. The following formulation is mainly adapted from Refs. \cite{paleari2019first,baroni2001phonons,pereira2017ab}.
 
 We are still in the Born-Oppenheimer approximation presented in Sec. \ref{sec:BO_approx}, \textit{i.e.} the ionic Hamiltonian depends on the electronic potential evaluated only at the static ionic positions. Reciprocally, the electronic Hamiltonian depends parametrically on the ionic positions $\{\RR\}$.
-Mainly adapted from Refs. \cite{paleari2019first,baroni2001phonons,pereira2017ab}. The vibrational problem can be solved starting from the Taylor expansion of the total energy of the solid around the equilibrium positions of the atoms. We truncate the expansion at the second order, which is the \textit{harmonic approximation}. It reads :
+The vibrational problem can be solved starting from the Taylor expansion of the total energy of the solid around the equilibrium positions of the atoms. We truncate the expansion at the second order, which is the \textit{harmonic approximation}. It reads :
 \begin{align}
 \begin{split}
 	E(\{\RR\}) &=  E(\{\RR^0\}) \\ 
@@ -744,7 +749,7 @@ We now reformulate the problem in term of the atomic \textit{displacements}, def
 \begin{equation}
 	E(\{\RR\}) = E(\{\RR^0\}) - \sum_{Ls\alpha} F_{Ls\alpha} u_{Ls\alpha} + \frac{1}{2} \sum_{\substack{Ls\alpha \\ Mt\beta}} C^{Ls\alpha}_{Mt\beta} \; u_{Ls\alpha} u_{Mt\beta} + \mathcal{O}(u^3)
 \end{equation}
-The size of the interatomic force constants matrix is $3N_cN_{at}$ where $N_c$ is the number of unit cells in the periodic supercell considered and $N_{at}$ is the number of atoms in the unit cell. However we can use the invariance of the force constants under a translation by a lattice vector $\mathbf{\tau}$, which means they only depend on the difference $\mathbf{\tau}_I = \mathbf{\tau}_L - \mathbf{\tau}_M$. This allows us to take the Fourier transform and solve the problem in reciprocal space, where only a unit cell is needed and the sum over supercells is replaced by a sum over a grid of $\qq$-points in the Brillouin Zone. We define the \textit{dynamical matrix} as :
+In practice, we calculate the phonon properties on relaxed structures, which means the forces acting on the atoms are zero. Hence we only need the information from the $C$ matrix. The size of the interatomic force constants matrix is $3N_cN_{at}$ where $N_c$ is the number of unit cells in the periodic supercell considered and $N_{at}$ is the number of atoms in the unit cell. However we can use the invariance of the force constants under a translation by a lattice vector $\mathbf{\tau}$, which means they only depend on the difference $\mathbf{\tau}_I = \mathbf{\tau}_L - \mathbf{\tau}_M$. This allows us to take the Fourier transform and solve the problem in reciprocal space, where only a unit cell is needed and the sum over supercells is replaced by a sum over a grid of $\qq$-points in the Brillouin Zone. We define the \textit{dynamical matrix} as :
 \begin{equation}
 	D^{s\alpha}_{t\beta}(\qq) = \frac{1}{\sqrt{M_sM_t}} \sum_I C^{Is\alpha}_{\ \, t\beta} \text{e}^{i\qq\cdot \tau_I}	
 \end{equation}
@@ -761,11 +766,11 @@ From this, we can obtain an expression for the atomic displacements in real-spac
 \begin{equation}
 	u_{Ls\alpha}(t) = \frac{1}{2\sqrt{N_cM_s}} \sum_{\mu q} \text{e}^{i\qq\cdot\tau_L} \; \xi^\mu_{s\alpha}(\qq)\left[ A_\mu(\qq,T) \text{e}^{-i\omega_\mu t} + A_\mu^*(\qq,T) \text{e}^{i\omega_\mu t} \right] \label{eq:normal_displacements}
 \end{equation}
-where the temperature-dependent amplitudes of the oscillations are given by the equipartition theorem $A_\mu(\qq,T) = \sqrt{2k_B T}/\omega_\mu(\qq)$ with $k_B$ the Boltzmann constant.\cite{bruesch2012phonons} In summary, we see that the crucial vibrational quantities are obtained after calculating the force constants, and then diagonalizing the dynamical matrix. One way to do the former starting from \acrshort{DFT} is presented in the next section.
+where the temperature-dependent amplitudes of the oscillations are given by the equipartition theorem $A_\mu(\qq,T) = \sqrt{2k_B T}/\omega_\mu(\qq)$ with $k_B$ the Boltzmann constant.\cite{bruesch2012phonons} In summary, we see that the crucial vibrational quantities are obtained after calculating the interatomic force constants matrix, and then diagonalizing the dynamical matrix. One way to do the former starting from \acrshort{DFT} is presented in the next section.
 
 %
 \subsection{Density Functional Perturbation Theory} \label{sec:DFPT}
-This theory is a general formulation of the linear response of the Kohn-Sham wavefunctions and charge density obtained in \glossary{DFT} with respect to a perturbation. It is presented by Baroni \textit{et al.} in Ref. \cite{baroni2001phonons}, where they show that the linear response can be calculated in a self-consistent maner in reciprocal space, independently of the wavelength of the perturbation. This means that the use of supercells is not needed. In the case of phonons, one needs to compute the Hessian of the Born-Oppenheimer energy surface, which is the second derivative of the ground-state energy with respect to atomic displacements. One can show that the force constants matrix can be obtained from \acrshort{DFT} with the following expression \cite{gonze1997dynamical} :
+This theory is a general formulation of the linear response of the Kohn-Sham wavefunctions and charge density obtained in \acrshort{DFT} with respect to a perturbation. It is presented by Baroni \textit{et al.} in Ref. \cite{baroni2001phonons}, where they show that the linear response can be calculated in a self-consistent maner in reciprocal space, independently of the wavelength of the perturbation. This means that the use of supercells is not needed. In the case of phonons, one needs to compute the Hessian of the Born-Oppenheimer energy surface, which is the second derivative of the ground-state energy with respect to atomic displacements. One can show that the force constants matrix can be obtained from \acrshort{DFT} with the following expression \cite{gonze1997dynamical} :
 \begin{align}
 \begin{split}
 	C^{Ls}_{Mt} &= \frac{\partial^2 E(\{\RR\})}{\partial\RR_{Ls} \partial \RR_{Mt}} \Biggr|_{\RR=\RR_0} = - \frac{\partial \FF_{Ls}}{\partial \RR_{Mt}} \Biggr|_{\RR=\RR_0} \\
@@ -782,8 +787,9 @@ The change of the Kohn-Sham states is in turn obtained from first-order perturba
 \end{equation}
 This problem can be reformulated such that no empty states are needed :
 \begin{equation}
-	(\hat{H} - \epsilon_n) \frac{\partial\ket{\psi_n}}{\partial \RR_{Ls}} = - \left(\frac{\partial v_{\text{eff}}}{\partial\RR_{Ls}} - \frac{\partial \epsilon_n}{\partial\RR_{Ls}}  \right) \ket{\psi_n}.
+	(\hat{H} - \epsilon_n) \frac{\partial\ket{\psi_n}}{\partial \RR_{Ls}} = - \left(\frac{\partial v_{\text{eff}}}{\partial\RR_{Ls}} - \frac{\partial \epsilon_n}{\partial\RR_{Ls}}  \right) \ket{\psi_n}. \label{eq:DFPT_Sternheimer}
 \end{equation}
+Eq. \eqref{eq:DFPT_Sternheimer} corresponds to a reformulation of the \acrshort{DFT} response of the system to an atomic displacement in the form of a  Sternheimer equation.
 
 %
 \subsubsection{Long wavelength limit}
@@ -797,11 +803,11 @@ In the case of non-2D polar semiconductors and insulators -- the material we stu
 \begin{equation}
 	\tilde{C}^{\text{NA} s\alpha}_{\ \ \ \; t\beta}(\qq \to 0) = \frac{4\pi}{\Omega} e^2 \frac{(\qq\cdot\mathbf{Z}^*_s)_\alpha(\qq\cdot\mathbf{Z}^*_t)_\beta}{\qq \cdot \mathbf{\varepsilon}^\infty \cdot \qq}
 \end{equation}
-The Born effective charges $Z^*$ and the electronic contribution to the dielectric permittivity tensor $\mathbf{\varepsilon}^\infty$ can be obtained from \acrfull{DFPT} with a macroscopic electric field as the perturbation.
+The Born effective charges $Z^*$ and the electronic contribution to the dielectric permittivity tensor $\mathbf{\varepsilon}^\infty$ can be obtained from \acrfull{DFPT} with a macroscopic electric field as the perturbation.\cite{baroni2001phonons}
 
 %
 \subsection{Electron-phonon coupling}
-The coupled system of electrons and phonons is described by a three-part Hamiltonian :
+In the previous sections, we solved the problem of electrons and ions independently of one another. Here we will reintroduce the coupling between these two systems. The coupled system of electrons and phonons is described by a three-part Hamiltonian :
 \begin{equation}
 	\hat{\mathcal{H}} = \hat{H}_e + \hat{H}_p + \hat{H}_{ep}
 \end{equation}
@@ -811,24 +817,25 @@ We can define the nuclear Hamiltonian as a sum of quantum harmonic oscillators, 
 	\hat{H}_p = \sum_{\qq\mu} \hbar \omega_\mu(\qq) (\hat{b}^\dagger_{\qq\mu}\hat{b}_{\qq\mu} + \frac{1}{2})
 \end{equation}
 where $\hat{b}$ and $\hat{b}^\dagger$ are annihilation and creation operators of a phonon with momentum $\qq$ and branch index $\mu$. They follow the commutation relations $\left[ \hat{b}_{\qq\mu},\hat{b}^\dagger_{\qq'\mu'} \right] = \delta_{\qq,\qq'}\delta_{\mu,\mu'}$ and $\left[ \hat{b}_{\qq\mu},\hat{b}_{\qq'\mu'} \right] = \left[ \hat{b}^\dagger_{\qq\mu},\hat{b}^\dagger_{\qq'\mu'} \right]= 0 $. We see that in the Born-Oppenheimer and harmonic approximations, lattice vibrations are quantized as perfect bosons.\\
-With these we can construct the electron-phonon Hamiltonian, which contain the first order expansion of the effective potential in terms of the atomic displacements :
+With these we can construct the electron-phonon Hamiltonian as the first order expansion of the effective potential in terms of the atomic displacements :
 \begin{equation}
 	H^{(1)}_{ep} = \sum_{Ls\alpha} \frac{\partial v_{\text{eff}}}{\partial R_{Ls\alpha}} u_{Ls\alpha} = \sum_{nm\mu\kk\qq} g^{\mu\qq}_{nm\kk} \hat{a}^\dagger_{n\kk} \hat{a}_{m\kk-\qq}(\hat{b}_{\qq\mu} + \hat{b}^\dagger_{-\qq\mu}).
 \end{equation}
-In the last equality, the electron-phonon coupling matrix element $g$ is introduced. It is the probability that a a phonon of branch index $\mu$ and momentum $\qq$ scatters a Kohn-Sham electron in state $\ket{m\kk-\qq} = \ket{\psi_{m\kk-\qq}}$ into another Kohn-Sham state $\ket{n\kk}$. It is written in a simplified form as :
+In the last equality, the electron-phonon coupling matrix element $g$ is introduced. It is the probability that a a phonon of branch index $\mu$ and momentum $\qq$ scatters a Kohn-Sham electron from a state $\ket{m\kk-\qq} = \ket{\psi_{m\kk-\qq}}$ into another state $\ket{n\kk}$. It is written in a simplified form as :
 \begin{equation}
 	g^{\mu\qq}_{nm\kk} = {}_{uc}\langle n\kk| \Delta_{\qq\mu} v_{\text{eff}} \ket{m\kk-\qq}_{uc}
 	\label{eq:elph_me}
 \end{equation}
-or in a more complete form, following the notation adopted by Giustino \cite{giustino2017review} :
+or in a more complete form, following the notation adopted by Giustino in Ref. \cite{giustino2017review} :
 \begin{equation}
-	g^{\mu\qq}_{nm\kk} = g^{\mu}_{nm}(\kk,\kk-\qq) = \sum_{Ls} \text{e}^{i\qq\cdot\RR_{Ls}} \frac{\mathbf{\xi}^\mu_s(\qq) }{\sqrt{2M_s\omega_\mu(\qq)}} {}_{uc}\langle n\kk | \frac{\partial v_{\text{eff}}}{\partial \RR_Ls} \ket{m\kk-\qq}_{uc}
+	g^{\mu\qq}_{nm\kk} = g^{\mu}_{nm}(\kk,\kk-\qq) = \sum_{Ls} \text{e}^{i\qq\cdot\RR_{Ls}} \ \frac{\mathbf{\xi}^\mu_s(\qq) }{\sqrt{2M_s\omega_\mu(\qq)}} \ \ {}_{uc}\langle n\kk | \frac{\partial v_{\text{eff}}}{\partial \RR_Ls} \ket{m\kk-\qq}_{uc}
 \end{equation}
-where the subscript $uc$ signifies that the integral is taken over a unit cell of the crystal, using the lattice-periodic parts of the Kohn-Sham wavefunctions $u_{n\kk}$. These matrix elements are the one we will use throughout this thesis to compute the magnitude of the interaction between electrons and phonons. They are also a key ingredient to define the exciton-phonon coupling \textit{ab initio}.\\
+where the subscript $uc$ signifies that the integral is taken over a unit cell of the crystal, using the lattice-periodic parts of the Kohn-Sham wavefunctions $u_{n\kk}$. These matrix elements are the one we will use throughout this thesis to compute the magnitude of the interaction between electrons and phonons. They are also a key ingredient to define the exciton-phonon coupling.\\
 Note that one can go beyond the first order and compute for instance the matrix elements generated by the second derivative of the effective potential with respect to the atomic displacements. One would obtain the so-called Debye-Waller term, which can be used in a self-energy framework to compute the renormalization of the electronic bands by the lattice vibrations.\cite{giustino2017review, kawai2014electron, cannuccia2011effect}
 
 %
 \subsection{Exciton-phonon coupling}
+
 
 %
 \newpage
@@ -846,5 +853,3 @@ Maybe this can go in the next chapter about the methods
 	\item double grids for elph and excph	
 \end{itemize}
 
-\section{Special case of 2D material}
-Should I explain stuff here at the start or rather when I present the results for the hBN monolayer ? Couloumb cutoff in DFT, phonons, RIM integration in GW
