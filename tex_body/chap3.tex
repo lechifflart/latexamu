@@ -1,5 +1,163 @@
-\chapter{ Résultats}
+\chapter{Ab initio exciton-phonon coupling}
 \chaptertoc{}
 
-\section{Modèles}
+\section{Introduction}
+Mainly on monolayer, the three experiments
+mention also the cathodoluminescence paper in which we see only the direct peak
+say we did a benchmark on hBN
+talk about the bBN and the reason we chose it : direct and indirect gaps are close in energy so we might see direct peak and phonon satellites. Indeed it was see experimentally so it is a good candidate for our method.
+
+\section{monolayer exciton dispersion}
+fitting of the dispersion, Lbar vs Lfull
+the nearly-free electron states at Gamma
+
+\section{Theory of the ab initio exciton-phonon coupling}
+The derivation in MBPT is carried out in Pierluigi Cuddazzo's paper in 2020 and with extensive details in Fulvio's thesis. Here we follow a different approach, similar to Chen's derivation. I should mention the fact that they compute the exc-ph matrix elements like us, but the luminescence is different.\\
+For simplicity, drop $\QQ$.
+exciton creation and annihilation operators\\
+
+We consider a system with displacements from the equilibrium positions $\boldsymbol{u}_{Ls}$ ($L$ labels the unit cell and $s$ the atom). Taylor expansion of the Kohn-Sham potential around the equilibrium positions :
+\begin{equation}
+    V^{KS}(\left\{ \uu_{Ls} \right\}) = V_0^{KS} + \sum_{Ls\alpha} \frac{\partial V^{KS}}{\partial \uu_{Ls\alpha}} \uu_{Ls\alpha} + \mathcal{O}(\left\{ \uu_{Ls} \right\}^2)
+\end{equation}
+The electronic wave functions and eigenvalues of the perturbed system depend on the atomic displacements $\left\{ \uu_{Ls} \right\}$. To obtain their change in the perturbed system, we apply first-order perturbation theory by keeping terms linear in $\left\{ \uu_{Ls} \right\}$. To first order, the correction to the eigenvalues vanishes while the correction to the Kohn-Sham wave functions $\psi_i$, (solutions of Eq. \eqref{eq:KS_eqs}) can be written as : 
+\begin{equation}
+    \delta\ket{\psi_i} = \sum_{j\neq i} \frac{\bra{\psi_j} \Delta V \ket{\psi_i}}{\epsilon_i - \epsilon_j} \ket{\psi_j}, \qquad \text{with} \ \ \Delta V = \sum_{Ls\alpha}\frac{\partial V^{KS}}{\partial \uu_{Ls}}\cdot \uu_{Ls}
+\end{equation}
+In the following, we use the tilde for quantities of the perturbed system and write the perturbed wave function as :
+\begin{equation}
+    \ket{\tilde{\psi}_i} = \ket{\psi_i} + \delta\ket{\psi_i} = \ket{\psi_i} + \sum_{j \neq i} \Delta_{ij} \ket{\psi_j}
+\end{equation}
+with
+\begin{equation}
+    \Delta_{ij} \equiv \frac{\bra{\psi_j} \Delta V \ket{\psi_i}}{\epsilon_i - \epsilon_j}
+\end{equation}
+
+We start by defining an unpertubed Bethe-Salpeter Hamiltonian $H \equiv H(\{\boldsymbol{u}_{Ls} \}=0)$ and a perturbed BSE Hamiltonian $\Tilde{H} \equiv H(\{\boldsymbol{u}_{Ls} \})$. We will use first order perturbation theory to obtain the exciton-phonon interaction. The BSE Hamiltonian writes :
+\begin{equation}
+    H_{vc,v'c'} = \bra{vc} H \ket{v'c'} = ( \epsilon_c - \epsilon_v ) \delta_{vv'}\delta_{cc'} + K_{vc,v'c'}
+    \label{eq:BSE_H}
+\end{equation}
+where $c,v$ are for conduction and valence band, respectively. The perturbed Hamiltonian one is :
+\begin{equation}
+    \Tilde{H}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'}  = \bra{\Tilde{v}\Tilde{c}} H \ket{\Tilde{v}'\Tilde{c}'}  = ( \Tilde{\epsilon}_c - \Tilde{\epsilon}_v ) \delta_{\Tilde{v}\Tilde{v}'}\delta_{\Tilde{c}\Tilde{c}'} + K_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'}
+\end{equation}
+The Bethe-Salpeter kernel is defined as :
+\begin{equation}
+    K_{vc,v'c'} = \bra{vc} K \ket{v'c'} = \int d1 d2 d3 d4 \psi_v(2) \psi_c^*(1) K(1234) \psi^*_{v'}(3)\psi_{c'}(4)
+\end{equation}
+where
+\begin{equation}
+    K(1234) = -i\delta(1,2)\delta(3,4)\ v(1,4) + i \delta(1,4)\delta(2,3)\ W(1,2)
+\end{equation}
+with $v$ being the bare Coulomb potential and $W$ the screened Coulomb interaction. In the fashion of Many-Body theory, space, time and spin variables are grouped like so : $1 = (\boldsymbol{r_1},t_1,\sigma_1)$. $\Tilde{K}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'}$ is the 
+\begin{equation}
+    \Tilde{K}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} = \bra{\Tilde{v}\Tilde{c}} \Tilde{K} \ket{\Tilde{v}'\Tilde{c}'} 
+\end{equation}
+Solving the BSE Hamiltonian in \eqref{eq:BSE_H} gives the exciton wave functions $\ket{S_n}$ and energies $E^{S_n}$ :
+\begin{align}
+    \sum_{v',c'} H_{vc,v'c'} A^{S_n}_{v'c'} &= E^{S_n} A^{S_n}_{vc} \\
+    \ket{S_n} = \sum_{vc}& A_{vc}^{S_n}\ket{vc}
+\end{align}
+To derive the exciton-phonon interaction, we project the perturbed BSE Hamiltonian onto the unperturbed basis set and keep only the terms to first-order in the phonon perturbation. By such a process, the terms that will arise and be different from the unperturbed BSE Hamiltonian will define the exciton-phonon interaction. One can show that to first order, the perturbed and unperturbed electronic energies coincide, so we will use $\Tilde{\epsilon}_i = \epsilon_i$. The perturbed Hamiltonian in the unperturbed basis is :
+\begin{align*}
+    \Tilde{H}_{nm} = \bra{S_m} \Tilde{H} \ket{S_n} &= \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'}  \bra{S_m}\ket{\Tilde{v}\Tilde{c}}\bra{\Tilde{v}\Tilde{c}} \Tilde{H} \ket{\Tilde{v}'\Tilde{c}'}\bra{\Tilde{v}'\Tilde{c}'}\ket{S_n} \\
+    &= \sum_{vc,v'c'}\sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{S_m}\ket{vc}\bra{vc}\ket{\Tilde{v}\Tilde{c}}\bra{\Tilde{v}\Tilde{c}} \Tilde{H} \ket{\Tilde{v}'\Tilde{c}'}\bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'}\bra{v'c'}\ket{S_n}
+\end{align*}
+where we used the completeness relations of both basis sets, $\sum_{vc}\ket{vc}\bra{vc} = 1$ and $\sum_{\Tilde{v},\Tilde{c}} \ket{\Tilde{v}\Tilde{c}}\bra{\Tilde{v}\Tilde{c}} = 1$. By definition of the BSE wave functions $\bra{v'c'}\ket{S_n} = A^{S_n}_{v'c'}$, then we can write the above equation as :
+\begin{equation}
+    \Tilde{H}_{nm} = \bra{S_m} \Tilde{H} \ket{S_n} = \sum_{vc,v'c'} A{^S_m *}_{vc} A^{S_n}_{v'c'} \times \left[ \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}}  \bra{\Tilde{v}\Tilde{c}} \Tilde{H} \ket{\Tilde{v}'\Tilde{c}'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} \right]
+    \label{eq:exc_ham}
+\end{equation}
+The term inside the square brackets can be separated into to terms :
+\begin{align*}
+    &\sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}}  \bra{\Tilde{v}\Tilde{c}} \Tilde{H} \ket{\Tilde{v}'\Tilde{c}'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} =  \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}}  \left[ (\Tilde{\epsilon}_{\Tilde{c}} - \Tilde{\epsilon}_{\Tilde{v}}) \delta_{\Tilde{v}\Tilde{v}'}\delta_{\Tilde{c}\Tilde{c}'} + \Tilde{K}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \right] \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} \\
+    &= \sum_{\Tilde{v}\Tilde{c}} \bra{vc}\ket{\Tilde{v}\Tilde{c}} (\epsilon_{\Tilde{c}} - \epsilon_{\Tilde{v}}) \bra{\Tilde{v}\Tilde{c}}\ket{v'c'} + \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}} \Tilde{K}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'}
+\end{align*}
+We make the choice to approximate the perturbed kernel with the unperturbed one, $\Tilde{K}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \approx \bra{\Tilde{v}\Tilde{c}}K\ket{\Tilde{v}'\Tilde{c}'}$, that is to say the effect of the atomic displacements on the bare and screened Coulomb interactions can be neglected and $W \approx \Tilde{W}$. With this approximation we have :
+\begin{equation}
+    \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}} \Tilde{K}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} 
+    \approx  \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}} 
+    \bra{\Tilde{v}\Tilde{c}} K \ket{\Tilde{v}'\Tilde{c}'}\bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} = \bra{vc} K \ket{v'c'} = K_{vc,v'c'}
+\end{equation}
+and thus the term in brackets in Eq. \eqref{eq:exc_ham} becomes 
+\begin{equation}
+    \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}}  \bra{\Tilde{v}\Tilde{c}} \Tilde{H} \ket{\Tilde{v}'\Tilde{c}'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} = \sum_{\Tilde{v}\Tilde{c}} \bra{vc}\ket{\Tilde{v}\Tilde{c}} (\epsilon_{\Tilde{v}} - \epsilon_{\Tilde{c}}) \bra{\Tilde{v}\Tilde{c}}\ket{v'c'} +  K_{vc,v'c'} 
+\end{equation}
+Next, we use Eq. (pas écrite) to expand $\sum_{\Tilde{v}\tilde{c}} \bra{vc}\ket{\Tilde{v}\Tilde{c}} (\epsilon_{\Tilde{c}} - \epsilon_{\Tilde{v}})\bra{\Tilde{v}\Tilde{c}}\ket{v'c'}$ to order $\mathcal{O}(\Delta)$. We work within the Tamm-Dancoff approximation and keep only the resonant part of the BSE Hamiltonian; as a consequence, only valence-valence and conduction-conduction hole- and electron-phonon are allowed, that is to day $\Delta_{vc} = \Delta_{cv} = 0$. Using Eq. (pas écrite) we get :
+\begin{align}
+\begin{split}
+    \bra{vc}\ket{\tv\tc} &= \bra{v}\ket{\tv}\bra{c}\ket{\tc} = \left(\delta_{v\tv} + \sum_{v''\neq\tv}\Delta_{\tv v''}\delta_{vv''}\right) \left(\delta_{c\tc} + \sum_{c''\neq \tc}\Delta_{\tc c''}\delta_{cc''}\right) \\
+    &= \left( \delta_{v\tv}\delta_{c\tc} + \delta_{v\tv} \sum_{c''\neq\tc} \Delta_{\tc c''}\delta_{cc''} + \delta_{c\tc}\sum_{v''\neq \tv} \Delta_{\tv v''} \delta_{vv''} \right) + \mathcal{O}(\Delta^2)
+\end{split}
+\end{align}
+and similarly
+\begin{equation}
+    \bra{\tv\tc}\ket{v'c'} = \bra{v'}\ket{\tv}^*\bra{c'}\ket{\tc}^* = \left( \delta_{v'\tv}\delta_{c'\tc} + \delta_{v'\tv} \sum_{c''\neq\tc} \Delta^*_{\tc c''}\delta_{c'c''} + \delta_{c'\tc}\sum_{v''\neq \tv} \Delta^*_{\tv v''} \delta_{v'v''}  \right)  + \mathcal{O}(\Delta^2)
+\end{equation}
+With these expressions, there are five first-order terms in $\sum_{\Tilde{v}\tilde{c}} \bra{vc}\ket{\Tilde{v}\Tilde{c}} (\epsilon_{\Tilde{c}} - \epsilon_{\Tilde{v}})\bra{\Tilde{v}\Tilde{c}}\ket{v'c'}$ that we can simplify using the Kronecker delta :
+\begin{align}
+    \sum_{\tv\tc} \bra{vc}\ket{\tv\tc} (\epsilon_{\Tilde{c}} - \epsilon_{\Tilde{v}})\bra{\tv\tc}\ket{v'c'} \nonumber \\
+    %
+        \approx (\epsilon_c - \epsilon_v)\delta_{vv'}\delta_{cc'} &+ \delta_{cc'}\sum_{\tv}(\epsilon_c - \epsilon_{\tv}) \sum_{v''\neq \tv} (\Delta^*_{\tv v''}\delta_{vv''}\delta_{v'\tv} + \Delta_{\tv v''}\delta_{v'v''}\delta_{v\tv}) \nonumber \\
+        &+  \delta_{vv'} \sum_{\tc} (\epsilon_{\tc} - \epsilon_v) \sum_{c'' \neq\tc} (\Delta_{\tc c''}\delta_{cc''}\delta_{c'\tc} + \Delta^*_{\tc c''}\delta_{c'c''}\delta_{c\tc}) \nonumber \\
+        %
+        = (\epsilon_c - \epsilon_v)\delta_{vv'}\delta_{cc'} &+ \delta_{cc'} \left[  \sum_{v''\neq v'} (\epsilon_c - \epsilon_{v'}) \Delta^*_{v'v''}\delta_{v v''} + \sum_{v'' \neq v} (\epsilon_c - \epsilon_v) \Delta_{vv''} \delta_{v'v''} \right] \nonumber \\
+        &+  \delta_{vv'} \left[ \sum_{c''\neq c'} (\epsilon_{c'} - \epsilon_v)\Delta_{c' c''}\delta_{cc''} + \sum_{c''\neq c} (\epsilon_c - \epsilon_v) \Delta^*_{cc''}\delta_{c'c''} \right] \nonumber \\
+    %
+    = (\epsilon_c - \epsilon_v) \delta_{vv'}\delta_{cc'} &+ \delta_{cc'}(\epsilon_{v'} - \epsilon_v) \Delta_{vv'} + \delta_{vv'}(\epsilon_c - \epsilon_{c'}) \Delta^*_{cc'}
+\end{align}
+where we used $\Delta_{ij} = -\Delta_{ji}^*$ to obtain the last line. Finally, the perturbed Hamiltonian in the excitonic basis in Eq. \eqref{eq:exc_ham} becomes :
+\begin{align}
+    \tilde{H}_{mn} &= \sum_{vc,v'c'} A^{S_m *}_{vc} A^{S_n}_{v'c'} \times \left\{ \left[ (\epsilon_c - \epsilon_v) \delta_{vv'}\delta_{cc'} + K_{vc,v'c'} \right] + \delta_{cc'} (\epsilon_{v'} - \epsilon_v)\Delta_{vv'} + \delta_{vv'}(\epsilon_c - \epsilon_{c'}) \Delta_{cc'}^*  \right\} \nonumber \\
+    &= E^{S_m}\delta_{mn} + \sum_{vc,v'c'} A^{S_m*}_{vc} A^{S_n}_{v'c'} \cdot \left( \delta_{cc'}(\epsilon_{v'} - \epsilon_v) \Delta_{vv'}  + \delta_{vv'} (\epsilon_c - \epsilon_{c'}) \Delta^*_{cc'} \right) \label{eq:perturb_H_exc}
+\end{align}
+where we use the fact that the unperturbed Hamiltonian is diagonalized by the Tamm-Dancoff exciton eigenvectors :
+\begin{equation}
+    E^{S_m}\delta_{mn} = \sum_{vc,v'c'} A^{S_m*}_{vc} A^{S_n}_{v'c'} \times \left( (\epsilon_c - \epsilon_v)\delta_{vv'}\delta_{cc'}+ K_{vc,v'c'} \right).
+\end{equation}
+Therefore, the first term in the second line of Eq. \eqref{eq:perturb_H_exc} is the unperturbed Hamiltonian, while the second term is the exciton-phonon interaction,
+\begin{equation}
+    \tilde{H}_{\text{exc-ph}} = \sum_{vc,v'c'} A^{S_m*}_{vc} A^{S_n}_{v'c'} \cdot \left( \delta_{cc'}(\epsilon_{v'} - \epsilon_v) \Delta_{vv'}  + \delta_{vv'} (\epsilon_c - \epsilon_{c'}) \Delta^*_{cc'} \right). \label{eq:H_exc-ph}
+\end{equation}
+To obtain the final result, we reintroduce the momemtum dependence and the Bloch states :
+\begin{equation}
+    \ket{\phi_i} \to \ket{\phi_{n\kk}}
+\end{equation}
+and the transition basis set for an exciton with center of mass momentum $\QQ$ is $\ket{vc} = \ket{v\kk_v,c\kk_c} = \ket{v\kk_v,c\kk_v + \QQ}$. We write the change in potential due to atomic displacements using normal coordinates :
+\begin{equation}
+    \Delta V = \sum_{\mu \qq} \sqrt{\frac{1}{2\Omega_{\mu\qq}}} \Delta_{\mu\qq} V^{KS}(\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq})  
+\end{equation}
+Then the $\Delta_{ij}$ describing the transition from $i$-th to $j$-th state becomes :
+\begin{equation}
+    \Delta_{n\kk n'\kk'} = \frac{\bra{n'\kk'} \Delta V \ket{n\kk}}{\epsilon_{n\kk} - \epsilon_{n'\kk'}} = \sum_{\mu\qq} \frac{g_{nn'v}(\kk,\qq) \delta(\kk'-\kk-\qq)}{\epsilon_{n\kk} - \epsilon_{n'\kk'}} (\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq})
+\end{equation}
+where $g_{nn'\mu}(\kk,\qq) = (1/2\Omega_{\mu\qq})^{1/2} \bra{n'\kk'} \Delta_{\mu\qq} V^{KS} \ket{n\kk}$ is the usual electron-phonon matrix element \textcolor{red}{check if it corresponds to the expression I gave in chapt1}, namely the probability amplitude for an electron in band $n$ with crystal momentum $\kk$ to transition to a final state in band $n'$ and momentum $\kk' = \kk+\qq$ by absorbing or emitting a phonon with mode index $\mu$ and wave vector $\qq$.
+
+By introducing exciton creation and annihilation operators, $\hat{a}^\dagger_{S_n(\QQ)}$ and $\hat{a}_{S_n(\QQ)}$, we rewrite the exciton-phonon interaction from Eq. \eqref{eq:H_exc-ph} as :
+\begin{equation}
+    \tilde{H}_{\text{exc-ph}} = \sum_{mn\mu, \QQ\qq} \mathcal{G}_{mn\mu}(\QQ,\qq) \hat{a}^\dagger_{S_n(\QQ+\qq)} \hat{a}_{S_n(\QQ)} (\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq}).
+\end{equation}
+where we defined the exciton-phonon matrix elements as :
+\begin{multline}
+    \mathcal{G}_{nm\mu}(\QQ,\qq) = \sum_{\substack{vcv'c'\\ \kk_v \kk_c \kk'_{v'} \kk'_{c'}}} A^{S_m(\QQ+\qq)*}_{v\kk_v,c\kk_c} A^{S_n(\QQ)}_{v'\kk'_{v'},c'\kk'_{c'}} \left[ \delta_{vv'} g_{c'c\mu}(\kk'_{c'},\qq) \delta(\kk_c - \kk'_{c'} - \qq) \right. \\
+    \left. - \delta_{cc'}g_{vv'\mu}(\kk_v,\qq) \delta(\kk'_{v'} - \kk_v -\qq) \right]. \label{eq:Gkkp}
+\end{multline}
+Let us make momentum conservation explicit to obtain the final expression. The exciton-phonon coupling constant $\mathcal{G}_{mn\mu}(\QQ,\qq)$ is the probability amplitude for scattering from an exciton with band index $n$ with center-of-mass momentum $\QQ$ to an exciton with band index $m$ and center-of-mass momentum $\QQ+\qq$. Since $A^{S_n(\QQ)}_{v\kk_{v},c\kk_{c}} \neq 0$ only for $\kk_c - \kk_v = \QQ$ \textcolor{red}{(why ?)}, in Eq. \eqref{eq:Gkkp} we can impose three constraints : $\kk_c - \kk_v = \QQ$, $\kk'_c - \kk'_v =\QQ + \qq$ and $\kk'_c - \kk_c = \qq$ (or $\kk'_v - \kk_v = \qq$). As a consequence, we drop three $\kk$-point \acrshort{BZ} summations and the final result for the exciton-phonon matrix element for a given exciton momentum $\QQ$ and phonon momentum $\qq$ is :
+\begin{multline}
+    \mathcal{G}_{nm\mu}(\QQ,\qq) = \sum_{\kk} \left[ \sum_{vcc'} A^{S_m(\QQ+\qq)*}_{v\kk,c(\kk+\QQ+\qq)} A^{S_n(\QQ)}_{v\kk,c'(\kk+\QQ)}g_{c'cv}(\kk+\QQ,\qq) \right.\\
+     \left. - \sum_{cvv'} A^{S_m(\QQ+\qq)*}_{v(\kk-\qq),c(\kk+\QQ)} A^{S_n(\QQ)}_{v'\kk,c(\kk+\QQ)} g_{vv'\mu}(\kk-\qq,\qq) \right].
+\end{multline}
+
+\section{PL benchmark on hBN and results for mBN}
+better than Chen but intensity reversed for LO/TO. Mention that in Matteo's paper they have the correct intensities by using Lbar at Gamma and Lfull otherwise I think ? \\
+experimental spectra
+
+\section{effect of the substrate}
+electronic gap, distortion of excitonic dispersion to simulate a change in the screening.
+
+\section{Preliminary results on bBN}
+show the distorted spectrum, which also contains the ZO peaks
+
+
 
