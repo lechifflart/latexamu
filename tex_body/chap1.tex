@@ -73,7 +73,7 @@ Using the fact that the total kinetic energy is independent of the density at fi
 \begin{align}
 \begin{split}
 	v_{\text{eff}}(\rr) &= v_{ext}(\rr) + \frac{\delta E_H[n]}{\delta n(\rr)} + \frac{\delta E_{xc}[n]}{\delta n(\rr)} \\
-	&\equiv v_{ext}(\rr) + v_H([n],\rr) + v_{xc}([n],\rr).
+	&\equiv v_{ext}(\rr) + v_H([n],\rr) + v_{xc}([n],\rr). \label{eq:KS_potential}
 \end{split}
 \end{align}
 At this point, we see that we have to solve the many-electron problem self-consistently. Indeed, the density is obtained by solving the Kohn-Sham equations which contain the effective potential. In turn, this potential depends on the density. In practice, one starts from a guess density and iterate over the self-consistent cycle until the quantities of interest vary less than an arbitrary threshold. \\
@@ -546,9 +546,9 @@ The matrix elements of the kernel are :
 \end{equation}
 In our derivation we consider a semiconductor or an insulator with well-separated valence and conduction bands. Therefore the difference of the occupation factors, at $T=0$, in the above equations guarantees that only pairs of an occupied and an empty state are contributing in the interaction. We can use the indices $v,c$ for valence and conduction states, respectively. Then
 \begin{equation}
-	\Xi^{v'c'}_{vc} = 2v^{cc'}_{vv'} - W^{v'c'}_{vc}
+	\Xi^{v'c'}_{vc} = 2v^{cc'}_{vv'} - W^{v'c'}_{vc} \label{eq:BSE_kernel_vc}
 \end{equation}
-This corresponding contribution is often referred to as electron-hole exchange. The second term is called the direct electron-hole interaction, and it is an attractive interaction between the electron and the hole that binds them in a pair.
+The first term above is often referred to as electron-hole exchange and is repulsive. The second term is called the direct electron-hole interaction, and it is an attractive interaction between the electron and the hole that binds them in a pair.
 We can decompose the Hamiltonian into four blocks :
 \begin{equation}
 	H^{2p} = \begin{pmatrix}
@@ -558,7 +558,7 @@ We can decompose the Hamiltonian into four blocks :
 \end{equation}
 where the resonant part is 
 \begin{equation}
-	H^{res} \equiv H^{2p\ v'c'}_{vc} = (\epsilon_c - \epsilon_v) \delta_{vv'}\delta_{cc'} + \Xi^{v'c'}_{vc}
+	H^{res} \equiv H^{2p\ v'c'}_{vc} = (\epsilon_c - \epsilon_v) \delta_{vv'}\delta_{cc'} + \Xi^{v'c'}_{vc} \label{eq:H_BSE_res}
 \end{equation}
 This subpart is hermitian and corresponds to transitions from the valence to the conduction band, with positive frequencies. The coupling part is :
 \begin{equation}
@@ -566,18 +566,18 @@ This subpart is hermitian and corresponds to transitions from the valence to the
 \end{equation}
 which is symmetric. The antiresonant part is :
 \begin{equation}
-	H^{ares} \equiv H^{2p\ c'v'}_{vc} (\epsilon_v - \epsilon_c)\delta_{vv'}\delta_{cc'} - \Xi^{c'v'}_{cv} = - [H^{res}]^*
+	H^{ares} \equiv H^{2p\ c'v'}_{vc} = (\epsilon_v - \epsilon_c)\delta_{vv'}\delta_{cc'} - \Xi^{c'v'}_{cv} = - [H^{res}]^*
 \end{equation}
-The whole Hamiltonian $H^{2p}$ pseudo-hermitian, which means that its eigenvalues are always real. For the calculations in this thesis, we used the Tamm-Dancoff approximation, which consists in neglecting the coupling part of the Hamiltonian. It works best with bulk semiconductors and insulators, where the energy of the transitions is large compared to the interaction matrix elements in $H^{coupl}$. \cite{gruning2009exciton} With this approximation, we only consider transitions with positive energies, and the full Hamiltonian becomes hermitian.
+The whole Hamiltonian $H^{2p}$ is pseudo-hermitian, which means that its eigenvalues are always real. For the calculations in this thesis, we used the Tamm-Dancoff approximation, which consists in neglecting the coupling part of the Hamiltonian. It works best with bulk semiconductors and insulators, where the energy of the transitions is large compared to the interaction matrix elements in $H^{coupl}$. \cite{gruning2009exciton} With this approximation, we only consider transitions with positive energies, and the full Hamiltonian becomes hermitian.
 With this Hamiltonian, we can build a two-particle Schrödinger equation :
 \begin{equation}
-	\sum_{n_3n_4} H^{2p\ n_3n_4}_{n_1n_2} A_\lambda^{n_3n_4} = E_\lambda A_\lambda^{n_1n_2}
+	\sum_{n_3n_4} H^{2p\ n_3n_4}_{n_1n_2} A_\lambda^{n_3n_4} = E_\lambda A_\lambda^{n_1n_2} \label{eq:BSE_secular}
 \end{equation}
-where $E_\lambda$ are the eigenvalues of the \textit{excitons} $\lambda$. We change from the quasiparticle basis $\{n\}$ to the exciton basis $\{\lambda\}$ where we can write the exciton wave function as :
+where $E_\lambda$ is the eigenenergy of the exciton $\lambda$. We change from the quasiparticle basis $\{n\}$ to the exciton basis $\{\lambda\}$ where we can write the exciton wave function as :
 \begin{equation}
 	\Psi_\lambda(r_1, r_2) = \sum_{n_1 n_2} A_\lambda^{n_1n_2} \psi_{n_1}^* (r_1) \psi_{n_2} (r_2)
 \end{equation}
-where $A_\lambda$ are the coefficients of the expansion in the exciton basis. We will later that they are also related to the oscillator strength of the transitions. Finally we can write the two-particle propagator using these quantities :
+where $A_\lambda$ are the coefficients of the expansion in the exciton basis. We will see later that they are also related to the oscillator strength of the transitions. Finally we can write the two-particle propagator using these quantities :
 \begin{equation}
 	L^{n_3n_4}_{n_1n_2}(\go) = 2i \sum_{\gl\gl'}\frac{A^{n_1n_2}_\gl \ A^{*n_3n_4}_{\gl'}}{\omega - E_\gl + i\eta} (f_{n_4} - f_{n_3})
 \end{equation}
@@ -828,7 +828,7 @@ In the last equality, the electron-phonon coupling matrix element $g$ is introdu
 \end{equation}
 or in a more complete form, following the notation adopted by Giustino in Ref. \cite{giustino2017review} :
 \begin{equation}
-	g^{\mu\qq}_{nm\kk} = g^{\mu}_{nm}(\kk,\kk-\qq) = \sum_{Ls} \text{e}^{i\qq\cdot\RR_{Ls}} \ \frac{\mathbf{\xi}^\mu_s(\qq) }{\sqrt{2M_s\omega_\mu(\qq)}} \ \ {}_{uc}\langle n\kk | \frac{\partial v_{\text{eff}}}{\partial \RR_Ls} \ket{m\kk-\qq}_{uc}
+	g^{\mu\qq}_{nm\kk} = g^{\mu}_{nm}(\kk,\kk-\qq) = \sum_{Ls} \text{e}^{i\qq\cdot\RR_{Ls}} \ \frac{\mathbf{\xi}^\mu_s(\qq) }{\sqrt{2M_s\omega_\mu(\qq)}} \ \ {}_{uc}\langle n\kk | \frac{\partial v_{\text{eff}}}{\partial \RR_{Ls}} \ket{m\kk-\qq}_{uc} \label{eq:gkkp}
 \end{equation}
 where the subscript $uc$ signifies that the integral is taken over a unit cell of the crystal, using the lattice-periodic parts of the Kohn-Sham wavefunctions $u_{n\kk}$. These matrix elements are the one we will use throughout this thesis to compute the magnitude of the interaction between electrons and phonons. They are also a key ingredient to define the exciton-phonon coupling.\\
 Note that one can go beyond the first order and compute for instance the matrix elements generated by the second derivative of the effective potential with respect to the atomic displacements. One would obtain the so-called Debye-Waller term, which can be used in a self-energy framework to compute the renormalization of the electronic bands by the lattice vibrations.\cite{giustino2017review, kawai2014electron, cannuccia2011effect}
