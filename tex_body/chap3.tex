@@ -15,32 +15,22 @@ fitting of the dispersion, Lbar vs Lfull
 the nearly-free electron states at Gamma
 
 \section{Theory of the ab initio exciton-phonon coupling}
-In this section we present an \textit{ab initio} approach to obtain the exciton-phonon coupling matrix elements, that goes beyond the finite-difference approach presented in Sec. \ref{sec:excph_fdd}. The great advantage of this formulation is the possibility to integrate over exciton momenta in the full \acrlong{BZ} Brillouin Zone and to obtain the coupling of all excitons to all phonons.\\
-For this work we based our numerical implementation on the formula derived by our collaborator Fulvio Paleari in his PhD thesis, \cite{paleari2019first} itself stemming from the theoretical work of Pierluigi Cudazzo published in Ref. \cite{cudazzo2020first}. The electron-phonon interaction induces a perturbation of the electron-hole interaction present in the BSE kernel. Hence, a dynamical correction appears in the kernel, which allows to construct a self-energy for the exciton-exciton interaction mediated by phonons. I refer the interested reader to these two references, where the rigorous derivation can be found.\\
+In this section we present an \textit{ab initio} approach to obtain the exciton-phonon coupling matrix elements, that goes beyond the finite-difference approach presented in Sec. \ref{sec:excph_fdd}. The great advantage of this formulation is the possibility to integrate over exciton momenta in the full \acrlong{BZ} and to obtain the coupling of all excitons to all phonon modes.\\
 
-In this thesis, I will use first-order perturbation theory for the excitonic Hamiltonian, which introduces an interaction term due to the electron-phonon coupling. 
-\textcolor{red}{c'est nul faut que je reformule de façon cohérente : relis l'article}
+For this work we based our numerical implementation on the formula derived by our collaborator Fulvio Paleari in his PhD thesis, \cite{paleari2019first} itself stemming from the theoretical work of Pierluigi Cudazzo published in Ref. \cite{cudazzo2020first}. In this approach, the electron-phonon interaction is included in the \acrshort{BSE} kernel via a phonon propagator. It induces a dynamic perturbation of the static electron-hole interaction contained in the kernel. It gives rise to a dynamical \acrlong{BSE}. Then, after a few approximations, the problem can be formally inverted and mapped onto an exciton-phonon Hamiltonian, which gives the exciton-phonon matrix elements. I refer the interested reader to these two references \cite{paleari2019first,cudazzo2020first}, where the rigorous derivation can be found.\\
 
-We treat the excitons as boson-like particles bound by the Coulomb interaction so we can define a bosonic Hamiltonian for excitons :
-\begin{equation}
-    H_{\text{exc}} = \sum_\lambda E_\lambda (\QQ) \hat{a}^\dagger_{\lambda\QQ} \hat{a}_{\lambda\QQ}
-\end{equation}
-where $\hat{a}^\dagger_{\lambda\QQ}, \hat{a}_{\lambda\QQ}$ are the creation/annihilation operators for an exciton $\lambda$ with center-of-mass momentum $\QQ$ and energy $E_\lambda(\QQ)$. This is an approximation that ignores the fact that excitons are a pair of two bound fermions, this is why it works best at low exciton density so that the exciton are weakly interacting. It has been shown to correctly reproduce several experimental results.\cite{paleari2019exciton,perebeinos2005effect} However, there are theoretical evidence that the fermionic character of excitons cannot always be neglected.\cite{katzer2023excitonphononscattering}\\
-There is also a more general approach where the idea is to treat the electron-electron, the electron-phonon interactions and the external field on the same footing,\cite{paleari2022exciton} which lifts some of the approximation we use, but it does not introduce relevant changes for the systems investigated here.\\
+In this thesis, I will present another way to derive the same exciton-phonon matrix elements, adapted from Ref. \cite{chen2020exciton}. It uses first-order perturbation theory for the excitonic Hamiltonian, the perturbation being a displacement of atoms along phonon modes. It introduces an additional interaction term due to the electron-phonon coupling, from which the exciton-phonon matrix elements can be identified. \\
+Note that another, more general approach exists in litterature. It consists in treating the electron-electron, the electron-phonon interactions and the external field on the same footing,\cite{paleari2022exciton} which lifts some of the approximation we use, but it does not introduce relevant changes for the systems investigated here.\\
 
-
-
-
-
-We consider a system with displacements from the equilibrium positions $\boldsymbol{u}_{Ls}$ ($L$ labels the unit cell and $s$ the atom). Once again, we start from the \acrshort{DFT} level and take the Taylor expansion of the Kohn-Sham potential, which was defined as $v_{\text{eff}}$ in Eq. \eqref{eq:KS_potential} and that we call here $V^{KS}$. The expansion around the equilibrium positions reads :
+We consider a system with displacements from equilibrium positions $\boldsymbol{u}_{Ls}$ ($L$ labels the unit cell and $s$ the atom). We start from the \acrshort{DFT} level and take the Taylor expansion of the Kohn-Sham potential, labelled as $v_{\text{eff}}$ in Eq. \eqref{eq:KS_potential}, which we call $V^{KS}$ here. The expansion around the equilibrium positions reads :
 \begin{equation}
     V^{KS}(\left\{ \uu_{Ls} \right\}) = V_0^{KS} + \sum_{Ls\alpha} \frac{\partial V^{KS}}{\partial \uu_{Ls\alpha}} \uu_{Ls\alpha} + \mathcal{O}(\left\{ \uu_{Ls} \right\}^2)
 \end{equation}
-The electronic wave functions and eigenvalues of the perturbed system depend on the atomic displacements $\left\{ \uu_{Ls} \right\}$. To obtain their change in the perturbed system, we apply first-order perturbation theory by keeping terms linear in $\left\{ \uu_{Ls} \right\}$. To first order, the correction to the eigenvalues vanishes while the correction to the Kohn-Sham wave functions $\psi_i$, (solutions of Eq. \eqref{eq:KS_eqs}) can be written as : 
+The electronic wave functions and eigenvalues of the perturbed system depend on the atomic displacements $\left\{ \uu_{Ls} \right\}$. To obtain their change in the perturbed system, we apply first-order perturbation theory by keeping terms linear in $\left\{ \uu_{Ls} \right\}$. To first order, the correction to the eigenvalues vanishes while the correction to the Kohn-Sham wave functions $\psi_i$ (solutions of Eq. \eqref{eq:KS_eqs}) can be written as : 
 \begin{equation}
     \delta\ket{\psi_i} = \sum_{j\neq i} \frac{\bra{\psi_j} \Delta V \ket{\psi_i}}{\epsilon_i - \epsilon_j} \ket{\psi_j}, \qquad \text{with} \ \ \Delta V = \sum_{Ls\alpha}\frac{\partial V^{KS}}{\partial \uu_{Ls}}\cdot \uu_{Ls}
 \end{equation}
-In the following, we use the tilde for quantities of the perturbed system and write the perturbed wave function as :
+In the following, we use the tilde to label quantities of the perturbed system and write the perturbed wave function as :
 \begin{equation}
     \ket{\tilde{\psi}_i} = \ket{\psi_i} + \delta\ket{\psi_i} = \ket{\psi_i} + \sum_{j \neq i} \Delta_{ij} \ket{\psi_j} \label{eq:perturb_wf}
 \end{equation}
@@ -80,7 +70,7 @@ The term inside the square brackets can be separated in two :
     &\sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}}  \bra{\Tilde{v}\Tilde{c}} \Tilde{H} \ket{\Tilde{v}'\Tilde{c}'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} =  \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}}  \left[ (\Tilde{\epsilon}_{\Tilde{c}} - \Tilde{\epsilon}_{\Tilde{v}}) \delta_{\Tilde{v}\Tilde{v}'}\delta_{\Tilde{c}\Tilde{c}'} + \tilde{\Xi}_{\tv\tc}^{\tv'\tc'} \right] \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} \\
     &= \sum_{\Tilde{v}\Tilde{c}} \bra{vc}\ket{\Tilde{v}\Tilde{c}} (\epsilon_{\Tilde{c}} - \epsilon_{\Tilde{v}}) \bra{\Tilde{v}\Tilde{c}}\ket{v'c'} + \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}} \tilde{\Xi}_{\tv\tc}^{\tv'\tc'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'}
 \end{align*}
-We make the choice to approximate the perturbed kernel with the unperturbed one, $\tilde{\Xi}_{\tv\tc}^{\tv'\tc'} \approx \bra{\Tilde{v}\Tilde{c}} \Xi \ket{\Tilde{v}'\Tilde{c}'}$, that is to say the effect of the atomic displacements screened interaction can be neglected and $W \approx \Tilde{W}$. This is the same approximation we took in Chapter 2 when we evaluated the response function by finite difference derivative. With this approximation we have :
+We make the choice to approximate the perturbed kernel with the unperturbed one, $\tilde{\Xi}_{\tv\tc}^{\tv'\tc'} \approx \bra{\Tilde{v}\Tilde{c}} \Xi \ket{\Tilde{v}'\Tilde{c}'}$, that is to say the effect of atomic displacements on the screened interaction can be neglected and $W \approx \Tilde{W}$. This is the same approximation we took in Chapter 2 when we evaluated the response function by finite difference derivative. With this approximation we have :
 \begin{equation}
     \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}} \tilde{\Xi}_{\tv\tc}^{\tv'\tc'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} 
     \approx  \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}} 
@@ -90,7 +80,7 @@ and thus the term in square brackets in Eq. \eqref{eq:exc_ham} becomes
 \begin{equation}
     \sum_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'} \bra{vc}\ket{\Tilde{v}\Tilde{c}}  \bra{\Tilde{v}\Tilde{c}} \Tilde{H} \ket{\Tilde{v}'\Tilde{c}'} \bra{\Tilde{v}'\Tilde{c}'}\ket{v'c'} = \sum_{\Tilde{v}\Tilde{c}} \bra{vc}\ket{\Tilde{v}\Tilde{c}} (\epsilon_{\Tilde{v}} - \epsilon_{\Tilde{c}}) \bra{\Tilde{v}\Tilde{c}}\ket{v'c'} +  \Xi_{vc}^{v'c'} 
 \end{equation}
-Next, we use Eq. \eqref{eq:perturb_wf} to expand $\sum_{\Tilde{v}\tilde{c}} \bra{vc}\ket{\Tilde{v}\Tilde{c}} (\epsilon_{\Tilde{c}} - \epsilon_{\Tilde{v}})\bra{\Tilde{v}\Tilde{c}}\ket{v'c'}$ to order $\mathcal{O}(\Delta)$. We work within the Tamm-Dancoff approximation and keep only the resonant part of the BSE Hamiltonian; as a consequence, only valence-valence hole-phonon and conduction-conduction electron-phonon scattering are allowed, that is to say $\Delta_{vc} = \Delta_{cv} = 0$ where the operator $\Delta$ was defined in Eq. \eqref{eq:Delta_var}. Using Eq. \eqref{eq:perturb_wf} we get :
+Next, we use Eq. \eqref{eq:perturb_wf} to expand $\sum_{\Tilde{v}\tilde{c}} \bra{vc}\ket{\Tilde{v}\Tilde{c}} (\epsilon_{\Tilde{c}} - \epsilon_{\Tilde{v}})\bra{\Tilde{v}\Tilde{c}}\ket{v'c'}$ to order $\mathcal{O}(\Delta)$. We work within the Tamm-Dancoff approximation and keep only the resonant part of the BSE Hamiltonian; as a consequence, only valence-valence and conduction-conduction phonon-mediated scattering are allowed, that is to say $\Delta_{vc} = \Delta_{cv} = 0$ where the operator $\Delta$ was defined in Eq. \eqref{eq:Delta_var}. Using Eq. \eqref{eq:perturb_wf} we get :
 \begin{align}
 \begin{split}
     \bra{vc}\ket{\tv\tc} &= \bra{v}\ket{\tv}\bra{c}\ket{\tc} = \left(\delta_{v\tv} + \sum_{v''\neq\tv}\Delta_{\tv v''}\delta_{vv''}\right) \left(\delta_{c\tc} + \sum_{c''\neq \tc}\Delta_{\tc c''}\delta_{cc''}\right) \\
@@ -126,37 +116,51 @@ Therefore, the first term in the second line of Eq. \eqref{eq:perturb_H_exc} is 
 \begin{equation}
     \tilde{H}_{\text{exc-ph}} = \sum_{vc,v'c'} A_{\lambda'}^{vc*} A_{\lambda}^{v'c'} \cdot \left( \delta_{cc'}(\epsilon_{v'} - \epsilon_v) \Delta_{vv'}  + \delta_{vv'} (\epsilon_c - \epsilon_{c'}) \Delta^*_{cc'} \right). \label{eq:H_exc-ph}
 \end{equation}
-To obtain the final result, we reintroduce the momemtum dependence and the Bloch states :
+To obtain the final result, we reintroduce the periodicity of the Kohn-Sham states stemming from Bloch theorem :
 \begin{equation}
     \ket{\phi_i} \to \ket{\phi_{n\kk}}
 \end{equation}
-and the transition basis set for an exciton with center of mass momentum $\QQ$ is $\ket{vc} = \ket{v\kk_v,c\kk_c} = \ket{v\kk_v,c\kk_v + \QQ}$. We write the change in potential due to atomic displacements using the phonon normal coordinates :
+and the transition basis set for an exciton with center of mass momentum $\QQ$ is $\ket{vc} = \ket{v\kk_v,c\kk_c} = \ket{v\kk_v,c\kk_v + \QQ}$. We write the change in potential due to atomic displacements in second quantization using the phonon normal coordinates :
 \begin{equation}
     \Delta V = \sum_{\mu \qq} \sqrt{\frac{1}{2\Omega_{\mu\qq}}} \partial_{\mu\qq} V^{KS}(\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq})  
 \end{equation}
-where the operator $\partial_{\mu\qq}$ should be understood as the derivative with respect to a displacement along a phonon mode $\mu$ at momentum $\qq$. Then the $\Delta_{ij}$ describing the transition from $i$-th to $j$-th state becomes :
+where the operator $\partial_{\mu\qq}$ should be understood as the derivative with respect to a displacement $R_{\mu\qq}$ along a phonon mode $\mu$ at momentum $\qq$. Then the $\Delta_{ij}$ describing the transition from $i$-th to $j$-th state becomes :
 \begin{equation}
     \Delta_{n\kk n'\kk'} = \frac{\bra{n'\kk'} \Delta V \ket{n\kk}}{\epsilon_{n\kk} - \epsilon_{n'\kk'}} = \sum_{\mu\qq} \frac{g_{nn'\mu}(\kk,\qq) \delta(\kk'-\kk-\qq)}{\epsilon_{n\kk} - \epsilon_{n'\kk'}} (\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq})
 \end{equation}
 where $g_{nn'\mu}(\kk,\qq)$ are the electron-phonon matrix elements defined in Eq. \eqref{eq:gkkp}, namely the probability amplitude for an electron in band $n$ with crystal momentum $\kk$ to transition to a final state in band $n'$ and momentum $\kk' = \kk+\qq$ by absorbing or emitting a phonon with mode index $\mu$ and wave vector $\qq$. The slight difference with Eq. \eqref{eq:gkkp} is that we change the arguments to have a more compact form : the first argument is the momentum of the initial state and the second argument is the phonon momentum.
 
-By introducing exciton creation and annihilation operators, $\hat{a}^\dagger_{\lambda(\QQ)}$ and $\hat{a}_{\lambda(\QQ)}$, we rewrite the exciton-phonon interaction from Eq. \eqref{eq:H_exc-ph} as :
+To proceed, we have to make the approximation that the excitons are boson-like particles bound by the Coulomb interaction. We can then define a bosonic Hamiltonian for excitons :
+\begin{equation}
+    H_{\text{exc}} = \sum_\lambda E_\lambda (\QQ) \hat{a}^\dagger_{\lambda\QQ} \hat{a}_{\lambda\QQ}
+\end{equation}
+where $\hat{a}^\dagger_{\lambda\QQ}, \hat{a}_{\lambda\QQ}$ are the creation/annihilation operators for an exciton $\lambda$ with center-of-mass momentum $\QQ$ and energy $E_\lambda(\QQ)$. This is an approximation that ignores the fact that excitons are a pair of two bound fermions, this is why it works best at low exciton density so that the exciton are weakly interacting. It has been shown to correctly reproduce several experimental results.\cite{paleari2019exciton,perebeinos2005effect} However, there are theoretical evidence that the fermionic character of excitons cannot always be neglected.\cite{katzer2023excitonphononscattering}\\
+Using this approximation we rewrite the exciton-phonon interaction from Eq. \eqref{eq:H_exc-ph} in second quantization :
 \begin{equation}
     \tilde{H}_{\text{exc-ph}} = \sum_{\lambda\lambda'\mu, \QQ\qq} \mathcal{G}_{\lambda\lambda'}^{\mu}\QQ,\qq \hat{a}^\dagger_{\lambda\QQ+\qq} \hat{a}_{\lambda\QQ} (\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq}).
 \end{equation}
 where we defined the exciton-phonon matrix elements as :
 \begin{multline}
     \mathcal{G}_{\lambda\lambda'}^{\mu}(\QQ,\qq) = \sum_{\substack{vcv'c'\\ \kk_v \kk_c \kk'_{v'} \kk'_{c'}}} A_{\lambda\QQ+\qq}(v\kk_v,c\kk_c) A_{\lambda'\QQ}^*(v'\kk'_{v'},c'\kk'_{c'}) \\ 
-    \times \left[ \delta_{vv'} g_{c'c\mu}(\kk'_{c'},\qq) \delta(\kk_c - \kk'_{c'} - \qq) \right. \left. - \delta_{cc'}g_{vv'\mu}(\kk_v,\qq) \delta(\kk'_{v'} - \kk_v -\qq) \right]. \label{eq:Gkkp}
+    \times \left[ \delta_{vv'} g_{c'c\mu}(\kk'_{c'},\qq) \delta(\kk_c - \kk'_{c'} - \qq) \right. \left. - \delta_{cc'}g_{vv'\mu}(\kk_v,\qq) \delta(\kk'_{v'} - \kk_v -\qq) \right]. \label{eq:Gkkp_full}
 \end{multline}
-Let us make momentum conservation explicit to obtain the final expression. The exciton-phonon coupling constant $\mathcal{G}_{\lambda\lambda'\mu}(\QQ,\qq)$ is the probability amplitude for scattering from an exciton with band index $\lambda$ with center-of-mass momentum $\QQ + \qq$ to an exciton with band index $\lambda'$ and center-of-mass momentum $\QQ$. This convention will be clarified later. Since $A_{\lambda\QQ}(v\kk_{v},c\kk_{c}) \neq 0$ only for $\kk_c - \kk_v = \QQ$, in Eq. \eqref{eq:Gkkp} we can impose three constraints : $\kk_c - \kk_v = \QQ$, $\kk'_c - \kk'_v =\QQ + \qq$ and $\kk'_c - \kk_c = \qq$ (or $\kk'_v - \kk_v = \qq$). As a consequence, we drop three $\kk$-point \acrshort{BZ} summations and the final result for the exciton-phonon matrix element for a given exciton momentum $\QQ$ and phonon momentum $\qq$ is :
+Let us make momentum conservation explicit to obtain the final expression. The exciton-phonon coupling constant $\mathcal{G}_{\lambda\lambda'\mu}(\QQ,\qq)$ is the probability amplitude for scattering from an exciton with band index $\lambda$ with center-of-mass momentum $\QQ + \qq$ to an exciton with band index $\lambda'$ and center-of-mass momentum $\QQ$. This convention will be clarified later. Since $A_{\lambda\QQ}(v\kk_{v},c\kk_{c}) \neq 0$ only for $\kk_c - \kk_v = \QQ$, in Eq. \eqref{eq:Gkkp_full} we can impose three constraints : $\kk_c - \kk_v = \QQ$, $\kk'_c - \kk'_v =\QQ + \qq$ and $\kk'_c - \kk_c = \qq$ (or $\kk'_v - \kk_v = \qq$). As a consequence, we drop three $\kk$-point \acrshort{BZ} summations and the final result for the exciton-phonon matrix element for a given exciton momentum $\QQ$ and phonon momentum $\qq$ is :
 \begin{multline}
     \mathcal{G}_{\lambda\lambda'}^{\mu}(\QQ,\qq) \\
     = \sum_{\kk} \left[ \sum_{vcc'} A_{\lambda\QQ+\qq}(v\kk,c\kk+\QQ+\qq) A_{\lambda'\QQ}^{*}(v\kk,c'\kk+\QQ)g_{c'c\mu}(\kk+\QQ +\qq,-\qq) \right.\\
-     \left. - \sum_{cvv'} A_{\lambda\QQ+\qq}(v\kk-\qq,c\kk+\QQ) A_{\lambda'\QQ}^*(v'\kk,c\kk+\QQ) g_{vv'\mu}(\kk-\qq,\qq) \right].
+     \left. - \sum_{cvv'} A_{\lambda\QQ+\qq}(v\kk-\qq,c\kk+\QQ) A_{\lambda'\QQ}^*(v'\kk,c\kk+\QQ) g_{vv'\mu}(\kk-\qq,\qq) \right]. \label{eq:Gkkp}
 \end{multline}
-\textcolor{red}{we took this convention for the scattering because final state is a direct exciton}
+This is the general expression which was implemented in the \yambo~code. With this expression, we see that using the exciton basis shifts the picture from electrons and holes scattering with phonons to transitions between excitonic states mediated by phonons.
 
+This formula allows to compute various quantities depending on the exciton-phonon matrix elements, such as the exciton lifetimes or more interestingly for us, the response function that includes phonon-assisted transitions. This will allow us to compute luminescence spectra. 
+
+
+\section{Phonon-assisted response function}
+To simulate the process of luminescence, we assume that the sample is constantly pumped with a laser and that there is a quasi-equilibrium population of excited carriers. In the excitonic picture, it means that the minima of the exciton dispersion are populated. When these minima are at indirect momenta, the process of light emission will start from an exciton $\lambda$ at finite momentum $\QQ$ that will be scattered by a phonon with momentum $\qq = -\QQ$ and frequency $\Omega_{-\QQ}$ into a direct exciton $\lambda'$ at $\QQ = 0$. This direct exciton is allowed to recombine radiatively but it is a virtual, intermediate state. The frequency of the emitted light will be $\hbar \omega_{PL} = \hbar E_{\lambda} \pm \hbar\Omega$. This allows us to simplify the expression of the exciton-phonon matrix elements in Eq. \eqref{eq:Gkkp} as $\mathcal{G}_{\lambda\lambda'}^\mu(\QQ=0,\qq) = \mathcal{G}_{\lambda\lambda'}^\mu(\qq)$ \textcolor{red}{maybe choose a less confusing labelling than $\lambda/\lambda'$ for the indirect/direct excitons}
+
+%
+%
+construct a self-energy for the exciton-exciton interaction mediated by phonons.
 
 \section{PL benchmark on hBN and results for mBN}
 better than Chen but intensity reversed for LO/TO. Mention that in Matteo's paper they have the correct intensities by using Lbar at Gamma and Lfull otherwise I think ? \\
