@@ -137,7 +137,7 @@ To proceed, we have to make the approximation that the excitons are boson-like p
 where $\hat{a}^\dagger_{\lambda\QQ}, \hat{a}_{\lambda\QQ}$ are the creation/annihilation operators for an exciton $\lambda$ with center-of-mass momentum $\QQ$ and energy $E_\lambda(\QQ)$. This is an approximation that ignores the fact that excitons are a pair of two bound fermions, this is why it works best at low exciton density so that the exciton are weakly interacting. It has been shown to correctly reproduce several experimental results.\cite{paleari2019exciton,perebeinos2005effect} However, there are theoretical evidence that the fermionic character of excitons cannot always be neglected.\cite{katzer2023excitonphononscattering}\\
 Using this approximation we rewrite the exciton-phonon interaction from Eq. \eqref{eq:H_exc-ph} in second quantization :
 \begin{equation}
-    \tilde{H}_{\text{exc-ph}} = \sum_{\lambda\lambda'\mu, \QQ\qq} \mathcal{G}_{\lambda\lambda'}^{\mu}\QQ,\qq \hat{a}^\dagger_{\lambda\QQ+\qq} \hat{a}_{\lambda\QQ} (\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq}).
+    \tilde{H}_{\text{exc-ph}} = \sum_{\lambda\lambda'\mu, \QQ\qq} \mathcal{G}_{\lambda\lambda'}^{\mu}(\QQ,\qq) \hat{a}^\dagger_{\lambda\QQ+\qq} \hat{a}_{\lambda'\QQ} (\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq}).
 \end{equation}
 where we defined the exciton-phonon matrix elements as :
 \begin{multline}
@@ -150,21 +150,24 @@ Let us make momentum conservation explicit to obtain the final expression. The e
     = \sum_{\kk} \left[ \sum_{vcc'} A_{\lambda\QQ+\qq}(v\kk,c\kk+\QQ+\qq) A_{\lambda'\QQ}^{*}(v\kk,c'\kk+\QQ)g_{c'c\mu}(\kk+\QQ +\qq,-\qq) \right.\\
      \left. - \sum_{cvv'} A_{\lambda\QQ+\qq}(v\kk-\qq,c\kk+\QQ) A_{\lambda'\QQ}^*(v'\kk,c\kk+\QQ) g_{vv'\mu}(\kk-\qq,\qq) \right]. \label{eq:Gkkp}
 \end{multline}
-This is the general expression which was implemented in the \yambo~code. With this expression, we see that using the exciton basis shifts the picture from electrons and holes scattering with phonons to transitions between excitonic states mediated by phonons.
+This is the general expression which was implemented in the \yambo~code. This expression is made of two contributions relative to the coupling of phonons with either the electron in the conduction band or the hole in the valence band constituting the exciton. It corresponds to a rotation of the electron-phonon coupling in the exciton basis. This basis shifts the picture from electrons and holes scattering with phonons to transitions between excitonic states mediated by phonons.
 
 This formula allows to compute various quantities depending on the exciton-phonon matrix elements, such as the exciton lifetimes or more interestingly for us, the response function that includes phonon-assisted transitions. This will allow us to compute luminescence spectra. 
 
 
 \section{Phonon-assisted response function}
+Now that we ha
+
+%
+%
 To simulate the process of luminescence, we assume that the sample is constantly pumped with a laser and that there is a quasi-equilibrium population of excited carriers. In the excitonic picture, it means that the minima of the exciton dispersion are populated. When these minima are at indirect momenta, the process of light emission will start from an exciton $\lambda$ at finite momentum $\QQ$ that will be scattered by a phonon with momentum $\qq = -\QQ$ and frequency $\Omega_{-\QQ}$ into a direct exciton $\lambda'$ at $\QQ = 0$. This direct exciton is allowed to recombine radiatively but it is a virtual, intermediate state. The frequency of the emitted light will be $\hbar \omega_{PL} = \hbar E_{\lambda} \pm \hbar\Omega$. This allows us to simplify the expression of the exciton-phonon matrix elements in Eq. \eqref{eq:Gkkp} as $\mathcal{G}_{\lambda\lambda'}^\mu(\QQ=0,\qq) = \mathcal{G}_{\lambda\lambda'}^\mu(\qq)$ \textcolor{red}{maybe choose a less confusing labelling than $\lambda/\lambda'$ for the indirect/direct excitons}
 
-%
-%
-construct a self-energy for the exciton-exciton interaction mediated by phonons.
 
+%
 \section{PL benchmark on hBN and results for mBN}
 better than Chen but intensity reversed for LO/TO. Mention that in Matteo's paper they have the correct intensities by using Lbar at Gamma and Lfull otherwise I think ? \\
 experimental spectra
+
 
 \section{effect of the substrate}
 electronic gap, distortion of excitonic dispersion to simulate a change in the screening.
