@@ -42,7 +42,7 @@ with
 We set ourselves in the Tamm-Dancoff approximation and we use the resonant Hamiltonian from Eq. \eqref{eq:H_BSE_res} as the  Hamiltonian of the unperturbed system $H \equiv H^{2p}(\{\boldsymbol{u}_{Ls} \}=0)$. For the perturbed system, we have $\Tilde{H} \equiv H^{2p}(\{\boldsymbol{u}_{Ls} \})$. 
 The perturbed Hamiltonian matrix element is :
 \begin{equation}
-    \Tilde{H}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'}  = \bra{\Tilde{v}\Tilde{c}} \tilde{H} \ket{\Tilde{v}'\Tilde{c}'}  = ( \Tilde{\epsilon}_c - \Tilde{\epsilon}_v ) \delta_{\Tilde{v}\Tilde{v}'}\delta_{\Tilde{c}\Tilde{c}'} + \tilde{\Xi}_{\tv\tc}^{\tv'\tc'}
+    \Tilde{H}_{\Tilde{v}\Tilde{c},\Tilde{v}'\Tilde{c}'}  = \bra{\Tilde{v}\Tilde{c}} \tilde{H} \ket{\Tilde{v}'\Tilde{c}'}  = ( \Tilde{\epsilon}_c - \Tilde{\epsilon}_v ) \delta_{\Tilde{v}\Tilde{v}'}\delta_{\Tilde{c}\Tilde{c}'} + \tilde{\Xi}_{\tv\tc}^{\tv'\tc'} \label{eq:perturbed_BSE}
 \end{equation}
 where $v,c$ refer to valence and conduction bands, respectively.
 The perturbed Bethe-Salpeter kernel is defined just as in Eq. \eqref{eq:BSE_kernel_vc}, except that it is evaluated with the screened interaction of the perturbed system $\tilde{W}$, and its matrix elements are expressed in the perturbed basis.
@@ -137,7 +137,7 @@ To proceed, we have to make the approximation that the excitons are boson-like p
 where $\hat{a}^\dagger_{\lambda\QQ}, \hat{a}_{\lambda\QQ}$ are the creation/annihilation operators for an exciton $\lambda$ with center-of-mass momentum $\QQ$ and energy $E_\lambda(\QQ)$. This is an approximation that ignores the fact that excitons are a pair of two bound fermions, this is why it works best at low exciton density so that the exciton are weakly interacting. It has been shown to correctly reproduce several experimental results.\cite{paleari2019exciton,perebeinos2005effect} However, there are theoretical evidence that the fermionic character of excitons cannot always be neglected.\cite{katzer2023excitonphononscattering}\\
 Using this approximation we rewrite the exciton-phonon interaction from Eq. \eqref{eq:H_exc-ph} in second quantization :
 \begin{equation}
-    \tilde{H}_{\text{exc-ph}} = \sum_{\lambda\lambda'\mu, \QQ\qq} \mathcal{G}_{\lambda\lambda'}^{\mu}(\QQ,\qq) \hat{a}^\dagger_{\lambda\QQ+\qq} \hat{a}_{\lambda'\QQ} (\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq}).
+    \tilde{H}_{\text{exc-ph}} = \sum_{\lambda\lambda'\mu, \QQ\qq} \mathcal{G}_{\lambda\lambda'}^{\mu}(\QQ,\qq) \hat{a}^\dagger_{\lambda\QQ+\qq} \hat{a}_{\lambda'\QQ} (\hat{b}_{\mu\qq} + \hat{b}^\dagger_{\mu-\qq}). \label{eq:H_excph}
 \end{equation}
 where we defined the exciton-phonon matrix elements as :
 \begin{multline}
@@ -156,24 +156,78 @@ This formula allows to compute various quantities depending on the exciton-phono
 
 
 \section{Phonon-assisted response function}
-Now that we ha
+Now we can proceed to the solution of the exciton-phonon Hamiltonian. A direct diagonalization is out of reach because the transitions at different $\QQ$ are mixed by the electron-phonon scattering, therefore the dimension of the Hilbert space becomes too large. Hence we will make use of \acrshort{MBPT} to find an approximate solution to Eq. \eqref{eq:H_excph}. The dynamical perturbation induced by the electron-phonon coupling adds a term to the \acrshort{BSE} kernel and it yields a general \textit{dynamical} \acrlong{BSE} :
+\begin{equation}
+    \mathcal{L}(1234) = L(1234) + \int d5678 \ L(1625) \ \tilde{\Xi}^{D}(5867) \ \mathcal{L}(7483) \label{eq:dBSE}
+\end{equation}
+where $L$ is the two-particle propagator solution of the static \acrshort{BSE} in Eq. \eqref{eq:BSE} and the kernel $\tilde{\Xi}^{D}$ has an additional dynamical term induced by the electron-phonon interaction. The dynamical kernel does not allow a direct inversion of the dynamical \acrshort{BSE} since it depends self-consistently on $L$ and cannot be written in terms of two times. We chose an approach that consists in taking the electron-phonon interaction only up to first order. This way, we define $L^{(1)}$ as the solution of Eq. \eqref{eq:dBSE}, obtained by replacing $\mathcal{L}$ on the right hand side of Eq. \ref{eq:dBSE} by the static $L$ :
+\begin{equation}
+    L^{(1)}(1234) = L(1234) + \int d5678 \ L(1625) \ \tilde{\Xi}(5867) \ L(7483)
+\end{equation}
+where $\Tilde{\Xi}$ is the kernel perturbed by first-order electron-phonon interaction, the same introduced in the above section in Eq. \eqref{eq:perturbed_BSE}. With this equation can consider only interaction mediated with a single phonon. Extension to multiple-phonon scattering exists in literature,\cite{perebeinos2008phonon} but the present formulation is the first order of a cumulant expansion and its generalization to coupling with phonons at all orders is straightforward.\cite{cudazzo2020first}\\
+Using the relation Eq. \eqref{eq:chi_iL}, we can obtain the response function in the excitonic basis in terms of one frequency (or two times), including the first-order correction due to exciton-phonon coupling :
+\begin{equation}
+    \chi^{(1)}_{\lambda\lambda'}(\omega) = \chi_{\lambda\lambda'}(\omega) + \chi_{\lambda}(\omega) \ \Pi^{\text{excp-ph}}_{\lambda\lambda'} (\omega) \ \chi_{\lambda'}(\omega) \label{eq:chi_1}
+\end{equation}
+where we used the short-hand notation $\chi_{\lambda}(\omega) = \chi_{\lambda\lambda'} (\omega) \delta_{\lambda\lambda'}$. On the right hand side, the quantity $\Pi^{\text{excp-ph}}_{\lambda\lambda'} (\omega)$ is the exciton self-energy describing dynamical effects induced by the electron-phonon interaction. We will refer to it as \textit{exciton-phonon self-energy}. It can be computed explicitly in \acrshort{MBPT}\cite{mahan2000many} from the perturbed kernel $\tilde{\Xi}$ in the Tamm-Dancoff approximation, and we do it in a similar way as in Ref. \cite{giustino2017review} for the electron-phonon case. Owing to the fact that we consider the first order only in exciton-phonon scattering, we will have a self-energy similar to the Fan-Migdal one for the electron-phonon problem : $\Pi^{\text{excp-ph}} = \mathcal{G}^2DL$ where the exciton propagator $L$ replaces the electron one, $D$ is the phonon propagator and $\mathcal{G}$ are the exciton-phonon matrix elements derived in the previous section given by Eq. \eqref{eq:Gkkp}. 
 
-%
-%
-To simulate the process of luminescence, we assume that the sample is constantly pumped with a laser and that there is a quasi-equilibrium population of excited carriers. In the excitonic picture, it means that the minima of the exciton dispersion are populated. When these minima are at indirect momenta, the process of light emission will start from an exciton $\lambda$ at finite momentum $\QQ$ that will be scattered by a phonon with momentum $\qq = -\QQ$ and frequency $\Omega_{-\QQ}$ into a direct exciton $\lambda'$ at $\QQ = 0$. This direct exciton is allowed to recombine radiatively but it is a virtual, intermediate state. The frequency of the emitted light will be $\hbar \omega_{PL} = \hbar E_{\lambda} \pm \hbar\Omega$. This allows us to simplify the expression of the exciton-phonon matrix elements in Eq. \eqref{eq:Gkkp} as $\mathcal{G}_{\lambda\lambda'}^\mu(\QQ=0,\qq) = \mathcal{G}_{\lambda\lambda'}^\mu(\qq)$ \textcolor{red}{maybe choose a less confusing labelling than $\lambda/\lambda'$ for the indirect/direct excitons}
+Keeping only the first order dynamical correction allows scattering with only one phonon, but the use of a self-energy allows to formally write two different ways of summing contributions to infinite orders, hence scattering with any number of phonons. The first one is to take a Dyson equation $\chi^{D} = \chi + \chi \Pi^{\text{excp-ph}} \chi$ which corresponds to a partial re-summation of the general Eq. \eqref{eq:dBSE}.\cite{marini2003dynamical} It will yield the correction to the exciton energies due to coupling with phonons but will fail to describe the phonon satellites in the optical spectra, just as the \acrshort{PES} satellites given by the $GW$ approximation are inaccurate. Another infinite summation is the cumulant expansion $\chi^C = \chi e^C$ with the cumulant coefficient of the form $C_\lambda(t) = \int dt \Pi^{\text{excp-ph}}_{\lambda\lambda}(t) e^{iE_\lambda t}$, determined by the diagonal components of the self-energy.\cite{cudazzo2020first} The cumulant ansatz is able to capture the physics giving rise to phonon satellites.\\
+In fact, the first order of these two summations is identical and is given by Eq. \eqref{eq:chi_1}. It is the one we use for the rest of this thesis. We will focus on the description of the satellite structures in optical spectra and neglect the corrections to exciton energies. The exciton-phonon self-energy writes :
+\begin{multline}
+    \Pi^{\text{excp-ph}}_{\lambda\lambda'} (\QQ,\omega) = \frac{1}{N_q} \sum_{\mu\beta\qq} \mathcal{G}^\mu_{\beta\lambda}(\QQ,\qq) \mathcal{G}^{\mu*}_{\beta\lambda'}(\QQ,\qq) \\
+    \times \left[ \frac{1-n_\beta(\QQ+\qq)+n_{\qq\mu}}{\omega-E_{\QQ+\qq,\beta} + \Omega_{\qq\mu} + i\eta} + \frac{n_\beta(\QQ+\qq)+n_{\qq\mu}}{\omega-E_{\QQ+\qq,\beta} - \Omega_{\qq\mu} + i\eta} \right] \label{eq:excph_SE}
+\end{multline}
+where $N_q$ is the number of $q$-points summed over in the Brillouin Zone, $\Omega_{\qq\mu}$ is the frequency of phonon mode $\mu$ at momentum $\qq$, $n_{\qq\mu}$ and $n_\beta(\QQ)$ are the temperature-dependent occupation factors for phonons and excitons, respectively. From here on, we label $\beta$ the finite-momentum, lowest lying excitons states that are populated. The internal sum over $\beta$ excitons includes every possible exciton level $E_{\QQ+\qq,\beta}$ that can be connected to the external exciton levels $E_{\lambda,\QQ}$ by emitting or absorbing one phonon with frequency $\Omega_{\qq\mu}$.
 
+To simulate the process of luminescence, we assume that the sample is constantly pumped with a laser and that there is a quasi-equilibrium population of excited carriers. In the excitonic picture, it means that the minima of the exciton dispersion are populated. When these minima are at indirect momenta, the process of light emission will start from an exciton $\beta$ at finite momentum $\qq$ that will be scattered by a phonon with the same momentum $\qq$ and frequency $\Omega_{\qq}$ into a direct exciton $\lambda$ at $\QQ = 0$. This direct exciton is allowed to recombine radiatively but it is a virtual, intermediate state. The frequency of the emitted light will be $\hbar \omega_{PL} = \hbar E_{\qq\beta} \pm \hbar\Omega_{\qq\mu}$. This allows us to simplify the expression of the exciton-phonon matrix elements in Eq. \eqref{eq:Gkkp} as $\mathcal{G}_{\lambda\lambda'}^\mu(\QQ=0,\qq) = \mathcal{G}_{\lambda\lambda'}^\mu(\qq)$. Then, we make two approximations to compute the self-energy in Eq. \eqref{eq:excph_SE}. The first one is to neglect the excitonic occupations $n_\beta$ compared to the phonon ones $n_{\qq\mu}$. This is realistic for the quasi-equilibrium situation we are interested in (see Supplemental Materials of Ref. \cite{schue2019bright} for an estimation of the excitonic density in hBN). The second is to use only the diagonal components of the self-energy.\cite{toyozawa1964interband} \textcolor{red}{I didn't really understand what the off-diagonal terms do.} The simplified expression for the self-energy reads :
+\begin{multline}
+    \Pi^{\text{excp-ph}}_{\lambda}(\QQ=0,\omega) = \frac{1}{N_q} \sum_{\mu\beta\qq} |\mathcal{G}^\mu_{\beta\lambda}(\qq)|^2 \\
+    \times \left[ \frac{1+n_{\qq\mu}}{\omega-E_{\qq\beta} - \Omega_{\qq\mu} + i\eta} + \frac{n_{\qq\mu}}{\omega-E_{\qq\beta} + \Omega_{\qq\mu} + i\eta} \right]. \label{eq:excph_SE_compact}
+\end{multline}
+Plugging Eq. \eqref{eq:excph_SE_compact} in Eq. \eqref{eq:chi_1}, we obtain for the diagonal case :
+\begin{equation}
+    \chi^{(1)}_\lambda(\omega) = \frac{|T^\lambda|^2 (1-R_\lambda)}{\omega - E_\lambda + i\eta} + \frac{|T^\lambda|^2}{N_q} \sum_{\mu\beta\qq} \frac{|\mathcal{G}^\mu_{\beta\lambda}(\qq)|^2}{(E_{\qq\beta} - E_\lambda \pm \Omega_{\qq\mu})^2} \frac{1/2 \pm 1/2 + n_{\qq\mu}}{\omega - E_{\qq\beta} \mp \Omega_{\qq\mu} + i\eta}
+\end{equation}
+where the upper (lower) sign refer to phonon emission (absorption). The above expression contains two terms : the first one describes the response coming from direct transitions. Its weight is reduced by the renormalization factor $R_\lambda$ compared to the static case. The second term gives the phonon satellites coming from transitions assisted by the absorption or emission of a single phonon. They appear at the energy of the finite-momentum excitons plus or minus on phonon frequency $E_{\qq\beta} \pm \Omega_{\qq\mu}$. The renormalization factor $R_\lambda$ is given by :
+\begin{align}
+    R_\lambda &= - \frac{\partial \Pi^{\text{excp-ph}}_{\lambda\lambda}(\omega)}{\partial \omega}\biggr|_{\omega = E_\lambda} \\
+    &= \frac{1}{N_q} \sum_{\mu\beta\qq} |\mathcal{G}^\mu_{\beta\mu}(\qq)|^2 \left[ \frac{n_{\qq\mu} + 1}{(E_{\qq\beta} - E_\lambda + \Omega_{\qq\mu} )^2} + \frac{n_{\qq\mu}}{(E_{\qq\beta} - E_\lambda - \Omega_{\qq\mu})^2} \right] \label{eq:renorm_fact}
+\end{align}
+It is given by the derivative of the self-energy with respect to incoming light frequency. It is a measure of how much weight is transferred from the direct peak to the satellites structures in the optical spectra when including the exciton-phonon coupling. There is a divergence when the phonon frequency is resonant with the exciton energy difference in the denominators. This unphysical behavior is an artifact of the finite-order perturbation theory.\cite{toyozawa2003optical} If higher order terms are included, as in the cumulant expansion for instance, then a correction to the exciton energies and a broadening enter then denominators, which removes the divergence. In our case, one of the experimental hypothesis is that a phonon satellite caused by a transition between two zero-momentum excitons is visible in the photoluminescence spectrum of \acrshort{mBN}. Hence we have to take special care when performing the $q$ integration around $\Gamma$. To avoid divergences, we excluded the three acoustic modes with zero frequency at $\Gamma$ in the sum over phonon modes. Moreover to have a precise description of the phonon and exciton dispersions at small momentum, we used a double-grid scheme as explained in Appendix \ref{sec:double_grids}.
+
+Now we use Eq. \eqref{eq:eps_macro} to get the imaginary part of the macroscopic dielectric function. which in turn enters the van Roosbroeck--Shockley relation from Eqs. \eqref{eq:vRS_PL} and \eqref{eq:vRS_PL_ind} and our final luminescence intensity formula writes, up to a multiplicative constant :
+\begin{multline}
+    I^{\text{PL}}(\omega) = \Im \sum_\lambda |T^\lambda|^2 \left\{  \omega^3 n_1(\omega) \frac{1-R_\lambda}{\omega - E_\lambda + i\eta} \ e^{-\tfrac{E_\lambda-E_{min}}{k_B T_{exc}}} \right.\\
+    +\left.  \sum_{\mu\beta\qq} \omega(\omega \mp \Omega_{\qq\mu})^2 n_1(\omega) \frac{|\mathcal{G}^\mu_{\beta\mu}(\qq)|^2}{(E_{\qq\beta} - E_\lambda \pm \Omega_{\qq\mu} )^2} \frac{1/2 \pm 1/2 + n_{\qq\mu}}{\omega - E_{\qq\beta} \pm \Omega_{\qq\mu} + i\eta} \ e^{\tfrac{E_{\qq\beta}-E_{min}}{k_B T_{exc}}} \right\} \label{eq:I_PL}
+\end{multline}
+where $n_1(\omega)$ is the refractive index, $E_{min}$ is the minimum of the exciton dispersion and $T_{exc}$ is the effective excitonic temperature used to evaluate the Boltzmann occupation of the excitonic states. It is the only parameter in the whole process that needs to be fitted and we estimated it from the experimental measurements of Ref. \cite{cassabois2016hexagonal}. For a lattice temperature of 10 K, the fit gives an excitonic temperature of $T_{exc}=24$ K. The Boltzmann function for excitons is an approximation of the Bose-Einstein assumption that we made earlier, but it is valid for low excitonic density and reproduces correctly the experimental exponential decay of the phonon satellite peaks. We tried to use an occupation factor made out of the single-particle fermionic occupations rotated in the exciton basis, just as it is done in Refs. \cite{cannuccia2019theory,de2016unified,libbi2022phonon}, with an occupation function given by $n_{\lambda} = \sum_{cv\kk} \bra{\lambda}\ket{cv\kk} f_{c\kk} (1-f_{v\kk}) \bra{cv\kk}\ket{\lambda}$, where $f$ is the Fermi-Dirac function. However it gives rise to unphysical occupations as can be seen in Fig. \ref{fig:all_occup} for three different hBN materials. Indeed, the lowest excitonic state is populated, but so are the higher states coming from the same transitions, that are the analogous of the Wannier exciton excited states. 
+\begin{figure}[tbp]
+	\vspace{0.2cm}
+	\setcapindent{2em}
+	\centering
+	\includegraphics[width=0.9\textwidth]{all_occupations.pdf}
+	\caption{Comparison of Boltzmann (blue areas) and quasi-Fermi (red areas) excitonic occupations for mBN, hBN and bBN. See main text for the definition of the occupation functions. The black lines are the Fourier interpolation of exciton dispersions, calculated at the $G_0W_0$+BSE level. \textcolor{red}{Add a BZ w/ R1 \& R2, labels to distinguish the 3 materials.}}
+	\label{fig:all_occup}
+\end{figure}
+
+The final expression for luminescence intensity Eq. \eqref{eq:I_PL} is to be compared with the one obtained with the finite difference method in Chapter 2, Eq. \eqref{eq:strain_vRS_PL}. Unlike the previous method where only the indirect transitions were included, in the present formula we have both the term coming from direct transitions and the term related to phonon satellites. The major theoretical advance here is that the renormalization factor from Eq. \eqref{eq:renorm_fact} allows to compare the relative intensities of the direct and the satellite peaks. Besides, the satellite energies include the addition or removal of the phonon frequency that arises from the dynamical correction in second order perturbation theory. In the derivation of the dielectric function from finite difference, the phonon frequencies were added \textit{ad hoc} because the electron-phonon corrections were static.
+
+A difference on the numerical side is that the internal sum in Eq. \eqref{eq:I_PL} runs over all phonon modes, all exciton and all $\qq$ points, which allows to accurately include the large excitonic density of states for phonon-assisted transitions, due to the low exciton dispersion common to most of BN crystals. \textcolor{green}{I could put the phonon-assisted DOS.} Moreover, our implementation allows to use the crystal symmetries for the calculation of the \acrshort{BSE} and of the exciton-phonon matrix elements. Thanks to this we can perform the whole workflow of \textit{ab initio} calculations in the unit cell, which is also an improvement from the previous method. 
 
 %
 \section{PL benchmark on hBN and results for mBN}
+Show the improvement from finite diff
 better than Chen but intensity reversed for LO/TO. Mention that in Matteo's paper they have the correct intensities by using Lbar at Gamma and Lfull otherwise I think ? \\
 experimental spectra
 
 
-\section{effect of the substrate}
+\section{effects of the substrate}
 electronic gap, distortion of excitonic dispersion to simulate a change in the screening.
 
 \section{Preliminary results on bBN}
 show the distorted spectrum, which also contains the ZO peaks
 
-
+\section{Conclusion of the chapter}
+need to solve the phase problem 
+natural extension to cumulant for multi phonons
 
