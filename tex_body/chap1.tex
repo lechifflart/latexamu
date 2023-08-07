@@ -13,7 +13,7 @@ To perform such calculations, we need to consider all nuclei and all electrons i
 \end{align}
 where capital indices refer to nuclei and lowercase indices refer to electrons. $Z_I$, $M_I$ and $\RR_I$ are the atomic number, the mass and the position in real space of nucleus $I$, and $m_e,\rr_i$ are the electron mass and the electron position in real space. In this thesis, unless explicitly specified, we will use the atomic units, that is $\hbar = m_e = e =\pi/\varepsilon_0 =1$.
 The terms on the first line are the kinetic energy of the ions and the ion-ion interaction, respectively. On the second line we have the kinetic energy of electrons, that we will later denote $T_{ee}$, the electron-electron interaction $V_{ee}$ and finally the electron-nucleus interaction, which we will refer to as the external potential felt by electrons in equilibrium, $V_{ext}$. This Hamiltonian is difficult to solve for a system containing two nuclei and two electrons, and is untractable for a larger number of particles. The kinetic terms and the interaction terms can be solved separately, but their combination is a formidable problem.
-To greatly simplify this Hamiltonian, we use the so-called Born-Oppenheimer approximation. It consists in considering that the nuclei move in a much longer time-scale than the electrons, because their masses are much greater than those of the electrons. Every time we compute the electronic part, we consider that the nuclei do not have time to move from their equilibrium position. \cite{monserrat2018electron} We can then split the Hamiltonian into a nuclear term and an electronic term, and the nuclear part is just an additive constant. The electronic Hamiltonian then reads :
+To greatly simplify this Hamiltonian, we use the so-called Born-Oppenheimer approximation. It consists in considering that the nuclei move in a much longer time-scale than the electrons, because their masses are much greater than those of the electrons. Every time we compute the electronic part, we consider that the nuclei do not have time to move from their equilibrium position. \cite{martin2020electronic} We can then split the Hamiltonian into a nuclear term and an electronic term, and the nuclear part is just an additive constant. The electronic Hamiltonian then reads :
 \be
 	\hat{H} = \hat{T_e} + \hat{V}_{ee} + \hat{V}_{ext}
 \ee
@@ -117,7 +117,7 @@ In this thesis we study infinite, periodic crystals. A suitable basis for this c
 \be
  	\phi_{j,\kk} (\rr) = u_j (\rr) e^{i\kk\cdot\rr}
 \ee
-The $u_j$ functions have the same periodicity as the lattice. The plane wave has a wavevector $\kk$. For infinite periodic crystals, this is a continuous variable belonging in the first \acrfull{BZ}. The quantity $\hbar \kk$ is called the quasi-momentum of the electron, or \textit{crystal momentum}. For brevity, we will sometimes call it momentum of the electron.
+The $u_j$ functions have the same periodicity as the lattice. The Bloch wave has a wavevector $\kk$. For infinite periodic crystals, this is a continuous variable belonging in the first \acrfull{BZ}. The quantity $\hbar \kk$ is called the quasi-momentum of the electron, or \textit{crystal momentum}. For brevity, we will sometimes call it momentum of the electron.
 We decompose the periodic functions $u_j$ in plane waves as such :
 \be
  	u_j (\rr) = \sum_{\GG} c_{j,\GG} e^{i\GG \cdot \rr}
@@ -526,7 +526,7 @@ Here we see that the coupling between two particles, which comes from the screen
 		&\qquad - L_0(x_1,x_4,x_{1'},x_{3};\go) W(x_3,x_4)  L(x_3,x_2,x_{4},x_{2'};\go) \label{eq:GW-BSE}
 \end{split}
 \end{align}
-The static screening approximation is necessary to obtain a two-particle propagator that depends only on one frequency and hence to be able to invert the \acrshort{BSE} and to rewrite the problem into an excitonic Hamiltonian, as it is done in the paragraph below. However, previous works attempted to solve the \acrshort{BSE} with a dynamic kernel, such as Refs. \cite{shindo1970effective,adamska2021bethe}. Part of the results presented later in this thesis are obtained by adding a dynamical correction to the \acrshort{BSE} kernel.
+The static screening approximation is necessary to obtain a two-particle propagator that depends only on one frequency and hence to be able to invert the \acrshort{BSE} and to rewrite the problem into an excitonic Hamiltonian, as it is done in the paragraph below. However, previous works attempted to solve the \acrshort{BSE} with a dynamic kernel, such as Refs. \cite{shindo1970effective,adamska2021bethe}. Part of the results presented later in this thesis are obtained by adding a dynamical correction to the static \acrshort{BSE} kernel.
 
 \subsubsection{Reformulation in a two-particle Schrödinger equation}
 The \acrshort{BSE} derived in the previous section, Eq. \eqref{eq:GW-BSE}, can be reformulated into a Schrödinger equation for two particles, which is easier to solve and will highlight the physics of the problem and make the \textit{excitons} appear as emerging quasiparticles. In this section, we omit the dependence in the momenta for simplicity, but the generalization to finite momenta is possible.\cite{gatti2013exciton} Here we consider an independent-particle basis in which the non-interacting two-particle propagator $L_0$ is diagonal, and we assumed that we obtained the quasiparticle eigenvalues from the \acrshort{GWA}. At $T=0$, we can write :
@@ -628,7 +628,7 @@ The response function enters both reciprocal space expressions in Eqs. \eqref{eq
 \end{equation}
 where $v,c$ denote for valence and conduction states. These matrix elements describe the transition from a valence state at $\kk$ to a conduction state at $\kk+\qq$ mediated by an electric field with momentum $q$. At this point we note that, for momentum conservation, the vector $\qq$ which lies in the first \acrshort{BZ} has to be equal to the difference of two crystal momenta $\kk$. 
 
-For independent particles in the \acrshort{RPA}, the response function has the form $\chi^0 = -iG_0G_0$, where $G_0$ are non-interacting Green's functions. The first matrix element of this response function can be written :
+For independent particles, the response function has the form $\chi^0 = -iG_0G_0$, where $G_0$ are non-interacting Green's functions. The first matrix element of this response function can be written :
 \begin{equation}
 	\chi^{0}_{00}(\qq \to 0,\omega) = 2\lim_{\qq \to 0} \sum_{vc\kk} \frac{\left|\rho_{v\kk c\kk+\qq}\right|^2}{\omega - (\epsilon_{c\kk+\qq}-\epsilon_{v\kk}) + i\eta} \label{eq:chi_IP_RPA}
 \end{equation}
@@ -713,9 +713,13 @@ Finally, by comparing the absorption and the spontaneous emission rates, we obta
 	 &= \frac{n_1(\omega)\omega^3}{\pi^2 c^3}\ \varepsilon_2(\omega)\ e^{-(\omega - \Delta \mu)/k_BT} \label{eq:vRS_PL}
 \end{split}
 \end{align}
-We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently $n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon^{exc}_2(\omega)^2} + \varepsilon^{exc}_1(\omega)}$. We can slightly anticipate the following parts of this thesis and mention how this relation is modified in the case of indirect transitions, assisted by phonons :
+We now have the spontaneous emission rate expressed in terms of absorption-related quantities that we are able to compute. Depending on which level of theory we consider, we can plug in either Eq. \eqref{eq:eps_2_IP} at the independent particle level or Eq. \eqref{eq:eps_2_exc} to include the excitonic effects. Note that in the latter case, the refractive index is calculated differently :
 \begin{equation}
-	R^{sp,exc}_{\mu q}(\omega) \propto n_1^{exc}(\omega) \omega(\omega - 2 \Omega_{q\mu})^2 \varepsilon^{exc}_2(\omega - 2\Omega_{q\mu})n_{B}(\omega), \label{eq:vRS_PL_ind}
+	 n_1^{exc}(\omega) = \sqrt{\tfrac{1}{2}\sqrt{\varepsilon_1^{exc}(\omega)^2+\varepsilon^{exc}_2(\omega)^2} + \varepsilon^{exc}_1(\omega)}. \label{eq:refrac_index}
+\end{equation}	 
+We can slightly anticipate the following parts of this thesis and mention how this relation is modified in the case of indirect transitions, assisted by phonons :
+\begin{equation}
+	R^{sp,exc}_{\mu q}(\omega) = \frac{n_1^{exc}(\omega) \omega(\omega - 2 \Omega_{q\mu})^2}{\pi^2 c^3} \varepsilon^{exc}_2(\omega - 2\Omega_{q\mu})n_{B}(\omega), \label{eq:vRS_PL_ind}
 \end{equation}
 where $\Omega_{q\mu}$ refers to a phonon frequency for the phonon mode $\mu$ at momentum $q$, which will be introduced in the next section and $n_B$ is the Boltzmann distribution.
 
@@ -793,7 +797,7 @@ This problem can be reformulated such that no empty states are needed :
 \begin{equation}
 	(\hat{H} - \epsilon_n) \frac{\partial\ket{\psi_n}}{\partial \RR_{Ls}} = - \left(\frac{\partial v_{\text{eff}}}{\partial\RR_{Ls}} - \frac{\partial \epsilon_n}{\partial\RR_{Ls}}  \right) \ket{\psi_n}. \label{eq:DFPT_Sternheimer}
 \end{equation}
-Eq. \eqref{eq:DFPT_Sternheimer} corresponds to a reformulation of the \acrshort{DFT} response of the system to an atomic displacement in the form of a Sternheimer equation.
+Eq. \eqref{eq:DFPT_Sternheimer} corresponds to a reformulation of the \acrshort{DFT} response of the system to an atomic displacement in the form of a Sternheimer equation.\cite{sternheimer1954electronic}
 
 %
 \subsubsection{Long wavelength limit}
