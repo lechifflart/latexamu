@@ -143,10 +143,10 @@
 	bookmarksopen=false,					%% signets repliés par défaut
 	linktocpage=false,						%% lien numéro de page dans TOC
 %% métadonnées :							%% ATTENTION à compléter
-	pdftitle={Titre},
+	pdftitle={Exciton-phonon coupling in haxagonal Boron Nitride nanostructures},
 	pdfauthor={Pierre LECHIFFLART},
-	pdfsubject={Résumé},
-	pdfkeywords = {mot clé, keyword, ...},
+	pdfsubject={PhD thesis of Pierre LECHIFFLART},
+	pdfkeywords = {exciton-phonon coupling, luminescence},
 	}
 
 %%% glossaires
