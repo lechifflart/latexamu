@@ -821,7 +821,7 @@ In the previous sections, we solved the problem of electrons and ions independen
 The electron-electron interactions are contained in the Kohn-Sham Hamiltonian, that can be written in second quantization $\hat{H}_e = \sum_{n\kk} \epsilon_{n\kk} \hat{a}^\dagger_{n\kk}\hat{a}_{n\kk}$. 
 We can define the nuclear Hamiltonian as a sum of quantum harmonic oscillators, which has the following second-quantized form :
 \begin{equation}
-	\hat{H}_p = \sum_{\qq\mu} \hbar \omega_\mu(\qq) (\hat{b}^\dagger_{\qq\mu}\hat{b}_{\qq\mu} + \frac{1}{2})
+	\hat{H}_p = \sum_{\qq\mu} \hbar \omega_\mu(\qq) \left(\hat{b}^\dagger_{\qq\mu}\hat{b}_{\qq\mu} + \frac{1}{2}\right)
 \end{equation}
 where $\hat{b}$ and $\hat{b}^\dagger$ are annihilation and creation operators of a phonon with momentum $\qq$ and branch index $\mu$. They follow the commutation relations $\left[ \hat{b}_{\qq\mu},\hat{b}^\dagger_{\qq'\mu'} \right] = \delta_{\qq,\qq'}\delta_{\mu,\mu'}$ and $\left[ \hat{b}_{\qq\mu},\hat{b}_{\qq'\mu'} \right] = \left[ \hat{b}^\dagger_{\qq\mu},\hat{b}^\dagger_{\qq'\mu'} \right]= 0 $. We see that in the Born-Oppenheimer and harmonic approximations, lattice vibrations are quantized as perfect bosons.\\
 With these we can construct the electron-phonon Hamiltonian as the first order expansion of the effective potential in terms of the atomic displacements :
