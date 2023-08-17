@@ -15,10 +15,37 @@ With the variety of optical and electronic properties offered by all the existin
 
 % 
 \subsection{Paragraph on the properties of hBN}
-Generalities about hBN \\
-AA'-hBN is stable at room temperature and ambient pressure
-hBN : hig gap, pDOS of valence at K is mostly Nitrogen, $\pi$ orbital(overlap of $p_z$, bonding)  . pDOS of conduction at M is mostly Boron, $\pi^*$ orbital (overlap of $p_z$ with opposite coefficient, antibonding)\\
-%We could compute phonon-assisted absorption but the phonon satellites are very small wrt to the main peaks so when they overlap, they are not visible.\\
+The first reported synthesis of Boron Nitride dates back from 1842.\cite{balmain1842xlvi} It is now available commercially under the form of a white powder and finds applications as lubricant and for its high thermal resistivity. It can be found under the form of a layered material composed of atomically thin layers arranged in a honeycomb lattice. High-purity crystals are synthesized under high-pressure and high-temperature conditions.\cite{watanabe2004direct} 
+Different stacking of the layers lead to different stable or metastable polytypes. In this thesis we will be mainly concerned with the AA' and the AB stackings, that are illustrated in Fig. \ref{fig:hBN_stackings}. We will refer to the AA' polytype as hBN and to the AB polytype (or Bernal phase) as bBN. The atoms within a layer are bond by hybrid $sp^2$ bonds, while the interlayer interactions are of van der Waals type.
+\begin{figure}[h!b]%
+	\vspace{0.2cm}
+	\setcapindent{2em}
+	\centering
+    \subfloat[AA' stacking]{\includegraphics[width=0.42\textwidth]{intro/hBN_struc_crop.pdf}} \qquad
+    \subfloat[AB stacking]{\includegraphics[width=0.45\textwidth]{intro/bBN_struc_crop.pdf}}%
+    \caption{Two polytypes of hexagonal Boron Nitride where four hexagonal unit cells are shown. Boron atoms are represented with orange spheres, Nitrogen with blue ones. We will refer to the AA' polytype as hBN and to the AB polytype (or Bernal phase) as bBN.}
+	\label{fig:hBN_stackings}
+\end{figure}
+%
+hBN is stable at ambient pressure and room temperature. It is an insulator with a gap of about 6 eV. Due to its low lattice mismatch with Graphene and its insulating character, it is a substrate of choice and a good encapsulation layer for Graphene-based applications.\cite{somethg} It also has a variety of defect-related physics, notably single photon emission with applications for quantum computing\cite{QC} or bright color center emission. However the property of interest for this thesis is the bright light emission in the deep UV domain and the rich features appearing in the luminescence spectra.\textcolor{red}{ptite compil des spectres expérimentaux}
+%
+show electronic bands : hig gap, pDOS of valence at K is mostly Nitrogen, $\pi$ orbital(overlap of $p_z$, bonding)  . pDOS of conduction at M is mostly Boron, $\pi^*$ orbital (overlap of $p_z$ with opposite coefficient, antibonding)\\
+
+absorption 
+
+it has been the subject of many experimental and theoretical studies and is now under scrutiny for its light emission properties as well
+
+
+
+\begin{itemize}
+	\item structure
+	\item synthesis
+	\item electronic bands and phonons (flat bands, HK transitions \cite{fugallo})
+	\item paper with synchrotron absorption (big excitonic effects)
+	\item PL spectra of bulk
+	\item CL spectra of few layers, difficulty of PL for monolayer
+	\item first experimental PL spectra of monolayer (say that we exploit them in Chap 3) 
+\end{itemize}
 
 
 \subsection{Explain luminescence}
@@ -31,13 +58,14 @@ Luminescence is often thought of as the reverse process of light absorption. Ind
 
 Because of this similarity, the spectra of absorption and of luminescence are quasi symmetrical for direct transitions. The asymmetry come from the phonon broadening of the electron density of states, known as the Stokes shift. However for phonon-assisted transitions, the spectra can look very different, as illustrated by the experimental results presented in Fig. \textcolor{red}{Figure}. For bulk hexagonal Boron Nitride, the states dominating the absorption is different from the one dominating the luminescence, which is at lower energy. Moreover, since the phonon-assisted transitions appear as multiple peaks, there is a strong asymmetry in the spectra. This will be explained in details in the body of this thesis.
 
-Absorption is easy to obtain from calculation, but luminescence is harder since it is an out-of-equilibrium process. For hBN it is the opposite on the experimental side of things : since the gap is very large, one needs high-frequency lasers for absorption, or synchrotron radiation as in Fig. \textcolor{red}{fig abs hBN}. For luminescence it less dependent on the excitation so its easier, but still we need low temperature to be able to resolve all the phonon peaks individually. When talking about a single layer it is even harder since the intensity of emitted light is low. This explain the very recent apparition of luminescence spectra of monolayer hBN in scientific litterature.
+Absorption is easy to obtain from calculation, but luminescence is harder since it is an out-of-equilibrium process. For hBN it is the opposite on the experimental side of things : since the gap is very large, one needs high-frequency lasers for absorption, or synchrotron radiation as in Fig. \textcolor{red}{fig abs hBN}. For luminescence it less dependent on the excitation so its easier, but still we need low temperature to be able to resolve all the phonon peaks individually. When talking about a single layer it is even harder since the intensity of emitted light is low. This explain the very recent apparition of luminescence spectra of monolayer hBN in scientific literature.
 
 In this thesis, we study the properties of different forms of hBN and develop theoretical and numerical methods with the aim of reproducing and predicting their luminescence spectra from \textit{ab initio} calculations.
 
 \subsection{Scope of the thesis}
 %
-Chapter 1 introduces the theoretical framework in which our calculations are contained. It starts from the adiabatic approximation that states that the electronic and the atomic motions can be decoupled thanks to the mass difference between nuclei and electrons.
+\textcolor{red}{reformulate this section not by saying "we", but presenting the state of the art for ab initio excitons and phonons, and electron-phonon}
+The state-of-the-art theoretical framework in which our calculations are contained starts from the adiabatic approximation. It states that the electronic and the atomic motions can be decoupled because of the mass difference between nuclei and electrons.
 
 We then include a brief description of the widely used \acrfull{DFT}. In this theory the electrons are treated as independent particles evolving in a mean-field. It allows to compute the ground state density of the crystal and to obtain the equilibrium geometries, with a certain set of approximations. From there we extract the Kohn-Sham eigenvalues and wavefunctions. These eigenvalues give an approximation to the band structure and are the starting point of the more involved \acrfull{MBPT}. 
 
@@ -46,13 +74,13 @@ With this we are able to obtain a more accurate band structure and simulate expe
 
 However the neutral excitations of the many-electron system -- \textit{i.e.} an electron being excited but staying in the system -- are not well described at this point. To this end, the electron-hole interaction is reintroduced by computing the two-particle Green's function. This is the solution of the so-called \acrfull{BSE}. Starting from the $GW$ approximation, the \acrshort{BSE} can be formulated in the basis of \textit{excitons}, which are quasiparticles made of an electron-hole pair, bound together by the Coulomb interaction. From the \acrshort{BSE} one can obtain the response function of the system including excitonic effects, with the assumption that excitations are instantaneous in time and response to these excitations. This is known as the \textit{static} approximation. Excitons have been shown to play a significant role in the optical spectra of \acrshort{hBN} and indeed the \acrshort{BSE} description is in much better agreement with experiments compared to independent-particles or quasiparticles levels of theory, as can be seen in Fig. \textcolor{red}{Figure of absorption}. The link between microscopic excitonic quantities and macroscopic observables is presented in the middle of the first Chapter. 
 
-Finally Chapter ends on the presentation of a perturbative method based on \acrshort{DFT} to obtain the vibrational properties of the crystal in the harmonic approximation, meaning that each atom is represented as an harmonic oscillator vibrating around its equilibrium position. It is called \acrfull{DFPT}. In second quantization, it gives a description of the vibration modes of the lattice in terms of quanta of vibration called \textit{phonons}. They are another type of quasiparticle, that is a collective excitation, with a definite frequency and wave vector, analogous to the crystal momentum of electrons. We can now reintroduce the coupling between nuclear and electronic motions and formulate the electron-phonon coupling in second quantization. We obtain the coupling matrix elements that are the probability amplitudes that a electron is scattered by a phonon from a given momentum-energy state into another, where the energy and momentum is exchanged with the phonon.  
+Finally Chapter 1 ends on the presentation of a perturbative method based on \acrshort{DFT} to obtain the vibrational properties of the crystal in the harmonic approximation, meaning that each atom is represented as an harmonic oscillator vibrating around its equilibrium position. It is called \acrfull{DFPT}. In second quantization, it gives a description of the vibration modes of the lattice in terms of quanta of vibration called \textit{phonons}. They are another type of quasiparticle, that is a collective excitation, with a definite frequency and wave vector, analogous to the crystal momentum of electrons. We can now reintroduce the coupling between nuclear and electronic motions and formulate the electron-phonon coupling in second quantization. We obtain the coupling matrix elements that are the probability amplitudes that a electron is scattered by a phonon from a given momentum-energy state into another, where the energy and momentum is exchanged with the phonon.  
 \begin{figure}[h!b]
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
-	\includegraphics[width=0.9\textwidth]{workflow_detailed.pdf}
-	\caption{Workflow of the calculations to compute exciton-phonon coupling and phonon-assisted luminescence. The green/red boxes indicate that we used \textsc{Quantum ESPRESSO} / \yambo~as simulation codes.}
+	\includegraphics[width=0.9\textwidth]{intro/workflow_detailed.pdf}
+	\caption{Workflow of the calculations to compute exciton-phonon coupling and phonon-assisted luminescence. The green and red boxes indicate that we used \textsc{Quantum ESPRESSO} and \yambo~as simulation codes, respectively.}
 	\label{fig:workflow}
 \end{figure}
 
