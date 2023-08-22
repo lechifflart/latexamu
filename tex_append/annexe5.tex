@@ -4,8 +4,7 @@ We start from the atomic structure, which was optimized in DFT for the monolayer
 
 Using the Kohn-Sham band structure as a starting point, we employed MBPT as implemented in the \yambo~ code\cite{Sangalli_2019} to calculate quasiparticle band structures within the G$_0$W$_0$ approximation\cite{aryasetiawan1998gw} and the excitonic optical response functions using the Bethe-Salpeter Equation.\cite{strinati1988application}
 All the many-body operators that enter in these calculations are expanded in a Kohn-Sham basis set. Therefore, in order to have converged results, we diagonalized the Kohn-Sham Hamiltonian for a large number of bands that were then used to build the electronic Green's function $G$ and the dielectric matrix $\epsilon$. In table \ref{tab:parms} we also report the cutoff used in the construction of the dielectric matrix. Finally, in order to speed up convergence with respect to the empty states, we used a terminator for both $\epsilon$ and $G$.\cite{bruneval2008accurate}
-The BSE was constructed using a static kernel derived from the GW self-energy within the Tamm-Dancoff approximation.\cite{strinati1988application}  We include only the lowest conduction and the highest valence bands in such a way to get converged absorption and emission spectra. The BSE was solved for a grid of transferred momenta $\QQ$ identical to the phonons grid. 
-
+The BSE was constructed using a static kernel derived from the GW self-energy within the Tamm-Dancoff approximation.\cite{strinati1988application}  We include only the lowest conduction and the highest valence bands in such a way to get converged absorption and emission spectra. The BSE was solved for a grid of transferred momenta $\QQ$ identical to the phonons grid. \\
 \begin{table}
     \begin{center}
         \begin{tabular}{ | c | c | c |}
@@ -27,7 +26,7 @@ The BSE was constructed using a static kernel derived from the GW self-energy wi
 
 
 Luminescence spectra were calculated using Eq.~\eqref{eq:I_PL}. We first built the exciton-phonon matrix elements using the results obtained from BSE and DFPT, as indicated in the scheme in Fig.~\textcolor{red}{put the scheme of the workflow}. We selected a number of ``initial'' excitons at finite $\QQ$ (indices $\beta$ in Eq.~\eqref{eq:I_PL}), that scatter with phonons (indices $\mu,\qq$) and end up in the ``final'' excitonic states at $\QQ=0$ (indices $\lambda$). All phonon modes and transferred momenta were included in these calculations. Note that both the the electronic and transferred momenta ($k$-grid and $q$-grid, respectively), were computed on the irreducible parts of the respective Brillouin zones (BZs).
-The exciton-phonon coupling matrix elements $\mathcal{G}$ from Eq.~\eqref{eq:Gkkp} were then expanded in the full BZs by symmetry transformations applied to the electron-phonon matrix elements $g$ and the excitonic coefficients $A$. In this way, we are able to strongly speed up exciton-phonon calculations, which would otherwise require the switching off of all crystal symmetries at the DFPT and MBPT levels.
+The exciton-phonon coupling matrix elements $\mathcal{G}$ from Eq.~\eqref{eq:Gkkp} were then expanded in the full BZs by symmetry transformations applied to the electron-phonon matrix elements $g$ and the excitonic coefficients $A$. In this way, we are able to strongly speed up exciton-phonon calculations, which would otherwise require the switching off of all crystal symmetries at the DFPT and MBPT levels.\\
 
 Then, we interpolated both exciton dispersions -- using a smooth Fourier interpolation\cite{pickett1988smooth} -- and phonon energies -- using the force constants method implemented in \textsc{Quantum ESPRESSO} -- on a finer grid to speed up convergence of the luminescence spectra with respect to the transferred momenta grid. Then these finer grids are used to average out the denominators appearing in the luminescence formula as:
 \begin{equation}
@@ -38,5 +37,7 @@ where $\tilde{E}_{min}$ is the minimum exciton energy on the double-grid, than w
 	{I}^{PL}(\omega)= \Im \sum_\lambda \frac{| T_\lambda  |^2}{\pi^2 \hbar c^3} \left\{ \omega^3 n_r(\omega) \frac{1 - R_\lambda}{\omega - E_\lambda + i\eta} e^{-\frac{E_{\lambda}-E_{min}}{kT_{exc}}} \right.\\
     \left. + \sum_{\mu\beta\qq} \omega(\omega \mp 2 \Omega_{\qq \mu})^2 n_1(\omega) \left|\mathcal{D}^{\pm}_{\beta\lambda,\qq \mu} \right| \frac{1}{W^{\pm}_{\lambda, \beta,  \qq, \mu }} \right\},
 \end{multline}
-implemented as a sum over the fine-grid $\tilde q$-points in the neighborhood of each coarse-grid $q$-point.
+implemented as a sum over the fine-grid $\tilde q$-points in the neighborhood of each coarse-grid $q$-point.\\
+
+The calculations of \acrshort{mBN} on top of one and two Graphene layers have been performed using a 36$\times$36$\times$ 1 grid, plus a shifted double-grid of 90$\times$90$\times$1 for the screened interaction $W$ as described in Ref.\cite{kmmerlander2012} and the slab cutoff in the out-of-plane direction, 7 Ha cutoff for the dielectric constant, and conduction bands up to 120 eV.
 
