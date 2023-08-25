@@ -132,7 +132,7 @@ where we used $\Delta_{ij} = -\Delta_{ji}^*$ to obtain the last line. Finally, t
     \tilde{H}_{\lambda\lambda'} &= \sum_{vc,v'c'} A_{\lambda'}^{vc*} A_{\lambda}^{v'c'} \times \left\{ \left[ (\epsilon_c - \epsilon_v) \delta_{vv'}\delta_{cc'} + \Xi_{vc}^{v'c'} \right] + \delta_{cc'} (\epsilon_{v'} - \epsilon_v)\Delta_{vv'} + \delta_{vv'}(\epsilon_c - \epsilon_{c'}) \Delta_{cc'}^*  \right\} \nonumber \\
     &= E_{\lambda'}\delta_{\lambda\lambda'} + \sum_{vc,v'c'} A_{\lambda'}^{vc*} A_{\lambda}^{v'c'} \cdot \left( \delta_{cc'}(\epsilon_{v'} - \epsilon_v) \Delta_{vv'}  + \delta_{vv'} (\epsilon_c - \epsilon_{c'}) \Delta^*_{cc'} \right) \label{eq:perturb_H_exc}
 \end{align}
-where we use the fact that the unperturbed Hamiltonian is diagonal in the excitonic space :
+where we use the fact that the unperturbed Hamiltonian is diagonal in the excitonic space:
 \begin{equation}
     E_{\lambda'}\delta_{\lambda\lambda'} = \sum_{vc,v'c'} A_{\lambda'}^{vc*} A_{\lambda}^{v'c'} \times \left( (\epsilon_c - \epsilon_v)\delta_{vv'}\delta_{cc'} + \Xi_{vc}^{v'c'} \right).
 \end{equation}
@@ -193,7 +193,7 @@ Using the relation Eq. \eqref{eq:chi_iL}, we can obtain the response function in
 \end{equation}
 where we used the short-hand notation $\chi_{\lambda}(\omega) = \chi_{\lambda\lambda'} (\omega) \delta_{\lambda\lambda'}$. On the right hand side, the quantity $\Pi^{\text{excp-ph}}_{\lambda\lambda'} (\omega)$ is the exciton self-energy describing dynamical effects induced by the electron-phonon interaction. We will refer to it as \textit{exciton-phonon self-energy}. It can be computed starting from the exciton-phonon Hamiltonian Eq. \ref{eq:H_exc-ph} in \acrshort{MBPT}\cite{mahan2000many} in a similar way as for the electron-phonon case.\cite{giustino2017review} Owing to the fact that we consider the first order only in exciton-phonon scattering, we will have a self-energy similar to the Fan-Migdal one for the electron-phonon problem : $\Pi^{\text{excp-ph}} = \mathcal{G}^2DL$ where the exciton propagator $L$ replaces the electron one, $D$ is the phonon propagator and $\mathcal{G}$ are the exciton-phonon matrix elements derived in the previous section given by Eq. \eqref{eq:Gkkp}. 
 
-Keeping only the first order dynamical correction allows scattering with only one phonon at a time, but this scattering can be re-summed at higher order solving the Dyson equation with a dynamical self-energy of a self-energy allows to formally write two different ways of summing contributions to infinite orders, hence scattering with any number of phonons. The first one is to take a Dyson equation $\chi^{D} = \chi + \chi \Pi^{\text{excp-ph}} \chi$ which corresponds to a partial re-summation of the general Eq. \eqref{eq:dBSE}.\cite{marini2003dynamical} It will yield the correction to the exciton energies due to coupling with phonons but will fail to describe the phonon satellites in the optical spectra, just as the \acrshort{PES} satellites given by the $GW$ approximation are inaccurate. Another infinite summation is the cumulant expansion $\chi_C = \chi e^C$ with the cumulant coefficient of the form $C_\lambda(t) = \int dt \Pi^{\text{excp-ph}}_{\lambda\lambda}(t) e^{iE_\lambda t}$, determined by the diagonal components of the self-energy.\cite{cudazzo2020first} The cumulant ansatz is able to capture the physics giving rise to phonon satellites.\\
+Keeping only the first order dynamical correction allows scattering with only one phonon at a time, but this scattering can be re-summed at higher order solving the Dyson equation with a dynamical self-energy, that allows to formally write two different ways of summing contributions to infinite orders, hence scattering with any number of phonons. The first one is to take a Dyson equation $\chi^{D} = \chi + \chi \Pi^{\text{excp-ph}} \chi$ which corresponds to a partial re-summation of the general Eq. \eqref{eq:dBSE}.\cite{marini2003dynamical} It will yield the correction to the exciton energies due to coupling with phonons but will fail to describe the phonon satellites in the optical spectra, just as the \acrshort{PES} satellites given by the $GW$ approximation are inaccurate. Another infinite summation is the cumulant expansion $\chi_C = \chi e^C$ with the cumulant coefficient of the form $C_\lambda(t) = \int dt \Pi^{\text{excp-ph}}_{\lambda\lambda}(t) e^{iE_\lambda t}$, determined by the diagonal components of the self-energy.\cite{cudazzo2020first} The cumulant ansatz is able to capture the physics giving rise to phonon satellites.\\
 Notice that the first order of these two summations is identical and is given by Eq. \eqref{eq:chi_1}. It is the one we use for the rest of this thesis. We will focus on the description of the satellite structures in optical spectra and neglect the corrections to exciton energies. The exciton-phonon self-energy writes :
 \begin{multline}
     \Pi^{\text{excp-ph}}_{\lambda\lambda'} (\QQ,\omega) = \frac{1}{N_q} \sum_{\mu\beta\qq} \mathcal{G}^\mu_{\beta\lambda}(\QQ,\qq) \mathcal{G}^{\mu*}_{\beta\lambda'}(\QQ,\qq) \\
@@ -228,7 +228,9 @@ where $R^{sp}_0(\omega)$ is the spontaneous emission rate for direct transitions
     I(\omega) = \mathcal{D} R^{sp}(\omega) = \mathcal{D} \Im \sum_\lambda |T^\lambda|^2 \left\{  \omega^3 n_1(\omega) \frac{1-Z_\lambda}{\omega - E_\lambda + i\eta} \ e^{-\tfrac{E_\lambda-E_{min}}{k_B T_{exc}}} \right.\\
     +\left.  \frac{1}{N_q}\sum_{\mu\beta\qq} \omega(\omega \mp \Omega_{\qq\mu})^2 n_1(\omega) \frac{|\mathcal{G}^\mu_{\beta\mu}(\qq)|^2}{(E_{\qq\beta} - E_\lambda \pm \Omega_{\qq\mu} )^2} \frac{1/2 \pm 1/2 + n_{\qq\mu}}{\omega - E_{\qq\beta} \pm \Omega_{\qq\mu} - i\eta} \ e^{\tfrac{E_{\qq\beta}-E_{min}}{k_B T_{exc}}} \right\} \label{eq:I_PL}
 \end{multline}
-where $\mathcal{D}$ is a dimensional factor, $n_1(\omega)$ is the refractive index. Here we need to reintroduce the exciton occupation that we neglected in the self-energy, as it is fundamental for light emission. We use a Boltzmann occupation function whose parameters are $E_{min}$, the minimum of the exciton dispersion and $T_{exc}$, the effective excitonic temperature. The latter is the only parameter in the whole process that needs to be fitted and we estimated it from the experimental measurements of Ref. \cite{cassabois2016hexagonal}. For a lattice temperature of 10 K, the fit gives an excitonic temperature of $T_{exc}=24$ K. The Boltzmann function for excitons is an approximation of the Bose-Einstein assumption that we made earlier, but it is valid for low excitonic density and reproduces correctly the experimental exponential decay of the phonon satellite peaks.
+where $\mathcal{D}$ is a dimensional factor, $n_1(\omega)$ is the refractive index. 
+Notice that the excitonic occupation that appears in the luminescence formula cannot be disregarded as in the self-energy, because fundamentally it gives the weight of the indirect transitions.
+We use a Boltzmann occupation function whose parameters are $E_{min}$, the minimum of the exciton dispersion and $T_{exc}$, the effective excitonic temperature. The latter is the only parameter in the whole process that needs to be fitted and we estimated it from the experimental measurements of Ref. \cite{cassabois2016hexagonal}. For a lattice temperature of 10 K, the fit gives an excitonic temperature of $T_{exc}=24$ K. The Boltzmann function for excitons is an approximation of the Bose-Einstein assumption that we made earlier, but it is valid for low excitonic density and reproduces correctly the experimental exponential decay of the phonon satellite peaks.
 
 In this thesis we also tried to use an occupation factor made out of the single-particle fermionic occupations rotated in the exciton basis, just as it is done in Refs. \cite{cannuccia2019theory,de2016unified,libbi2022phonon}, with an occupation function given by $n_{\lambda} = \sum_{cv\kk} \bra{\lambda}\ket{cv\kk} f_{c\kk} (1-f_{v\kk}) \bra{cv\kk}\ket{\lambda}$, where $f$ is the Fermi-Dirac function. However it gives rise to unphysical occupations as can be seen in Fig. \ref{fig:all_occup} for three different BN nanostructures, namely \acrshort{mBN}, \acrshort{hBN} and \acrshort{bBN}. Indeed, the lowest excitonic state is populated, but so are the higher states coming from the same transitions, that are the analogous of the Wannier exciton's excited states. Hence we stuck to the Boltzmann occupation instead of that derived from non-equilibrium Green's functions.
 \begin{figure}[h!b]
@@ -236,7 +238,7 @@ In this thesis we also tried to use an occupation factor made out of the single-
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.9\textwidth]{all_occupations.pdf}
-	\caption{Comparison of Boltzmann (blue areas) and quasi-Fermi (red areas) excitonic occupations for \acrshort{mBN} (first column), \acrshort{hBN} (second column) and bBN (third column). See main text for the definition of the occupation functions and section \ref{sec:bulk_hBN} for the definition of the R$_1$ and R$_2$ points. The black lines are the Fourier interpolation of exciton dispersions, calculated at the G$_0$W$_0$+BSE level. \textcolor{blue}{Add a BZ w/ R1 \& R2, labels to distinguish the 3 materials.}}
+	\caption{Comparison of Boltzmann (blue areas) and quasi-Fermi (red areas) excitonic occupations for \acrshort{mBN} (first column), \acrshort{hBN} (second column) and bBN (third column). See main text for the definition of the occupation functions and section \ref{sec:bulk_hBN} for the definition of the R$_1$ and R$_2$ points. The black lines are the Fourier interpolation of exciton dispersions, calculated at the G$_0$W$_0$+BSE level.}
 	%MODIF Add a BZ w/ R1 \& R2, labels to distinguish the 3 materials.
 	\label{fig:all_occup}
 \end{figure}
@@ -251,7 +253,7 @@ In this section we will apply the theoretical development presented in the two p
 The electronic and optical properties of \acrlong{mBN} have been the subject of numerous studies using both \emph{ab initio} and semi-empirical methods.\cite{galvani2016excitons}
 Within DFT, with the LDA exchange-correlation functionals, \acrshort{mBN} is a direct band gap material at high-symmetry point $K$, but the G$_0$W$_0$ corrections change its gap from direct to indirect, going from $K$ to $\Gamma$.\cite{prete2020giant} 
 We verified that the system remains indirect even at the semi-self-consistent ``eigenvalue-GW'' level (ev$GW$). We plot the electronic band structure in Fig. \ref{fig:mBN_bands_LDA_G0W0_G4W4} at different levels of theory : \acrshort{DFT} within the \acrshort{LDA}, G$_0$W$_0$ and evG$_4$W$_4$. The latter means that we iterated the Hedin's equation in the $GW$ approximation four times, modifying only the poles of $G$ at every iteration.\cite{van2006quasiparticle} This process is compensating the lack of higher order correction of the G$_0$W$_0$ approximation and usually improves the agreement with experiments regarding the bandgap values.\cite{faber2014excited}
-\begin{figure}[h!b]
+\begin{figure}[h!tb]
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
@@ -266,7 +268,7 @@ The nearly-free electron states have been investigated in the past in BN nanotub
 Despite the presence of these states at $\Gamma$, the optical properties of BN-based systems are actually dictated by the $\pi$ bands around $K$ and $M$, and this remains true for mBN.
 The optical spectrum of mBN is characterized by a strong doubly degenerate excitonic peak of symmetry $E$ at about $6$ eV. Exciton dispersions have been reported in several articles.\cite{cudazzo2016exciton,koskelo2017excitons,sponza2018direct} In Fig. \ref{fig:mBN_excdisp_lda_gw} we also report our calculated dispersion along selected high-symmetry lines, starting both from the quasiparticle band structure and the DFT one plus a scissor operator. The scissor shift is chosen in such a way that the lowest exciton energy at $\QQ = 0$ matches the one obtained starting from the $GW$ quasiparticle band structure. Our exciton dispersion compares well with previously publicated results.\cite{koskelo2017excitons,sponza2018direct}
 
-\begin{figure}[h!b]
+\begin{figure}[h!tb]
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
@@ -280,11 +282,11 @@ These new excitonic states are clearly distinguishable from the ``standard'' BN 
 
 We tracked the exciton wavefunction of the lowest two bands the high-symmetry lines. We can see that the exciton momentum confers the wavefunction a shape according to the symmetry of the point, \textit{e.g.} it has a straight shape at \MM~but is circular at $\Gamma$ and \KK. 
 While the usual $\pi \rightarrow \pi^*$-derived states (green exciton bands in the figure) display the electronic density strongly localized on the Boron sublattice, when the hole is fixed on top of a Nitrogen, the $\pi \rightarrow \sigma^*$-derived states (red exciton band) present an electron density strongly delocalized away from the layer plane. This is a clear signature of nearly-free electron character.
-\begin{figure}[h!b]
+\begin{figure}[h!tb]
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
-	\includegraphics[width=0.95\textwidth]{1l_excdisp_disentangled.pdf}
+	\includegraphics[width=0.95\textwidth]{full_disentangled.png}
 	\caption{Details of the exciton dispersion of monolayer hexagonal BN. The insets show the spatial localization of the exciton wavefunction at several different $q$-points and branches (this is obtained by fixing the hole position on top of a Nitrogen atom, i.e. on a valence $\pi$ orbital, and plotting the resulting electron density). As evidenced in the insets, the red branch in the dispersion plot is due to the nearly-free electron states (involving conduction bands with $\sigma^*$ character), while the green branches originate from the optically active $\pi-\pi^*$ band transitions.}
 	%MODIF : red arrows, bigger labels
 	\label{fig:mBN_excdisp_wf}
@@ -308,20 +310,20 @@ We also plot the same quantity but keeping only ZA and ZO phonon modes in the su
 	\centering
     \subfloat[All phonon modes.]{\label{Gkkp_plot_hBN:all_phonons} \includegraphics[width=0.45\textwidth]{hBN_all_phonons_all_planes.png}} \qquad 
     \subfloat[ZA+ZO modes only.]{\label{Gkkp_plot_hBN:z_only} \includegraphics[width=0.45\textwidth]{hBN_z_only_all_planes.png}}%
-    \caption{Magnitude of the coupling between the finite-momentum excitons and the lowest-lying bright excitons in bulk hexagonal BN. Color bar is the modulus of $\mathcal{G}(\qq)$ in eV, for a 18$\times$18 $\qq$-points grid. \textcolor{blue}{add label for colorbar}}
-	\label{fig:Gkkp_plot_hBN}
+    \caption{Magnitude of the coupling between the finite-momentum excitons and the lowest-lying bright excitons in bulk hexagonal BN. Color bar is the modulus of $\mathcal{G}(\qq)$ in eV, for a 18$\times$18 $\qq$-points grid.}
+	\label{fig:Gkkp_plot_hBN} %MODIF add label for colorbar
 \end{figure}
 It is the probability that the excitons $\beta=1$ and $\beta=2$ are scattered into the zero-momentum excitons $\lambda=3$ and $\lambda=4$ by all phonon modes with the corresponding momentum. The information we can extract from this plot is that the coupling has the same symmetry as the crystal, where the 3-fold rotation symmetry is clearly visible. From the panel (a) of Fig. \ref{fig:Gkkp_plot_hBN}, we see that the scattering is maximal with excitons close to the $\Gamma A$ line. From the panel (b), we see that the ZA and ZO modes couple more with the minimum excitons on the $\Gamma K$ lines. This coupling contributes to about ten percent of the sum of all modes, as can be seen with the color bars.  
 
 \subsubsection{2D mBN}
 For the monolayer BN, we plot a similar quantity in Fig. \ref{fig:mBN_Gkkp}, except there is no need of averaging over planes since the \acrshort{BZ} is two-dimensional. We plot the scattering of finite-momentum excitons $\beta=1$ and $\beta=2$ into the two degenerate bright excitons $\lambda = 1$ and $\lambda = 2$ at $\Gamma$ (where the $\beta$ and $\lambda$ indices coincide).
-\begin{figure}[h!t]
+\begin{figure}[h!bt]
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.55\textwidth]{mBN_Gkkp.png}
-	\caption{Magnitude of the coupling between the finite-momentum excitons and the lowest-lying bright excitons in monolayer hBN. Color bar is the modulus of $\mathcal{G}(\qq)$ in eV for a $\qq$-points grid of 36$\times$36 grid. \textcolor{blue}{add label for colorbar}} 
-	\label{fig:mBN_Gkkp} %MODIF : trim + add label
+	\caption{Magnitude of the coupling between the finite-momentum excitons and the lowest-lying bright excitons in monolayer hBN. Color bar is the modulus of $\mathcal{G}(\qq)$ in eV for a $\qq$-points grid of 36$\times$36 grid.} 
+	\label{fig:mBN_Gkkp} %MODIF : trim + add label; add label for colorbar
 \end{figure}
 Here the situation is different since most of the coupling happens around $\Gamma$ and is about 4 times stronger than in the bulk materials. The 3-fold hexagonal pattern can still be distinguished but with a lower coupling strength. This result is a first hint that in \acrshort{mBN}, it is less likely to see phonon-satellites coming from the scattering of an exciton at the \acrshort{BZ} edge than at the center.   
 
@@ -336,9 +338,9 @@ We now put to the test our method by calculating the luminescence spectra of bul
 	\setcapindent{2em}
 	\centering
     \subfloat[Phonon dispersion of hBN]{\includegraphics[width=0.42\textwidth]{hBN_phdisp.pdf}}
-    \subfloat[Exciton dispersion of hBN \textcolor{blue}{ticklabel is wrong it is H instead of L}]{\includegraphics[width=0.48\textwidth]{hBN_excdisp.pdf}}
+    \subfloat[Exciton dispersion of hBN]{\includegraphics[width=0.48\textwidth]{hBN_excdisp.pdf}}
     \caption{Phonon (left) and exciton (right) dispersions of bulk \acrshort{hBN}.}
-    \label{fig:ph_exc_disp_hBN} %MODIF : trim and same size for both
+    \label{fig:ph_exc_disp_hBN} %MODIF : trim and same size for both ; ticklabel is wrong it is H instead of L
 \end{figure}
 The exciton dispersion exhibits a double local minimum on the $\Gamma K$ line with the Fourier interpolation. However the true minimum is on a point that is not on the $\Gamma K$ line. This is verified in Ref. \cite{zanfrognini2023distinguishing}.
 With our coarse 18$\times$18$\times$6 momentum grid, the points with the minimum excitonic energies are labelled $R_1$ and $R_2$ and their reduced coordinates are fractions of the reciprocal lattice vectors $R_1=(\tfrac{1}{9},\tfrac{2}{9},0)$ and $R_2=(\tfrac{1}{9},\tfrac{5}{18},0)$. With the double-grid approach explained in Appendix \ref{app:comp_details_Chapt3}, the sampling of the exciton dispersion is much finer and the true minimum momentum is more accurately located.
@@ -348,9 +350,9 @@ In the left panel of Fig. \ref{fig:hBN_PL_comparison}, we plot the luminescence 
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
-    \subfloat[Comparison of finite-difference and \textit{ab initio} methods.]{\includegraphics[width=0.45\textwidth]{comparison_pl.png}} \label{comparison_fdd} \qquad 
+    \subfloat[Comparison of finite-difference and \textit{ab initio} methods.]{\includegraphics[width=0.45\textwidth]{comparison_pl.pdf}} \label{comparison_fdd} \qquad 
     \subfloat[Comparison of our \textit{ab initio} method and the one of Chen \textit{et al.}]{\label{comparison_ai} \includegraphics[width=0.45\textwidth]{hbn_pl_bulk.pdf}}%
-    \caption{Comparisons of the normalized luminescence spectrum obtained with our \textit{ab initio} method (blue line) and the finite difference method (green line) on the left panel. On the right, we compare it to the result of Ref. \cite{chen2020exciton} (red dashed line). In both panels, the experimental data (black dots) comes from Ref. \cite{schue2019bright}.} %MODIF : trim and same size for both ; add labels for the peaks
+    \caption{Comparisons of the normalized luminescence spectrum obtained with the exciton-phonon matrix elements obtained from our \textit{ab initio} method (blue line) and the finite difference method (green line) on the left panel. On the right, we compare it to the result of Ref. \cite{chen2020exciton} (red dashed line). In both panels, the experimental data (black dots) comes from Ref. \cite{schue2019bright}.} %MODIF : trim and same size for both ; add labels for the peaks
 	\label{fig:hBN_PL_comparison}
 \end{figure}
 
@@ -396,7 +398,7 @@ We plot the central result of this chapter in Fig. \ref{fig:mBN_PL}. In panel (a
 
 Finally as a sanity check, we considered the possibility that the distance between the exciton $\KK$ and $\Gamma$ is not well reproduced by our calculations and analyzed the matrix elements of the phonon-assisted transitions between $\KK$ and $\Gamma$. We found that these are in any case too small to explain the additional peak seen close to the main one in the experiments with a Graphite substrate.
 
-In the light of these results, let us now discuss the different experiments. The details of the three luminescence spectra reported in the literature, see Fig.~\ref{fig:mBN_PL}(b-d), are the following: two of them feature mBN grown by molecular beam epitaxy on Graphite,\cite{elias2019direct,wang2022scalable} and one mechanically exfoliated on Silicon Oxide.\cite{rousseau2021monolayer}
+In the light of these results, let us now discuss the different experiments. The details of the three luminescence spectra reported in the literature, see Fig.~\ref{fig:mBN_PL} (b-d), are the following: two of them feature mBN grown by molecular beam epitaxy on Graphite,\cite{elias2019direct,wang2022scalable} and one mechanically exfoliated on Silicon Oxide.\cite{rousseau2021monolayer}
 With the Graphite substrate, multiple peaks are visible.
 These peaks have been attributed to various causes, which we will briefly summarized here. In the work of Elias \emph{et al.},\cite{elias2019direct} the possibility of additional satellites appearing due to scattering of the indirect excitons at $K$ was considered. We also mention that in a very recent article, not peer-reviewed yet,\cite{shima2023cathodoluminescence} cathodoluminescence measurements of mBN on Graphite revealed a faint peak at 6.04 eV, that was attributed to the phonon-assisted recombination of the $K$ exciton assisted with a ZA phonon.
 In the work of Rousseau \emph{et al.}\cite{rousseau2021monolayer} they put forward the possible presence of bubbles in the sample as cause of the additional peaks. 
@@ -410,7 +412,7 @@ Finally, note that the presence of defects or edges, which break translational s
 
 
 %
-\section{Effects of the substrate on the electronic bands and excitons of mBN} \label{sec:substrate}
+\section{Effects of the substrate on the electronic gap and excitons of mBN} \label{sec:substrate}
 In the previous section we considered the isolated \acrshort{mBN} and its luminescence spectrum. However it is well known that the interaction of 2D materials with a substrate can strongly modify their electronic and optical properties. In this section we analyze how the presence of a Graphite substrate could modify the picture presented in the previous section. In particular, we will investigate the role of nearly-free electron states and of indirect excitons.
 In order to see if we can really expect an optical experimental signature from the exciton made of nearly-free electron states -- that will make the system functionally indirect -- we decided to investigate how the presence of a substrate modifies their position with respect to the direct gap, compared to the freestanding mBN. We included a graphitic substrate in the simulation, analogous to the one used in some of the experiments. Since we are not able to include a full bulk Graphite in the simulation, we modelled it with one and two layers of Graphene. We found that the presence of a graphitic substrate lowers the direct gap at $K$ much more than the indirect one, actually making the system a true direct band gap insulator again. This is most likely due to the stronger interaction of the $p_z$ orbitals of boron with those of Graphene while the planar $\sigma^*$ states are less affected. The dependence of the mBN gaps on the number of substrate Graphene layers is shown in Fig. \ref{fig:mBN_gap_layers} (calculation details are given in Appendix \ref{app:comp_details_Chapt3}). 
 \begin{figure}[H]
@@ -432,7 +434,7 @@ Indeed, with increased screening the attractive term in the \acrshort{BSE} kerne
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.8\textwidth]{mBN_distortion.pdf}
-	\caption{Left column : plots of the Fourier interpolated lowest excitonic band in the dispersion of mBN, between $\Gamma$ and $K$, when momentum-dependent distortion is applied to decrease the energy at $K$. The Boltzmann occupation function is represented in green. Right column : corresponding luminescence plots, normalized to 1. The main peak is always visible and the phonon satellite gain intensity when the distortion brings the energy at $K$ lower than at $\Gamma$. \textcolor{blue}{I will put arrows or dashes to symbolize the distortion}} %MODIF : put math font for labels, think about colors; add arrow to symbolize distortion: more vspace on xlabel left to highlight Gamma and K; trim
+	\caption{Left column : plots of the Fourier interpolated lowest excitonic band in the dispersion of mBN, between $\Gamma$ and $K$, when momentum-dependent distortion is applied to decrease the energy at $K$. The Boltzmann occupation function is represented in green. Right column : corresponding luminescence plots, normalized to 1. The main peak is always visible and the phonon satellite gain intensity when the distortion brings the energy at $K$ lower than at $\Gamma$.} %MODIF : put math font for labels, think about colors; add arrow or dashed to symbolize distortion: more vspace on xlabel left to highlight Gamma and K; trim
     \label{fig:mBN_distortion}
 \end{figure}
 We plot the undistorted exciton dispersion and luminescence spectrum in the two upper panels of Fig. \ref{fig:mBN_distortion}. In this case the phonon-assisted satellite coming from the $K$ valley is invisible due to the energy separation. In the middle panels, we see that when $\Delta_{K\Gamma} \equiv E_1($K$) - E_1(\Gamma) = 1 meV$, the valley at $K$ gets populated, but the corresponding luminescence plots still show a phonon satellite barely visible compared to the direct peak. It is an overlap of the satellites from $\Gamma$ and from $K$, that scatter with the same phonon modes and hence have the same energy here. Finally, in the bottom panels when $\Delta_{K\Gamma} = -27$ meV, the $K$ valley is much more populated than the $\Gamma$ one and thus the phonon satellite becomes visible. 
@@ -450,8 +452,8 @@ The Bernal stacking type exhibits quite a different exciton dispersion compared 
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.8\textwidth]{bBN_excdisp.pdf}
-	\caption{Calculated exciton dispersion in Bernal BN \textcolor{blue}{ticklabel is wrong it is H instead of L}} %	
-    \label{fig:bBN_excdisp}
+	\caption{Calculated exciton dispersion in Bernal BN} %	
+    \label{fig:bBN_excdisp} % MODIF ticklabel is wrong it is H instead of L
 \end{figure}
 
 We plot the exciton-phonon matrix elements for \acrshort{bBN} in Fig. \ref{fig:Gkkp_plot_hBN}. The coupling for all phonon modes is very similar than for \acrshort{hBN}, with a snowflake shape. The maximum of the coupling is around $\Gamma$ with some coupling along the $\Gamma K$ lines. Concerning the ZA and ZO modes, the matrix elements are more homogeneous with maxima at the middle of the $\Gamma K$ lines and the coupling is non-zero over the whole \acrshort{BZ}, although the magnitude is slightly lower than for hBN.
@@ -461,8 +463,8 @@ We plot the exciton-phonon matrix elements for \acrshort{bBN} in Fig. \ref{fig:G
 	\centering
     \subfloat[All phonon modes.]{\label{Gkkp_plot_bBN:all_phonons} \includegraphics[width=0.45\textwidth]{bBN_Gkkp_allphonons.pdf}} \qquad 
     \subfloat[ZA+ZO modes only.]{\label{Gkkp_plot_bBN:z_only} \includegraphics[width=0.45\textwidth]{bBN_Gkkp_zonly.pdf}}%
-    \caption{Magnitude of the coupling between the finite-momentum excitons and the lowest-lying bright excitons in Bernal BN. Color bar is the modulus of $\mathcal{G}(\qq_\parallel)$ in eV, for a 18$\times$18 $\qq$-points grid. \textcolor{blue}{add label for colorbar}}
-	\label{fig:Gkkp_plot_bBN}
+    \caption{Magnitude of the coupling between the finite-momentum excitons and the lowest-lying bright excitons in Bernal BN. Color bar is the modulus of $\mathcal{G}(\qq_\parallel)$ in eV, for a 18$\times$18 $\qq$-points grid.}
+	\label{fig:Gkkp_plot_bBN} %MODIF add label for colorbar
 \end{figure}
 
 We found most of the contribution to the luminescence came from excitonic states at $\Gamma$ and along the $\Gamma A$ line which has a low dispersion (see Fig. \ref{fig:bBN_excdisp}). This is in agreement with the exciton-phonon matrix elements showing a higher coupling around $\Gamma$.

@@ -1,4 +1,5 @@
 \chapter{ State of the art theory} \label{chap:theory}
+
 \chaptertoc{}
 %
 
@@ -187,7 +188,8 @@ and
 \begin{equation}
 	G_2(1,2:1',2') = (-i)^2  \frac{\bra{N}\hat{T}\left[\hat{S}\hpsi(1)\hpsi(2)\hpsidag(2')\hpsidag(1')\right]\ket{N}}{\bra{N}T[\hat{S}]\ket{N}}\label{eq:2GF}
 \end{equation}
-where $\ket{N}$ is the exact ground state of the N-electron system and T is a time-ordering operator. It ensures that the time variable increases from right to left. It gives $\hat{T}\left[ \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) \right] = \theta(t_1 - t_2) \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) - \theta(t_2-t_1)\hpsidag(\rr_2 t_2)\hpsi(\rr_1 t_1)$, where $\theta$ is the Heaviside function.\cite{fetter2012quantum} The physical meaning of the one-body Green's function is the probability amplitude that an electron added in the system at time $t_2$ and position $\rr_2$ propagates to position $\rr_1$ and time $t_1$. In the time-ordered formalism that we are using, it is also the probability amplitude that a hole created at time $t_1$ and position $x_1$ propagates to $(x_2,t_2)$, depending on how the two time variables are ordered. \textcolor{red}{maybe add a figure to illustrate}
+where $\ket{N}$ is the exact ground state of the N-electron system and T is a time-ordering operator. It ensures that the time variable increases from right to left. It gives $\hat{T}\left[ \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) \right] = \theta(t_1 - t_2) \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) - \theta(t_2-t_1)\hpsidag(\rr_2 t_2)\hpsi(\rr_1 t_1)$, where $\theta$ is the Heaviside function.\cite{fetter2012quantum} The physical meaning of the one-body Green's function is the probability amplitude that an electron added in the system at time $t_2$ and position $\rr_2$ propagates to position $\rr_1$ and time $t_1$. In the time-ordered formalism that we are using, it is also the probability amplitude that a hole created at time $t_1$ and position $x_1$ propagates to $(x_2,t_2)$, depending on how the two time variables are ordered. 
+% MODIF maybe add a figure to illustrate
 The two-particle Green's function $G_2$ describes the propagation of two correlated particles. Depending on the time ordering, it can describe a propagation electron-electron pair, a hole-hole pair or an electron-hole pair. It will become useful in a following section. \\
 %
 
@@ -281,7 +283,7 @@ We introduce the \textbf{dynamically screened interaction} $W$ or screened Coulo
 \begin{equation}
 	W(1,2) \equiv \int d3 \inveps(1,3) v(3,2) \equiv \int d3 v(1,3) \inveps(2,3)
 \end{equation}
-\textcolor{red}{add a Feynman diagram to illustrate}
+%MODIF add a Feynman diagram to illustrate
 Note that the screened interaction is symmetric under the exchange of indices $W(1,2) = W(2,1)$.
 Finally, we introduce the \textbf{electron self-energy}, defined as :
 \begin{equation}
@@ -371,7 +373,7 @@ Equation \eqref{eq:Dyson} is called the \textit{Dyson equation} for the single-p
 \begin{equation}
 	\gS(1,2) = v_H(1,2) - i\int d34 v(1,4)G(1,3) \left[ \frac{\delta G^{-1}(3,2)}{\delta \Phi(4^+)} \right] 
 \end{equation}
-\textcolor{red}{add a Feynman diagram to illustrate}
+%MODIF add a Feynman diagram to illustrate
 %
 \subsection{The Random Phase Approximation} 
 The \acrfull{RPA} consists in neglecting the vertex corrections in the formula of the reducible polarizability Eq. \eqref{eq:tilde_chi}. The vertex functions is reduced to 
@@ -594,7 +596,7 @@ To make the distinction between short-range, microscopic variations and long-ran
 \begin{equation}
 	f(\rr,\rr';\omega) = \frac{1}{\Omega} \sum_{\kk}^{BZ} \sum_{\GG\GG'} \exp{i(\kk+\GG)\cdot\rr} f(\kk+\GG,\kk'+\GG';\omega)  \exp{-i(\kk+\GG')\cdot\rr'}
 \end{equation}
-\textcolor{red}{I could make a figure to illustrate}
+%MODIF I could make a figure to illustrate
 where $\Omega$ is the volume of the crystal (more precisely of the Born-von Karmann supercell in the case of an infinite crystal), $\kk$ is a Bloch wavevector confined to the first \acrshort{BZ} and $\GG,\GG'$ are reciprocal lattice vectors.
 With this definition, we can write the inverse dielectric matrix in reciprocal space :
 \begin{equation}
@@ -668,7 +670,8 @@ At the \acrshort{BSE} level, the dipole matrix elements are replaced with their 
 \begin{equation}
 	\varepsilon_2(\omega) = \frac{8\pi^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda) \label{eq:eps_2_exc}
 \end{equation}
-As one can see in the delta functions of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption. \textcolor{blue}{Here I need to make a figure but I have several questions about it.}
+As one can see in the delta functions of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption.
+%MODIF Here I need to make a figure but I have several questions about it.
 
 We now have access to another relevant quantity which is the \textit{absorption coefficient} $\alpha(\omega)$ :
 \begin{equation}

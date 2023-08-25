@@ -26,7 +26,8 @@ First, we obtain the strained structure by taking an orthorombic cell of the pri
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.8\textwidth]{AppB_structure_BZ.png}
-	\caption{Left : visualization of the strained crystal and the orthorombic and pseudo-hexagonal unit cells. Right : corresponding strained Brillouin Zone. The dotted line is the shape of the equilibrium BZ. The yellow zone is the area enclosed by the high-symmetry points we used to plot dispersions. \textcolor{red}{maybe add phonon density of states (from suppmat) on the side}}
+	\caption{Left : visualization of the strained crystal and the orthorombic and pseudo-hexagonal unit cells. Right : corresponding strained Brillouin Zone. The dotted line is the shape of the equilibrium BZ. The yellow zone is the area enclosed by the high-symmetry points we used to plot dispersions. }
+	%MODIF maybe add phonon density of states (from suppmat) on the side
 	\label{fig:strain_BZ}
 \end{figure}
 After setting the length of the cell to the desired length corresponding to a strain value, we let the atom positions and the other two cell vectors relax, using a damped molecular dynamics algorithm where the forces acting on the atoms are computed in \acrshort{DFT} using the Hellmann--Feynman theorem. This procedure in implemented in the \qe ~suite.\cite{giannozzi2009quantum,giannozzi2017advanced} More computational details can be found in Appendix \ref{app:comp_par_strain}. We found that once the two cell vectors orthogonal to the strained one are relaxed, their length vary linearly with the strain.\\
@@ -78,12 +79,12 @@ These variations can be explained in term of the variation of the orbital proper
 	\setcapindent{1em}
 	\centering
 	\includegraphics[width=0.4\textwidth]{M_and_M_prime.png}
-	\caption{$\pi^*$ atomic-like orbitals of the conduction band minima on one of the layers for a compression of 0.5\%. At \MM', the components of the wavefunctions are oriented along the compressed B-N bond. At \MM, they are oriented along one of the other bonds.}%\textcolor{red}{Rajoute des flèches pour montrer le strain.}}
+	\caption{$\pi^*$ atomic-like orbitals of the conduction band minima on one of the layers for a compression of 0.5\%. At \MM', the components of the wavefunctions are oriented along the compressed B-N bond. At \MM, they are oriented along one of the other bonds.}%MODIF {red}{Rajoute des flèches pour montrer le strain.}}
 	\label{fig:WF_strain}
 \end{wrapfigure}
 The $\pi^*$ atomic-like orbitals at \MM~and \MM' have a different shape, as illustrated in Fig. \ref{fig:WF_strain} for a compression of 0.5\%. While they are degenerated in energy for the unstrained crystal, this degeneracy is lifted due to the symmetry breaking. The state with orbital components along the strained bond is the one whose energy changes with strain at \MM'. Moreover these orbitals have a strong dependence on the interlayer interactions,\cite{kang2016unified} which in turns depends on the interlayer distance. This distance varies linearly with the strain applied to the system in our relaxation process. These two effects, the breaking of the in plane symmetries and the change in the interlayer interaction, explain the splitting and shift of the bands induced by strain at the \MM' point.
 
-The valence states around \KK~and \KK' are only slightly changed in energy. This can be explained because the orbitals corresponding to these states are protected from interlayer interactions by symmetry, as shown in the theoretical study of Ref. \cite{kang2016unified}. There is nonetheless a slight change in energy, which causes the valence band maximum to be located at the point called \textbf{T}$_2$ under compression and at \textbf{T}$_1$ under stretch. %\textcolor{red}{change the names either of these points OR of the T point in the BZ scheme}. 
+The valence states around \KK~and \KK' are only slightly changed in energy. This can be explained because the orbitals corresponding to these states are protected from interlayer interactions by symmetry, as shown in the theoretical study of Ref. \cite{kang2016unified}. There is nonetheless a slight change in energy, which causes the valence band maximum to be located at the point called \textbf{T}$_2$ under compression and at \textbf{T}$_1$ under stretch. %MODIF change the names either of these points OR of the T point in the BZ scheme}. 
 All these modifications of the band structure induce a change in the position of the minimal indirect band gaps for compressive and tensile strain that are indicated by the dotted lines in Fig. \ref{fig:strain_eldisp}.
 
 
@@ -151,7 +152,8 @@ This above second derivative is evaluated numerically with the finite difference
 \end{equation}
 
 Since we are interested in phonon-assisted luminescence and we know where the minima lie in the excitonic dispersion, we know the phonon momentum $\bar{q}$ necessary to satisfy momentum conservation. Therefore we calculate the derivatives of the excitonic dipoles
-only for a momentum $\bar{q}$ that connect the minimum of the exciton dispersion to $\Gamma$ as illustrated in Fig. \textcolor{red}{exc disp and phonon arrow at $\bar{q}$}.
+only for a momentum $\bar{q}$ that connect the minimum of the exciton dispersion to $\Gamma$.  
+% MODIF as illustrated in Fig. \textcolor{red}{exc disp and phonon arrow at $\bar{q}$}.
 Then we label the displacements $R \to R_{\mu\bar{q}}$. They are along the eigenvector of a particular phonon mode $\mu$ taken at the momentum $\bar{q}$. The displacement magnitudes are given, similarly to Eq. \eqref{eq:normal_displacements} taken for $t=0$, by the real part of the phonon eigenvector multiplied by a scaling factor $c$ :
 \begin{equation}
 	u^{\mu\bar{q}}_{Ls\alpha}(t=0) = \frac{c}{\sqrt{M_s}}\Re\left\{ e^{i\bar{\qq}\cdot\boldsymbol{\tau}_L} \xi^{\mu\bar{q}}_{s\alpha} \right\}
