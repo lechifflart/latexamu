@@ -189,7 +189,6 @@ and
 	G_2(1,2:1',2') = (-i)^2  \frac{\bra{N}\hat{T}\left[\hat{S}\hpsi(1)\hpsi(2)\hpsidag(2')\hpsidag(1')\right]\ket{N}}{\bra{N}T[\hat{S}]\ket{N}}\label{eq:2GF}
 \end{equation}
 where $\ket{N}$ is the exact ground state of the N-electron system and T is a time-ordering operator. It ensures that the time variable increases from right to left. It gives $\hat{T}\left[ \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) \right] = \theta(t_1 - t_2) \hpsi(\rr_1 t_1) \hpsidag(\rr_2 t_2) - \theta(t_2-t_1)\hpsidag(\rr_2 t_2)\hpsi(\rr_1 t_1)$, where $\theta$ is the Heaviside function.\cite{fetter2012quantum} The physical meaning of the one-body Green's function is the probability amplitude that an electron added in the system at time $t_2$ and position $\rr_2$ propagates to position $\rr_1$ and time $t_1$. In the time-ordered formalism that we are using, it is also the probability amplitude that a hole created at time $t_1$ and position $x_1$ propagates to $(x_2,t_2)$, depending on how the two time variables are ordered. 
-% MODIF maybe add a figure to illustrate
 The two-particle Green's function $G_2$ describes the propagation of two correlated particles. Depending on the time ordering, it can describe a propagation electron-electron pair, a hole-hole pair or an electron-hole pair. It will become useful in a following section. \\
 %
 
@@ -283,7 +282,6 @@ We introduce the \textbf{dynamically screened interaction} $W$ or screened Coulo
 \begin{equation}
 	W(1,2) \equiv \int d3 \inveps(1,3) v(3,2) \equiv \int d3 v(1,3) \inveps(2,3)
 \end{equation}
-%MODIF add a Feynman diagram to illustrate
 Note that the screened interaction is symmetric under the exchange of indices $W(1,2) = W(2,1)$.
 Finally, we introduce the \textbf{electron self-energy}, defined as :
 \begin{equation}
@@ -373,7 +371,6 @@ Equation \eqref{eq:Dyson} is called the \textit{Dyson equation} for the single-p
 \begin{equation}
 	\gS(1,2) = v_H(1,2) - i\int d34 v(1,4)G(1,3) \left[ \frac{\delta G^{-1}(3,2)}{\delta \Phi(4^+)} \right] 
 \end{equation}
-%MODIF add a Feynman diagram to illustrate
 %
 \subsection{The Random Phase Approximation} 
 The \acrfull{RPA} consists in neglecting the vertex corrections in the formula of the reducible polarizability Eq. \eqref{eq:tilde_chi}. The vertex functions is reduced to 
@@ -596,7 +593,6 @@ To make the distinction between short-range, microscopic variations and long-ran
 \begin{equation}
 	f(\rr,\rr';\omega) = \frac{1}{\Omega} \sum_{\kk}^{BZ} \sum_{\GG\GG'} \exp{i(\kk+\GG)\cdot\rr} f(\kk+\GG,\kk'+\GG';\omega)  \exp{-i(\kk+\GG')\cdot\rr'}
 \end{equation}
-%MODIF I could make a figure to illustrate
 where $\Omega$ is the volume of the crystal (more precisely of the Born-von Karmann supercell in the case of an infinite crystal), $\kk$ is a Bloch wavevector confined to the first \acrshort{BZ} and $\GG,\GG'$ are reciprocal lattice vectors.
 With this definition, we can write the inverse dielectric matrix in reciprocal space :
 \begin{equation}
@@ -670,8 +666,15 @@ At the \acrshort{BSE} level, the dipole matrix elements are replaced with their 
 \begin{equation}
 	\varepsilon_2(\omega) = \frac{8\pi^2}{V} \sum_\lambda \left| \sum_{cv\kk} A_\lambda^{cv\kk} d_{cv\kk} \right|^2 \delta(\omega - E_\lambda) \label{eq:eps_2_exc}
 \end{equation}
-As one can see in the delta functions of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in the figure for absorption.
-%MODIF Here I need to make a figure but I have several questions about it.
+As one can see in the delta functions of the two versions, the peaks are not given by the same excitations. Hence the spectra will exhibit different features, whether we consider the RPA or the electron-hole interaction in the BSE. This is illustrated in Fig. \ref{fig:abs}.
+\begin{figure}[h!t]
+	\vspace{0.5cm}
+	\setcapindent{2em}
+	\centering
+	\includegraphics[width=0.8\textwidth]{abs.pdf}
+	\caption{Absorption spectrum of bulk \acrshort{hBN}, computed at the \acrshort{RPA} independent particle (orange) and \acrshort{BSE} (blue) level of theory compared to the experiment of Ref. \cite{artus2021ellipsometry}. The vertical line is at the supposed gap energy. The inclusion of excitonic effects makes a striking difference from the independent particle level and gives a much better agreement with experiment, where peaks appear below the gap energy. Note that the blue curve is calculated to match only the first peak and all curves are normalized.}
+	\label{fig:abs}
+\end{figure}
 
 We now have access to another relevant quantity which is the \textit{absorption coefficient} $\alpha(\omega)$ :
 \begin{equation}
@@ -688,7 +691,7 @@ In general, luminescence is the spontaneous emission of light from an excited st
 
 Photoluminescence is the process that can be seen as the inverse of absorption : photo-excited carriers de-excite from the bottom of the conduction band to an empty state in the valence band by emitting light with a frequency corresponding to the gap energy. For direct semiconductors or insulators, considering that the light emission is the inverse process of the absorption is generally an acceptable approximation. In this case, the spectra for the two process should look identical\footnote[1]{In reality there are differences such as the Stokes shift, which is caused by the broadening of electronic states by phonons.}. However, for materials with indirect gaps, this simple picture does not hold anymore. Indeed, one needs to consider the phonon-assisted transitions, which give rise to phonon satellites in both the absorption and the luminescence spectra, as will be discussed later. \\
 
-Here I will present an approximation to derive the spontaneous emission rate, which is the key quantity to compute luminescence spectra, for any kind of gapped material, starting from the absorption rate. We use the van Roosbroeck -- Shockley relation, derived in 1954 to describe the light emission in Germanium \cite{van1954photon} and follow Refs \cite{paleari2019exciton,paleari2019first,}. This relation is based on a \emph{steady-state} approximation, that is to say we consider the absorption rate and the spontaneous emission rate to be in detailed balance. We start by giving the relations for the case of independent particles and direct transitions only. For indirect transitions, the same kind of relations hold but they need to be slightly modified to include the phonon-assisted transitions, which will be done in the body of this thesis. Here we consider a quasi-equilibrium situation
+Here I will present an approximation to derive the spontaneous emission rate, which is the key quantity to compute luminescence spectra, for any kind of gapped material, starting from the absorption rate. We use the van Roosbroeck--Shockley relation, derived in 1954 to describe the light emission in Germanium \cite{van1954photon} and follow Refs \cite{paleari2019exciton,paleari2019first,}. This relation is based on a \emph{steady-state} approximation, that is to say we consider the absorption rate and the spontaneous emission rate to be in detailed balance. We start by giving the relations for the case of independent particles and direct transitions only. For indirect transitions, the same kind of relations hold but they need to be slightly modified to include the phonon-assisted transitions, which will be done in the body of this thesis. Here we consider a quasi-equilibrium situation
 where excited electron and holes are relaxed at the band extrema after scattering with phonons, electrons or other relaxation processes. Hence reach a quasi-equilibrium distribution of particles where some electrons
 have been removed from the top valence band and promoted in conductions bands. These electron and hole distributions are described by two Fermi-Dirac functions with two different chemical potentials (for a discussion see section 12.2.1 of Ref. \cite{schafer2002semiconductor}). The absorption rate is :
 \begin{equation}
