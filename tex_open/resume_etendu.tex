@@ -49,7 +49,7 @@ Ensuite, le problème des vibrations des atomes et le problème électronique so
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.8\textwidth]{intro/workflow_detailed.pdf}
-	\caption{\footnotesize{Schéma du processus de calcul du couplage exciton-phonon et de la luminescence assistée par les phonons. Les cadres verts et rouges indiquent l'utilisation de \textsc{Quantum ESPRESSO} et \yambo~comme codes de simulation, respectivement.}}
+	\caption{Schéma du processus de calcul du couplage exciton-phonon et de la luminescence assistée par les phonons. Les cadres verts et rouges indiquent l'utilisation de \textsc{Quantum ESPRESSO} et \yambo~comme codes de simulation, respectivement.}
 	\label{fig:workflow_fr}
 \end{figure}
 Un schéma du processus de calcul est présenté dans la Fig. \ref{fig:workflow_fr}, qui contient également le nom des codes de simulation utilisés.\\
@@ -64,12 +64,12 @@ Nous observons que la déformation induit une brisure de symétrie et que la zon
 La levée de dégénérescence a également un effet sur les énergies des excitons. Nous observons que les deux excitons directs avec les plus basses énergies, qui sont doublement dégénérés à l'équilibre, se séparent et donnent quatre niveaux distincts. L'énergie des excitons directs décroissent pour des étirements et croissent pour des compressions. Pour les excitons indirects, qui ne sont pas dégénérés, la tendance n'est pas la même et leur énergie décroît pour toutes les valeurs de déformation. L'effet de la séparation des niveaux d'énergie est clairement visible sur le spectre d'absorption où l'on voit apparaître un deuxième pic, provenant de la séparation de l'exciton blanc en deux états. L'effet est également visible sur la fonction d'onde de ces deux nouveaux états : en effet les deux ne sont pas orientés suivant la même direction cristallographique.
 
 Dans la section 3.5, nous présentons l'approche utilisée pour calculer l'effet des phonons sur les excitons. Le couplage est obtenu par une dérivée aux différences finies de la fonction de réponse ou des dipoles excitoniques, de façon équivalente. Cette dérivée permet de calculer le couplage des excitons à moments finis avec les modes de phonons ayant les mêmes moments. Il est donc nécessaire de construire des supercellules pour pouvoir capturer la périodicité des modes de phonons aux moments choisis. Dans notre cas et comme évoqué plus haut, il nous faut considérer toutes les transitions non-équivalentes donnant des excitons indirects à très proche énergie. Tout ceci nous conduit à présenter les spectres de luminescence à différente valeur de déformation dans la Fig. \ref{fig:Lum_vs_strain_fr}.
-\begin{figure}[H]
+\begin{figure}[h!t]
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.8\textwidth]{Lum_vs_strain.pdf}
-	\caption{\footnotesize{Spectres de luminescence en fonction de la déformation, pour des valeurs choisies de compression. Les courbes sont déplacées verticalement par souci de clarté. Les données expérimentales sont reportés par les points noirs de la courbe du haut. Les spectres sont décalés en énergie pour correspondre à l'expérience. Les lignes pointillées sont un guide visuel.}}
+	\caption{Spectres de luminescence en fonction de la déformation, pour des valeurs choisies de compression. Les courbes sont déplacées verticalement par souci de clarté. Les données expérimentales sont reportés par les points noirs de la courbe du haut. Les spectres sont décalés en énergie pour correspondre à l'expérience. Les lignes pointillées sont un guide visuel.}
 	\label{fig:Lum_vs_strain_fr}
 \end{figure}
 
@@ -91,7 +91,7 @@ Nous avons finalement calculé le spectre de luminescence du mBN libre. Nous l'a
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.8\textwidth]{hBN_monolayer_lum2.pdf}
-	\caption{\footnotesize{Spectre de luminescence calculé pour la monocouche de hBN (a) comparé aux résultats expérimentaux dans les Ref. \cite{elias2019direct}(b), Ref. \cite{rousseau2021monolayer}(c) et Ref. \cite{wang2022scalable}(d). Les spectres calculés ont été décalés en énergie pour s'accorder avec le pic principal du panel (c). Par souci de clarté, nous avons tracé le spectre calculé sur chaque panel. Dans l'encadré du panel (a) nous montrons la même courbe en échelle semi-logarithmique, qui révèle le satellite à moindre intensité.}}
+	\caption{Spectre de luminescence calculé pour la monocouche de hBN (a) comparé aux résultats expérimentaux dans les Ref. \cite{elias2019direct}(b), Ref. \cite{rousseau2021monolayer}(c) et Ref. \cite{wang2022scalable}(d). Les spectres calculés ont été décalés en énergie pour s'accorder avec le pic principal du panel (c). Par souci de clarté, nous avons tracé le spectre calculé sur chaque panel. Dans l'encadré du panel (a) nous montrons la même courbe en échelle semi-logarithmique, qui révèle le satellite à moindre intensité.}
 	\label{fig:mBN_PL_fr} 
 \end{figure}
 
