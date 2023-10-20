@@ -19,7 +19,7 @@ To greatly simplify this Hamiltonian, we use the so-called Born-Oppenheimer appr
 \ee
 The first and second term are universal for all systems.The peculiarities of any systems are included in the last term in the above equation.
 
-\section{Density Functional Theory}
+\section{Density Functional Theory} \label{sec:DFT}
 \acrfull{DFT} is vastly used in solid-state physics and quantum chemistry. In this thesis, it will be the starting tool to compute structural and electronic properties of our systems. The idea behind \acrshort{DFT} is to replace the real system of interacting electrons by an auxiliary system of non-interacting particles evolving in an effective potential. \acrshort{DFT} is an exact theory in principle and allows one to compute the ground state of the many-electron system.
 
 \acrshort{DFT} is based on the work of Hohenberg and Kohn who stated and proved two fundamental theorems. \cite{hohenberg1964} The first one ensures there is a one-to-one correspondence between the electronic density and the external potential acting on the system. The second theorem states that the total energy of the system is a functional of the electronic density.
@@ -133,12 +133,11 @@ In principle all complete bases of the Hilbert space yield equal representation 
 One has to verify that the cutoff is high enough so that the results are accurate, but setting it too high would mean including more plane waves which would slow down the calculations. Since the plane waves are orthonormal, adding extra ones to the basis by increasing $E_{cut}$ does not add redundant physical information.\cite{martin2020electronic} All the potentials entering the Kohn-Sham equations can be expressed in the plane waves basis, as well as the equations themselves.
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-\section{Many-Body Perturbation Theory}
+\section{Many-Body Perturbation Theory} \label{sec:MBPT}
 As mentioned above, \acrshort{DFT} is not well suited to simulate optics experiments of semiconductors or insulators. Optical excitations are neutral excitations, in the sense that the excited electron does not leave the system and can therefore interact with the hole it left behind in the valence band. This interaction between a hole in a valence band and an excited electron in the conduction bands is not accurately accounted for in \acrshort{DFT}, as it is designed to calculate the total energy and the electronic density of the \textit{groundstate}. For this reason, we resort to a more refined theoretical framework to treat the electronic correlations and study the excited states.
 
 In this section I will present the basics of \acrfull{MBPT}. In this theory, the many-body interactions are treated as a perturbation to the system of non-interacting electrons. I will detail the effects on the electronic structure and also the inclusion of the electron-hole interaction, to deal with optical excitations. 
@@ -586,8 +585,9 @@ Each couple $(nn')$ corresponds to a pair $(vc)$ or $(cv)$ of an occupied and an
 The difference between the transition energy and the quasiparticle gap is called the \textit{exciton binding energy}. Excitonic effects can be extremely important in the optical properties of semiconductors, as we will see in the next section.
 %
 
+
 %
-\section{Optics}
+\section{Optics} \label{sec:optics}
 Optics experiments involve an external field interacting with the electronic density of the material. In the regime of low intensity field where we can describe it as a perturbation, the formalism presented above is a perfectly suited simulation tool. The key quantity to reproduce the results of these experiments is the electronic screening of the material, which is linked to the dielectric matrix and to the response function or polarizability $\chi$. Pertubatively, the response of the electronic density with respect to an external field can be described in terms of the neutral excitations of the system, \textit{i.e.} by the formation and propagation of electron-hole pairs.
 In optics experiments, the external fields have wavelength that are far larger than the characteristic length of the unit cells of the crystals we simulate. Typically, the wavelengths are in the visible or ultraviolet range, from 180 nm to 1200 nm, while the crystal unit cells are of the order of a few nm. 
 In order to obtain optical spectra that are comparable to those measured experimentally, we need to average the microscopic variations in the response functions and related quantities we introduced so far. Hence we can obtain macroscopic quantities, which are the ones accessible in experiments. 
@@ -733,7 +733,7 @@ where $\Omega_{q\mu}$ refers to a phonon frequency for the phonon mode $\mu$ at 
 
 %
 %
-\section{Phonons and electron-phonon coupling}
+\section{Phonons and electron-phonon coupling} \label{sec:phonons}
 In solids, the collective motion of atoms can be treated as quasiparticles, called \textit{phonons}. They represent the vibrational eigenmodes of atoms in the crystal. In this thesis we use the harmonic approximation, which means that we approximate the potential acting on the atoms as a sum of coupled harmonic oscillators. In this approximation the phonons are eigenstates of the system with infinite lifetime. Corrections due to the anharmonicity or to the coupling between electronic and atomic motions introduce
 a finite lifetime for the atomic vibrations, but these effects are not considered here.\cite{giustino2017review} 
 A phonon is a quantum of lattice vibrations and similarly to the crystal momentum $\kk$ of the electrons, phonons have a crystal momentum that we call $\qq$. 
@@ -852,20 +852,40 @@ where the subscript $uc$ signifies that the integral is taken over a unit cell o
 
 Note that one can go beyond the first order and compute for instance the matrix elements generated by the second derivative of the effective potential with respect to the atomic displacements. One would obtain the so-called Debye-Waller term, which can be used in a self-energy framework to compute the renormalization of the electronic bands by the lattice vibrations.\cite{giustino2017review, kawai2014electron, cannuccia2011effect}
 
+%
+\newpage
+\begin{tcolorbox}[enhanced jigsaw,breakable,pad at break*=1mm,
+	colback=cyanamu!5!white,colframe=blueamu!90!white,title= Summary of Chapter {\hypersetup{linkcolor=.}\ref{chap:theory}}]
+%
+Summary of Section \ref{sec:DFT}
+	\begin{itemize}
+		\item Density Functional Theory allows to compute the ground state density $n(\rr)$ and the equilibrium crystal structure of materials.
+		\item The Kohn-Sham eigenvalues $\epsilon_i(\rr)$ obtained from \acrshort{DFT} give an estimation of the band structure.
+		\item Along with the Kohn-Sham wavefunctions $\psi_i(\rr)$, these are the starting quantities for the more involved calculations presented in the following sections.
+	\end{itemize}
+%
+Summary of Section \ref{sec:MBPT}
+	  \begin{itemize}
+		  \item The $GW$ approximation includes many-electron effects for weakly correlated systems, that are absent in \acrshort{DFT}.
+		  \item We obtain from this the quasiparticle corrections that give more accurate electronic band structures.
+		  \item We switch to a basis of bound electron-hole pair, the so-called excitons, better suited to describe optical processes.
+		  \item We compute the exciton properties with the Bethe-Salpeter equation, from which we obtain exciton energies and eigenvectors.
+	  \end{itemize}  
+%
+Summary of Section \ref{sec:optics}
+	\begin{itemize}
+		\item We simulate optical spectra with the linear response function obtained from \acrshort{MBPT}, including excitonic effects.
+		\item The imaginary part of the dielectric function, calculated \textit{ab initio}, gives access to the optical absorption spectrum.
+		\item We use a steady state approximation to obtain the luminescence spectrum from the absorption one.
+	\end{itemize}  
+%
+Summary of Section \ref{sec:phonons}
+	\begin{itemize}
+		\item Phonons are quanta of vibrations of the lattice.
+		\item They are quasiparticles with frequencies and eigenvectors that we obtain from \acrshort{DFPT}.
+		\item The coupling between electrons and phonons enters an Hamiltonian in second quantization, in the form of matrix elements.
+	\end{itemize}  
+\end{tcolorbox}
+\newpage
 
-% %
-% \newpage
-% %
-% \section{Numerical implementation / Computational scheme}
-% Maybe this can go in the next chapter about the methods
-% %There are different ways of treating the frequency dependence of the screening. One can the dielectric matrix on a selected grid of frequencies $\omega$, or approximate it with a model function depending on a few frequencies, as in the Plasmon Pole Approximation. Most commonly, it is computed in the \acrshort{RPA}. 
-% \begin{itemize}
-% 	\item Subtract the $v_{xc}$ from DFT when computing QP energies
-% 	\item from $\rr$ space to $\kk$ space, dipoles, Lehmann representation from DFT ev and wf
-% 	\item Iterating GW cycle; $G_0W_0$ === explain this in particular because it is widely used in the results
-% 	% \item include \cite{martin2016interacting} Eqs. (12.53) and (12.54)
-% 	% \item divergence of the Coulomb term at $\qq = 0$ and $\GG' =0$
-% 	% \item matrix elements of W and v, in terms of the dipoles (14.54) and (14.55) of Martin Reining Ceperley
-% 	\item double grids for elph and excph	
-% \end{itemize}
 

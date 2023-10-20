@@ -414,8 +414,9 @@ In order to see if we can really expect an optical experimental signature from t
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
-	\includegraphics[width=0.7\textwidth]{mBN_gap_vs_layers.pdf}
-	\caption{Band gaps of mBN as a function of the number of graphene layers\label{gap_vs_layers}. The large direct gap at $\Gamma$ is in blue, the indirect $\pi\rightarrow\sigma^*$, i.e. $K\rightarrow\Gamma$, is in green and the smallest $K\rightarrow K$ direct gap is in red.} 
+	\subfloat{\includegraphics[height=2.2in]{mBN_gap_vs_layers.pdf}} \qquad
+	\subfloat{\includegraphics[height=2.0in]{scheme_layers.pdf}}
+	\caption{Band gaps of mBN as a function of the number of Graphene layers\label{gap_vs_layers} included in the simulation cell. The large direct gap at $\Gamma$ is in blue, the indirect $\pi\rightarrow\sigma^*$, i.e. $K\rightarrow\Gamma$, is in green and the smallest $K\rightarrow K$ direct gap is in red.} 
 	\label{fig:mBN_gap_layers}
 \end{figure}
 Therefore, we expect that these states at $\Gamma$ will not contribute to the luminescence in a realistic experiment where mBN is deposited or grown on a substrate.
@@ -423,13 +424,13 @@ In order to simulate luminescence from an ideal mBN deposited on a substrate we 
 
 
 Next, we investigate the effect of a substrate on the indirect excitons of \acrshort{mBN}. As computing the excitonic dispersion in the presence of a substrate would be computationally prohibitive, we decided to use a simple model to study the impact on luminescence. We know that the difference in energy between the excitons at $\Gamma$ and $K$ is due to correlation effects. Therefore with the substrate increasing the screening, we expect this gap to decrease.
-Indeed, with increased screening the attractive term in the \acrshort{BSE} kernel is stronger, hence increasing the finite-momentum excitons binding energy. By adding a parameter that renormalizes the exciton energies proportionally to their momentum with the formula $E(\qq) = E_0(\qq) + \alpha |\qq|$, we can roughly simulate this effect and bring the exciton at $K$ lower in energy than the one at $\Gamma$. Hence, this new minimum gets more populated with the Boltzmann occupation function and it might increase the intensity of phonon satellites. An \textit{ab initio} treatment of the Graphite substrate is possible at the $GW$ and BSE level with recent numerical developments,\cite{guandalini2023efficient} but it remains too expansive computationally for our way of calculating the exciton-phonon coupling, given the number of $\kk$ and $\qq$ points needed to accurately describe the sharp electronic dispersion of Graphene layers. More advanced numerical procedures to include the screening of a substrate or any external environment exist,\cite{ugeda2014giant,bradley2015probing} but they are beyond the scope of this thesis.
+Indeed, with increased screening the atractive term in the \acrshort{BSE} kernel is stronger, hence increasing the finite-momentum excitons binding energy. By adding a parameter that renormalizes the exciton energies proportionally to their momentum with the formula $E(\qq) = E_0(\qq) + \alpha |\qq|$, we can roughly simulate this effect and bring the exciton at $K$ lower in energy than the one at $\Gamma$. Hence, this new minimum gets more populated with the Boltzmann occupation function and it might increase the intensity of phonon satellites. An \textit{ab initio} treatment of the Graphite substrate is possible at the $GW$ and BSE level with recent numerical developments,\cite{guandalini2023efficient} but it remains too expansive computationally for our way of calculating the exciton-phonon coupling, given the number of $\kk$ and $\qq$ points needed to accurately describe the sharp electronic dispersion of Graphene layers. More advanced numerical procedures to include the screening of a substrate or any external environment exist,\cite{ugeda2014giant,bradley2015probing} but they are beyond the scope of this thesis.
 \begin{figure}[H]
 	\vspace{0.2cm}
 	\setcapindent{2em}
 	\centering
 	\includegraphics[width=0.9\textwidth]{mBN_distortion.pdf}
-	\caption{Left column : plots of the Fourier interpolated lowest excitonic band in the dispersion of mBN, between $\Gamma$ and $K$, when momentum-dependent distortion is applied to decrease the energy at $K$. The Boltzmann occupation function is represented in green. Right column : corresponding luminescence plots, normalized to 1. The main peak is always visible and the phonon satellite gain intensity when the distortion brings the energy at $K$ lower than at $\Gamma$.} %MODIF : put math font for labels, think about colors; add arrow or dashed to symbolize distortion: more vspace on xlabel left to highlight Gamma and K; trim
+	\caption{Left column : plots of the Fourier interpolated lowest excitonic band in the dispersion of mBN, between $\Gamma$ and $K$, when momentum-dependent distortion is applied to decrease the energy at $K$. The Boltzmann occupation function is represented in green. Right column : corresponding luminescence plots, normalized to 1. The main peak is always visible and the phonon satellite gain intensity when the distortion brings the energy at $K$ lower than at $\Gamma$.} 
     \label{fig:mBN_distortion}
 \end{figure}
 We plot the undistorted exciton dispersion and luminescence spectrum in the two upper panels of Fig. \ref{fig:mBN_distortion}. In this case the phonon-assisted satellite coming from the $K$ valley is invisible due to the energy separation. In the middle panels, we see that when $\Delta_{K\Gamma} \equiv E_1($K$) - E_1(\Gamma) = 1 meV$, the valley at $K$ gets populated, but the corresponding luminescence plots still show a phonon satellite barely visible compared to the direct peak. It is an overlap of the satellites from $\Gamma$ and from $K$, that scatter with the same phonon modes and hence have the same energy here. Finally, in the bottom panels when $\Delta_{K\Gamma} = -27$ meV, the $K$ valley is much more populated than the $\Gamma$ one and thus the phonon satellite becomes visible. 
@@ -497,4 +498,20 @@ We support the interpretation that this fine structure is not intrinsic, nor due
 
 Regarding \acrshort{bBN}, our first numerical studies suggest a direct luminescence. Despite considering a small distortion of the excitonic dispersion, our spectrum still differs from the experimental one. We are investigating the role of van der Waals correction and the possible numerical problems in our procedure to provide an accurate interpretation for the experimental results.
 
-Finally, we would like to mention that our methodology based on the dynamical self-energy has been fully implemented in the \yambo~code and is applicable to other systems of interest. This formulation allows one to compute more observables than just the luminescence presented here, such as phonon-assisted absorption, exciton linewidths and relaxation rates.
+Finally, we would like to mention that our methodology based on the dynamical self-energy has been fully implemented in the \yambo~code and is applicable to other systems of interest. This formulation allows one to compute more observables than just the luminescence presented here, such as phonon-assisted absorption, exciton linewidths and relaxation rates. \\
+
+\textit{Added note.} We have become aware of a recently published article, Ref. \cite{cudazzo2023dynamical}, in which a formula for the phonon-assisted luminescence was derived using non-equilibrium Green's functions theory. It includes renormalization factors in a very similar way to our approach.
+
+\vspace{1cm}
+\begin{tcolorbox}[enhanced jigsaw,breakable,pad at break*=1mm,
+	colback=cyanamu!5!white,colframe=blueamu!90!white,title=Summary of Chapter {\hypersetup{linkcolor=.}\ref{chap:mBN}}.]
+	\begin{itemize}
+		\item The coupling between excitons and phonons was computed \textit{ab initio} in Sec. \ref{sec:excph_ai} by treating the electron-phonon interaction as a dynamical perturbation.
+		\item This approach allowed to compute the interaction between all excitons and all phonon modes in the full Brillouin Zone.
+		\item Within \acrshort{MBPT}, we could formally build an exciton-phonon self-energy that corrected the response function dynamically in Sec. \ref{sec:PL_ai}.
+		\item Using the van Roosbroeck--Shockley relation, we were able to compute luminescence spectra with contributions from both direct excitons and phonon-assisted transitions, with a renormalization factor that allowed their relative intensities to be compared.
+		\item We benchmarked the method on bulk \acrshort{hBN} and applied it to the monolayer \acrshort{mBN} and to the Bernal phase \acrshort{bBN}, and compared our results with available experimental measurements.
+	\end{itemize}  
+\end{tcolorbox}
+
+\newpage

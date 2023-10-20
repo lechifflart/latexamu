@@ -143,7 +143,7 @@
 	bookmarksopen=false,					%% signets repliés par défaut
 	linktocpage=false,						%% lien numéro de page dans TOC
 %% métadonnées :							%% ATTENTION à compléter
-	pdftitle={Exciton-phonon coupling in haxagonal Boron Nitride nanostructures},
+	pdftitle={Exciton-phonon coupling in hexagonal Boron Nitride nanostructures},
 	pdfauthor={Pierre LECHIFFLART},
 	pdfsubject={PhD thesis of Pierre LECHIFFLART},
 	pdfkeywords = {exciton-phonon coupling, luminescence},
@@ -215,5 +215,6 @@
 \RequirePackage{empheq}		  % boxed multiline equations
 \RequirePackage{amssymb}      % maths symbols
 \RequirePackage{wrapfig}	  % to wrap text around figures
+\RequirePackage[most]{tcolorbox} % color boxes for summaries 
 
 \include{alias}               % a file with a lot of new commands and aliases

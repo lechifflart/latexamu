@@ -191,7 +191,7 @@ The final expression writes :
 The upper (lower) sign refers to the process of phonon absorption (emission). One thing to note here is that we neglect the variation of the exciton energies induced by the coupling with phonon, which is an effect beyond second order derivative for indirect excitons, so we expect this renormalization to be minor.\cite{marini2008ab} Moreover we know that due to the approximations adopted in this work we will not be able to get the correct absolute position\cite{artus2021ellipsometry} of the exciton but only the relative position of indirect emission with respect to the direct one. 
 
 %
-\section{Luminescence results}
+\section{Luminescence results} \label{sec:PL_fdd}
 In order to compute the luminescence spectra, we used the van Roosbroeck--Shockley relation from Eq. \eqref{eq:vRS_PL_ind} combined with the expression of the dielectric function in Eq. \eqref{eq:eps2_fdd}. We simulate a crystal at low temperature, which we set at 55K in agreement with the experimental measurements. At this temperature, the phonon emission processes widely dominate the absorption ones and we have $n_{\mu \bar{q}} \ll  1$. Therefore we set these factors to zero in the numerator. We get a final expression for the luminescence as :
 \begin{multline}
 	I(\omega) = \mathcal{D} R^{sp}(\omega)= \mathcal{D} \sum_{\mu,{\bar{q}}} \frac{\omega(\omega - 2\Omega_{\mu \bar{q}})^2}{\pi c^3 } n_1(\omega) \sum_{\lambda'} \frac{\partial^2 |T^{\lambda'}|^2 }{\partial R_{\mu\bar{q}}^2}\biggr|_{\text{eq}} \\ \times	\Im \left\{\frac{1}{\omega-(E^{\lambda'}-\Omega_{\mu \bar{q}})+i\eta}\right\} n_B(E^{\lambda'}_{\bar{q}},T_{exc}) \label{eq:strain_vRS_PL}
@@ -226,3 +226,16 @@ Finally, for larger values of strain, the exciton energies split so much that th
 In this chapter, I presented our results about the electronic, phononic and optical properties of bulk hBN under uniaxial strain, both tensile and compressive, along the armchair direction. We observed a splitting of the exciton at $\Gamma$ due to the breaking
 of the threefold rotational symmetry. This splitting could be measured in reflectivity experiments.\cite{elias2021flat} We also found that the direct excitons energies vary linearly with the applied strain, while the indirect exciton energies decrease both with compression and stretch. We were also able to evaluate the strain gauge factor, which was found to be similar to that of transition metal dichalcogenides.
 I presented a method to include the exciton-phonon coupling in the response function and hence in the optical spectra of the strained crystals. It is based on a finite-difference derivative approach and is well-suited for materials with a indirect and deep exciton dispersion minimum. The coupling of excitons and phonons is calculated only for a few momenta in the Brillouin Zone. Since this method requires the use of supercells, it is particularly adapted to the study of defects such as was done in Ref. \cite{libbi2022phonon}. We employed this method to compute the phonon-assisted luminescence spectrum and how it changes with strain. We found that at low strain, additional peaks appear in the spectra due to the breaking of the degeneracy between the different $K$ and $M$ points in the Brillouin Zone. These additional peaks decrease the intensity ratio between the acoustic- and the optical-phonon assisted transitions, in agreement with recent measurements. For large compressive strain we found that only one valley contributes to the luminescence, and the spectra return to a shape similar to the equilibrium one but shifted at lower energies. This prediction could be verified by means of luminescence measurements in highly strained \acrshort{hBN}.\cite{blundo2022vibrational}
+
+\vspace{1cm}
+\begin{tcolorbox}[enhanced jigsaw,breakable,pad at break*=1mm,
+	colback=cyanamu!5!white,colframe=blueamu!90!white,title=Summary of Chapter {\hypersetup{linkcolor=.}\ref{chap:strain}}]
+	\begin{itemize}
+		\item The coupling between excitons and phonons was included in the second derivative of the response function with respect to the atomic displacements along phonon eigenvectors, in Sec. \ref{sec:excph_fdd}
+		\item We evaluated this derivative numerically by building supercells and displacing the atoms along all phonon modes. 
+		\item We then computed the response function with a \acrshort{BSE} calculation on the displaced configurations.
+		\item We obtained the luminescence spectra \textit{via} the van Roosbroeck--Shockley relation for several values of strain and compared our results to the experimental spectra in Sec. \ref{sec:PL_fdd}.
+	\end{itemize}  
+\end{tcolorbox}
+
+\newpage
